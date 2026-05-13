@@ -1,12 +1,13 @@
 # Template Lock Policy
 
-## Status: LOCKED as of 2026-05-13
+## Status: LOCKED as of 2026-05-13 14:53 CST (UPDATED)
 
 ### Lock Details
-- **Template file**: `agentic_market_daily_template_v12.html`
-- **Locked snapshot**: `template_snapshots/v12_2026-05-13.html`
-- **SHA256 checksum**: `7f950ffb73c81f4efbc0a0d17f9ff1839a736fa5d363cc5131b4493690f3bfaf`
+- **Template file**: `agentic_market_daily_template_v12.html` (local) / `template.html` (GitHub)
+- **Locked snapshot**: `template_snapshots/v12_2026-05-13_LOCKED.html`
+- **SHA256 checksum**: `ba59f65ce8c9bec7bcfdbfe739a4f381bebe1394e3bcdbd5df961a345b83d947`
 - **Checksum file**: `agentic_market_daily_template_v12.sha256`
+- **Source**: User-uploaded attachment `Agentic_Market_Daily_2026-05-13.html`
 
 ### Rules
 1. This template is read-only. Never modify it directly.
@@ -19,3 +20,7 @@
 sha256sum -c agentic_market_daily_template_v12.sha256
 ```
 Expected output: `OK`
+
+### Update History
+- 2026-05-13 14:47: Initial lock (previous template)
+- 2026-05-13 14:53: **RE-LOCKED** with user-uploaded final version
