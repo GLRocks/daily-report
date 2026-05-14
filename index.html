@@ -94,6 +94,9 @@ header .date-badge {
 .quote-source { font-size:0.85em; color:var(--accent); font-weight:bold; }
 .quote-context { font-size:0.8em; color:var(--text2); margin-top:4px; }
 .play-btn {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
   display:inline-flex; align-items:center; gap:6px;
   background:rgba(0,212,255,0.15); border:1px solid var(--accent);
   color:var(--accent); padding:4px 12px; border-radius:16px;
@@ -155,6 +158,10 @@ header .date-badge {
 .footer {
   text-align:center; padding:30px; border-top:1px solid var(--border);
   color:var(--text2); font-size:0.85em; margin-top:40px;
+}
+.play-btn:active {
+  transform: scale(0.95);
+  opacity: 0.8;
 }
 .play-btn:hover::after {
   content: "原声内容请访问上方来源链接";
@@ -919,5 +926,67 @@ header .date-badge {
 </div>
 
 
+
+<script>
+// Make play buttons clickable
+document.querySelectorAll('.play-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Find the parent quote-box
+        var quoteBox = btn.closest('.quote-box');
+        if (!quoteBox) {
+            alert('原声内容请访问上方来源链接');
+            return;
+        }
+        
+        // Try to find a source link in the quote-box
+        var sourceLink = quoteBox.querySelector('a[href]');
+        if (sourceLink && sourceLink.href && sourceLink.href !== '#' && sourceLink.href !== window.location.href + '#') {
+            window.open(sourceLink.href, '_blank');
+            return;
+        }
+        
+        // Try to extract source from quote-context text
+        var context = quoteBox.querySelector('.quote-context');
+        if (context) {
+            var text = context.textContent || '';
+            // Look for source names and construct search URL
+            var sources = ['Motley Fool', 'BBC', 'WSJ', 'Wall Street Journal', 'Bloomberg', 'CNBC', 'Reuters', 'FT', 'NYT'];
+            var sourceName = '';
+            for (var i = 0; i < sources.length; i++) {
+                if (text.indexOf(sources[i]) !== -1) {
+                    sourceName = sources[i];
+                    break;
+                }
+            }
+            
+            var person = '';
+            var sourceEl = quoteBox.querySelector('.quote-source');
+            if (sourceEl) {
+                person = sourceEl.textContent || '';
+            }
+            
+            var quoteText = '';
+            var quoteEl = quoteBox.querySelector('.quote-text');
+            if (quoteEl) {
+                quoteText = quoteEl.textContent || '';
+                quoteText = quoteText.substring(0, 80);
+            }
+            
+            if (sourceName && person) {
+                var searchQuery = encodeURIComponent(person + ' ' + quoteText + ' ' + sourceName);
+                window.open('https://www.google.com/search?q=' + searchQuery, '_blank');
+                return;
+            }
+        }
+        
+        // Fallback: show tooltip message
+        alert('原声内容请访问上方来源链接，或点击来源卡片中的超链接');
+    });
+});
+</script>
 </body></html><!-- deploy: 2026-05-14 11:50 CST | V12 template clean | all 21 stocks updated -->
 <!-- cache-bust: 2026-05-14 11:55 CST -->
+<!-- deploy: 2026-05-14 12:20 CST | play-btn fix | cursor:pointer + click handler -->
