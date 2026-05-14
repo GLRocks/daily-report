@@ -117,9 +117,36 @@ header .date-badge {
 /* Signal List */
 .signal-list { list-style:none; }
 .signal-list li {
-  padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px; align-items:flex-start;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: start;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
 }
 .signal-list li:last-child { border-bottom:none; }
+.signal-list li .tag {
+  align-self: start;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+.signal-list li .signal-body {
+  line-height: 1.6;
+}
+.signal-list li .signal-body strong {
+  white-space: nowrap;
+}
+.signal-list li .signal-source {
+  align-self: start;
+  text-align: right;
+  white-space: nowrap;
+  font-size: 0.85em;
+  color: var(--text2);
+  margin-top: 2px;
+}
+.signal-list li .signal-source a {
+  color: var(--accent);
+}
 .tag {
   display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.72em; font-weight:bold;
   white-space:nowrap; flex-shrink:0;
@@ -526,13 +553,13 @@ header .date-badge {
   <div class="section-title"><span class="num">3</span> AI独角兽模型技术动向</div>
 
   <ul class="signal-list">
-    <li><span class="tag tag-hot">HOT</span> <strong>OpenAI GPT-5.5</strong>：发布于2026-04-23，上下文窗口128K，价格降至GPT-4.1的1/10。企业客户反馈：代码生成准确率提升40%。<em><a href="https://openai.com/blog/" class="source-link" target="_blank">来源</a>：OpenAI官方博客, 2026-04-23</em></li>
-    <li><span class="tag tag-new">NEW</span> <strong>Anthropic Claude Opus 4.7</strong>：即将发布，Anthropic内部代号"Orion"。ARPU持续攀升至$30B年化收入（已超越OpenAI）。<em><a href="https://www.theinformation.com/" class="source-link" target="_blank">来源</a>：The Information, 2026-05-04</em></li>
-    <li><span class="tag tag-key">KEY</span> <strong>Google Gemini 3.1 Ultra</strong>：原生多模态+深度推理，B端采用率加速。Google云收入增速26%部分受益于Gemini企业版。<em><a href="https://io.google/2026/" class="source-link" target="_blank">来源</a>：Google I/O 2026, 2026-05-07</em></li>
-    <li><span class="tag tag-hot">HOT</span> <strong>DeepSeek V4</strong>：685B参数MoE架构，推理成本降至GPT-4.1的1/50。中国云厂商采用率迅速攀升，但北美客户渗透有限。<em><a href="https://www.deepseek.com/" class="source-link" target="_blank">来源</a>：DeepSeek官方, 2026-04-28</em></li>
-    <li><span class="tag tag-new">NEW</span> <strong>ByteDance Doubao 1.5</strong>：1.8T参数MoE，DAU突破2500万。抖音生态内AI助手集成推动用户增长。<em><a href="https://www.volcengine.com/" class="source-link" target="_blank">来源</a>：ByteDance火山引擎, 2026-05-06</em></li>
-    <li><span class="tag tag-key">KEY</span> <strong>Moonshot K2.6</strong>：已上线提供在线服务，上下文窗口200万token。编程能力评测超越GPT-4.1，国内开发者采用率攀升。<em><a href="https://www.moonshot.cn/" class="source-link" target="_blank">来源</a>：Moonshot官方, 2026-05-08</em></li>
-    <li><span class="tag tag-new">NEW</span> <strong>Minimax MiniMax-Text-04</strong>：多模态对话模型，企业API调用量月增120%。<em><a href="https://www.minimaxi.com/" class="source-link" target="_blank">来源</a>：Minimax官方, 2026-05-01</em></li>
+    <li><span class="tag tag-hot">HOT</span><div class="signal-body"><strong>OpenAI GPT-5.5</strong>：发布于2026-04-23，上下文窗口128K，价格降至GPT-4.1的1/10。企业客户反馈：代码生成准确率提升40%。</div><div class="signal-source"><em><a href="https://openai.com/blog/" class="source-link" target="_blank">来源</a>：OpenAI官方博客, 2026-04-23</em></div></li>
+    <li><span class="tag tag-new">NEW</span><div class="signal-body"><strong>Anthropic Claude Opus 4.7</strong>：即将发布，Anthropic内部代号"Orion"。ARPU持续攀升至$30B年化收入（已超越OpenAI）。</div><div class="signal-source"><em><a href="https://www.theinformation.com/" class="source-link" target="_blank">来源</a>：The Information, 2026-05-04</em></div></li>
+    <li><span class="tag tag-key">KEY</span><div class="signal-body"><strong>Google Gemini 3.1 Ultra</strong>：原生多模态+深度推理，B端采用率加速。Google云收入增速26%部分受益于Gemini企业版。</div><div class="signal-source"><em><a href="https://io.google/2026/" class="source-link" target="_blank">来源</a>：Google I/O 2026, 2026-05-07</em></div></li>
+    <li><span class="tag tag-hot">HOT</span><div class="signal-body"><strong>DeepSeek V4</strong>：685B参数MoE架构，推理成本降至GPT-4.1的1/50。中国云厂商采用率迅速攀升，但北美客户渗透有限。</div><div class="signal-source"><em><a href="https://www.deepseek.com/" class="source-link" target="_blank">来源</a>：DeepSeek官方, 2026-04-28</em></div></li>
+    <li><span class="tag tag-new">NEW</span><div class="signal-body"><strong>ByteDance Doubao 1.5</strong>：1.8T参数MoE，DAU突破2500万。抖音生态内AI助手集成推动用户增长。</div><div class="signal-source"><em><a href="https://www.volcengine.com/" class="source-link" target="_blank">来源</a>：ByteDance火山引擎, 2026-05-06</em></div></li>
+    <li><span class="tag tag-key">KEY</span><div class="signal-body"><strong>Moonshot K2.6</strong>：已上线提供在线服务，上下文窗口200万token。编程能力评测超越GPT-4.1，国内开发者采用率攀升。</div><div class="signal-source"><em><a href="https://www.moonshot.cn/" class="source-link" target="_blank">来源</a>：Moonshot官方, 2026-05-08</em></div></li>
+    <li><span class="tag tag-new">NEW</span><div class="signal-body"><strong>Minimax MiniMax-Text-04</strong>：多模态对话模型，企业API调用量月增120%。</div><div class="signal-source"><em><a href="https://www.minimaxi.com/" class="source-link" target="_blank">来源</a>：Minimax官方, 2026-05-01</em></div></li>
   </ul>
 
   <table class="data-table">
@@ -563,10 +590,10 @@ header .date-badge {
   <div class="section-title"><span class="num">4</span> NVIDIA / AMD / Intel</div>
 
   <ul class="signal-list">
-    <li><span class="tag tag-hot">HOT</span> <strong>Qualcomm -11.46%崩盘</strong>：QCOM在70%月度涨幅后单日暴跌11.46%，Q3收入指引$9.2-10B低于共识$10.2B。Android智能手机收入减速，但AI PC和汽车业务增长 intact。<em><a href="https://investor.qualcomm.com/" class="source-link" target="_blank">来源</a>：QCOM财报, 2026-05-12 | 数据日期: 2026-05-12收盘</em></li>
-    <li><span class="tag tag-key">KEY</span> <strong>AMD/Intel 2026年跑赢NVDA</strong>：Intel YTD +240%，AMD YTD +65%，均大幅跑赢NVDA。Intel 18A工艺在亚利桑那州上线，Apple代工传闻推动股价。<em><a href="https://www.wsj.com/" class="source-link" target="_blank">来源</a>：WSJ/Bloomberg, 2026-05-12</em></li>
-    <li><span class="tag tag-new">NEW</span> <strong>Lisa Su服务器CPU TAM预测</strong>：Su在WSJ专访中表示服务器CPU市场将以&gt;35%年增速扩张至$120B(2030)。MI400系列Q3开始出货，推理性价比挑战NVDA H200。<em><a href="https://www.wsj.com/" class="source-link" target="_blank">来源</a>：WSJ, 2026-05-12</em></li>
-    <li><span class="tag tag-key">KEY</span> <strong>NVIDIA市值触及$5T</strong>：NVDA于2026-04-24盘中触及$5T市值，但此后回调约8%。GTC 2026宣布$1T订单 pipeline，推理芯片占新增订单60%。<em><a href="https://www.bloomberg.com/" class="source-link" target="_blank">来源</a>：Bloomberg, 2026-04-24</em></li>
+    <li><span class="tag tag-hot">HOT</span><div class="signal-body"><strong>Qualcomm -11.46%崩盘</strong>：QCOM在70%月度涨幅后单日暴跌11.46%，Q3收入指引$9.2-10B低于共识$10.2B。Android智能手机收入减速，但AI PC和汽车业务增长 intact。</div><div class="signal-source"><em><a href="https://investor.qualcomm.com/" class="source-link" target="_blank">来源</a>：QCOM财报, 2026-05-12 | 数据日期: 2026-05-12收盘</em></div></li>
+    <li><span class="tag tag-key">KEY</span><div class="signal-body"><strong>AMD/Intel 2026年跑赢NVDA</strong>：Intel YTD +240%，AMD YTD +65%，均大幅跑赢NVDA。Intel 18A工艺在亚利桑那州上线，Apple代工传闻推动股价。</div><div class="signal-source"><em><a href="https://www.wsj.com/" class="source-link" target="_blank">来源</a>：WSJ/Bloomberg, 2026-05-12</em></div></li>
+    <li><span class="tag tag-new">NEW</span><div class="signal-body"><strong>Lisa Su服务器CPU TAM预测</strong>：Su在WSJ专访中表示服务器CPU市场将以&gt;35%年增速扩张至$120B(2030)。MI400系列Q3开始出货，推理性价比挑战NVDA H200。</div><div class="signal-source"><em><a href="https://www.wsj.com/" class="source-link" target="_blank">来源</a>：WSJ, 2026-05-12</em></div></li>
+    <li><span class="tag tag-key">KEY</span><div class="signal-body"><strong>NVIDIA市值触及$5T</strong>：NVDA于2026-04-24盘中触及$5T市值，但此后回调约8%。GTC 2026宣布$1T订单 pipeline，推理芯片占新增订单60%。</div><div class="signal-source"><em><a href="https://www.bloomberg.com/" class="source-link" target="_blank">来源</a>：Bloomberg, 2026-04-24</em></div></li>
   </ul>
 
   <table class="data-table">
@@ -595,9 +622,9 @@ header .date-badge {
   <div class="section-title"><span class="num">5</span> 中国云厂商AI策略</div>
 
   <ul class="signal-list">
-    <li><span class="tag tag-new">NEW</span> <strong>百度Q1 2026</strong>：AI云收入同比增长26%，但搜索广告收入下滑3%。文心一言DAU 4500万，企业API调用量季度增85%。<em><a href="https://ir.baidu.com/" class="source-link" target="_blank">来源</a>：百度Q1财报, 2026-05-08</em></li>
-    <li><span class="tag tag-key">KEY</span> <strong>阿里云Qwen3 MoE</strong>：开源32B/72B/110B/235B/400B参数版本，国际社区下载量突破3000万。通义千问DAU 2500万，企业API收入季度增40%。<em><a href="https://www.aliyun.com/" class="source-link" target="_blank">来源</a>：阿里云官方, 2026-04-29</em></li>
-    <li><span class="tag tag-hot">HOT</span> <strong>腾讯混元3.0</strong>：多模态大模型，微信生态集成推动日调用量突破10亿次。游戏AI NPC和广告推荐引擎为内部最大应用场景。<em><a href="https://ai.tencent.com/" class="source-link" target="_blank">来源</a>：腾讯AI Lab, 2026-05-05</em></li>
+    <li><span class="tag tag-new">NEW</span><div class="signal-body"><strong>百度Q1 2026</strong>：AI云收入同比增长26%，但搜索广告收入下滑3%。文心一言DAU 4500万，企业API调用量季度增85%。</div><div class="signal-source"><em><a href="https://ir.baidu.com/" class="source-link" target="_blank">来源</a>：百度Q1财报, 2026-05-08</em></div></li>
+    <li><span class="tag tag-key">KEY</span><div class="signal-body"><strong>阿里云Qwen3 MoE</strong>：开源32B/72B/110B/235B/400B参数版本，国际社区下载量突破3000万。通义千问DAU 2500万，企业API收入季度增40%。</div><div class="signal-source"><em><a href="https://www.aliyun.com/" class="source-link" target="_blank">来源</a>：阿里云官方, 2026-04-29</em></div></li>
+    <li><span class="tag tag-hot">HOT</span><div class="signal-body"><strong>腾讯混元3.0</strong>：多模态大模型，微信生态集成推动日调用量突破10亿次。游戏AI NPC和广告推荐引擎为内部最大应用场景。</div><div class="signal-source"><em><a href="https://ai.tencent.com/" class="source-link" target="_blank">来源</a>：腾讯AI Lab, 2026-05-05</em></div></li>
   </ul>
 
   <table class="data-table">
@@ -624,9 +651,9 @@ header .date-badge {
   <div class="section-title"><span class="num">6</span> AI Agent应用趋势</div>
 
   <ul class="signal-list">
-    <li><span class="tag tag-hot">HOT</span> <strong>Anysphere/Cursor估值$100B传闻</strong>：AI编程助手Cursor母公司Anysphere最新轮融资估值接近$100B，年化收入超$5B。<em><a href="https://www.bloomberg.com/" class="source-link" target="_blank">来源</a>：Bloomberg, 2026-05-09</em></li>
-    <li><span class="tag tag-new">NEW</span> <strong>Cognition Devin商业化</strong>：AI软件工程师Devin开始接受企业客户预订，首批定价$500/月/ seat。代码生成准确率72%，较GPT-5.5高15个百分点。<em><a href="https://www.cognition.ai/" class="source-link" target="_blank">来源</a>：Cognition官方, 2026-05-06</em></li>
-    <li><span class="tag tag-key">KEY</span> <strong>垂直Agent估值泡沫</strong>：法律AI Harvey估值$30B，金融AI Alphasense估值$40B。垂直Agent平均PS倍数达50x，远超SaaS历史均值。<em><a href="https://pitchbook.com/" class="source-link" target="_blank">来源</a>：PitchBook, 2026-05-08</em></li>
+    <li><span class="tag tag-hot">HOT</span><div class="signal-body"><strong>Anysphere/Cursor估值$100B传闻</strong>：AI编程助手Cursor母公司Anysphere最新轮融资估值接近$100B，年化收入超$5B。</div><div class="signal-source"><em><a href="https://www.bloomberg.com/" class="source-link" target="_blank">来源</a>：Bloomberg, 2026-05-09</em></div></li>
+    <li><span class="tag tag-new">NEW</span><div class="signal-body"><strong>Cognition Devin商业化</strong>：AI软件工程师Devin开始接受企业客户预订，首批定价$500/月/ seat。代码生成准确率72%，较GPT-5.5高15个百分点。</div><div class="signal-source"><em><a href="https://www.cognition.ai/" class="source-link" target="_blank">来源</a>：Cognition官方, 2026-05-06</em></div></li>
+    <li><span class="tag tag-key">KEY</span><div class="signal-body"><strong>垂直Agent估值泡沫</strong>：法律AI Harvey估值$30B，金融AI Alphasense估值$40B。垂直Agent平均PS倍数达50x，远超SaaS历史均值。</div><div class="signal-source"><em><a href="https://pitchbook.com/" class="source-link" target="_blank">来源</a>：PitchBook, 2026-05-08</em></div></li>
   </ul>
 
   <table class="data-table">
@@ -656,9 +683,9 @@ header .date-badge {
   <div class="section-title"><span class="num">7</span> Agent接口及生态标准化</div>
 
   <ul class="signal-list">
-    <li><span class="tag tag-key">KEY</span> <strong>MCP生态加速</strong>：Model Context Protocol (MCP)服务器数量突破50,000个，开发者社区月增35%。Anthropic推动MCP成为事实标准，OpenAI被迫跟进支持。<em><a href="https://www.anthropic.com/news/" class="source-link" target="_blank">来源</a>：Anthropic官方博客, 2026-05-10</em></li>
-    <li><span class="tag tag-new">NEW</span> <strong>A2A协议Google主导</strong>：Google发布Agent-to-Agent (A2A)通信协议v1.0，支持跨厂商Agent协作。与MCP形成互补：MCP解决Agent-工具接口，A2A解决Agent-Agent协作。<em><a href="https://cloud.google.com/blog/" class="source-link" target="_blank">来源</a>：Google Cloud Blog, 2026-05-07</em></li>
-    <li><span class="tag tag-key">KEY</span> <strong>OpenAI Skills API</strong>：OpenAI推出Skills API允许开发者定义可复用的Agent能力模块，与MCP Server概念直接竞争。生态碎片化风险上升。<em><a href="https://platform.openai.com/" class="source-link" target="_blank">来源</a>：OpenAI Developer Blog, 2026-05-05</em></li>
+    <li><span class="tag tag-key">KEY</span><div class="signal-body"><strong>MCP生态加速</strong>：Model Context Protocol (MCP)服务器数量突破50,000个，开发者社区月增35%。Anthropic推动MCP成为事实标准，OpenAI被迫跟进支持。</div><div class="signal-source"><em><a href="https://www.anthropic.com/news/" class="source-link" target="_blank">来源</a>：Anthropic官方博客, 2026-05-10</em></div></li>
+    <li><span class="tag tag-new">NEW</span><div class="signal-body"><strong>A2A协议Google主导</strong>：Google发布Agent-to-Agent (A2A)通信协议v1.0，支持跨厂商Agent协作。与MCP形成互补：MCP解决Agent-工具接口，A2A解决Agent-Agent协作。</div><div class="signal-source"><em><a href="https://cloud.google.com/blog/" class="source-link" target="_blank">来源</a>：Google Cloud Blog, 2026-05-07</em></div></li>
+    <li><span class="tag tag-key">KEY</span><div class="signal-body"><strong>OpenAI Skills API</strong>：OpenAI推出Skills API允许开发者定义可复用的Agent能力模块，与MCP Server概念直接竞争。生态碎片化风险上升。</div><div class="signal-source"><em><a href="https://platform.openai.com/" class="source-link" target="_blank">来源</a>：OpenAI Developer Blog, 2026-05-05</em></div></li>
   </ul>
 
   <table class="data-table">
@@ -762,9 +789,9 @@ header .date-badge {
   <div class="section-title"><span class="num">9</span> ToC侧Agent应用及硬件部署形式</div>
 
   <ul class="signal-list">
-    <li><span class="tag tag-key">KEY</span> <strong>Apple iOS 27开放第三方AI</strong>：允许用户选择OpenAI之外的多家第三方AI模型（Google Gemini、Perplexity等）。端侧AI入口价值重估。<em><a href="https://developer.apple.com/wwdc/" class="source-link" target="_blank">来源</a>：Apple WWDC预告, 2026-05-10</em></li>
-    <li><span class="tag tag-new">NEW</span> <strong>Qualcomm骁龙X Elite AI PC</strong>：NPU算力45 TOPS，已获HP/Dell/Lenovo超100款设计。但QCOM财报中AI PC收入占比仍&lt;5%。<em><a href="https://investor.qualcomm.com/" class="source-link" target="_blank">来源</a>：QCOM财报, 2026-05-12</em></li>
-    <li><span class="tag tag-hot">HOT</span> <strong>Intel Lunar Lake NPU</strong>：48 TOPS NPU算力，但功耗优化落后于ARM架构。Intel 18A工艺节点对端侧芯片竞争力至关重要。<em><a href="https://www.intel.com/content/www/us/en/newsroom/" class="source-link" target="_blank">来源</a>：Intel技术日, 2026-05-08</em></li>
+    <li><span class="tag tag-key">KEY</span><div class="signal-body"><strong>Apple iOS 27开放第三方AI</strong>：允许用户选择OpenAI之外的多家第三方AI模型（Google Gemini、Perplexity等）。端侧AI入口价值重估。</div><div class="signal-source"><em><a href="https://developer.apple.com/wwdc/" class="source-link" target="_blank">来源</a>：Apple WWDC预告, 2026-05-10</em></div></li>
+    <li><span class="tag tag-new">NEW</span><div class="signal-body"><strong>Qualcomm骁龙X Elite AI PC</strong>：NPU算力45 TOPS，已获HP/Dell/Lenovo超100款设计。但QCOM财报中AI PC收入占比仍&lt;5%。</div><div class="signal-source"><em><a href="https://investor.qualcomm.com/" class="source-link" target="_blank">来源</a>：QCOM财报, 2026-05-12</em></div></li>
+    <li><span class="tag tag-hot">HOT</span><div class="signal-body"><strong>Intel Lunar Lake NPU</strong>：48 TOPS NPU算力，但功耗优化落后于ARM架构。Intel 18A工艺节点对端侧芯片竞争力至关重要。</div><div class="signal-source"><em><a href="https://www.intel.com/content/www/us/en/newsroom/" class="source-link" target="_blank">来源</a>：Intel技术日, 2026-05-08</em></div></li>
   </ul>
 
   <table class="data-table">
@@ -793,10 +820,10 @@ header .date-badge {
   <div class="section-title"><span class="num">10</span> 全球交易：大宗商品与金融趋势</div>
 
   <ul class="signal-list">
-    <li><span class="tag tag-key">KEY</span> <strong>铜价$9,850/t持稳</strong>：LME铜现货价格维持在$9,800-9,900区间，供应端智利/秘鲁矿山扰动减少，但AI数据中心电缆需求支撑。<em>来源:LME, 2026-05-12</em></li>
-    <li><span class="tag tag-hot">HOT</span> <strong>HBM3E供不应求</strong>：SK Hynix和Samsung HBM3E产能2026年已全部售罄，价格较DDR5溢价300%。Micron HBM3E Q2开始量产。<em>来源:SemiAnalysis, 2026-05-10</em></li>
-    <li><span class="tag tag-key">KEY</span> <strong>碳酸锂$7,800/t触底反弹</strong>：中国碳酸锂期货价格从$7,200低点回升至$7,800，宁德时代和比亚迪Q2排产增加。<em>来源:Shanghai Futures, 2026-05-12</em></li>
-    <li><span class="tag tag-new">NEW</span> <strong>DDR5价格上涨8%</strong>：AI服务器内存密度提升（单台H100配1.2TB HBM+512GB DDR5）推动DDR5合约价Q2上涨。<em>来源:DigiTimes, 2026-05-08</em></li>
+    <li><span class="tag tag-key">KEY</span><div class="signal-body"><strong>铜价$9,850/t持稳</strong>：LME铜现货价格维持在$9,800-9,900区间，供应端智利/秘鲁矿山扰动减少，但AI数据中心电缆需求支撑。</div><div class="signal-source"><em>来源:LME, 2026-05-12</em></div></li>
+    <li><span class="tag tag-hot">HOT</span><div class="signal-body"><strong>HBM3E供不应求</strong>：SK Hynix和Samsung HBM3E产能2026年已全部售罄，价格较DDR5溢价300%。Micron HBM3E Q2开始量产。</div><div class="signal-source"><em>来源:SemiAnalysis, 2026-05-10</em></div></li>
+    <li><span class="tag tag-key">KEY</span><div class="signal-body"><strong>碳酸锂$7,800/t触底反弹</strong>：中国碳酸锂期货价格从$7,200低点回升至$7,800，宁德时代和比亚迪Q2排产增加。</div><div class="signal-source"><em>来源:Shanghai Futures, 2026-05-12</em></div></li>
+    <li><span class="tag tag-new">NEW</span><div class="signal-body"><strong>DDR5价格上涨8%</strong>：AI服务器内存密度提升（单台H100配1.2TB HBM+512GB DDR5）推动DDR5合约价Q2上涨。</div><div class="signal-source"><em>来源:DigiTimes, 2026-05-08</em></div></li>
   </ul>
 
   <table class="data-table">
@@ -819,10 +846,10 @@ header .date-badge {
   <div class="section-title"><span class="num">11</span> 政治突发：地缘与政策对供应链影响</div>
 
   <ul class="signal-list">
-    <li><span class="tag tag-hot">HOT</span> <strong>H200 25%关税框架</strong>：特朗普政府撤销H200禁令但加征25%关税，创建年度许可证制度。中国 hyperscaler 加速国产替代，华为昇腾市场份额从3%升至12%。<em>来源:Semiconductors Insight, 2026-04-29</em></li>
-    <li><span class="tag tag-key">KEY</span> <strong>年度许可证制度生效</strong>：TSMC南京厂、Samsung西安厂、SK Hynix无锡厂自2026-01-01起需年度出口许可证。Washington每年持有"续命卡"。<em>来源:Semiconductors Insight, 2026-04-29</em></li>
-    <li><span class="tag tag-new">NEW</span> <strong>国会推动全面设备禁运</strong>：8名两党议员致信商务部，要求对中国全面禁运半导体制造设备（非仅黑名单实体）。ASML对华DUV销售2022-2024年翻倍。<em>来源:Congressional Letter, 2026-02-15</em></li>
-    <li><span class="tag tag-key">KEY</span> <strong>中国稀土出口暂停</strong>：中国暂停稀土出口限制至2026-11-10（作为中美贸易协议一部分）。但ASML等企业已建立替代供应链。<em>来源:ASML 2025年报, 2026-03-01</em></li>
+    <li><span class="tag tag-hot">HOT</span><div class="signal-body"><strong>H200 25%关税框架</strong>：特朗普政府撤销H200禁令但加征25%关税，创建年度许可证制度。中国 hyperscaler 加速国产替代，华为昇腾市场份额从3%升至12%。</div><div class="signal-source"><em>来源:Semiconductors Insight, 2026-04-29</em></div></li>
+    <li><span class="tag tag-key">KEY</span><div class="signal-body"><strong>年度许可证制度生效</strong>：TSMC南京厂、Samsung西安厂、SK Hynix无锡厂自2026-01-01起需年度出口许可证。Washington每年持有"续命卡"。</div><div class="signal-source"><em>来源:Semiconductors Insight, 2026-04-29</em></div></li>
+    <li><span class="tag tag-new">NEW</span><div class="signal-body"><strong>国会推动全面设备禁运</strong>：8名两党议员致信商务部，要求对中国全面禁运半导体制造设备（非仅黑名单实体）。ASML对华DUV销售2022-2024年翻倍。</div><div class="signal-source"><em>来源:Congressional Letter, 2026-02-15</em></div></li>
+    <li><span class="tag tag-key">KEY</span><div class="signal-body"><strong>中国稀土出口暂停</strong>：中国暂停稀土出口限制至2026-11-10（作为中美贸易协议一部分）。但ASML等企业已建立替代供应链。</div><div class="signal-source"><em>来源:ASML 2025年报, 2026-03-01</em></div></li>
   </ul>
 
   <table class="data-table">
@@ -850,9 +877,9 @@ header .date-badge {
   <div class="section-title"><span class="num">12</span> Gen Z研究：15-24岁行为信号</div>
 
   <ul class="signal-list">
-    <li><span class="tag tag-key">KEY</span> <strong>41% Gen Z使用社交搜索</strong>：TikTok/Instagram/YouTube已成为15-24岁用户的首要搜索界面，传统Google搜索使用率下降。SEO正在被GEO（Generative Engine Optimization）替代。<em>来源:SQ Magazine, 2026-04-27</em></li>
-    <li><span class="tag tag-new">NEW</span> <strong>"Micro-Dramas"内容经济</strong>：短视频进化为连续剧式"微剧"，预计2026年产生$78亿收入。Gen Z 73%偏好微内容，匿名平台（Reddit/Telegram）使用增长25%。<em>来源:SQ Magazine, 2026-04-27</em></li>
-    <li><span class="tag tag-hot">HOT</span> <strong>AI信任度崩塌</strong>："AI slop"（低质量AI生成内容）饱和导致Gen Z对AI生成内容的信任度大幅下降，"Authentic Imperfection"（真实不完美）美学崛起。<em>来源:SQ Magazine, 2026-04-27</em></li>
+    <li><span class="tag tag-key">KEY</span><div class="signal-body"><strong>41% Gen Z使用社交搜索</strong>：TikTok/Instagram/YouTube已成为15-24岁用户的首要搜索界面，传统Google搜索使用率下降。SEO正在被GEO（Generative Engine Optimization）替代。</div><div class="signal-source"><em>来源:SQ Magazine, 2026-04-27</em></div></li>
+    <li><span class="tag tag-new">NEW</span><div class="signal-body"><strong>"Micro-Dramas"内容经济</strong>：短视频进化为连续剧式"微剧"，预计2026年产生$78亿收入。Gen Z 73%偏好微内容，匿名平台（Reddit/Telegram）使用增长25%。</div><div class="signal-source"><em>来源:SQ Magazine, 2026-04-27</em></div></li>
+    <li><span class="tag tag-hot">HOT</span><div class="signal-body"><strong>AI信任度崩塌</strong>："AI slop"（低质量AI生成内容）饱和导致Gen Z对AI生成内容的信任度大幅下降，"Authentic Imperfection"（真实不完美）美学崛起。</div><div class="signal-source"><em>来源:SQ Magazine, 2026-04-27</em></div></li>
   </ul>
 
   <table class="data-table">
