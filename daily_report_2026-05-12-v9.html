@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今日晨报 | 2026-05-12</title>
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f3460;
+            --highlight: #e94560;
+            --text: #f5f5f5;
+            --text-secondary: #b8b8b8;
+            --card-bg: #242444;
+            --border: #333355;
+            --success: #4ecca3;
+            --warning: #ffc107;
+            --danger: #ff4757;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 2px solid var(--highlight);
+            margin-bottom: 30px;
+        }
+        .header h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: 2px; }
+        .header .date { color: var(--highlight); font-size: 1.2rem; margin-top: 10px; }
+        .header .tagline { color: var(--text-secondary); font-size: 0.9rem; margin-top: 5px; }
+
+        /* Stock Ticker */
+        .stock-ticker {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+        }
+        .stock-ticker h3 {
+            color: var(--highlight);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .stock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 10px;
+        }
+        .stock-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .stock-card .ticker { font-weight: bold; font-size: 0.95rem; color: var(--text); }
+        .stock-card .name { font-size: 0.75rem; color: var(--text-secondary); margin: 3px 0; }
+        .stock-card .price { font-size: 1.1rem; font-weight: 600; margin: 5px 0; }
+                .cat-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .cat-badge.chip { background: rgba(78,204,163,0.15); color: #4ecca3; border: 1px solid rgba(78,204,163,0.3); }
+        .cat-badge.app { background: rgba(233,69,96,0.15); color: #e94560; border: 1px solid rgba(233,69,96,0.3); }
+        .cat-badge.energy { background: rgba(255,193,7,0.15); color: #ffc107; border: 1px solid rgba(255,193,7,0.3); }
+.stock-card .change {
+            font-size: 0.85rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+        .change-up { background: rgba(78, 204, 163, 0.2); color: var(--success); }
+        .change-down { background: rgba(233, 69, 96, 0.2); color: var(--danger); }
+        .stock-card .highlight-stock {
+            border: 1px solid var(--highlight);
+            box-shadow: 0 0 10px rgba(233, 69, 96, 0.2);
+        }
+
+        /* Section Cards */
+        .section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .section-number {
+            background: var(--highlight);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 0.9rem;
+        }
+        .section h2 { color: var(--text); font-size: 1.3rem; font-weight: 600; }
+        .section .timestamp { color: var(--text-secondary); font-size: 0.85rem; margin-left: auto; }
+
+        .content ul { list-style: none; padding-left: 0; }
+        .content li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            padding-left: 20px;
+        }
+        .content li:last-child { border-bottom: none; }
+        .content li::before { content: "▸"; color: var(--highlight); position: absolute; left: 0; }
+
+        .highlight-box {
+            background: rgba(233, 69, 96, 0.1);
+            border: 1px solid var(--highlight);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .highlight-box .label { color: var(--highlight); font-weight: 600; font-size: 0.9rem; margin-bottom: 8px; }
+
+        .quote {
+            border-left: 3px solid var(--success);
+            padding-left: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+        .quote-source {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.85rem;
+            color: var(--success);
+            font-style: normal;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+        .data-table th {
+            background: var(--accent);
+            color: var(--text);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .data-table td { padding: 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:hover { background: rgba(255,255,255,0.03); }
+
+        .causal-chain {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        .causal-chain h3 { color: var(--highlight); margin-bottom: 15px; }
+        .chain-step {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+        .chain-step .step-num {
+            background: var(--highlight);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 8px;
+        }
+        .badge-hot { background: rgba(233, 69, 96, 0.2); color: var(--highlight); }
+        .badge-new { background: rgba(78, 204, 163, 0.2); color: var(--success); }
+        .badge-analysis { background: rgba(255, 193, 7, 0.2); color: var(--warning); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .section { padding: 15px; }
+            .data-table { font-size: 0.85rem; }
+            .stock-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>今日晨报</h1>
+            <div class="date">2026-05-12</div>
+            <div class="tagline">半导体投资级技术情报 | 晨间决策参考</div>
+        </div>
+
+        <!-- Stock Prices Section -->
+        <div class="stock-ticker">
+            <h3>🔥 核心持仓实时行情 (2026-05-11收盘)</h3>
+            <div class="stock-grid">
+            <div class="stock-card highlight-stock">
+                    <div class="cat-badge chip">芯片</div>
+                    <div class="ticker">NVDA</div>
+                    <div class="name">NVIDIA</div>
+                    <div class="price" style="color: var(--success);">$219.44</div>
+                    <div class="change change-up">+1.97%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> 数据中心收入增速 | GPU市占率 | 推理收入占比
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> 推理收入拐点确认，Agentic AI打开$1T+ TAM；GTC 2026指引$1T至2027年需求，训练→推理转型延长GPU替换周期</span>
+                    </div>
+                </div>
+            <div class="stock-card highlight-stock">
+                    <div class="cat-badge chip">芯片</div>
+                    <div class="ticker">QCOM</div>
+                    <div class="name">Qualcomm</div>
+                    <div class="price" style="color: var(--success);">$237.53</div>
+                    <div class="change change-up">+8.42%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> 骁龙X Elite PC市占率 | 端侧AI NPU算力 | IoT收入
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> 骁龙X Elite抢占AI PC入口，端侧AI NPU算力从40→100 TOPS；PC市占率从0→10%是2026年最大增量叙事</span>
+                    </div>
+                </div>
+            <div class="stock-card highlight-stock">
+                    <div class="cat-badge chip">芯片</div>
+                    <div class="ticker">MU</div>
+                    <div class="name">Micron</div>
+                    <div class="price" style="color: var(--success);">$795.33</div>
+                    <div class="change change-up">+6.50%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> HBM收入占比 | DRAM/NAND价格 | 数据中心Memory收入
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> HBM4 2026收入$600M-$1.5B，HBM3E已占收入>50%；DRAM/NAND超级周期，数据中心Memory需求3年CAGR 35%+</span>
+                    </div>
+                </div>
+            <div class="stock-card highlight-stock">
+                    <div class="cat-badge chip">芯片</div>
+                    <div class="ticker">COHR</div>
+                    <div class="name">Coherent</div>
+                    <div class="price" style="color: var(--success);">$379.69</div>
+                    <div class="change change-up">+13.25%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> 数据中心光器件收入 | 800G/1.6T光模块出货 | AI连接收入占比
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> 800G光模块渗透率从20%→60%，1.6T 2026H2量产；AI集群光互连需求随NVL72规模部署指数增长</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge chip">芯片</div>
+                    <div class="ticker">AMD</div>
+                    <div class="name">AMD</div>
+                    <div class="price" style="color: var(--success);">$458.91</div>
+                    <div class="change change-up">+0.82%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> 数据中心收入占比 | MI系列GPU出货 | Venice CPU进展
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> Venice 256核CPU+MI400 GPU双引擎，数据中心份额从5%→15%路径清晰；Samsung 2nm代工分流TSMC产能风险</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge chip">芯片</div>
+                    <div class="ticker">TSM</div>
+                    <div class="name">TSMC</div>
+                    <div class="price" style="color: var(--danger);">$404.54</div>
+                    <div class="change change-down">-1.73%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> 先进制程产能利用率 | HPC收入占比 | CoWoS产能
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> 先进制程产能紧张至2028年，CoWoS封装被NVIDIA/AMD/Google锁定，定价权最强；2nm 2026H2量产打开ASP上行空间</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge chip">芯片</div>
+                    <div class="ticker">AVGO</div>
+                    <div class="name">Broadcom</div>
+                    <div class="price" style="color: var(--danger);">$428.48</div>
+                    <div class="change change-down">-0.35%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> AI收入($B) | XPU客户数 | VMware整合进展
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> AI收入$120B→$180B指引，Google/Meta/Anthropic定制ASIC核心伙伴；若Intel收购/分拆，x86/IP资产价值重估</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge chip">芯片</div>
+                    <div class="ticker">AMAT</div>
+                    <div class="name">Applied Materials</div>
+                    <div class="price" style="color: var(--success);">$443.62</div>
+                    <div class="change change-up">+1.88%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> 沉积设备市占率 | HBM设备订单 | 服务收入占比
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> HBM设备订单积压至2027年，ALD沉积设备在3D NAND中不可替代；服务收入占比>35%提供经常性收入缓冲</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge chip">芯片</div>
+                    <div class="ticker">LRCX</div>
+                    <div class="name">Lam Research</div>
+                    <div class="price" style="color: var(--success);">$296.05</div>
+                    <div class="change change-up">+0.68%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> HBM刻蚀设备订单 | 3D NAND设备需求 | 先进封装设备
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> HBM4 16层→HBM4E 20层堆叠，刻蚀/沉积步骤指数级增加；市占率>50%，HBM扩产周期至少持续至2028</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge chip">芯片</div>
+                    <div class="ticker">ASML</div>
+                    <div class="name">ASML</div>
+                    <div class="price" style="color: var(--danger);">$1565.81</div>
+                    <div class="change change-down">-1.65%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> EUV订单backlog | High-NA EUV进展 | 中国大陆收入占比
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> EUV垄断地位无法撼动，High-NA EUV 2026年交付Intel/TSMC；中国大陆收入占比限制已price in，非中国大陆backlog创新高</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge app">应用</div>
+                    <div class="ticker">GOOGL</div>
+                    <div class="name">Alphabet</div>
+                    <div class="price" style="color: var(--danger);">$388.64</div>
+                    <div class="change change-down">-3.03%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> Cloud收入增速 | AI搜索查询量 | Gemini Enterprise采用
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> Cloud收入增速>30%，Gemini Enterprise采用率季度翻倍；TPU v6+定制芯片降低推理成本30%，搜索+云双引擎</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge app">应用</div>
+                    <div class="ticker">MSFT</div>
+                    <div class="name">Microsoft</div>
+                    <div class="price" style="color: var(--danger);">$412.66</div>
+                    <div class="change change-down">-0.59%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> Azure收入增速 | Copilot MAU/ARPU | M365收入
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> Azure AI收入$10B年化，Copilot MAU 500万+、ARPU $30/月；OpenAI独家云服务+企业工作流锁定最深</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge app">应用</div>
+                    <div class="ticker">AAPL</div>
+                    <div class="name">Apple</div>
+                    <div class="price" style="color: var(--danger);">$292.68</div>
+                    <div class="change change-down">-0.13%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> iPhone ASP | 服务收入增速 | Apple Intelligence采用率
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:#8892b0;font-weight:700;background:rgba(136,146,176,0.15);border:1px solid rgba(136,146,176,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">HOLD</span>
+                        <span style="color:var(--text-secondary);"> Apple Intelligence采用率待验证，硬件周期下行iPhone销量-5% YoY；服务收入增速放缓至12%，缺乏AI变现清晰路径</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge app">应用</div>
+                    <div class="ticker">META</div>
+                    <div class="name">Meta</div>
+                    <div class="price" style="color: var(--danger);">$598.86</div>
+                    <div class="change change-down">-1.77%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> Reels收入增速 | AI推荐系统ROI | Llama推理成本
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> AI推荐系统ROI验证，Reels收入>Stories；Llama开源策略降低推理成本50%+，广告转化率提升驱动Capex回收</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge app">应用</div>
+                    <div class="ticker">PLTR</div>
+                    <div class="name">Palantir</div>
+                    <div class="price" style="color: var(--danger);">$136.89</div>
+                    <div class="change change-down">-0.66%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> AIP平台收入 | 政府合同增速 | 商业客户增长
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> AIP平台收入占比>45%，政府合同续约率>90%；AI决策系统从国防→金融/医疗垂直扩展，SBC稀释已见顶</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge app">应用</div>
+                    <div class="ticker">SNOW</div>
+                    <div class="name">Snowflake</div>
+                    <div class="price" style="color: var(--danger);">$151.50</div>
+                    <div class="change change-down">-0.62%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> 产品收入增速 | 大客户留存率($1M+) | AI功能采用率
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:#8892b0;font-weight:700;background:rgba(136,146,176,0.15);border:1px solid rgba(136,146,176,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">HOLD</span>
+                        <span style="color:var(--text-secondary);"> 产品收入增速恢复至20%+，AI功能（Snowflake Cortex）采用率待验证；$1M+客户留存率95%但竞争加剧（Databricks/Databricks SQL）</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge app">应用</div>
+                    <div class="ticker">BABA</div>
+                    <div class="name">Alibaba</div>
+                    <div class="price" style="color: var(--danger);">$137.30</div>
+                    <div class="change change-down">-1.97%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> 云智能收入增速 | AI产品收入 | 国际云增速
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:#8892b0;font-weight:700;background:rgba(136,146,176,0.15);border:1px solid rgba(136,146,176,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">HOLD</span>
+                        <span style="color:var(--text-secondary);"> 云智能收入增速恢复至双位数，但宏观消费疲软+地缘政治风险压制估值；AI产品收入占比<10%，尚未形成第二曲线</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge app">应用</div>
+                    <div class="ticker">TSLA</div>
+                    <div class="name">Tesla</div>
+                    <div class="price" style="color: var(--text);">$445.00</div>
+                    <div class="change" style="background: rgba(255,255,255,0.1); color: var(--text-secondary);">0.00%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> FSD take rate | Robotaxi里程 | Dojo算力利用率
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:#8892b0;font-weight:700;background:rgba(136,146,176,0.15);border:1px solid rgba(136,146,176,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">HOLD</span>
+                        <span style="color:var(--text-secondary);"> FSD take rate 25%但Robotaxi时间表反复推迟；Dojo算力利用率<30%，能源业务增速>50%但体量尚小，主业汽车销售承压</span>
+                    </div>
+                </div>
+            <div class="stock-card highlight-stock">
+                    <div class="cat-badge energy">能源</div>
+                    <div class="ticker">OKLO</div>
+                    <div class="name">Oklo</div>
+                    <div class="price" style="color: var(--success);">$78.13</div>
+                    <div class="change change-up">+7.75%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> Aurora电厂建设进度 | NRC许可进展 | SMR订单backlog
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--warning);font-weight:700;background:rgba(255,193,7,0.15);border:1px solid rgba(255,193,7,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">SPEC BUY</span>
+                        <span style="color:var(--text-secondary);"> Aurora电厂NRC许可进展超预期，SMR订单backlog $10B+；但无营收纯概念，适合风险偏好高的配置，目标2028年首台商业运营</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge energy">能源</div>
+                    <div class="ticker">CEG</div>
+                    <div class="name">Constellation</div>
+                    <div class="price" style="color: var(--danger);">$299.69</div>
+                    <div class="change change-down">-1.30%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> 核电发电量 | 数据中心PPA签约 | 电价结构
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> 数据中心PPA签约量2026年翻倍，核电电价较天然气有30%成本优势；Microsoft/Google/Amazon三巨头锁定10+年期供电合同</span>
+                    </div>
+                </div>
+            <div class="stock-card">
+                    <div class="cat-badge energy">能源</div>
+                    <div class="ticker">CCJ</div>
+                    <div class="name">Cameco</div>
+                    <div class="price" style="color: var(--success);">$120.14</div>
+                    <div class="change change-up">+2.90%</div>
+                
+                    <div style="margin-top:6px;font-size:0.62rem;color:var(--text-secondary);line-height:1.3;border-top:1px solid var(--border);padding-top:4px;">
+                        <span style="color:var(--highlight);font-weight:600;">核心指标:</span> 铀产量 | 长协价格 | 全球核电重启进度
+                    </div>
+                
+                    <div style="margin-top:5px;font-size:0.62rem;line-height:1.3;">
+                        <span style="color:var(--success);font-weight:700;background:rgba(78,204,163,0.15);border:1px solid rgba(78,204,163,0.3);padding:1px 6px;border-radius:3px;font-size:0.6rem;">BUY</span>
+                        <span style="color:var(--text-secondary);"> 铀价从$50→$85/lb，全球核电重启（中国/印度/欧洲）驱动需求；长协价格锁定2026-2028年产能，供应缺口持续扩大</span>
+                    </div>
+                </div>
+            </div>>

@@ -1,0 +1,30 @@
+{
+  "stm": {
+    "count": 4,
+    "last_ts": "2026-05-15T09:09:50.295291",
+    "last_sessions": 96,
+    "last_messages": 2967,
+    "last_chars": 27811
+  },
+  "diary": {
+    "count": 35,
+    "last_ts": "2026-05-15T03:46:28.959210",
+    "last_day": 21,
+    "last_sessions": 21,
+    "last_messages": 1816,
+    "last_filename": "day21-2026-05-15-alarm_didnt_ring_i_did.md",
+    "last_latency_s": 22.0,
+    "last_skip": "conversation_hash_unchanged"
+  },
+  "compact": {
+    "count": 35,
+    "last_ts": "2026-05-15T03:46:31.017081",
+    "last_invoke": 13,
+    "last_sessions": 94,
+    "last_messages": 2959,
+    "last_latency_s": 16.4,
+    "last_model": "k2p6",
+    "last_skip": "stm_hash_unchanged",
+    "last_error": "The read operation timed out"
+  }
+}

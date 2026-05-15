@@ -1,0 +1,422 @@
+{
+  "version": 1,
+  "updatedAt": "2026-05-12T05:26:29.255Z",
+  "entries": {
+    "memory:memory/2026-04-23.md:1:15": {
+      "key": "memory:memory/2026-04-23.md:1:15",
+      "path": "memory/2026-04-23.md",
+      "startLine": 1,
+      "endLine": 15,
+      "source": "memory",
+      "snippet": "2026-04-23 用户偏好记录（晨报定制）： - 每天早晨 8:00 推送新闻日报 - 关注领域（7个）： 1. AI独角兽：模型技术动向 + AI Agent应用趋势 2. 芯片三强：Nvidia/AMD/Intel 最新产品形态、AI软件栈动态、财报分析 3. 中国云厂商：AI策略、AI产品市场反馈（DAU/MAU）、组织变动 4. 全球经济：金融底层核心元素交易、趋势预测（含政治因素）、数据表格 5. 政治突发：全球突发新闻对金融/AI科技的即时影响 6. 开源社区：应对趋势的技术路径 7. 每日精选推荐：基于对全球5年内信息的整合，挑选一件最有吸引力的事件，并询问用户反馈以便后续调整推送 - 风格要求：简洁精简，直击核心 - cron job ID: 10c86c55-05d3-47b9-b518-19de94d449ac",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.672260758280754,
+      "maxScore": 0.4364843100309372,
+      "firstRecalledAt": "2026-05-10T00:07:08.270Z",
+      "lastRecalledAt": "2026-05-12T02:30:07.265Z",
+      "queryHashes": [
+        "e434dc6679e4",
+        "b1592928ad63",
+        "2de9ef93e504",
+        "c7cc1ac58cdc"
+      ],
+      "recallDays": [
+        "2026-05-10",
+        "2026-05-12"
+      ],
+      "conceptTags": [
+        "nvidia/amd/intel",
+        "dau/mau",
+        "全球突发新闻对金融/ai科技的即时影响",
+        "用户",
+        "偏好",
+        "记录",
+        "晨报",
+        "定制"
+      ]
+    },
+    "memory:memory/2026-05-02.md:31:43": {
+      "key": "memory:memory/2026-05-02.md:31:43",
+      "path": "memory/2026-05-02.md",
+      "startLine": 31,
+      "endLine": 43,
+      "source": "memory",
+      "snippet": "- QuestMobile / Xinhua ## 质量自检 - [x] 国际观点80%+，国内20% - [x] 引用权威来源（机构报告、官方财报、政策文件） - [x] 无二手媒体水文 - [x] 含预测表格（板块5） - [x] 9大板块全覆盖 - [x] 简洁直达核心，无冗余 ## 备注 用户此前投诉内容时效性不足、重复度高。本次搜索刻意扩大来源范围至官方财报、政策原文、国际智库，避免中文二手媒体报道。",
+      "recallCount": 5,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.0013097405433653,
+      "maxScore": 0.42456040978431697,
+      "firstRecalledAt": "2026-05-12T01:52:06.768Z",
+      "lastRecalledAt": "2026-05-12T05:26:29.255Z",
+      "queryHashes": [
+        "b1592928ad63",
+        "2de9ef93e504",
+        "c7cc1ac58cdc",
+        "e6448cb990b4",
+        "f3c1fc6f417c"
+      ],
+      "recallDays": [
+        "2026-05-12"
+      ],
+      "conceptTags": [
+        "questmobile",
+        "xinhua",
+        "质量",
+        "国际",
+        "观点",
+        "国内",
+        "引用",
+        "权威"
+      ]
+    },
+    "memory:memory/2026-05-11.md:20:50": {
+      "key": "memory:memory/2026-05-11.md:20:50",
+      "path": "memory/2026-05-11.md",
+      "startLine": 20,
+      "endLine": 50,
+      "source": "memory",
+      "snippet": "- Chrome headless `--print-to-pdf` 的CSS兼容性：避免复杂flex布局，使用传统block/inline-block更可靠 - 用户可能在不同环境查看（网页/PDF/Kimi预览），需要分别验证 ## 股票价格补全完成（2026-05-11 23:00 CST） ### 最终状态：72/72 只股票全部补全价格 **问题**：stockanalysis.com 对批量请求返回 HTTP 403，导致无法自动获取所有股票价格。 **解决过程**： 1. 先用 stockanalysis.com 批量获取了 ~40 只股票价格 2. stockanalysis.com 全面封锁后，改用 kimi_search 逐个搜索剩余股票 3. 最后 4 只港股（0700.HK、09988.HK、3690.HK、9888.HK）通过 Yahoo Finance 历史数据获取 **最终数据（2026-05-08 收盘）**： - 美股：全部通过 stockanalysis.com / Yahoo Finance / investing.com 获取 - 港股： - 0700.HK (腾讯): 471.40 HKD (-1.26%) - 09988.HK (阿里): 139.00 HKD (-1.35%) - 3690.HK (美团): 84.05 HKD (-0.24%) - 9888.HK (百度): 145.20 HKD (+5.75%) **推送版本**：v9 PDF + https://followed-monica-our",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39884476363658905,
+      "maxScore": 0.39884476363658905,
+      "firstRecalledAt": "2026-05-12T02:13:48.999Z",
+      "lastRecalledAt": "2026-05-12T02:13:48.999Z",
+      "queryHashes": [
+        "2de9ef93e504"
+      ],
+      "recallDays": [
+        "2026-05-12"
+      ],
+      "conceptTags": [
+        "print-to-pdf",
+        "使用传统block/inline-block更可靠",
+        "网页/pdf/kimi预览",
+        "72/72",
+        "stockanalysis.com",
+        "kimi-search",
+        "0700.hk",
+        "09988.hk"
+      ]
+    },
+    "memory:memory/2026-05-11.md:45:76": {
+      "key": "memory:memory/2026-05-11.md:45:76",
+      "path": "memory/2026-05-11.md",
+      "startLine": 45,
+      "endLine": 76,
+      "source": "memory",
+      "snippet": "- 数据源可靠性：stockanalysis.com 对频率敏感，不适合批量爬取 - 备选策略：当主数据源失效时，kimi_search 可以有效获取个股历史价格 - 港股数据：Yahoo Finance 港股历史数据完整可用 ## 当前有效链接 - v9 HTML: https://followed-monica-our-andrea.trycloudflare.com - 推送时间: 2026-05-11 ~23:00 CST ## 待办更新 - [x] 补全所有72只股票价格 - [ ] 建立每日自动获取股票价格的机制（需解决数据源稳定性问题） - [ ] 监控数据源可用性，建立备选方案 --- ## 用户第三次催促价格问题（2026-05-11 22:23 CST） 用户再次发送：\"还是只有部分股票有价格，马上修复问题\" 这已是用户第三次催促同一问题。可能原因： 1. 用户可能查看的是旧版本（v7/v8）而非最新推送的v9 2. Kimi客户端对消息排序或缓存可能导致用户看到旧内容 3. 或者v9推送确实仍有问题 **已采取的措施**： - 已推送 v9 版本（https://followed-monica-our-andrea.trycloudflare.com） - 72只股票价格全部已写入HTML（通过/tmp/fix_all_prices.py + /tmp/fix_hk_prices.py） - 等待用户确认v9是否正常 **如果v9仍有问题**，下一步排查方向： 1. 检查HTML中是否仍有未替换的占位符",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7219459921121596,
+      "maxScore": 0.3712644845247268,
+      "firstRecalledAt": "2026-05-12T02:13:48.999Z",
+      "lastRecalledAt": "2026-05-12T05:26:29.255Z",
+      "queryHashes": [
+        "2de9ef93e504",
+        "f3c1fc6f417c"
+      ],
+      "recallDays": [
+        "2026-05-12"
+      ],
+      "conceptTags": [
+        "stockanalysis.com",
+        "kimi-search",
+        "v7/v8",
+        "通过/tmp/fix-all-prices.py",
+        "tmp/fix-hk-prices.py",
+        "数据",
+        "可靠性",
+        "频率"
+      ]
+    },
+    "memory:memory/2026-05-11.md:1:26": {
+      "key": "memory:memory/2026-05-11.md:1:26",
+      "path": "memory/2026-05-11.md",
+      "startLine": 1,
+      "endLine": 26,
+      "source": "memory",
+      "snippet": "# Memory - 2026-05-11 Evening ## 股票价格显示问题修复 ### 问题 用户多次反馈股票推荐卡片中价格未显示。经排查，发现以下问题链： 1. **初始版本(v5/v6)**：价格行使用 `display:flex` + CSS变量(`var(--border)`等)，Chrome headless生成PDF时价格行可能渲染异常 2. **验证方法错误**：最初用 `grep` 搜索PDF二进制文件，发现0个价格字符串 → 误以为PDF中没有价格 3. **真相**：安装 `pdftotext` (poppler-utils) 后验证，PDF v7 确实包含价格数据（MSFT $415.12、GOOGL $400.80、AMD $455.19、NVDA $215.20 等） 4. **网页版本正常**：用户截图显示网页中价格已正确显示 ### 修复措施 1. CSS从 `flex/gap/CSS变量` 改为 `block/inline-block/硬编码颜色值` 2. 补全已知价格：GOOGL $400.80 (+0.71%)、AMD $455.19 (+11.44%) 3. 推送 v7 PDF + 新 Cloudflare tunnel 链接 ### 教训 - PDF文本提取不能用 `grep` 二进制文件，必须用 `pdftotext` - Chrome headless `--print-to-pdf` 的CSS兼容性：避免复杂flex布局，使用传统block/inline-block更可靠 - 用户可能在不同环境查看（网页/PDF/",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3628529518842697,
+      "maxScore": 0.3628529518842697,
+      "firstRecalledAt": "2026-05-12T02:13:48.999Z",
+      "lastRecalledAt": "2026-05-12T02:13:48.999Z",
+      "queryHashes": [
+        "2de9ef93e504"
+      ],
+      "recallDays": [
+        "2026-05-12"
+      ],
+      "conceptTags": [
+        "v5/v6",
+        "poppler-utils",
+        "415.12",
+        "400.80",
+        "455.19",
+        "215.20",
+        "flex/gap/css变量",
+        "block/inline-block/硬编码颜色值"
+      ]
+    },
+    "memory:memory/2026-05-12.md:53:64": {
+      "key": "memory:memory/2026-05-12.md:53:64",
+      "path": "memory/2026-05-12.md",
+      "startLine": 53,
+      "endLine": 64,
+      "source": "memory",
+      "snippet": "### 最终交付 - **文件**：daily_report_2026-05-12-v2.html - **链接**：https://lamp-recipes-harper-collections.trycloudflare.com/daily_report_2026-05-12-v2.html - **内容**：33只股票行情 + 12板块完整内容 - **用户反馈**：无进一步异议，修正版本可接受 ### 追加教训 - **股票行情是硬需求**，cron自动化流程中必须包含实时股价获取步骤，不可遗漏 - **本地IP对用户永远不可访问**，任何HTML可视化输出都必须经过Cloudflare Tunnel发布公网链接 - **cron payload需要固化**：在jobs.json的message中明确加入\"启动python3 http.server + cloudflared tunnel\"步骤，避免未来遗漏 - **当上下文溢出时**，股票信息和板块内容同等重要，宁可减少搜索轮次也要保证两者齐全",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.45379703938961025,
+      "maxScore": 0.45379703938961025,
+      "firstRecalledAt": "2026-05-12T02:30:07.265Z",
+      "lastRecalledAt": "2026-05-12T02:30:07.265Z",
+      "queryHashes": [
+        "c7cc1ac58cdc"
+      ],
+      "recallDays": [
+        "2026-05-12"
+      ],
+      "conceptTags": [
+        "daily-report-2026-05-12-v2.html",
+        "在jobs.json的message中明确加入",
+        "http.server",
+        "最终",
+        "交付",
+        "文件",
+        "daily-report-2026",
+        "html"
+      ]
+    },
+    "memory:memory/2026-05-12.md:1:39": {
+      "key": "memory:memory/2026-05-12.md:1:39",
+      "path": "memory/2026-05-12.md",
+      "startLine": 1,
+      "endLine": 39,
+      "source": "memory",
+      "snippet": "# Memory - 2026-05-12 Morning Fix ## 问题修复记录 ### 问题1：遗漏股票价格信息 **原因**：早上因上下文溢出紧急生成精简版晨报，遗漏了股票行情板块 **解决**：获取33只核心持仓实时价格，新增独立股票行情面板 ### 问题2：链接无法访问 **原因**：使用了本地IP地址（10.210.70.207:8080），用户无法从外部访问 **解决**：改用 Cloudflare Tunnel（.trycloudflare.com 域名）创建公网可访问链接 ### 最终版本 - **HTML文件**：daily_report_2026-05-12-v2.html - **公网链接**：https://lamp-recipes-harper-collections.trycloudflare.com/daily_report_2026-05-12-v2.html - **股票数量**：33只核心持仓 ### 关键股价（2026-05-11收盘） | 代码 | 价格 | 涨跌 | |------|------|------| | NVDA | $219.44 | +1.97% | | AMD | $458.91 | +0.82% | | INTC | $129.44 | +3.62% | | TSM | $404.54 | -1.73% | | QCOM | $237.53 | +8.42% | | MU | $795.33 | +6.50% | | COHR | $379.69 | +13.25% | | OKLO | $78.13",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.1357920169830322,
+      "maxScore": 0.42520818412303923,
+      "firstRecalledAt": "2026-05-12T02:30:07.265Z",
+      "lastRecalledAt": "2026-05-12T05:26:20.520Z",
+      "queryHashes": [
+        "c7cc1ac58cdc",
+        "ed2b85827e84",
+        "af2a33ed7cd9"
+      ],
+      "recallDays": [
+        "2026-05-12"
+      ],
+      "conceptTags": [
+        "10.210.70.207",
+        "trycloudflare.com",
+        "daily-report-2026-05-12-v2.html",
+        "2026-05-11收盘",
+        "219.44",
+        "1.97",
+        "458.91",
+        "0.82"
+      ]
+    },
+    "memory:memory/2026-05-12.md:33:59": {
+      "key": "memory:memory/2026-05-12.md:33:59",
+      "path": "memory/2026-05-12.md",
+      "startLine": 33,
+      "endLine": 59,
+      "source": "memory",
+      "snippet": "- 本地IP地址对用户不可访问，必须使用Cloudflare Tunnel等公网tunnel服务 - 股票价格板块是用户刚需，不可遗漏 - 当模型上下文溢出时，优先保证核心功能（股票价格+11板块内容），而不是压缩内容质量 ## 2026-05-12 10:20 - 用户反馈与二次修复 ### 用户原始反馈 > \"你完全忘记了 我还需要股票信息 另外 昨天说的链接不是你这个 这个打不开\" **两个问题**： 1. 晨报遗漏股票价格信息（33只核心持仓全部缺失） 2. 推送的链接是本地IP（10.210.70.207:8080），用户无法从外部访问 ### 修复过程 1. 获取33只核心持仓实时股价（2026-05-11收盘） 2. 重写HTML，在顶部新增独立股票行情面板（grid布局，涨跌幅颜色编码） 3. 使用Cloudflare Tunnel创建公网可访问链接（.trycloudflare.com域名） 4. HTTP server在端口切换时被SIGKILL终止，属于正常清理 ### 最终交付 - **文件**：daily_report_2026-05-12-v2.html - **链接**：https://lamp-recipes-harper-collections.trycloudflare.com/daily_report_2026-05-12-v2.html - **内容**：33只股票行情 + 12板块完整内容 - **用户反馈**：无进一步异议，修正版本可接受 ### 追加教训",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7740940272808075,
+      "maxScore": 0.41950882971286774,
+      "firstRecalledAt": "2026-05-12T02:30:07.265Z",
+      "lastRecalledAt": "2026-05-12T04:43:54.526Z",
+      "queryHashes": [
+        "c7cc1ac58cdc",
+        "ed2b85827e84"
+      ],
+      "recallDays": [
+        "2026-05-12"
+      ],
+      "conceptTags": [
+        "10.210.70.207",
+        "2026-05-11收盘",
+        "trycloudflare.com域名",
+        "daily-report-2026-05-12-v2.html",
+        "本地",
+        "地址",
+        "用户",
+        "不可"
+      ]
+    },
+    "memory:memory/2026-04-30.md:83:101": {
+      "key": "memory:memory/2026-04-30.md:83:101",
+      "path": "memory/2026-04-30.md",
+      "startLine": 83,
+      "endLine": 101,
+      "source": "memory",
+      "snippet": "- **vLLM / SGLang**：推理引擎持续优化，支持更大batch size和更长上下文。 - **技术路径分化**： - 闭源路线：OpenAI/Anthropic聚焦\"端到端Agent\"（用户给出目标，Agent自主分解执行）。 - 开源路线：社区偏向\"可组合Agent\"（模块化工具调用+人工监督节点）。 **投资信号**：Agentic AI将重塑SaaS估值模型——从\"人均ARR\"转向\"Agent处理量/Token消耗量\"。 --- ## 五、全球核心元素交易与趋势预测（含政治因素） | 元素 | 当前趋势 | 政治驱动因素 | 2026-2027预测 | |------|----------|-------------|---------------| | **稀土（Nd, Dy, Tb）** | 中国出口管制收紧，价格上行 | 中美科技脱钩、电动车/风电需求 | 📈 供应缺口扩大，价格+15-25% | | **锂** | 价格从历史高位回落，供应过剩 | 南美\"锂三角\"国有化趋势 | 📉 短期承压，2027反弹 | | **钴** | 刚果（金）供应占70%，ESG压力 | 供应链ESG审计趋严 | 📈 合规成本推升价格 | | **铀** | 核能复兴，价格创10年新高 | 俄乌战争后供应链重组 | 📈 持续上行，核电重启加速 | | **氦气** | 美国国家战略储备枯竭 | 芯片制造+量子计算需求 | 📈 结构性短缺 |",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35431397557258604,
+      "maxScore": 0.35431397557258604,
+      "firstRecalledAt": "2026-05-12T03:32:42.501Z",
+      "lastRecalledAt": "2026-05-12T03:32:42.501Z",
+      "queryHashes": [
+        "233ae42034fe"
+      ],
+      "recallDays": [
+        "2026-05-12"
+      ],
+      "conceptTags": [
+        "openai",
+        "openai/anthropic聚焦",
+        "agent处理量/token消耗量",
+        "2026-2027预测",
+        "电动车/风电需求",
+        "15-25",
+        "vllm",
+        "sglang"
+      ]
+    },
+    "memory:memory/2026-05-12.md:53:78": {
+      "key": "memory:memory/2026-05-12.md:53:78",
+      "path": "memory/2026-05-12.md",
+      "startLine": 53,
+      "endLine": 78,
+      "source": "memory",
+      "snippet": "### 最终交付 - **文件**：daily_report_2026-05-12-v2.html - **链接**：https://lamp-recipes-harper-collections.trycloudflare.com/daily_report_2026-05-12-v2.html - **内容**：33只股票行情 + 12板块完整内容 - **用户反馈**：无进一步异议，修正版本可接受 ### 追加教训 - **股票行情是硬需求**，cron自动化流程中必须包含实时股价获取步骤，不可遗漏 - **本地IP对用户永远不可访问**，任何HTML可视化输出都必须经过Cloudflare Tunnel发布公网链接 - **cron payload需要固化**：在jobs.json的message中明确加入\"启动python3 http.server + cloudflared tunnel\"步骤，避免未来遗漏 - **当上下文溢出时**，股票信息和板块内容同等重要，宁可减少搜索轮次也要保证两者齐全 ## 2026-05-12 10:56 - 重新推送晨报请求 ### 上下文 用户在修正版推送后，再次要求\"按我的要求重新推送晨报\"。这意味着需要： 1. 严格遵循12板块完整结构（非精简版） 2. 包含33只核心持仓股票行情 3. 每条客观事件附带权威人士原声评论 4. 包含因果链分析与投资预测 5. HTML可视化输出 + Cloudflare Tunnel公网链接 6. 内容质量：国际观点80%，国内20%；只引用Tier 1/2来源 ### 执行计划 1.",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7711915284395217,
+      "maxScore": 0.39914896786212917,
+      "firstRecalledAt": "2026-05-12T04:43:54.526Z",
+      "lastRecalledAt": "2026-05-12T05:26:20.520Z",
+      "queryHashes": [
+        "ed2b85827e84",
+        "af2a33ed7cd9"
+      ],
+      "recallDays": [
+        "2026-05-12"
+      ],
+      "conceptTags": [
+        "daily-report-2026-05-12-v2.html",
+        "在jobs.json的message中明确加入",
+        "http.server",
+        "1/2来源",
+        "最终",
+        "交付",
+        "文件",
+        "daily-report-2026"
+      ]
+    },
+    "memory:memory/2026-05-05.md:1:17": {
+      "key": "memory:memory/2026-05-05.md:1:17",
+      "path": "memory/2026-05-05.md",
+      "startLine": 1,
+      "endLine": 17,
+      "source": "memory",
+      "snippet": "# Memory - 2026-05-05 ### Daily Report Crisis - 5月5日 - **用户追问**：\"日报呢？又没有？\" - **根因诊断**：连续3天cron执行失败 - 5/2：生成中断，只输出了一句\"先确认记忆状态\" - 5/4：生成中断，只输出\"正在多路并行搜索中\" - 5/5：API rate limit，直接失败 - **根因**：9板块并行搜索任务太重，cron会话token耗尽/超时 - **修复**：手动生成今日晨报，同时精简cron payload——减少每板块搜索次数，明确指令避免token耗尽 - **cron jobs.json已更新**：payload更精简，明确限制搜索策略 - **今日晨报已手动推送**：包含5/5新鲜信号（Intel聘Qualcomm高管、Apple-Intel-Samsung代工谈判、NXP/Micron earnings-driven action、Anthropic Mythos安全测试） ### 今日晨报关键信号摘要 1. **Intel-Apple-Samsung代工三角**：Bloomberg 5/5报道苹果正在与Intel和Samsung进行探索性代工谈判，寻求TSMC之外多元化。这是foundry竞争格局可能重构的首个实质性信号。 2. **TSMC Q1财报（4/16）**：$35.9B revenue (+40.6% YoY)，66.2% GM，>50% NM。全年growth guide上调至\"above 30%\"。HPC占收入61%。股价跑输SOX ~12pts",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3835181027650833,
+      "maxScore": 0.3835181027650833,
+      "firstRecalledAt": "2026-05-12T05:26:20.520Z",
+      "lastRecalledAt": "2026-05-12T05:26:20.520Z",
+      "queryHashes": [
+        "af2a33ed7cd9"
+      ],
+      "recallDays": [
+        "2026-05-12"
+      ],
+      "conceptTags": [
+        "5/2",
+        "5/4",
+        "5/5",
+        "cron会话token耗尽/超时",
+        "jobs.json已更新",
+        "包含5/5新鲜信号",
+        "apple-intel-samsung代工谈判",
+        "nxp/micron"
+      ]
+    },
+    "memory:memory/2026-05-02.md:1:40": {
+      "key": "memory:memory/2026-05-02.md:1:40",
+      "path": "memory/2026-05-02.md",
+      "startLine": 1,
+      "endLine": 40,
+      "source": "memory",
+      "snippet": "# 2026-05-02 晨报生成记录 ## 生成时间 - 北京时间 2026-05-02 08:07 - 触发源：cron job (daily-news-report) ## 搜索覆盖 1. AI模型动向：OpenAI GPT-4.1、Kimi K2.6、Gemini 2.5 Pro、DeepSeek V3.2 2. NVIDIA/AMD/Intel：Q1 FY2026财报、Blackwell、MI350、Intel DCAI 3. 中国云厂商：Qwen3.5、ERNIE 4.5开源、Hunyuan、价格战 4. AI Agent：MCP协议、A2A、开源社区趋势 5. 大宗商品：黄金、铜、稀土、油价 6. 地缘政治：特朗普关税、半导体出口管制、台湾博弈 7. 年轻人行为：Gen Z社交平台、TikTok/Instagram主导 ## 关键信号提取 - NVIDIA Q1营收$44.06B（+69%），但H20中国禁令造成$4.5B损失 - Intel 19季度来首次CPU+AI加速器增速超AMD - DeepSeek API价格比OpenAI o1便宜140倍 - 美国25%半导体进口关税已生效（2026.1.15） - 2027.6.23为半导体301关税最终确定日——关键时间节点 ## 参考来源 - NVIDIA官方财报（nvidianews.nvidia.com） - 247wallst.com - tech-insider.org - merchmindai.net - Citi Research（Christopher Danely） - Tax Fou",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35685060322284695,
+      "maxScore": 0.35685060322284695,
+      "firstRecalledAt": "2026-05-12T05:26:20.520Z",
+      "lastRecalledAt": "2026-05-12T05:26:20.520Z",
+      "queryHashes": [
+        "af2a33ed7cd9"
+      ],
+      "recallDays": [
+        "2026-05-12"
+      ],
+      "conceptTags": [
+        "gpt",
+        "openai",
+        "daily-news-report",
+        "gpt-4.1",
+        "k2.6",
+        "2.5",
+        "v3.2",
+        "nvidia/amd/intel"
+      ]
+    },
+    "memory:memory/2026-04-30.md:173:188": {
+      "key": "memory:memory/2026-04-30.md:173:188",
+      "path": "memory/2026-04-30.md",
+      "startLine": 173,
+      "endLine": 188,
+      "source": "memory",
+      "snippet": "- **Meta Threads**：4200万Gen Z用户，蚕食Twitter/X份额。 - **LinkedIn**：Gen Z使用率仅11%，但随着首批Z世代进入职场，正在缓慢爬升。 **产品决策启示**： 1. 设计需默认\"隐私优先\"——不是功能，是信任前提。 2. 视频优先，但长度需适配\"微内容\"习惯（<60秒）。 3. 搜索/发现功能必须嵌入社交/视频流，而非独立入口。 4. 匿名/半匿名功能不是边缘需求，是核心用户诉求。 --- > **来源标注**：TrendForce, SemiAnalysis, WCCFtech, AMD Investor Relations, Alpha Sense, SQ Magazine, Cropink, 与非网, 富途牛牛 > **生成时间**：2026-04-30 08:07 CST · 百晓生 > —— 今天的记录到此。你醒了吗？🔥",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35654374957084656,
+      "maxScore": 0.35654374957084656,
+      "firstRecalledAt": "2026-05-12T05:26:29.255Z",
+      "lastRecalledAt": "2026-05-12T05:26:29.255Z",
+      "queryHashes": [
+        "f3c1fc6f417c"
+      ],
+      "recallDays": [
+        "2026-05-12"
+      ],
+      "conceptTags": [
+        "蚕食twitter/x份额",
+        "搜索/发现功能必须嵌入社交/视频流",
+        "匿名/半匿名功能不是边缘需求",
+        "meta",
+        "threads",
+        "gen",
+        "用户",
+        "蚕食"
+      ]
+    }
+  }
+}
