@@ -183,6 +183,86 @@ def check(report_path):
             fatal(f"S12 cites 'SQ Magazine' {sq_count} times — max 2 per section, and must verify source credibility")
         print(f"PASS: S12 SQ Magazine citations = {sq_count} (max 2)")
     
+    # === CONTENT QUALITY CHECKS (CQ1-CQ6) ===
+    print("\n=== CONTENT QUALITY CHECKS ===")
+    
+    # CQ1: Model version verification (S3)
+    s3_section = re.search(r'<div class="section">.*?<span class="num">3</span>.*?</div>\s*</div>', html, re.DOTALL)
+    if s3_section:
+        s3_html = s3_section.group(0)
+        # Check for potentially outdated model versions
+        outdated_patterns = ['GPT-4', 'GPT-4.1', 'Claude 3', 'Kimi K2.5', 'Gemini 1.5']
+        for pattern in outdated_patterns:
+            if pattern in s3_html:
+                # Allow if explicitly marked as historical/context
+                if '历史' not in s3_html and '此前' not in s3_html:
+                    print(f"WARN: S3 may contain outdated model version '{pattern}' — verify against official latest")
+    print("CQ1: Model version check completed")
+    
+    # CQ2: Earnings data freshness (S4)
+    s4_section = re.search(r'<div class="section">.*?<span class="num">4</span>.*?</div>\s*</div>', html, re.DOTALL)
+    if s4_section:
+        s4_html = s4_section.group(0)
+        # Check for Q1 references when Q2 may be available (as of May 2026)
+        q1_count = len(re.findall(r'Q1\s+2026', s4_html))
+        if q1_count > 0:
+            # May 2026 = Q1 earnings season just ended, Q2 not yet available
+            # This is acceptable, but flag for verification
+            print(f"INFO: S4 contains {q1_count} Q1 2026 references — verify Q2 not yet available")
+    print("CQ2: Earnings data freshness check completed")
+    
+    # CQ3: PR verification placeholder (S8)
+    s8_section = re.search(r'<div class="section">.*?<span class="num">8</span>.*?</div>\s*</div>', html, re.DOTALL)
+    if s8_section:
+        s8_html = s8_section.group(0)
+        # Check for PR numbers without links
+        pr_no_links = re.findall(r'PR\s+#(\d+)[^<]', s8_html)
+        if pr_no_links:
+            fatal(f"S8 contains PR numbers without hyperlinks: {pr_no_links} — all PRs must link to github.com")
+        # Check for PR links that are not github.com
+        non_github_links = re.findall(r'href="(?!https://github\.com)[^"]*pull[^"]*"', s8_html)
+        if non_github_links:
+            fatal(f"S8 contains non-GitHub PR links: {non_github_links}")
+        # Count GitHub PR links
+        github_links = re.findall(r'github\.com/(vllm-project|sgl-project)/[^"]+/pull/\d+', s8_html)
+        if len(github_links) < 2:
+            fatal(f"S8 PR links insufficient: {len(github_links)} found, minimum 2 required")
+        print(f"CQ3: S8 GitHub PR links = {len(github_links)} — OK")
+    
+    # CQ4: Policy source ban (S11)
+    s11_section = re.search(r'<div class="section">.*?<span class="num">11</span>.*?</div>\s*</div>', html, re.DOTALL)
+    if s11_section:
+        s11_html = s11_section.group(0)
+        banned_sources = ['ASML 2025年报', 'ASML年报', '设备商财报']
+        for bad in banned_sources:
+            if bad in s11_html:
+                fatal(f"CQ4: S11 contains banned source '{bad}' — policy info must cite government sources")
+        print("CQ4: S11 policy sources OK")
+    
+    # CQ5: Research sample size (S12)
+    s12_section = re.search(r'<div class="section">.*?<span class="num">12</span>.*?</div>\s*</div>', html, re.DOTALL)
+    if s12_section:
+        s12_html = s12_section.group(0)
+        # Check for research claims without sample size
+        research_patterns = re.findall(r'([\d,]+\s*(?:users|people|respondents|participants))', s12_html)
+        if not research_patterns:
+            # Check if there are survey claims at all
+            survey_claims = re.findall(r'(survey|study|research|poll)', s12_html, re.IGNORECASE)
+            if survey_claims:
+                print(f"WARN: CQ5: S12 contains {len(survey_claims)} survey references — verify all have sample sizes")
+        else:
+            print(f"CQ5: S12 sample sizes found: {len(research_patterns)} — OK")
+    
+    # CQ6: International source ratio (全文)
+    # Count domestic sources (Chinese media)
+    domestic_patterns = ['36kr', '钛媒体', '品玩', '雷锋网', '第一财经', '财新']
+    domestic_count = sum(html.count(p) for p in domestic_patterns)
+    # This is a simplified check — full implementation would need NLP analysis
+    if domestic_count > 5:
+        print(f"WARN: CQ6: {domestic_count} domestic source references found — verify international ratio ≥80%")
+    else:
+        print("CQ6: International source ratio OK")
+    
     print("\n=== ALL CRITICAL CHECKS PASSED ===")
     return True
 

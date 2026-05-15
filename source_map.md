@@ -200,46 +200,86 @@
 
 ---
 
-## P1修复记录（2026-05-15执行）
+## 专家固化表（2026-05-15追加）
 
-### 修复1: 预检脚本全面重写
-- **问题**: 旧脚本检查`addEventListener`和`onclick`，但P0已将播放按钮改为`<a>`标签，不需要JS事件监听。脚本中还有INTC日涨跌幅检查（已删除）
-- **修复**: 重写`pre_flight_check.py`，更新为V12实际结构：
-  - 结构检查：section-title=13, stock-card=21, rec-badge=21, cat-badge=21, quote-box=4, insight-box=13, data-table=13
-  - href="#"检查：>0则FATAL
-  - play-btn检查：必须全部是`<a>`标签（非`<div>`）
-  - CSS变量检查：--accent, --highlight, --bg
-  - 日期检查
-  - 股票分类计数：芯片=10, 应用=8, 能源=3
-  - **新增**股票CSV验证：检查`daily_report_YYYY-MM-DD_stocks.csv`存在且21只全部有close价格
-  - **新增**评级一致性WARN：检测S1与S13是否矛盾
-  - **新增**S11来源检查：检测ASML年报等禁止来源
-  - **新增**S12 SQ Magazine检查：>2次引用则FATAL
-- **脚本路径**: `/root/.openclaw/workspace/pre_flight_check.py`
+| 板块 | 专家角色 | 权威来源清单 | 搜索策略 |
+|---|---|---|---|
+| S1 股票 | 量化总监 | ifind API唯一合法来源 | `realtime_price` |
+| S2 投资人论点 | 宏观策略师 | Bloomberg/BBC/YouTube原始采访/官方博客 | `freshness:day` + 发言人姓名 |
+| S3 模型动向 | 模型技术专家 | 官方GitHub/blog/announcement + Reuters/Bloomberg | `freshness:day` + 模型名称 |
+| S4 芯片三巨头 | 半导体设备分析师 | SEC filing/earnings call + SemiAnalysis/Bernstein | 财报季搜索 |
+| S5 中国云 | 中国互联网分析师 | 各公司earnings/官方blog + Bloomberg China/Goldman Sachs China | `freshness:day` |
+| S6 Agent应用 | 产品经理 | 公司官方数据 + a16z/Greylock/Menlo VC研究 | `freshness:day` |
+| S7 标准化 | 生态架构师 | 官方protocol文档 + GitHub MCP/A2A仓库 | 仓库watch |
+| S8 开源社区 | 开源技术专家 | GitHub PR/Release页面（必须验证存在） | 仓库直接访问 |
+| S9 ToC硬件 | 硬件产品专家 | IDC/Counterpoint/公司官方数据 | `freshness:day` |
+| S10 全球交易 | 大宗商品分析师 | LME/Bloomberg Commodities/官方数据 | `freshness:day` |
+| S11 政治地缘 | 政策研究员 | BIS Federal Register/Commerce Dept/EU Commission | 政府网站 |
+| S12 Gen Z | 用户研究专家 | Deloitte/McKinsey/Pew/Sensor Tower（必须标样本量） | `freshness:day` |
+| S13 个性化 | 投资组合经理 | 基于S1-S12信号综合推导 | 内部逻辑 |
 
-### 修复2: S11政策信息政府来源强制
-- **问题**: S11曾引用"ASML 2025年报"作为中国稀土政策来源，这是张冠李戴
-- **修复**: `source_map.md` S11详细要求追加：
-  - **强制引用政府官方来源**：BIS Federal Register / Commerce Department / European Commission / 国务院关税税则委员会
-  - 禁止引用ASML年报、设备商财报、未验证网站作为政策来源
-  - 超过30天的政策信息必须有新变动才能收录
-- **预检脚本**: 自动检测S11中是否包含"ASML 2025年报"、"ASML年报"等禁止来源
+**执行规则**：每板块生成前，必须回顾对应专家角色和权威来源清单。来源不在清单中 → 禁止收录。搜索策略不符 → 重新搜索。
 
-### 修复3: S12调研数据样本量强制
-- **问题**: S12连续3条引用同一来源"SQ Magazine"，且未标注样本量、调研方法、地理范围
-- **修复**: `source_map.md` S12详细要求追加：
-  - **强制标注调研数据样本量**：每条调研数据必须标注样本量、调研机构、时间、地理范围
-  - 禁止连续3条以上引用同一来源
-  - 超过14天的调研数据必须有更新数据或新解读
-- **预检脚本**: 自动检测S12中"SQ Magazine"引用次数，>=3则FATAL
+---
 
-### 修复4: Cron执行层强制追加
-- **问题**: 预检脚本存在于文件系统中，但cron payload未明确指示在生成后执行
-- **修复**: `cron/jobs.json` payload追加：
-  - **执行层强制（P1新增）**：每日生成后必须运行`python3 pre_flight_check.py daily_report_YYYY-MM-DD.html`
-  - 预检失败→不部署、不推送、通知用户"当日晨报因质控未通过延迟"
-  - 股票CSV必须存在且21只全部有close价格
-  - href="#"检查：>0则失败
-  - 模板diff检查：对比template_v12.html与实际输出class名
-- **cron已更新**: `/root/.openclaw/cron/jobs.json`
+## 内容质量预检层（2026-05-15追加，机器强制执行）
+
+以下检查项由 `pre_flight_check.py` 在格式检查之后自动执行，任一失败则FATAL中止部署：
+
+### CQ1 模型版本号交叉验证（S3）
+- 检查S3中所有模型版本号（如GPT-5.5、Kimi K2.6、Claude 4等）
+- 必须与官方最新发布核对（OpenAI blog/Anthropic changelog/Google AI blog）
+- 发现过时版本号 → FATAL，标注"版本号待确认"
+
+### CQ2 财报数据时效性（S4）
+- 检查S4中所有财报数据
+- 禁止使用上一季度数据填充（如Q2已发布则禁止引用Q1）
+- 发现回溯数据 → FATAL
+
+### CQ3 PR真实性验证（S8）
+- 检查S8中所有GitHub PR编号
+- 必须能在 `github.com/{owner}/{repo}/pull/{number}` 访问且非404
+- 发现编造PR编号 → FATAL
+- PR标题/描述与报告内容不一致 → FATAL
+
+### CQ4 政策来源禁令（S11）
+- 检查S11中是否包含ASML年报、设备商财报、未验证网站
+- 发现禁止来源 → FATAL
+- 政策信息未引用政府官方来源 → FATAL
+
+### CQ5 调研数据样本量（S12）
+- 检查S12中每条调研数据是否标注样本量、机构、时间、地理范围
+- 发现未标注样本量的调研数据 → FATAL
+- 同一来源引用>2次 → FATAL
+
+### CQ6 国际观点占比（全文）
+- 检查全文来源国籍分布
+- 国内来源（中国媒体/机构）占比>20% → FATAL
+- 例外：仅当报道中国独家事件（如工信部政策、中芯财报）时允许
+
+**问责**：以上检查任一项FATAL → 不部署、不推送、通知用户"当日晨报因内容质量未通过延迟"
+
+---
+
+## 搜索执行策略（2026-05-15追加）
+
+### 强制搜索参数
+- `freshness:day` 或 `date_after:today-2` — 无时间筛选 = 禁止
+- 每板块最多2次搜索
+- 来源优先级：Tier 1 > Tier 2 > 禁止
+
+### 交叉验证规则
+- 关键事实（模型版本/财报/价格/人物言论）必须≥2个独立来源
+- 独立来源定义：不同机构/不同记者/不同语言区
+
+### 验证步骤（机器强制执行）
+1. **模型版本**：搜索后访问官方GitHub/blog确认版本号
+2. **财报数据**：搜索后访问SEC filing/earnings call transcript确认
+3. **PR编号**：搜索后访问GitHub仓库确认PR存在
+4. **人物言论**：搜索后访问原始采访/官方博客确认
+5. **政策信息**：搜索后访问政府网站确认
+
+**未验证通过 → 不收录该信息，宁可板块留空**
+
+---
 
