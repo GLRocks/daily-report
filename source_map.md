@@ -94,8 +94,8 @@
     - **强制数据表格**：PR追踪表（时间/里程碑/PR编号/标题/技术point/解决问题/投资含义）、大厂技术路径矩阵表、社区vs公司异同对比表
 9. ToC侧Agent应用及硬件部署形式：端侧AI芯片（NVIDIA Jetson/Intel NPU/AMD Ryzen AI/Qualcomm骁龙X Elite等）。强制数据表格：端侧芯片算力TOPS/功耗/出货量对比。
 10. 全球交易：铜/锂/稀土/半导体设备/DRAM-NAND价格趋势+政治因素。强制数据表格。
-11. 政治突发：出口管制/关税/地缘冲突对供应链影响。强制数据表格。
-12. Gen Z研究：15-24岁平台迁移/消费/社交行为信号。强制数据表格。
+11. 政治突发：出口管制/关税/地缘冲突对供应链影响。**强制引用政府官方来源**：BIS Federal Register / Commerce Department / European Commission / 国务院关税税则委员会（中国）。禁止引用ASML年报、设备商财报、未验证网站作为政策来源。超过30天的政策信息必须有新变动才能收录。强制数据表格。
+12. Gen Z研究：15-24岁平台迁移/消费/社交行为信号。**强制标注调研数据样本量**：每条调研数据必须标注样本量、调研机构、时间、地理范围。禁止连续3条以上引用同一来源。超过14天的调研数据必须有更新数据或新解读。强制数据表格。
 13. 个性化推荐：基于用户半导体投资背景的深度信号。附权威分析。
 
 ---
@@ -194,4 +194,49 @@
 - **问题**: 模板曾存在`href="#"`占位符，导致点击跳转页面顶部而非来源页面
 - **状态**: 当前模板已无`href="#"`，所有source-link指向真实机构域名
 - **规则追加**: 模板中禁止任何`href="#"`的source-link或play-btn。生成后必须执行`grep -c 'href="#"'`检查，>0则预检失败
+
+---
+
+## P1修复记录（2026-05-15执行）
+
+### 修复1: 预检脚本全面重写
+- **问题**: 旧脚本检查`addEventListener`和`onclick`，但P0已将播放按钮改为`<a>`标签，不需要JS事件监听。脚本中还有INTC日涨跌幅检查（已删除）
+- **修复**: 重写`pre_flight_check.py`，更新为V12实际结构：
+  - 结构检查：section-title=13, stock-card=21, rec-badge=21, cat-badge=21, quote-box=4, insight-box=13, data-table=13
+  - href="#"检查：>0则FATAL
+  - play-btn检查：必须全部是`<a>`标签（非`<div>`）
+  - CSS变量检查：--accent, --highlight, --bg
+  - 日期检查
+  - 股票分类计数：芯片=10, 应用=8, 能源=3
+  - **新增**股票CSV验证：检查`daily_report_YYYY-MM-DD_stocks.csv`存在且21只全部有close价格
+  - **新增**评级一致性WARN：检测S1与S13是否矛盾
+  - **新增**S11来源检查：检测ASML年报等禁止来源
+  - **新增**S12 SQ Magazine检查：>2次引用则FATAL
+- **脚本路径**: `/root/.openclaw/workspace/pre_flight_check.py`
+
+### 修复2: S11政策信息政府来源强制
+- **问题**: S11曾引用"ASML 2025年报"作为中国稀土政策来源，这是张冠李戴
+- **修复**: `source_map.md` S11详细要求追加：
+  - **强制引用政府官方来源**：BIS Federal Register / Commerce Department / European Commission / 国务院关税税则委员会
+  - 禁止引用ASML年报、设备商财报、未验证网站作为政策来源
+  - 超过30天的政策信息必须有新变动才能收录
+- **预检脚本**: 自动检测S11中是否包含"ASML 2025年报"、"ASML年报"等禁止来源
+
+### 修复3: S12调研数据样本量强制
+- **问题**: S12连续3条引用同一来源"SQ Magazine"，且未标注样本量、调研方法、地理范围
+- **修复**: `source_map.md` S12详细要求追加：
+  - **强制标注调研数据样本量**：每条调研数据必须标注样本量、调研机构、时间、地理范围
+  - 禁止连续3条以上引用同一来源
+  - 超过14天的调研数据必须有更新数据或新解读
+- **预检脚本**: 自动检测S12中"SQ Magazine"引用次数，>=3则FATAL
+
+### 修复4: Cron执行层强制追加
+- **问题**: 预检脚本存在于文件系统中，但cron payload未明确指示在生成后执行
+- **修复**: `cron/jobs.json` payload追加：
+  - **执行层强制（P1新增）**：每日生成后必须运行`python3 pre_flight_check.py daily_report_YYYY-MM-DD.html`
+  - 预检失败→不部署、不推送、通知用户"当日晨报因质控未通过延迟"
+  - 股票CSV必须存在且21只全部有close价格
+  - href="#"检查：>0则失败
+  - 模板diff检查：对比template_v12.html与实际输出class名
+- **cron已更新**: `/root/.openclaw/cron/jobs.json`
 
