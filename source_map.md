@@ -148,7 +148,7 @@
    3. 页面存在 → 检查标题/描述与报告内容是否一致
    4. 不一致 → 以实际PR标题为准，修正报告内容
    ```
-4. **来源标注**：PR追踪表中的每一条记录都必须标注来源（GitHub仓库链接或官方release note链接），不允许无来源的"近期焦点"。
+4. **来源标注**：PR追踪表中的每一条记录的"里程碑/焦点"字段必须附带可点击的GitHub超链接（`<a href="https://github.com/..." target="_blank" class="source-link">...`），指向对应的PR页面、Release页面或仓库搜索页面。不允许无链接的纯文本描述。
 
 ### 错误案例（2026-05-13）
 - **错误**: vLLM "PR #11234: PD分离支持"、SGLang "PR #892: Speculative Decode"、vLLM "PR #11120: Chunked Prefill"
@@ -159,3 +159,39 @@
 ### 问责
 - 违反"禁止编造PR编号"规则→记录到accuracy_errors.md
 - 连续2次PR编号造假→暂停Section 8生成，改为仅收录已验证的release/milestone信息
+
+---
+
+## P0修复记录（2026-05-15执行）
+
+### 修复1: 播放按钮真实URL化
+- **问题**: `.play-btn` 使用 `<div>` 标签，点击无反应，只有tooltip提示"原声内容请访问上方来源链接"
+- **修复**: 全部改为 `<a href="来源URL" class="play-btn" target="_blank">` 真实链接
+- **规则追加**: 投资人及权威机构最新论点（S2）中每条言论的`.play-btn`必须链接到来源机构真实URL或相关报道页面，禁止纯CSS样式div
+- **模板已更新**: `agentic_market_daily_template_v12.html` 中4条权威言论的播放按钮已改为真实链接
+
+### 修复2: 股票卡片日涨跌幅字段删除
+- **问题**: `pct_change_1m`被误用为日涨跌幅，实际为1分钟变动≈0%，展示为日涨跌是误导
+- **修复**: 从S1股票卡片中完全移除`<span class="change">`元素，`.price-row`只保留`<span class="price">`
+- **规则追加**: S1核心持仓实时行情中，股票卡片禁止展示日涨跌幅。ifind API不提供US stock真实日涨跌，禁止自行计算或搜索回填
+- **模板已更新**: 21只股票的change元素已全部移除
+
+### 修复3: S4表格删除"日涨跌"列
+- **问题**: S4 NVIDIA/AMD/Intel表格中的"日涨跌"列同样使用错误数据
+- **修复**: 删除该列，表格变为：公司/收盘价/YTD/关键催化/投资信号
+- **模板已更新**: S4表格已删除日涨跌列
+
+### 修复4: 全文标的评级一致性
+- **问题**: S1中QCOM=HOLD但S13信号1建议"投机仓位"；S1中NVDA=BUY（highlight-stock）但S13信号3建议"降级为HOLD"
+- **修复**: 
+  - QCOM: S1=HOLD, S13=HOLD（统一为HOLD，删除"投机仓位"表述）
+  - NVDA: S1=BUY（核心持仓+highlight-stock）, S13=BUY（统一维持BUY，删除降级表述）
+  - AMD: S1=BUY, S13=BUY（已一致）
+  - Intel: S1=BUY, S13=BUY（统一维持BUY）
+- **规则追加**: 同一标的在全文中只能有一个评级。S1股票面板的评级是全篇唯一权威评级，S13个性化推荐中的投资建议必须与S1一致，禁止矛盾
+
+### 修复5: href="#"占位符拦截
+- **问题**: 模板曾存在`href="#"`占位符，导致点击跳转页面顶部而非来源页面
+- **状态**: 当前模板已无`href="#"`，所有source-link指向真实机构域名
+- **规则追加**: 模板中禁止任何`href="#"`的source-link或play-btn。生成后必须执行`grep -c 'href="#"'`检查，>0则预检失败
+
