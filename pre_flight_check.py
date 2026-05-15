@@ -55,6 +55,29 @@ def check(report_path):
         fatal(f"data-table: expected at least 13, found {table_count}")
     print(f"PASS: data-table = {table_count}")
     
+    # === STOCK CHANGE% CHECK ===
+    stock_changes = re.findall(r'class="change[^"]*"', html)
+    if len(stock_changes) < 20:
+        fatal(f"Stock change% missing: expected ≥20, found {len(stock_changes)} — each stock card must show daily change% from CSV pct_change")
+    print(f"PASS: Stock change% present = {len(stock_changes)}")
+    
+    # === S4 TABLE CHANGE COLUMN CHECK ===
+    s4_section = re.search(r'<span class="num">4</span>.*?</table>', html, re.DOTALL)
+    if s4_section:
+        if '日涨跌' not in s4_section.group(0):
+            fatal("S4 table missing '日涨跌' column — must show daily price change")
+        print("PASS: S4 table has 日涨跌 column")
+    
+    # === S8 PR LINK CHECK ===
+    s8_section = re.search(r'<span class="num">8</span>.*?<!-- Section 9 -->', html, re.DOTALL)
+    if s8_section:
+        s8_html = s8_section.group(0)
+        # Check for PR links
+        pr_links = re.findall(r'github\.com/(vllm-project|sgl-project)/[^"]+/pull/\d+', s8_html)
+        if len(pr_links) < 2:
+            fatal(f"S8 PR links missing: expected ≥2 GitHub PR URLs, found {len(pr_links)} — vLLM/SGLang PRs must be clickable links")
+        print(f"PASS: S8 PR links = {len(pr_links)}")
+    
     # === SOURCE LINKS VALIDITY ===
     bad_links = html.count('href="#"')
     if bad_links > 0:

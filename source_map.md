@@ -35,10 +35,13 @@
 - **股票面板格式固定**：21只卡片，每张含：
   - 左上角 `.rec-badge`（BUY/HOLD/SPEC BUY），绝对定位
   - 右上角 `.cat-badge`（芯片/应用/能源），绝对定位
-  - 中间：ticker + name + price + change
+  - 中间：ticker + name + price + **change%（日涨跌幅，从CSV的pct_change字段）**
   - 底部 `.stock-metrics`："核心指标: xxx | xxx | xxx"
   - 底部 `.stock-reason`："推荐: " + 底层逻辑
   - CSS: `.stock-card { position: relative; }`
+  - **强制**：价格必须来自ifind API `close`字段，涨跌幅来自`pct_change`字段
+- **S4表格格式**：必须包含"日涨跌"列，数据来自ifind API
+- **S8 PR链接**：vLLM/SGLang PR编号必须为可点击的GitHub PR链接（如`https://github.com/vllm-project/vllm/pull/12845`）
 - 每日仅更新内容（文字、数据、价格），模板结构零变更
 - 生成后必须对比 template_v12.html 的结构一致性（section数量、class名、CSS变量）
 
