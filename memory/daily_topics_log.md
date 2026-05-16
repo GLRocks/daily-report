@@ -61,3 +61,20 @@
 2026-05-13 | S11 | H200 25%关税 / 年度许可证制度 / 国会全面禁运提案 | Semiconductors Insight | 结构化分离深化
 2026-05-13 | S12 | Gen Z 41%社交搜索 / Micro-Dramas $78亿 / AI信任崩塌 | SQ Magazine | GEO替代SEO
 2026-05-13 | S13 | QCOM结构性启示 / Compute Futures / AMD>NVDA / HBM3E连锁反应 | 综合分析 | 估值叙事 vs 基本面验证
+
+## 2026-05-16
+2026-05-16 | S1 | 21只核心持仓行情面板 | ifind实时API | 周五集体回调，INTC/BABA/MU领跌
+2026-05-16 | S2 | Trump-Xi峰会未达成半导体贸易突破 + Lisa Su CPU TAM $120B + BTIG 25-30%回调预警 | Bloomberg/AMD IR/BTIG | 地缘回调=买入窗口
+2026-05-16 | S3 | Lisa Su / Jonathan Krinsky / Jamieson Greer / Lip-Bu Tan | AMD IR/CNBC/Bloomberg/WSJ | CPU复兴+回调预警+地缘落空
+2026-05-16 | S4 | 当日无重大模型发布 | — | 维持既有观察
+2026-05-16 | S5 | Trump-Xi未达成芯片贸易突破 / AMD Q1 +38% / INTC Q1超预期$1.4B / Apple/Google供应协议 | USTR/AMD IR/Intel IR/WSJ | 回调即加仓
+2026-05-16 | S6 | 当日无重大云厂商策略更新 | — | 维持既有观察
+2026-05-16 | S7 | 当日无重大Agent应用发布 | — | 维持既有观察
+2026-05-16 | S8 | 当日无重大协议更新 | — | 维持既有观察
+2026-05-16 | S9 | vLLM PR #42731/#42703/#42694/#42707 + SGLang v0.5.11 | GitHub | MoE LoRA/PD分离/KV Connector/Spec Decode V2
+2026-05-16 | S10 | 当日无重大硬件发布 | — | 维持既有观察
+2026-05-16 | S11 | 当日无重大大宗商品突破 | — | 周五芯片回调构成短期信号
+2026-05-16 | S12 | Trump-Xi峰会无芯片突破 / H200出口授权但北京未批准 / 年度许可制 / 稀土暂停出口 | USTR/WSJ/BIS/国务院 | 政策风险price-in
+2026-05-16 | S13 | 当日无新Gen Z报告 | — | 维持既有观察
+2026-05-16 | S14 | Agentic CPU复兴 + 地缘回调买入窗口 + BTIG风险管理 | 综合推导 | AMD/INTC/NVDA
+2026-05-16 | DEPLOY | GitHub Pages修复完成 | 公共repo daily-report | 原私有repo无法启用Pages(免费版限制)，已创建干净公共repo并修复部署流程

@@ -15,50 +15,58 @@
 - **板块标题格式固定**：`<div class="section-title"><span class="num">{number}</span> {名称}</div>`
   - `.num` 是圆形数字标签（background: var(--highlight)）
   - 禁止使用 `.section-number` 或其他变体
-- **板块顺序固定（13个）**：
+- **板块顺序固定（14个）**：
   1. 核心持仓实时行情（21只股票，含BUY/HOLD/SPEC BUY标签+分类标签）
-  2. 投资人及权威机构最新论点
-  3. AI独角兽模型技术动向
-  4. NVIDIA / AMD / Intel（财报级信号）
-  5. 中国云厂商AI策略
-  6. AI Agent应用趋势
-  7. Agent接口及生态标准化
-  8. 开源社区技术路径深度追踪 & 因果链分析
-  9. ToC侧Agent应用及硬件部署形式
-  10. 全球交易：大宗商品与金融趋势
-  11. 政治突发：地缘与政策对供应链影响
-  12. Gen Z研究：15-24岁行为信号
-  13. 个性化推荐：值得深度跟踪的信号
+  2. **专家共识：跨板块综合研判**（新增2026-05-15）
+  3. 投资人及权威机构最新论点
+  4. AI独角兽模型技术动向
+  5. NVIDIA / AMD / Intel（财报级信号）
+  6. 中国云厂商AI策略
+  7. AI Agent应用趋势
+  8. Agent接口及生态标准化
+  9. 开源社区技术路径深度追踪 & 因果链分析
+  10. ToC侧Agent应用及硬件部署形式
+  11. 全球交易：大宗商品与金融趋势
+  12. 政治突发：地缘与政策对供应链影响
+  13. Gen Z研究：15-24岁行为信号
+  14. 个性化推荐：值得深度跟踪的信号
 - **特殊样式类必须保留**：`.quote-box` `.quote-text` `.quote-source` `.quote-context` `.play-btn`（权威引用块）；`.insight-box` `.label` `.content`（洞察框）；`.signal-list` `.tag` `.tag-hot` `.tag-new` `.tag-key`（信号列表+标签）；`.causal-chain` `.chain-title` `.chain-item` `.key` `.val`（因果链分析）；`.highlight-stock`（股票卡片边框高亮）
 - **表格样式固定**：`.data-table` 统一样式，表头 `background: #0a1628; color: var(--accent); border-bottom: 2px solid var(--accent)`，斑马纹 `var(--card2)`
 - **禁止**增删板块、调换顺序、合并或拆分板块
 - **股票面板格式固定**：21只卡片，每张含：
   - 左上角 `.rec-badge`（BUY/HOLD/SPEC BUY），绝对定位
   - 右上角 `.cat-badge`（芯片/应用/能源），绝对定位
-  - 中间：ticker + name + price + **change%（日涨跌幅，从CSV的pct_change字段）**
+  - 中间：ticker + name + price（**禁止展示change%日涨跌幅**，P0 fix 2026-05-15）
   - 底部 `.stock-metrics`："核心指标: xxx | xxx | xxx"
   - 底部 `.stock-reason`："推荐: " + 底层逻辑
   - CSS: `.stock-card { position: relative; }`
-  - **强制**：价格必须来自ifind API `close`字段，涨跌幅来自`pct_change`字段
-- **S4表格格式**：必须包含"日涨跌"列，数据来自ifind API
-- **S8 PR链接**：vLLM/SGLang PR编号必须为可点击的GitHub PR链接（如`https://github.com/vllm-project/vllm/pull/12845`）
+  - **强制**：价格必须来自ifind API `close`字段
+- **S5表格格式**：公司/收盘价/YTD/关键催化/投资信号（**禁止日涨跌列**，P0 fix 2026-05-15）
+- **S9 PR链接**：vLLM/SGLang PR编号必须为可点击的GitHub PR链接（如`https://github.com/vllm-project/vllm/pull/12845`）（注意：原S8因新增S2而变为S9）
 - 每日仅更新内容（文字、数据、价格），模板结构零变更
 - 生成后必须对比 template_v12.html 的结构一致性（section数量、class名、CSS变量）
 
 ---
 
-## 输出流程（GitHub Pages部署 - 强制）
-1. 生成HTML格式晨报，使用专业暗色主题
-2. 保存到 /root/.openclaw/workspace/daily_report_YYYY-MM-DD.html
-3. 复制到index.html: cp daily_report_YYYY-MM-DD.html index.html
-4. 部署到GitHub Pages:
-   - cd /root/.openclaw/workspace
+## 输出流程（GitHub Pages部署 - 强制更新 2026-05-16）
+**仓库架构**：
+- **私有备份**: `glrocks/daily-report-private` — 存放完整workspace（含memory/template/config）
+- **公共Pages**: `glrocks/daily-report` — **仅存放HTML报告**（index.html + daily_report_*.html + .nojekyll + template）
+- **禁止**将workspace完整内容（133文件）推送到公共Pages仓库
+
+**部署步骤**：
+1. 生成HTML格式晨报，保存到 /root/.openclaw/workspace/daily_report_YYYY-MM-DD.html
+2. 运行预检: python3 /root/.openclaw/workspace/pre_flight_check.py /root/.openclaw/workspace/daily_report_YYYY-MM-DD.html
+3. 预检通过 → 复制到 /tmp/daily-report-public/index.html
+4. 部署到GitHub Pages（公共仓库，仅HTML文件）：
+   - cd /tmp/daily-report-public
    - git remote set-url origin https://TOKEN@github.com/glrocks/daily-report.git
-   - git add -f index.html daily_report_YYYY-MM-DD.html
+   - cp /root/.openclaw/workspace/daily_report_YYYY-MM-DD.html index.html
+   - git add -f index.html
    - git commit -m "Daily report YYYY-MM-DD"
-   - git push origin master --force
-5. 向用户推送固定链接: https://glrocks.github.io/daily-report/（每日固定地址，不再使用Cloudflare Tunnel）
-6. 部署后立即验证: curl -s https://glrocks.github.io/daily-report/ | grep -c "Agentic Market Daily"
+   - git push origin main --force
+5. 验证部署: curl -s https://glrocks.github.io/daily-report/ | grep -c "Agentic Market Daily"
+6. 向用户推送固定链接: https://glrocks.github.io/daily-report/
 
 ---
 

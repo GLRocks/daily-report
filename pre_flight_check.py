@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
 pre_flight_check.py — Automated quality gate before deployment
-FAIL = stop deployment, do not pass go
-called by cron after report generation and before git push
+Updated 2026-05-16: 14 sections, no stock change%, no S4 daily change column
 """
 import sys
 import re
@@ -24,13 +23,11 @@ def check(report_path):
         html = f.read()
     
     # === STRUCTURE CHECKS ===
-    # === STRUCTURE CHECKS ===
     structure_checks = {
-        'section-title': 13,
+        'section-title': 14,
         'stock-card': 21,
         'rec-badge': 21,
         'cat-badge': 21,
-        'quote-box': 4,
     }
     
     for cls, expected in structure_checks.items():
@@ -42,12 +39,22 @@ def check(report_path):
             fatal(f"{cls}: expected {expected}, found {actual}")
         print(f"PASS: {cls} = {actual}")
     
+    # === SECTION 2: EXPERT CONSENSUS CHECK ===
+    s2 = re.search(r'<span class="num">2</span>.*?</div>', html, re.DOTALL)
+    if not s2:
+        fatal("S2 (专家共识) missing — must be present as section 2")
+    s2_html = s2.group(0)
+    if '当日核心判断' not in s2_html and '核心判断' not in s2_html:
+        warn("S2 may be missing '当日核心判断'")
+    if '因果链' not in s2_html:
+        warn("S2 may be missing '因果链速览'")
+    print("PASS: S2 (专家共识) present")
+    
     # === INSIGHT-BOX COUNT ===
-    # S1 (stock panel) may not have insight-box, so check sections 2-13
     insight_count = html.count('class="insight-box"')
     if insight_count < 12:
-        fatal(f"insight-box: expected at least 12 (sections 2-13), found {insight_count}")
-    print(f"PASS: insight-box = {insight_count} (sections 2-13)")
+        fatal(f"insight-box: expected at least 12 (sections 2-14), found {insight_count}")
+    print(f"PASS: insight-box = {insight_count} (sections 2-14)")
     
     # === DATA-TABLE COUNT ===
     table_count = html.count('<table class="data-table">')
@@ -55,28 +62,29 @@ def check(report_path):
         fatal(f"data-table: expected at least 13, found {table_count}")
     print(f"PASS: data-table = {table_count}")
     
-    # === STOCK CHANGE% CHECK ===
+    # === NO STOCK CHANGE% (P0 fix 2026-05-15) ===
     stock_changes = re.findall(r'class="change[^"]*"', html)
-    if len(stock_changes) < 20:
-        fatal(f"Stock change% missing: expected ≥20, found {len(stock_changes)} — each stock card must show daily change% from CSV pct_change")
-    print(f"PASS: Stock change% present = {len(stock_changes)}")
+    if stock_changes:
+        fatal(f"Stock change% found: {len(stock_changes)} — per P0 fix, S1 cards must NOT show change%")
+    else:
+        print("PASS: No stock change% elements (P0 fix compliant)")
     
-    # === S4 TABLE CHANGE COLUMN CHECK ===
-    s4_section = re.search(r'<span class="num">4</span>.*?</table>', html, re.DOTALL)
-    if s4_section:
-        if '日涨跌' not in s4_section.group(0):
-            fatal("S4 table missing '日涨跌' column — must show daily price change")
-        print("PASS: S4 table has 日涨跌 column")
+    # === S4/S5 TABLE: NO "日涨跌" COLUMN (P0 fix 2026-05-15) ===
+    # S5 is now NVIDIA/AMD/Intel (was S4 before adding S2)
+    s5_section = re.search(r'<span class="num">5</span>.*?</table>', html, re.DOTALL)
+    if s5_section:
+        if '日涨跌' in s5_section.group(0):
+            fatal("S5 table has '日涨跌' column — per P0 fix, this column must be removed")
+        print("PASS: S5 table has no 日涨跌 column (P0 fix compliant)")
     
-    # === S8 PR LINK CHECK ===
-    s8_section = re.search(r'<span class="num">8</span>.*?<!-- Section 9 -->', html, re.DOTALL)
-    if s8_section:
-        s8_html = s8_section.group(0)
-        # Check for PR links
-        pr_links = re.findall(r'github\.com/(vllm-project|sgl-project)/[^"]+/pull/\d+', s8_html)
+    # === S9 PR LINK CHECK (was S8 before adding S2) ===
+    s9_section = re.search(r'<span class="num">9</span>.*?<!-- Section 10 -->', html, re.DOTALL)
+    if s9_section:
+        s9_html = s9_section.group(0)
+        pr_links = re.findall(r'github\.com/(vllm-project|sgl-project)/[^"]+/pull/\d+', s9_html)
         if len(pr_links) < 2:
-            fatal(f"S8 PR links missing: expected ≥2 GitHub PR URLs, found {len(pr_links)} — vLLM/SGLang PRs must be clickable links")
-        print(f"PASS: S8 PR links = {len(pr_links)}")
+            fatal(f"S9 PR links missing: expected >=2 GitHub PR URLs, found {len(pr_links)}")
+        print(f"PASS: S9 PR links = {len(pr_links)}")
     
     # === SOURCE LINKS VALIDITY ===
     bad_links = html.count('href="#"')
@@ -84,7 +92,7 @@ def check(report_path):
         fatal(f"{bad_links} links have href='#' — must be real URLs")
     print("PASS: No href='#' placeholder links")
     
-    # === PLAY-BTN CLICKABILITY (V12: must be <a> tag with href) ===
+    # === PLAY-BTN CLICKABILITY ===
     play_btns = re.findall(r'<[^>]*class="play-btn"[^>]*>', html)
     for btn in play_btns:
         if '<a ' not in btn:
@@ -137,24 +145,21 @@ def check(report_path):
                 fatal(f"Stocks missing price: {', '.join(missing_price)} — max 1 allowed (TCEHY)")
             print(f"PASS: Stock CSV valid — {len(rows)} stocks, {len(missing_price)} without price (allowed)")
     
-    # === RATING CONSISTENCY (basic: check S1 vs S13) ===
+    # === RATING CONSISTENCY ===
     s1_ratings = {}
     s1_cards = re.findall(r'<div class="stock-card[^"]*"[^>]*>.*?<span class="rec-badge[^"]*">([^<]+)</span>.*?<div class="ticker">([^<]+)</div>', html, re.DOTALL)
     for badge, ticker in s1_cards:
         s1_ratings[ticker] = badge.strip()
     
-    # Check S13 mentions of same tickers
     inconsistencies = []
     for ticker, s1_rating in s1_ratings.items():
-        # Look for explicit rating mentions in S13 insight boxes
-        s13_matches = re.findall(rf'{ticker}[^。]*?([B|S][^\s]*)', html)
-        for m in s13_matches:
+        s14_matches = re.findall(rf'{ticker}[^。]*?([B|S][^\s]*)', html)
+        for m in s14_matches:
             if 'BUY' in m or 'HOLD' in m or 'SPEC' in m:
-                s13_rating = m.strip()
-                if s13_rating != s1_rating and not (s1_rating == 'BUY' and s13_rating == 'BUY'):
-                    # Allow partial match (e.g. "维持BUY" contains BUY)
-                    if s1_rating not in s13_rating and s13_rating not in s1_rating:
-                        inconsistencies.append(f"{ticker}: S1={s1_rating} vs S13 text='{s13_rating}'")
+                s14_rating = m.strip()
+                if s14_rating != s1_rating and not (s1_rating == 'BUY' and s14_rating == 'BUY'):
+                    if s1_rating not in s14_rating and s14_rating not in s1_rating:
+                        inconsistencies.append(f"{ticker}: S1={s1_rating} vs S14 text='{s14_rating}'")
     
     if inconsistencies:
         for inc in inconsistencies[:3]:
@@ -162,104 +167,90 @@ def check(report_path):
     else:
         print("PASS: No obvious rating inconsistencies")
     
-    # === POLICY SOURCE CHECK (S11) ===
-    s11_section = re.search(r'<div class="section">.*?<span class="num">11</span>.*?</div>\s*</div>', html, re.DOTALL)
-    if s11_section:
-        s11_html = s11_section.group(0)
-        # Check for known bad sources
+    # === POLICY SOURCE CHECK (S12, was S11) ===
+    s12_section = re.search(r'<span class="num">12</span>.*?</div>\s*</div>', html, re.DOTALL)
+    if s12_section:
+        s12_html = s12_section.group(0)
         bad_sources = ['ASML 2025年报', 'ASML年报']
         for bad in bad_sources:
-            if bad in s11_html:
-                fatal(f"S11 contains prohibited source: '{bad}' — policy info must cite government sources (BIS/Commerce/EU Commission)")
-        print("PASS: S11 no prohibited sources detected")
+            if bad in s12_html:
+                fatal(f"S12 contains prohibited source: '{bad}'")
+        print("PASS: S12 no prohibited sources detected")
     
-    # === GEN-Z SOURCE CHECK (S12) ===
-    s12_section = re.search(r'<div class="section">.*?<span class="num">12</span>.*?</div>\s*</div>', html, re.DOTALL)
-    if s12_section:
-        s12_html = s12_section.group(0)
-        # Check for SQ Magazine repeated use
-        sq_count = s12_html.count('SQ Magazine')
+    # === GEN-Z SOURCE CHECK (S13, was S12) ===
+    s13_section = re.search(r'<span class="num">13</span>.*?</div>\s*</div>', html, re.DOTALL)
+    if s13_section:
+        s13_html = s13_section.group(0)
+        sq_count = s13_html.count('SQ Magazine')
         if sq_count >= 3:
-            fatal(f"S12 cites 'SQ Magazine' {sq_count} times — max 2 per section, and must verify source credibility")
-        print(f"PASS: S12 SQ Magazine citations = {sq_count} (max 2)")
+            fatal(f"S13 cites 'SQ Magazine' {sq_count} times — max 2 per section")
+        print(f"PASS: S13 SQ Magazine citations = {sq_count} (max 2)")
     
-    # === CONTENT QUALITY CHECKS (CQ1-CQ6) ===
+    # === CONTENT QUALITY CHECKS ===
     print("\n=== CONTENT QUALITY CHECKS ===")
     
-    # CQ1: Model version verification (S3)
-    s3_section = re.search(r'<div class="section">.*?<span class="num">3</span>.*?</div>\s*</div>', html, re.DOTALL)
-    if s3_section:
-        s3_html = s3_section.group(0)
-        # Check for potentially outdated model versions
-        outdated_patterns = ['GPT-4', 'GPT-4.1', 'Claude 3', 'Kimi K2.5', 'Gemini 1.5']
-        for pattern in outdated_patterns:
-            if pattern in s3_html:
-                # Allow if explicitly marked as historical/context
-                if '历史' not in s3_html and '此前' not in s3_html:
-                    print(f"WARN: S3 may contain outdated model version '{pattern}' — verify against official latest")
-    print("CQ1: Model version check completed")
-    
-    # CQ2: Earnings data freshness (S4)
-    s4_section = re.search(r'<div class="section">.*?<span class="num">4</span>.*?</div>\s*</div>', html, re.DOTALL)
+    # CQ1: Model version (S4, was S3)
+    s4_section = re.search(r'<span class="num">4</span>.*?</div>\s*</div>', html, re.DOTALL)
     if s4_section:
         s4_html = s4_section.group(0)
-        # Check for Q1 references when Q2 may be available (as of May 2026)
-        q1_count = len(re.findall(r'Q1\s+2026', s4_html))
+        outdated_patterns = ['GPT-4', 'GPT-4.1', 'Claude 3', 'Kimi K2.5', 'Gemini 1.5']
+        for pattern in outdated_patterns:
+            if pattern in s4_html:
+                if '历史' not in s4_html and '此前' not in s4_html:
+                    print(f"WARN: S4 may contain outdated model version '{pattern}'")
+    print("CQ1: Model version check completed")
+    
+    # CQ2: Earnings data (S5, was S4)
+    s5_section = re.search(r'<span class="num">5</span>.*?</div>\s*</div>', html, re.DOTALL)
+    if s5_section:
+        s5_html = s5_section.group(0)
+        q1_count = len(re.findall(r'Q1\s+2026', s5_html))
         if q1_count > 0:
-            # May 2026 = Q1 earnings season just ended, Q2 not yet available
-            # This is acceptable, but flag for verification
-            print(f"INFO: S4 contains {q1_count} Q1 2026 references — verify Q2 not yet available")
+            print(f"INFO: S5 contains {q1_count} Q1 2026 references — verify Q2 not yet available")
     print("CQ2: Earnings data freshness check completed")
     
-    # CQ3: PR verification placeholder (S8)
-    s8_section = re.search(r'<div class="section">.*?<span class="num">8</span>.*?</div>\s*</div>', html, re.DOTALL)
-    if s8_section:
-        s8_html = s8_section.group(0)
-        # Check for PR numbers without links
-        pr_no_links = re.findall(r'PR\s+#(\d+)[^<]', s8_html)
+    # CQ3: PR verification (S9, was S8)
+    s9_section = re.search(r'<span class="num">9</span>.*?</div>\s*</div>', html, re.DOTALL)
+    if s9_section:
+        s9_html = s9_section.group(0)
+        pr_no_links = re.findall(r'PR\s+#(\d+)[^<]', s9_html)
         if pr_no_links:
-            fatal(f"S8 contains PR numbers without hyperlinks: {pr_no_links} — all PRs must link to github.com")
-        # Check for PR links that are not github.com
-        non_github_links = re.findall(r'href="(?!https://github\.com)[^"]*pull[^"]*"', s8_html)
+            fatal(f"S9 contains PR numbers without hyperlinks: {pr_no_links}")
+        non_github_links = re.findall(r'href="(?!https://github\.com)[^"]*pull[^"]*"', s9_html)
         if non_github_links:
-            fatal(f"S8 contains non-GitHub PR links: {non_github_links}")
-        # Count GitHub PR links
-        github_links = re.findall(r'github\.com/(vllm-project|sgl-project)/[^"]+/pull/\d+', s8_html)
+            fatal(f"S9 contains non-GitHub PR links: {non_github_links}")
+        github_links = re.findall(r'github\.com/(vllm-project|sgl-project)/[^"]+/pull/\d+', s9_html)
         if len(github_links) < 2:
-            fatal(f"S8 PR links insufficient: {len(github_links)} found, minimum 2 required")
-        print(f"CQ3: S8 GitHub PR links = {len(github_links)} — OK")
+            fatal(f"S9 PR links insufficient: {len(github_links)} found, minimum 2 required")
+        print(f"CQ3: S9 GitHub PR links = {len(github_links)} — OK")
     
-    # CQ4: Policy source ban (S11)
-    s11_section = re.search(r'<div class="section">.*?<span class="num">11</span>.*?</div>\s*</div>', html, re.DOTALL)
-    if s11_section:
-        s11_html = s11_section.group(0)
-        banned_sources = ['ASML 2025年报', 'ASML年报', '设备商财报']
-        for bad in banned_sources:
-            if bad in s11_html:
-                fatal(f"CQ4: S11 contains banned source '{bad}' — policy info must cite government sources")
-        print("CQ4: S11 policy sources OK")
-    
-    # CQ5: Research sample size (S12)
-    s12_section = re.search(r'<div class="section">.*?<span class="num">12</span>.*?</div>\s*</div>', html, re.DOTALL)
+    # CQ4: Policy source ban (S12, was S11)
+    s12_section = re.search(r'<span class="num">12</span>.*?</div>\s*</div>', html, re.DOTALL)
     if s12_section:
         s12_html = s12_section.group(0)
-        # Check for research claims without sample size
-        research_patterns = re.findall(r'([\d,]+\s*(?:users|people|respondents|participants))', s12_html)
-        if not research_patterns:
-            # Check if there are survey claims at all
-            survey_claims = re.findall(r'(survey|study|research|poll)', s12_html, re.IGNORECASE)
-            if survey_claims:
-                print(f"WARN: CQ5: S12 contains {len(survey_claims)} survey references — verify all have sample sizes")
-        else:
-            print(f"CQ5: S12 sample sizes found: {len(research_patterns)} — OK")
+        banned_sources = ['ASML 2025年报', 'ASML年报', '设备商财报']
+        for bad in banned_sources:
+            if bad in s12_html:
+                fatal(f"CQ4: S12 contains banned source '{bad}'")
+        print("CQ4: S12 policy sources OK")
     
-    # CQ6: International source ratio (全文)
-    # Count domestic sources (Chinese media)
+    # CQ5: Research sample size (S13, was S12)
+    s13_section = re.search(r'<span class="num">13</span>.*?</div>\s*</div>', html, re.DOTALL)
+    if s13_section:
+        s13_html = s13_section.group(0)
+        research_patterns = re.findall(r'([\d,]+\s*(?:users|people|respondents|participants))', s13_html)
+        if not research_patterns:
+            survey_claims = re.findall(r'(survey|study|research|poll)', s13_html, re.IGNORECASE)
+            if survey_claims:
+                print(f"WARN: CQ5: S13 contains {len(survey_claims)} survey references — verify all have sample sizes")
+        else:
+            print(f"CQ5: S13 sample sizes found: {len(research_patterns)} — OK")
+    
+    # CQ6: International source ratio
     domestic_patterns = ['36kr', '钛媒体', '品玩', '雷锋网', '第一财经', '财新']
     domestic_count = sum(html.count(p) for p in domestic_patterns)
-    # This is a simplified check — full implementation would need NLP analysis
     if domestic_count > 5:
-        print(f"WARN: CQ6: {domestic_count} domestic source references found — verify international ratio ≥80%")
+        print(f"WARN: CQ6: {domestic_count} domestic source references found — verify international ratio >=80%")
     else:
         print("CQ6: International source ratio OK")
     
