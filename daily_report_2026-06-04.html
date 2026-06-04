@@ -627,18 +627,30 @@ header .date-badge {
     <tr><td colspan="4" style="color:var(--text2);text-align:center;">当日无高star/高评论新PR</td></tr>
   </table>
 
-  <h3 style="color:var(--accent);margin:15px 0 10px;">vLLM / SGLang PR追踪（近7日）</h3>
+  <div class="insight-box">
+    <div class="label">当日信号</div>
+    <div class="content">vLLM/SGLang近7日合并的PR以工程维护为主（dead code清理、LoRA适配器修复、buffer重构、CUDA graph优化），无投资级新功能发布。当日无高价值PR值得单独追踪。</div>
+  </div>
+
+  <h3 style="color:var(--accent);margin:15px 0 10px;">vLLM / SGLang PR追踪（近7日 — 真实数据）</h3>
   <table class="data-table">
     <thead>
-      <tr><th>社区</th><th>PR#</th><th>标题</th><th>技术Point</th><th>解决问题</th><th>投资含义</th></tr>
+      <tr><th>社区</th><th>PR#</th><th>标题</th><th>合并日期</th><th>投资含义</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>vLLM</strong></td><td><a href="https://github.com/vllm-project/vllm/pull/12845" target="_blank">#12845</a></td><td>PD-Disaggregation: CPU-offload KV cache</td><td>将KV cache卸载到CPU内存，支持100K+ context</td><td>长上下文推理内存瓶颈</td><td>降低推理成本30%+，利好应用层</td></tr>
-      <tr><td><strong>vLLM</strong></td><td><a href="https://github.com/vllm-project/vllm/pull/12789" target="_blank">#12789</a></td><td>Multi-Modal Agent: vision+text pipeline</td><td>原生支持多模态Agent推理</td><td>视觉Agent集成复杂</td><td>加速机器人/自动驾驶Agent落地</td></tr>
-      <tr><td><strong>SGLang</strong></td><td><a href="https://github.com/sgl-project/sglang/pull/2156" target="_blank">#2156</a></td><td>Speculative Decoding v3: draft model auto-select</td><td>自动选择最优draft model，提速2.5x</td><td>投机解码配置困难</td><td>推理延迟下降=用户体验提升</td></tr>
-      <tr><td><strong>SGLang</strong></td><td><a href="https://github.com/sgl-project/sglang/pull/2188" target="_blank">#2188</a></td><td>Agentic Loop: tool-use + reflection</td><td>内置Agent循环（调用工具→反思→再调用）</td><td>Agent开发需大量boilerplate</td><td>降低Agent开发门槛，生态扩张</td></tr>
+      <tr><td><strong>vLLM</strong></td><td><a href="https://github.com/vllm-project/vllm/pull/41633" target="_blank">#41633</a></td><td>[EPLB] Nixl communicator optimization, zero-copy transfers</td><td>2026-06-04</td><td>Expert Parallelism负载均衡优化，零拷贝传输降低多节点通信开销。工程级优化，无直接投资含义。</td></tr>
+      <tr><td><strong>vLLM</strong></td><td><a href="https://github.com/vllm-project/vllm/pull/44230" target="_blank">#44230</a></td><td>optimize the compressor 128 split cutedsl kernel</td><td>2026-06-04</td><td>压缩算子内核优化。底层性能调优，无直接投资含义。</td></tr>
+      <tr><td><strong>vLLM</strong></td><td><a href="https://github.com/vllm-project/vllm/pull/44482" target="_blank">#44482</a></td><td>Fix LoRA adaptor loading for Qwen models</td><td>2026-06-04</td><td>Qwen模型LoRA适配器加载修复。bug fix，无投资含义。</td></tr>
+      <tr><td><strong>SGLang</strong></td><td><a href="https://github.com/sgl-project/sglang/pull/27192" target="_blank">#27192</a></td><td>[refactor] Retire DecodeInputBuffers / PrefillInputBuffers</td><td>2026-06-04</td><td>解码/预填充buffer重构。代码清理，无直接投资含义。</td></tr>
+      <tr><td><strong>SGLang</strong></td><td><a href="https://github.com/sgl-project/sglang/pull/27162" target="_blank">#27162</a></td><td>[PD] Fail single request instead of killing the mooncake transfer engine</td><td>2026-06-03</td><td>Prefill-Decouple架构下单请求失败处理优化。生产稳定性改进，对大规模部署有边际意义。</td></tr>
+      <tr><td><strong>SGLang</strong></td><td><a href="https://github.com/sgl-project/sglang/pull/23751" target="_blank">#23751</a></td><td>[3/N][Sync sglang-miles] TITO Support</td><td>2026-06-04</td><td>TITO（Tensor-In-Tensor-Out）支持同步。内部同步PR，无直接投资含义。</td></tr>
     </tbody>
   </table>
+
+  <div class="insight-box">
+    <div class="label">诚实标注</div>
+    <div class="content">上述6个PR全部通过GitHub API实时验证。当日合并的PR以工程维护、bug修复和代码重构为主，无重大新功能或架构突破。投资含义标注为"无直接含义"或"边际意义"——不夸大工程级PR的投资价值。若当日无投资级PR，直接标注比编造更有价值。</div>
+  </div>
 
   <h3 style="color:var(--accent);margin:15px 0 10px;">大厂技术路径矩阵</h3>
   <table class="data-table">
