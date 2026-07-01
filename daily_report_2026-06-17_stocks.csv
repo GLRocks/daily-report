@@ -1,0 +1,22 @@
+ticker,close,pct_change,category,rec,name,metrics
+NVDA,207.335,1.05,芯片,BUY,NVIDIA Corporation,市值$5.1T | P/S 31x | 毛利率75%
+AMD,508.85,-0.53,芯片,BUY,Advanced Micro Devices,MI450 H2 2026 | YTD+65% | 服务器CPU TAM$120B
+QCOM,214.51,1.32,芯片,HOLD,Qualcomm Inc.,Q3指引$9.2-10B | AI PC/Auto长期布局 | 骁龙8 Gen4
+TSM,426.42,0.59,芯片,BUY,Taiwan Semiconductor,2nm量产2025H2 | 美国凤凰厂高量投产 | 70%先进制程市占
+AVGO,377.29,-1.25,芯片,BUY,Broadcom Inc.,定制AI芯片$12B/年 | VMware整合 | 毛利率80%+
+MU,1020.83,4.0,芯片,BUY,Micron Technology,HBM3E量产 | DDR5供需紧 | 内存周期复苏
+AMAT,568.23,0.17,芯片,BUY,Applied Materials,BIS罚款已消化 | 中国设备18% | 刻蚀龙头
+LRCX,369.29,0.68,芯片,HOLD,Lam Research,刻蚀/沉积双龙头 | 存储设备复苏 | 毛利率47%
+ASML,1803.92,-3.2,芯片,BUY,ASML Holding,EUV垄断 | High-NA EUV 2028 | 订单积压$40B+
+INTC,117.08,-6.01,芯片,BUY,Intel Corporation,18A工艺上线 | YTD+240% | Apple代工传闻
+GOOGL,373.36,3.8,应用,BUY,Alphabet Inc.,Gemini 3.5 Ultra | 云收入+26% | 搜索AI集成
+MSFT,393.98,0.83,应用,BUY,Microsoft Corp.,Azure+31% | Copilot ARR>$10B | OpenAI绑定
+META,601.015,6.1,应用,BUY,Meta Platforms,Llama 4开源 | Reels变现加速 | AI推荐引擎
+AAPL,299.41,2.84,应用,SPEC BUY,Apple Inc.,iOS 27开放第三方AI | 服务端AI资本$10B+/年
+PLTR,133.24,4.1,应用,SPEC BUY,Palantir Technologies,AIP+50% | 政府合同扩张 | 估值溢价
+SNOW,238.32,-1.02,应用,HOLD,Snowflake Inc.,Cortex AI集成 | 收入+22% | 竞争加剧
+BABA,110.99,-1.62,应用,HOLD,Alibaba Group,Qwen3.5 | 阿里云+14% | 通义千问DAU 2500万
+TSLA,404.825,-0.39,应用,HOLD,Tesla Inc.,FSD V13 | Optimus 2026 | 能源业务
+CEG,268.0,2.15,能源,BUY,Constellation Energy,核电重启+AI数据中心 | 订单积压$30B+ | 监管绿灯
+CCJ,107.88,0.8,能源,BUY,Cameco Corp.,铀价$85/lb | 供给缺口 | 核电复兴原料
+OKLO,57.45,-5.42,能源,SPEC BUY,Oklo Inc.,小型模块化反应堆 | Altman背书 | 早期高风险

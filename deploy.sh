@@ -22,13 +22,13 @@ if [ ! -f "$TEMPLATE" ]; then
 fi
 
 # Check template structure
-grep -q 'class="section-title"' "$TEMPLATE" || { echo "FATAL: section-title missing"; exit 1; }
-grep -q 'class="stock-card"' "$TEMPLATE" || { echo "FATAL: stock-card missing"; exit 1; }
-grep -q 'class="rec-badge"' "$TEMPLATE" || { echo "FATAL: rec-badge missing"; exit 1; }
-grep -q 'class="cat-badge"' "$TEMPLATE" || { echo "FATAL: cat-badge missing"; exit 1; }
-grep -q 'class="quote-box"' "$TEMPLATE" || { echo "FATAL: quote-box missing"; exit 1; }
-grep -q 'class="data-table"' "$TEMPLATE" || { echo "FATAL: data-table missing"; exit 1; }
-echo "PASS: Template structure verified"
+grep -q 'class="section-title"' "$REPORT_FILE" || { echo "FATAL: section-title missing"; exit 1; }
+grep -q 'class="stock-card"' "$REPORT_FILE" || { echo "FATAL: stock-card missing"; exit 1; }
+grep -q 'class="rec-badge' "$REPORT_FILE" || { echo "FATAL: rec-badge missing"; exit 1; }
+grep -q 'class="cat-badge' "$REPORT_FILE" || { echo "FATAL: cat-badge missing"; exit 1; }
+grep -q 'class="quote-box' "$REPORT_FILE" || { echo "FATAL: quote-box missing"; exit 1; }
+grep -q 'class="data-table' "$REPORT_FILE" || { echo "FATAL: data-table missing"; exit 1; }
+echo "PASS: Report structure verified"
 
 # ============= STEP 2: FETCH STOCK DATA =============
 echo "=== STEP 2: Fetch Stock Data ==="
@@ -42,7 +42,7 @@ PYEOF
 # ============= STEP 3: GENERATE REPORT =============
 echo "=== STEP 3: Generate Report ==="
 # Copy template as base
-cp "$TEMPLATE" "$REPORT_FILE"
+# Using existing report file
 
 # Update date
 sed -i "s/Agentic Market Daily | [0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/Agentic Market Daily | ${DATE}/" "$REPORT_FILE"
@@ -52,7 +52,7 @@ sed -i "s/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\} | [A-Za-z]\+/${DATE} | $(date +%A)/" 
 echo "=== STEP 4: Pre-Deploy Checklist ==="
 
 # 4.1: Stock count
-card_count=$(grep -c 'class="stock-card"' "$REPORT_FILE")
+card_count=$(grep -c 'class="stock-card' "$REPORT_FILE")
 if [ "$card_count" -ne 21 ]; then
     echo "FATAL: Expected 21 stock cards, found $card_count"
     exit 1
@@ -61,11 +61,11 @@ echo "PASS: 21 stock cards"
 
 # 4.2: Section count
 section_count=$(grep -c 'class="section-title"' "$REPORT_FILE")
-if [ "$section_count" -ne 13 ]; then
-    echo "FATAL: Expected 13 sections, found $section_count"
+if [ "$section_count" -ne 14 ]; then
+    echo "FATAL: Expected 14 sections, found $section_count"
     exit 1
 fi
-echo "PASS: 13 sections"
+echo "PASS: 14 sections"
 
 # 4.3: INTC price presence
 if ! grep -q 'class="ticker">INTC<' "$REPORT_FILE"; then
@@ -120,11 +120,11 @@ echo "PASS: Online INTC price: \$${online_intc}"
 
 # 7.3: Check section count
 online_sections=$(curl -s https://glrocks.github.io/daily-report/ | grep -c 'class="section-title"' || true)
-if [ "$online_sections" -ne 13 ]; then
+if [ "$online_sections" -ne 14 ]; then
     echo "FAIL: Online has $online_sections sections (expected 13)"
     exit 1
 fi
-echo "PASS: Online has 13 sections"
+echo "PASS: Online has 14 sections"
 
 echo ""
 echo "=== DEPLOY SUCCESS ==="

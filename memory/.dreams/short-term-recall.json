@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-12T05:26:29.255Z",
+  "updatedAt": "2026-06-04T00:20:11.420Z",
   "entries": {
     "memory:memory/2026-04-23.md:1:15": {
       "key": "memory:memory/2026-04-23.md:1:15",
@@ -332,18 +332,20 @@
       "endLine": 17,
       "source": "memory",
       "snippet": "# Memory - 2026-05-05 ### Daily Report Crisis - 5月5日 - **用户追问**：\"日报呢？又没有？\" - **根因诊断**：连续3天cron执行失败 - 5/2：生成中断，只输出了一句\"先确认记忆状态\" - 5/4：生成中断，只输出\"正在多路并行搜索中\" - 5/5：API rate limit，直接失败 - **根因**：9板块并行搜索任务太重，cron会话token耗尽/超时 - **修复**：手动生成今日晨报，同时精简cron payload——减少每板块搜索次数，明确指令避免token耗尽 - **cron jobs.json已更新**：payload更精简，明确限制搜索策略 - **今日晨报已手动推送**：包含5/5新鲜信号（Intel聘Qualcomm高管、Apple-Intel-Samsung代工谈判、NXP/Micron earnings-driven action、Anthropic Mythos安全测试） ### 今日晨报关键信号摘要 1. **Intel-Apple-Samsung代工三角**：Bloomberg 5/5报道苹果正在与Intel和Samsung进行探索性代工谈判，寻求TSMC之外多元化。这是foundry竞争格局可能重构的首个实质性信号。 2. **TSMC Q1财报（4/16）**：$35.9B revenue (+40.6% YoY)，66.2% GM，>50% NM。全年growth guide上调至\"above 30%\"。HPC占收入61%。股价跑输SOX ~12pts",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3835181027650833,
+      "totalScore": 0.7492308288812637,
       "maxScore": 0.3835181027650833,
       "firstRecalledAt": "2026-05-12T05:26:20.520Z",
-      "lastRecalledAt": "2026-05-12T05:26:20.520Z",
+      "lastRecalledAt": "2026-06-04T00:20:11.420Z",
       "queryHashes": [
-        "af2a33ed7cd9"
+        "af2a33ed7cd9",
+        "6369ba1584c0"
       ],
       "recallDays": [
-        "2026-05-12"
+        "2026-05-12",
+        "2026-06-04"
       ],
       "conceptTags": [
         "5/2",

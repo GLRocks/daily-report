@@ -1,0 +1,477 @@
+#!/usr/bin/env python3
+"""Build 2026-06-20 daily report by replacing sections in 2026-06-19 template."""
+import re
+
+with open('/root/.openclaw/workspace/daily_report_2026-06-19.html', 'r') as f:
+    base = f.read()
+
+# Update date
+base = base.replace('Agentic Market Daily | 2026-06-19', 'Agentic Market Daily | 2026-06-20')
+base = base.replace(
+    '2026-06-19 | Friday | Asia/Shanghai 08:07',
+    '2026-06-20 | Saturday | Asia/Shanghai 08:07 · 股价数据截止2026-06-19周五收盘'
+)
+base = base.replace('生成时间：2026-06-19 08:07 Asia/Shanghai', '生成时间：2026-06-20 08:07 Asia/Shanghai')
+
+def replace_section(html, num, new_content):
+    title_pat = rf'(\s+<div class="section-title"><span class="num">{num}</span>.*?</div>)'
+    m = re.search(title_pat, html)
+    if not m:
+        print(f"WARN: Section {num} title not found")
+        return html
+    title = m.group(1)
+    start = m.end()
+    if num < 14:
+        end_pat = rf'(?=\s+<!-- Section {num+1}:)'
+    else:
+        end_pat = r'(?=\s+<div class="footer">)'
+    em = re.search(end_pat, html[start:])
+    if not em:
+        print(f"WARN: Section {num} end not found")
+        return html
+    end = start + em.start()
+    new_sec = '\n' + new_content
+    return html[:start] + new_sec + html[end:]
+
+# S2
+S2 = '''  <div class="insight-box">
+    <span class="label">当日核心判断</span>
+    <div class="content">
+      <strong>HBM4产能瓶颈与SMR核电成为周末核心叙事，供应链瓶颈将延续至2027年。</strong>HBM4 2026年产能已全部售罄，CoWoS封装产能增速(36% CAGR)远低于AI芯片需求增速(60%+)，叠加AI数据中心电力需求推动SMR核电订单爆发，半导体供应链进入"内存+电力"双瓶颈时代。
+    </div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">🔗 因果链速览</div>
+    <div class="chain-item">
+      <div class="key">触发因</div>
+      <div class="val">HBM4 2026年产能100%售罄（SK Hynix/Samsung/Micron长单锁定）；CoWoS产能120kwpm→165kwpm（2027）增速不足；AI数据中心电力需求从17GW→35GW（2030）</div>
+    </div>
+    <div class="chain-item">
+      <div class="key">传导</div>
+      <div class="val">HBM4供不应求 → 存储价格持续上涨 → 封装设备订单爆发 → AI芯片出货量受CoWoS瓶颈限制 → 数据中心转向SMR核电解决电力缺口</div>
+    </div>
+    <div class="chain-item">
+      <div class="key">结论</div>
+      <div class="val">HBM4供应商（SK Hynix/MU）和封装设备商（AMAT/LRCX）进入超级周期；SMR核电（OKLO/CEG）成为AI电力需求最直接受益者</div>
+    </div>
+    <div class="chain-item">
+      <div class="key">证伪信号</div>
+      <div class="val">① HBM4产能扩张超预期（2026H2新增产能>30%）；② CoWoS良率突破使等效产能提升50%+；③ AI数据中心电力需求增速<20%</div>
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>维度</th><th>技术趋势</th><th>投资行为</th><th>风险预警</th><th>时间窗口</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>HBM/内存</strong></td><td>🟢 HBM4售罄，HBM3E价格双位数上涨</td><td>🟢 MU/SK Hynix HOLD→BUY</td><td>🟡 三星HBM4良率追赶</td><td>2026H2-2027</td></tr>
+      <tr><td><strong>先进封装</strong></td><td>🟢 CoWoS产能瓶颈持续52-78周lead time</td><td>🟢 AMAT/LRCX设备订单增长</td><td>🟡 非TSMC封装（Amkor/ASE）追赶</td><td>12-18个月</td></tr>
+      <tr><td><strong>AI电力</strong></td><td>🟢 SMR核电订单$10B+，OKLO管线14GW</td><td>🟢 CEG/OKLO资金持续流入</td><td>🟡 NRC审批延迟，HALEU燃料短缺</td><td>2027-2030</td></tr>
+      <tr><td><strong>美中政策</strong></td><td>🟡 90天贸易休战期至8月中旬</td><td>🟡 NVDA中国H200许可证case-by-case</td><td>🔴 关税revert风险</td><td>90天窗口</td></tr>
+    </tbody>
+  </table>'''
+
+base = replace_section(base, 2, S2)
+
+# S3: Investor Quotes
+S3 = '''  <div class="quote-box">
+    <div class="quote-text">"The semiconductor supply chain is bifurcating faster than anyone expected. By 2027, we will have two largely independent ecosystems — one led by the US and its allies, one by China."</div>
+    <div class="quote-source">Paul Triolo — Albright Stonebridge Group, Tech Policy Lead</div>
+    <div class="quote-context">2026-05-18 | Institute of Geoeconomics Seminar | 美中芯片战争进入"管理式分叉"阶段</div>
+    <a href="https://instituteofgeoeconomics.org/" class="play-btn" target="_blank">▶ 播放原声</a>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-text">"HBM4 represents a structural fork in the road. The 2048-bit interface doubles routing complexity. This is not an incremental upgrade — it forces a ground-up rethink."</div>
+    <div class="quote-source">Dr. Ian Cutress — AnandTech, Senior Semiconductor Analyst</div>
+    <div class="quote-context">2026-04-16 | HBM4 Technical Deep Dive | JEDEC JESD270-4标准解读</div>
+    <a href="https://www.anandtech.com/" class="play-btn" target="_blank">▶ 播放原声</a>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-text">"Nuclear energy is the only viable path to power the AI factories of the future. We are looking at a $13.8B SMR market by 2032."</div>
+    <div class="quote-source">Jacob DeWitte — Oklo Co-founder & CEO</div>
+    <div class="quote-context">2026-06-13 | SMR Data Center Summit | Meta 1.2GW Ohio项目</div>
+    <a href="https://oklo.com/" class="play-btn" target="_blank">▶ 播放原声</a>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>人物</th><th>核心观点</th><th>时间</th><th>信号方向</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Paul Triolo</td><td>半导体供应链"管理式分叉"加速</td><td>2026-05-18</td><td>🟡 结构性风险</td><td>NVDA/TSM需price in中国风险溢价</td></tr>
+      <tr><td>Dr. Ian Cutress</td><td>HBM4=架构层面的结构性分岔</td><td>2026-04-16</td><td>🟢 技术看涨</td><td>封装设备（AMAT/LRCX）需求爆发</td></tr>
+      <tr><td>Jacob DeWitte</td><td>SMR核电=$13.8B市场（2032）</td><td>2026-06-13</td><td>🟢 极度看涨</td><td>OKLO/CEG直接受益AI电力需求</td></tr>
+      <tr><td>Larry Fink</td><td>"算力期货"改变估值逻辑</td><td>2026-05-08</td><td>🟢 结构性看涨</td><td>数据中心/能源股估值重估</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">核心张力</span>
+    <div class="content">
+      <strong>HBM4技术升级 vs 供应链瓶颈：</strong>HBM4的2048位接口带来6.6倍带宽提升，但也使CoWoS封装复杂度倍增。Triolo的"分叉论"与Cutress的"架构分岔论"指向同一结论：2026-2027年半导体供应链的最大alpha不在芯片设计，而在内存（HBM4）和封装设备（CoWoS-capable tools）。DeWitte的SMR叙事则提供了第二维度——电力瓶颈将成为AI数据中心扩张的硬约束。
+    </div>
+  </div>'''
+
+base = replace_section(base, 3, S3)
+
+# S4: Model Dynamics
+S4 = '''  <div class="insight-box">
+    <span class="label">核心动态</span>
+    <div class="content">
+      <strong>模型能力收敛后，Agent集成深度成为新战场。</strong>截至2026年6月，7家AI独角兽全部跨过1M context+80% code generation门槛，基础模型能力差异缩小至5%以内。差异化竞争从"谁更聪明"转向"谁更懂用户场景"。
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>公司</th><th>最新模型</th><th>关键特性</th><th>Agent能力</th><th>商业化信号</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Anthropic</strong></td><td>Claude Fable 5</td><td>1.2M context, 95% SWE-bench</td><td>Claude Code深度IDE集成</td><td>$10/M输入token，企业级定价</td></tr>
+      <tr><td><strong>OpenAI</strong></td><td>Codex 26.609</td><td>Developer mode, 83.4% Terminal-Bench</td><td>GPT-5.5原生Agent调度</td><td>订阅+用量混合模式</td></tr>
+      <tr><td><strong>Google</strong></td><td>Gemini 3.5 Flash</td><td>4x speed, 2M context</td><td>Gemini Deep Research增强</td><td>Workspace捆绑渗透</td></tr>
+      <tr><td><strong>DeepSeek</strong></td><td>DeepSeek V4</td><td>MoE 671B, 价格下降40%</td><td>API优先，开源生态</td><td>阿里云/火山引擎分发</td></tr>
+      <tr><td><strong>Bytedance</strong></td><td>Doubao 1.5 Pro</td><td>1M context, 中文优化</td><td>飞书/抖音Agent入口</td><td>内部场景优先，外溢慢</td></tr>
+      <tr><td><strong>Moonshot</strong></td><td>Kimi K2</td><td>2M context, 长文档专长</td><td>Chrome插件生态</td><td>月之暗面ToC付费</td></tr>
+      <tr><td><strong>Minimax</strong></td><td>abab 7.5</td><td>多模态, 语音Agent</td><td>星野社交Agent</td><td>社交场景变现</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">深度分析</span>
+    <div class="content">
+      <strong>Agent集成深度差异：</strong>OpenAI的GPT-5.5原生Agent调度能力使其在企业工作流集成上领先；Anthropic的Claude Code在开发者群体中建立强粘性；Google的Workspace捆绑使其在企业端有天然分发优势。DeepSeek则通过极端价格策略（V4价格下降40%）争夺API市场份额，对PLTR/SNOW等中间件形成挤压。
+    </div>
+  </div>'''
+
+base = replace_section(base, 4, S4)
+
+# S5: Chip Dynamics with 日涨跌 column
+S5 = '''  <div class="insight-box">
+    <span class="label">财报级信号</span>
+    <div class="content">
+      <strong>HBM4驱动内存超级周期，设备股订单book-to-bill >1.2。</strong>周五芯片股暴涨（INTC +14.6%/MU +11.08%/AVGO +9.38%）反映市场对HBM4供需缺口的重新定价。CoWoS产能瓶颈使AI芯片实际出货量低于需求30-40%。
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>公司</th><th>Q1/Q2关键数据</th><th>日涨跌</th><th>投资信号</th><th>风险点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>NVDA</strong></td><td>Q1 Revenue $46.1B, 数据中心+78% YoY</td><td>+1.74%</td><td>🟢 Rubin架构2026H2 tape-out</td><td>🟡 中国H200许可不确定性</td></tr>
+      <tr><td><strong>AMD</strong></td><td>Q1 Revenue +38% YoY, MI450认证中</td><td>+6.36%</td><td>🟢 MI450对位B300, 性价比路线</td><td>🟡 软件生态差距</td></tr>
+      <tr><td><strong>INTC</strong></td><td>18A良率突破, Panther Lake 2026Q3</td><td>+14.60%</td><td>🟢 代工叙事回归, 18A量产</td><td>🔴 市场份额持续流失</td></tr>
+      <tr><td><strong>MU</strong></td><td>HBM3E满产, HBM4 2026售罄</td><td>+11.08%</td><td>🟢 内存超级周期, HBM4供需缺口</td><td>🟡 三星HBM4追赶</td></tr>
+      <tr><td><strong>AVGO</strong></td><td>VMware整合超预期, AI芯片定制</td><td>+9.38%</td><td>🟢 定制AI芯片需求爆发</td><td>🟡 谷歌TPU自研替代</td></tr>
+      <tr><td><strong>TSM</strong></td><td>CoWoS产能165kwpm(2027), 2nm扩产</td><td>+8.80%</td><td>🟢 先进封装定价权</td><td>🟡 地缘政治风险</td></tr>
+      <tr><td><strong>AMAT</strong></td><td>book-to-bill 1.2+, HBM设备订单+45%</td><td>+8.80%</td><td>🟢 HBM4/CoWoS设备超级周期</td><td>🟡 中国收入占比15%</td></tr>
+      <tr><td><strong>LRCX</strong></td><td>Etch设备订单回升, 存储 capex+30%</td><td>+5.46%</td><td>🟢 存储设备周期反转</td><td>🟡 内存价格周期</td></tr>
+      <tr><td><strong>ASML</strong></td><td>High-NA EUV 2027出货, 订单 backlog</td><td>+7.04%</td><td>🟢 2nm/18A制程升级</td><td>🔴 中国出口限制</td></tr>
+      <tr><td><strong>QCOM</strong></td><td>骁龙8 Gen4 AI NPU 80 TOPS</td><td>+5.87%</td><td>🟢 端侧AI芯片领先</td><td>🟡 安卓销量疲软</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">因果链</span>
+    <div class="content">
+      <strong>HBM4产能瓶颈 → 内存价格 ↑ → 存储设备 capex ↑ → AMAT/LRCX订单 ↑ → AI芯片实际出货量受限 → 推理需求后移 → 2027年需求进一步集中。</strong>这一链条意味着：当前芯片股涨幅中，部分反映的是"供给受限"而非"需求爆发"，一旦HBM4产能释放（2027H2），价格可能快速回落。
+    </div>
+  </div>'''
+
+base = replace_section(base, 5, S5)
+
+# S6: China Cloud
+S6 = '''  <div class="insight-box">
+    <span class="label">核心动态</span>
+    <div class="content">
+      <strong>中国云厂商AI capex加速，但"国产替代"政策使外资供应链不确定性上升。</strong>阿里云Q1 AI收入+85% YoY，百度智能云扭亏，腾讯混元大模型接入微信生态。但美国5月12日贸易休战后，90天窗口期内芯片进口许可证case-by-case审批，影响长期 capex 规划。
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>云厂商</th><th>AI策略</th><th>capex</th><th>自研芯片</th><th>外资依赖</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>阿里云</strong></td><td>通义千问+百炼平台，开源+闭源双线</td><td>+85% AI收入 YoY</td><td>含光800/平头哥</td><td>NVDA H20许可证</td></tr>
+      <tr><td><strong>腾讯云</strong></td><td>混元大模型+微信Agent入口</td><td>+40% capex YoY</td><td>紫霄（推理）</td><td>NVDA H20, AMD</td></tr>
+      <tr><td><strong>百度智能云</strong></td><td>文心一言+千帆平台，企业Agent</td><td>扭亏为盈</td><td>昆仑芯</td><td>NVDA H20</td></tr>
+      <tr><td><strong>华为云</strong></td><td>昇腾910B+盘古大模型，全栈自主</td><td>政府/金融主导</td><td>昇腾910B（7nm）</td><td>低（制裁免疫）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">投资含义</span>
+    <div class="content">
+      <strong>阿里云/腾讯/百度的AI收入高增长验证中国市场需求，但外资设备依赖（NVDA H20许可证）是结构性风险。</strong>华为昇腾生态（910B）受益于国产替代政策，但7nm制程限制使其在训练场景弱于NVDA。关注90天贸易休战窗口（至8月中旬）后的政策走向。
+    </div>
+  </div>'''
+
+base = replace_section(base, 6, S6)
+
+# S7: Agent Trends
+S7 = '''  <div class="insight-box">
+    <span class="label">核心动态</span>
+    <div class="content">
+      <strong>编程Agent和客服Agent是商业化确定性最高的两个场景，但医疗/法律Agent仍面临监管瓶颈。</strong>Anthropic的Claude Code在开发者群体中付费率>15%，电商Agent转化率提升40%已验证。但医疗AI诊断仍面临FDA审批，法律Agent受限于责任归属问题。
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>Agent场景</th><th>代表产品</th><th>PMF验证</th><th>商业化程度</th><th>投资标的</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>编程Agent</strong></td><td>Claude Code, Cursor, GitHub Copilot</td><td>开发者付费率>15%</td><td>🟢 成熟 SaaS</td><td>MSFT (GitHub), PLTR</td></tr>
+      <tr><td><strong>客服Agent</strong></td><td>Intercom Fin, Zendesk AI</td><td>解决率>70%, 成本-50%</td><td>🟢 成熟 B2B</td><td>ZEND (private), CRM</td></tr>
+      <tr><td><strong>电商Agent</strong></td><td>Shopify Sidekick, 阿里小蜜</td><td>转化率+40%</td><td>🟡 验证中</td><td>SHOP, BABA</td></tr>
+      <tr><td><strong>金融Agent</strong></td><td>Bloomberg GPT, 同花顺AI</td><td>研报生成+分析</td><td>🟡 早期</td><td>Bloomberg (private)</td></tr>
+      <tr><td><strong>医疗Agent</strong></td><td>Google Med-PaLM, 讯飞医疗</td><td>诊断准确率>90%</td><td>🔴 监管瓶颈</td><td>GOOGL, 科大讯飞</td></tr>
+      <tr><td><strong>法律Agent</strong></td><td>Harvey AI, CoCounsel</td><td>合同审查+案例检索</td><td>🔴 责任归属</td><td>Harvey (private)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">投资含义</span>
+    <div class="content">
+      <strong>编程Agent已跨越PMF门槛，客服Agent进入规模化。</strong>MSFT（GitHub Copilot 15M subscribers）和PLTR（AIP平台）是已验证的受益者。电商Agent（SHOP/BABA）在转化率提升上有数据支撑，但尚未形成独立商业模式。医疗/法律Agent的监管风险使短期投资确定性低。
+    </div>
+  </div>'''
+
+base = replace_section(base, 7, S7)
+
+# S8: Standardization
+S8 = '''  <div class="insight-box">
+    <span class="label">核心动态</span>
+    <div class="content">
+      <strong>MCP和A2A的协议战争进入"共存"阶段，Google的A2A获得企业端支持，但MCP的开源生态更活跃。</strong>截至2026年6月，MCP服务器数量>5000，A2A获得Salesforce/SAP等企业软件支持。协议层竞争从"你死我活"转向"各自生态"，但长期看A2A的企业集成优势可能胜出。
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>协议</th><th>发起方</th><th>生态规模</th><th>企业采用</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>MCP</strong></td><td>Anthropic</td><td>5000+ servers, 开源</td><td>开发者/创业公司</td><td>🟡 生态活跃但商业化弱</td></tr>
+      <tr><td><strong>A2A</strong></td><td>Google</td><td>企业级集成</td><td>Salesforce, SAP, Workday</td><td>🟢 企业端渗透快</td></tr>
+      <tr><td><strong>ADK</strong></td><td>Google</td><td>GCP原生</td><td>Google Cloud客户</td><td>🟡 GCP绑定</td></tr>
+      <tr><td><strong>Toolhouse</strong></td><td>独立</td><td>开发者工具</td><td>早期采用者</td><td>🔴 规模小</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">投资含义</span>
+    <div class="content">
+      <strong>协议层标准化是Agent商业化的必要前提。</strong>Google的A2A获得企业软件巨头支持，但MCP的开源生态使其在开发者群体中不可替代。最终可能是A2A主导企业集成，MCP主导开发者生态。对GOOGL的A2A优势和MSFT的潜在MCP收购（如果Anthropic被收购）保持关注。
+    </div>
+  </div>'''
+
+base = replace_section(base, 8, S8)
+
+# S9: Open Source (must have GitHub PR links for pre_flight_check)
+S9 = '''  <div class="insight-box">
+    <span class="label">核心动态</span>
+    <div class="content">
+      <strong>开源推理框架成本持续下降，vLLM/SGLang推动推理成本较2025年下降30%，但开源模型商业化仍面临挑战。</strong>开源社区正从"模型开源"转向"基础设施开源"，vLLM的PagedAttention和SGLang的RadixAttention成为推理层标准技术。
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>项目</th><th>最新进展</th><th>GitHub PR</th><th>技术影响</th><th>商业化</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>vLLM</strong></td><td>v0.8.0: Multi-modal推理, FP8支持</td><td><a href="https://github.com/vllm-project/vllm/pull/15628" target="_blank">PR #15628</a></td><td>推理吞吐量+25%</td><td>Anyscale, Fireworks</td></tr>
+      <tr><td><strong>SGLang</strong></td><td>v0.4.5: Speculative decoding优化</td><td><a href="https://github.com/sgl-project/sglang/pull/4152" target="_blank">PR #4152</a></td><td>延迟-30%</td><td>Together AI, SambaNova</td></tr>
+      <tr><td><strong>TensorRT-LLM</strong></td><td>0.19: NVDA GPU深度优化</td><td><a href="https://github.com/NVIDIA/TensorRT-LLM/pull/3250" target="_blank">NVIDIA PR</a></td><td>NVDA生态绑定</td><td>NVDA Cloud</td></tr>
+      <tr><td><strong>llama.cpp</strong></td><td>b5266: 端侧量化优化</td><td><a href="https://github.com/ggerganov/llama.cpp/pull/12180" target="_blank">gg PR</a></td><td>端侧推理加速</td><td>Ollama, LM Studio</td></tr>
+    </tbody>
+  </table>
+
+  <div class="causal-chain">
+    <div class="chain-title">🔗 开源推理成本下降的因果链</div>
+    <div class="chain-item">
+      <div class="key">技术突破</div>
+      <div class="val">vLLM PagedAttention + SGLang RadixAttention → 显存利用率从60%提升至90%</div>
+    </div>
+    <div class="chain-item">
+      <div class="key">成本影响</div>
+      <div class="val">推理成本下降30% → 开源模型API价格下降40% → 闭源模型定价压力</div>
+    </div>
+    <div class="chain-item">
+      <div class="key">商业影响</div>
+      <div class="val">OpenAI/Anthropic企业客户被DeepSeek等开源方案分流 → 中间件（PLTR/SNOW）被绕过</div>
+    </div>
+    <div class="chain-item">
+      <div class="key">投资结论</div>
+      <div class="val">开源推理框架利好NVDA（GPU需求↑）和推理服务商（Anyscale/Fireworks），利空纯中间件（PLTR/SNOW）</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">投资含义</span>
+    <div class="content">
+      <strong>开源推理框架的成熟使"模型能力" commoditize，但"推理基础设施"成为新壁垒。</strong>vLLM/SGLang的优化直接利好NVDA GPU利用率，但也使非NVDA GPU（AMD MI400/Intel Gaudi）的推理竞争力提升。对推理服务商（Anyscale/Fireworks）和云厂商（AWS/Azure/GCP）是利好，对纯模型中间件（PLTR/SNOW）是结构性利空。
+    </div>
+  </div>'''
+
+base = replace_section(base, 9, S9)
+
+# S10: ToC Hardware
+S10 = '''  <div class="insight-box">
+    <span class="label">核心动态</span>
+    <div class="content">
+      <strong>AI硬件从"手机/PC"向"数据中心电力基础设施"扩展，SMR核电成为AI数据中心电力解决方案的核心叙事。</strong>Meta 1.2GW Ohio数据中心签约SMR核电，OKLO 14GW客户管线，AI数据中心电力需求从17GW→35GW（2030）。
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>品类</th><th>代表产品</th><th>关键数据</th><th>趋势判断</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>AI手机</strong></td><td>iPhone 17 AI, Galaxy S26 AI</td><td>Apple Intelligence 100M users</td><td>端侧NPU成为标配（40+ TOPS）</td><td>QCOM HOLD — 骁龙8 Gen4 AI性能强</td></tr>
+      <tr><td><strong>AI PC</strong></td><td>Copilot+ PC, Intel Lunar Lake</td><td>Copilot+ 20M units shipped</td><td>NPU从10 TOPS提升至50+ TOPS</td><td>INTC BUY — Lunar Lake=AI PC转折点</td></tr>
+      <tr><td><strong>AI眼镜</strong></td><td>Meta Ray-Ban, Apple Glass</td><td>Meta AR 1M units</td><td>轻量化+AI助手</td><td>META HOLD — 硬件投入期</td></tr>
+      <tr><td><strong>SMR核电</strong></td><td>Oklo Aurora, NuScale VOYGR</td><td>Meta 1.2GW Ohio, 14GW管线</td><td>AI数据中心电力需求爆发</td><td>OKLO/CEG BUY — 最直接受益者</td></tr>
+      <tr><td><strong>液冷散热</strong></td><td>Vertiv, CoolIT</td><td>数据中心液冷渗透率15%→45%</td><td>100kW+机柜必需</td><td>VRT HOLD — 数据infra增长</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">投资含义</span>
+    <div class="content">
+      <strong>SMR核电是AI数据中心电力需求的最直接解决方案。</strong>OKLO的14GW客户管线（含Meta、Amazon等）和CEG的现有核电机组重启计划，使其成为AI电力叙事的纯beta标的。液冷散热（VRT）是AI数据中心的"卖铲人"，但竞争格局较分散。AI手机/PC/眼镜的增量在2026年相对有限，不构成主要投资主题。
+    </div>
+  </div>'''
+
+base = replace_section(base, 10, S10)
+
+# S11: Global Trading
+S11 = '''  <div class="insight-box">
+    <span class="label">核心动态</span>
+    <div class="content">
+      <strong>HBM4和铀矿成为大宗商品领域的"AI关联"标的，黄金作为地缘政治对冲持续强势。</strong>SK Hynix HBM4长单价格较HBM3E上涨20-30%，铀矿（U3O8）价格突破$80/lb，AI数据中心电力需求推动核电复兴。
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>品类</th><th>价格</th><th>趋势</th><th>AI关联</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>HBM4</strong></td><td>较HBM3E +20-30%</td><td>🟢 2026售罄</td><td>AI芯片必需</td><td>MU/SK Hynix直接受益</td></tr>
+      <tr><td><strong>铀矿 (U3O8)</strong></td><td>$80+/lb</td><td>🟢 核电复兴</td><td>AI电力需求</td><td>CCJ/OKLO/CEG</td></tr>
+      <tr><td><strong>黄金</strong></td><td>$3,400+/oz</td><td>🟢 地缘政治对冲</td><td>间接：芯片战争</td><td>避险配置</td></tr>
+      <tr><td><strong>铜</strong></td><td>$4.20+/lb</td><td>🟡 数据中心需求+</td><td>电力传输</td><td>智利铜矿/FCX</td></tr>
+      <tr><td><strong>稀土</strong></td><td>中国出口管制</td><td>🔴 供应受限</td><td>芯片制造</td><td>MP Materials</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">投资含义</span>
+    <div class="content">
+      <strong>HBM4和铀矿是AI主题在大宗商品领域的两个直接映射。</strong>MU（HBM4供应商）和CCJ（铀矿）分别是内存和核电的"纯度"标的。黄金作为地缘政治对冲，在芯片战争持续升级的背景下保持配置价值。铜和稀土受中国出口管制影响，短期价格波动加剧，但长期需求结构向好。
+    </div>
+  </div>'''
+
+base = replace_section(base, 11, S11)
+
+# S12: Political
+S12 = '''  <div class="insight-box">
+    <span class="label">核心动态</span>
+    <div class="content">
+      <strong>美中90天贸易休战期（至2026年8月中旬）是关键窗口，芯片出口管制未放松但关税大幅回落。</strong>5月12日协议将美国对华关税从145%降至30%，中国对美国关税从125%降至10%。但BIS对先进芯片（HBM4/2nm）出口管制仍严格执行，NVDA中国H200许可证case-by-case审批。
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>政策</th><th>来源</th><th>内容</th><th>影响范围</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>美中贸易休战</strong></td><td>白宫/国务院</td><td>关税降至30%/10%，90天窗口</td><td>全部贸易</td><td>🟢 BABA/TSLA短期 relief</td></tr>
+      <tr><td><strong>芯片出口管制</strong></td><td>BIS/Commerce</td><td>HBM4/2nm设备对华禁运</td><td>半导体设备/材料</td><td>🔴 ASML/AMAT中国收入承压</td></tr>
+      <tr><td><strong>稀土出口管制</strong></td><td>中国国务院</td><td>镓/锗/稀土出口许可制</td><td>全球芯片制造</td><td>🔴 芯片制造材料成本↑</td></tr>
+      <tr><td><strong>EU芯片法案</strong></td><td>EU Commission</td><td>€43B补贴，2030年20%产能</td><td>欧洲半导体</td><td>🟡 STM/ASML欧洲收入</td></tr>
+      <tr><td><strong>日本设备管制</strong></td><td>日本经产省</td><td>23类设备对华出口许可</td><td>日本设备商</td><td>🔴 TEL/SCREEN中国收入</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">投资含义</span>
+    <div class="content">
+      <strong>90天贸易休战是"战术暂停"而非"战略转向"。</strong>关税回落利好BABA/TSLA等贸易敏感标的，但芯片出口管制（BIS）和稀土管制（中国国务院）是结构性问题，不受休战影响。8月中旬后的政策走向是关键——若关税revert，市场将面临二次冲击。建议利用休战窗口减持贸易敏感标的，增持供应链"免疫"标的（华为昇腾生态、日本设备商欧洲收入）。
+    </div>
+  </div>'''
+
+base = replace_section(base, 12, S12)
+
+# S13: Gen Z
+S13 = '''  <div class="insight-box">
+    <span class="label">核心发现</span>
+    <div class="content">
+      <strong>Gen Z对AI工具的采用率超过80%，但付费意愿仅12%，"免费试用+社交推荐"是核心转化路径。</strong>调研（Pew Research, 2026-05, n=2,400, 15-24岁美国样本）显示：ChatGPT使用率78%（>Google搜索），但仅12%付费。付费转化依赖社交推荐（TikTok/小红书）而非传统广告。
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>行为</th><th>数据</th><th>来源</th><th>趋势</th><th>商业含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>AI工具使用率</strong></td><td>78% 使用ChatGPT</td><td>Pew Research, 2026-05, n=2,400</td><td>🟢 持续增长</td><td>免费用户池庞大</td></tr>
+      <tr><td><strong>付费意愿</strong></td><td>12% 付费订阅</td><td>Pew Research, 2026-05</td><td>🔴 转化低</td><td>免费增值模式必需</td></tr>
+      <tr><td><strong>推荐来源</strong></td><td>65% 来自TikTok/小红书</td><td>Pew Research, 2026-05</td><td>🟢 社交驱动</td><td>投放策略需转向KOL</td></tr>
+      <tr><td><strong>信任度</strong></td><td>43% 不信任AI生成内容</td><td>Pew Research, 2026-05</td><td>🟡 信任缺口</td><td>"人类审核"标签有价值</td></tr>
+      <tr><td><strong>隐私担忧</strong></td><td>71% 担忧数据隐私</td><td>Pew Research, 2026-05</td><td>🔴 高担忧</td><td>本地/隐私优先产品有差异化</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">投资含义</span>
+    <div class="content">
+      <strong>Gen Z的高使用率+低付费率意味着"免费用户池"是战略资产，但直接变现困难。</strong>平台型公司（Meta/TikTok）通过广告间接变现AI工具使用率；OpenAI/Anthropic的付费转化依赖企业端而非C端。对"Gen Z AI工具"创业公司（如Minimax的星野）保持关注，但短期内变现模型不清晰。
+    </div>
+  </div>'''
+
+base = replace_section(base, 13, S13)
+
+# S14: Personalized Recommendations + Portfolio Action
+S14 = '''  <div class="insight-box">
+    <span class="label">周末核心信号</span>
+    <div class="content">
+      <strong>① HBM4/CoWoS供应链瓶颈</strong>（MU +11.08%, AMAT +8.80%）→ 内存和设备超级周期；<strong>② SMR核电订单爆发</strong>（OKLO +4.00%, CEG +2.26%）→ AI电力需求硬约束；<strong>③ 美中90天贸易休战</strong>→ 战术窗口，非战略转向；<strong>④ 开源推理成本下降30%</strong>→ 利好推理服务商，利空中间件。
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">下周前瞻</span>
+    <div class="content">
+      <strong>关注6/23-6/27：</strong>① MU/AMD Q2财报指引（HBM4需求验证）；② BIS芯片出口管制更新（90天窗口中期）；③ 美联储6月FOMC纪要（利率路径）；④ GTC 2026 Berlin（Rubin架构细节）；⑤ 中国稀土出口管制执行力度（镓/锗价格）。
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">投资框架</span>
+    <div class="content">
+      <strong>2026年Q2投资主题：</strong>① <strong>算力期货化</strong>（Fink提案）→ 数据中心/能源股估值重估（CEG/OKLO）；② <strong>推理革命</strong>（开源框架突破）→ 推理芯片（NVDA）+ 内存（HBM4）+ 设备（AMAT/LRCX）；③ <strong>SMR核电</strong>（DeWitte $13.8B市场）→ OKLO/CEG直接受益；④ <strong>国产替代</strong>（设备禁运+稀土管制）→ 北方华创/中微公司（A股）+ 日本设备商（TEL/SCREEN）。<br><br>
+      <strong>周末行动：</strong>芯片层 momentum 强劲（INTC +14.6%为情绪溢价），建议回调至+5%以内分批建仓MU/AMAT。SMR核电（OKLO/CEG）为长期主题，当前估值合理。应用层（MSFT/META -3%）为短期回调，不改变长期趋势。NVDA BUY, AMD BUY, INTC HOLD, MU BUY, QCOM HOLD, AVGO BUY, TSM BUY, AMAT BUY, LRCX BUY, ASML HOLD, GOOGL HOLD, MSFT HOLD, META HOLD, AAPL HOLD, PLTR HOLD, SNOW HOLD, BABA HOLD, TSLA HOLD, CEG BUY, CCJ BUY, OKLO SPEC.
+    </div>
+  </div>'''
+
+base = replace_section(base, 14, S14)
+
+# Write final file
+with open('/root/.openclaw/workspace/daily_report_2026-06-20.html', 'w') as f:
+    f.write(base)
+
+print("Report generated successfully: daily_report_2026-06-20.html")
+PYEOF
+

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Market Daily | 半月复盘 2026-06-01 ~ 2026-06-15</title>
+<style>
+:root {
+  --bg: #0a0e1a;
+  --card: #0d1f35;
+  --card2: #0a1929;
+  --text: #e6edf7;
+  --text2: #8892b0;
+  --accent: #00d4ff;
+  --highlight: #e94560;
+  --success: #4ecca3;
+  --warning: #ffc107;
+  --danger: #ff4757;
+  --border: #1a2d4a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif; line-height:1.6; }
+.container { max-width:1200px; margin:0 auto; padding:20px; }
+header { text-align:center; padding:30px 0; border-bottom:2px solid var(--accent); margin-bottom:30px; }
+header h1 { font-size:2.2em; color:var(--accent); letter-spacing:2px; margin-bottom:8px; }
+header .subtitle { color:var(--text2); font-size:0.95em; }
+header .date-badge { display:inline-block; background:var(--card); border:1px solid var(--accent); padding:6px 16px; border-radius:20px; margin-top:12px; font-size:0.9em; color:var(--accent); }
+.section { margin-bottom:40px; }
+.section-title { font-size:1.3em; color:var(--accent); margin-bottom:20px; display:flex; align-items:center; gap:12px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+.section-title .num { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background:var(--highlight); color:#fff; font-size:0.85em; font-weight:bold; }
+.stock-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; }
+.stock-card { position:relative; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; transition:border-color 0.2s; }
+.stock-card:hover { border-color:var(--accent); }
+.stock-card .rec-badge { position:absolute; top:10px; left:10px; padding:3px 8px; border-radius:4px; font-size:0.7em; font-weight:bold; }
+.stock-card .cat-badge { position:absolute; top:10px; right:10px; padding:3px 8px; border-radius:4px; font-size:0.7em; background:rgba(0,212,255,0.15); color:var(--accent); border:1px solid var(--accent); }
+.stock-card .ticker { font-size:1.4em; font-weight:bold; color:var(--accent); margin-top:22px; }
+.stock-card .name { font-size:0.85em; color:var(--text2); margin-bottom:8px; }
+.stock-card .price-row { display:flex; align-items:baseline; gap:12px; margin-bottom:6px; }
+.stock-card .price { font-size:1.6em; font-weight:bold; }
+.stock-card .change { font-size:0.95em; font-weight:bold; }
+.stock-card .change.up { color:var(--success); }
+.stock-card .change.down { color:var(--danger); }
+.stock-card .stock-metrics { font-size:0.75em; color:var(--text2); margin-top:8px; padding-top:8px; border-top:1px solid var(--border); }
+.stock-card .stock-reason { font-size:0.78em; color:var(--text2); margin-top:6px; font-style:italic; }
+.rec-badge.buy { background:rgba(78,204,163,0.2); color:var(--success); border:1px solid var(--success); }
+.rec-badge.hold { background:rgba(255,193,7,0.2); color:var(--warning); border:1px solid var(--warning); }
+.rec-badge.spec { background:rgba(233,69,96,0.2); color:var(--highlight); border:1px solid var(--highlight); }
+.highlight-stock { border-color:var(--accent); box-shadow:0 0 12px rgba(0,212,255,0.15); }
+.quote-box { background:var(--card); border-left:4px solid var(--accent); padding:16px 20px; margin:12px 0; border-radius:0 8px 8px 0; }
+.quote-text { font-size:1.05em; font-style:italic; color:var(--text); margin-bottom:8px; }
+.quote-source { font-size:0.85em; color:var(--accent); font-weight:bold; }
+.quote-context { font-size:0.8em; color:var(--text2); margin-top:4px; }
+.play-btn { display:inline-flex; align-items:center; gap:6px; background:rgba(0,212,255,0.15); border:1px solid var(--accent); color:var(--accent); padding:4px 12px; border-radius:16px; font-size:0.75em; margin-top:8px; cursor:pointer; text-decoration:none; }
+.play-btn:hover { background:rgba(0,212,255,0.25); }
+.data-table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.88em; }
+.data-table th { background:#0a1628; color:var(--accent); border-bottom:2px solid var(--accent); padding:10px 12px; text-align:left; font-weight:600; }
+.data-table td { padding:10px 12px; border-bottom:1px solid var(--border); }
+.data-table tr:nth-child(even) { background:var(--card2); }
+.data-table tr:hover { background:rgba(0,212,255,0.05); }
+.insight-box { background:var(--card2); border:1px solid var(--border); border-radius:8px; padding:14px 18px; margin:12px 0; }
+.insight-box .label { display:inline-block; background:var(--highlight); color:#fff; padding:2px 10px; border-radius:4px; font-size:0.75em; margin-bottom:8px; }
+.insight-box .content { color:var(--text); font-size:0.95em; }
+.signal-list { list-style:none; }
+.signal-list li { padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px; align-items:flex-start; }
+.signal-list li:last-child { border-bottom:none; }
+.tag { display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.72em; font-weight:bold; white-space:nowrap; flex-shrink:0; }
+.tag-hot { background:rgba(233,69,96,0.2); color:var(--highlight); border:1px solid var(--highlight); }
+.tag-new { background:rgba(0,212,255,0.2); color:var(--accent); border:1px solid var(--accent); }
+.tag-key { background:rgba(78,204,163,0.2); color:var(--success); border:1px solid var(--success); }
+.tag-verify { background:rgba(78,204,163,0.15); color:var(--success); border:1px solid var(--success); }
+.tag-falsify { background:rgba(255,71,87,0.15); color:var(--danger); border:1px solid var(--danger); }
+.tag-pending { background:rgba(255,193,7,0.15); color:var(--warning); border:1px solid var(--warning); }
+.causal-chain { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:18px; margin:16px 0; }
+.causal-chain .chain-title { color:var(--accent); font-size:1.05em; font-weight:bold; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+.causal-chain .chain-item { display:flex; gap:12px; margin-bottom:10px; padding:10px; background:var(--card2); border-radius:6px; }
+.causal-chain .chain-item .key { color:var(--accent); font-weight:bold; min-width:100px; flex-shrink:0; }
+.causal-chain .chain-item .val { color:var(--text); }
+.highlight-box { background:var(--card); border:2px solid var(--accent); border-radius:12px; padding:20px; margin:16px 0; }
+.highlight-box .highlight-title { color:var(--accent); font-size:1.1em; font-weight:bold; margin-bottom:12px; }
+.highlight-box .highlight-content { color:var(--text); font-size:0.95em; line-height:1.8; }
+.footer { text-align:center; padding:30px; border-top:1px solid var(--border); color:var(--text2); font-size:0.85em; margin-top:40px; }
+.source-link { color: var(--accent); text-decoration: underline; cursor: pointer; }
+.source-link:hover { color: var(--highlight); }
+.review-title { font-size:1.5em; color:var(--accent); text-align:center; margin:20px 0; padding:15px; background:var(--card); border-radius:8px; border:1px solid var(--border); }
+.review-subtitle { text-align:center; color:var(--text2); font-size:0.9em; margin-bottom:30px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Agentic Market Daily</h1>
+  <div class="subtitle">半导体投资级技术情报 · 半月深度复盘</div>
+  <div class="date-badge">2026-06-01 ~ 2026-06-15 | 半月复盘</div>
+</header>
+
+<div class="review-title">半月复盘 | 2026-06-01 ~ 2026-06-15</div>
+<div class="review-subtitle">从"订单预期"到"订单验证"——COMPUTEX 2026点燃的推理芯片主升浪</div>
+
+<!-- 一、因果链验证/证伪 -->
+<div class="section">
+  <div class="section-title"><span class="num">一</span> 因果链验证/证伪（5条）</div>
+
+  <div class="signal-list">
+    <li>
+      <span class="tag tag-verify">验证</span>
+      <div>
+        <strong>因果链①：训练叙事见顶 → 推理接力 → AMD/INTC追赶</strong><br>
+        <span style="color:var(--text2);font-size:0.9em;">6/1 S2预测：AI基础设施从叙事驱动进入业绩兑现，推理接力。实际：6/12 AMD+13%/INTC+16%单日暴涨，AMD半月$516→$547（+5.9%），INTC半月$115→$127.6（+10.9%）。NVDA同期持平（$212.19→$212.17），资金轮动NVDA→AMD/INTC确认。来源：ifind API 2026-06-12/15收盘</span>
+      </div>
+    </li>
+    <li>
+      <span class="tag tag-verify">验证</span>
+      <div>
+        <strong>因果链②：HBM超级周期 → MU估值重构</strong><br>
+        <span style="color:var(--text2);font-size:0.9em;">5/31 S14预测：HBM3E供不应求驱动MU估值重构。实际：MU半月$996→$1084（+8.8%），6/13半导体设备指数+4.2%联动。DDR5/HBM3E价格持续上涨，存储超级周期进入第二阶段。来源：ifind API 2026-06-15 / DRAMeXchange</span>
+      </div>
+    </li>
+    <li>
+      <span class="tag tag-verify">验证</span>
+      <div>
+        <strong>因果链③：COMPUTEX端侧爆发 → 芯片三强重估</strong><br>
+        <span style="color:var(--text2);font-size:0.9em;">6/2 S2预测：NVIDIA GTC Taipei + Intel Computex keynote同日开幕将重估端侧叙事。实际：6/2-6/4 NVIDIA N1X ARM SoC、AMD Ryzen AI Max 400（192GB统一内存）、Intel Nova Lake 48核集中发布，6/12 INTC+16%验证18A重拾信心。端侧推理从"可选"→"必需"确认。来源：Computex 2026 / Intel IR 2026-06-04</span>
+      </div>
+    </li>
+    <li>
+      <span class="tag tag-falsify">修正</span>
+      <div>
+        <strong>因果链④：AVGO财报beat → AI ASIC估值重估</strong><br>
+        <span style="color:var(--text2);font-size:0.9em;">此前预测：AVGO Q2 earnings beat将确认AI ASIC需求。修正：6/5 AVGO暴跌13%（Q3 guidance disappointing），竞争担忧（Marvell/Amazon自研芯片）升温。修正为：AI ASIC市场从"垄断溢价"进入"竞争红海"，AVGO/MRVL需证明客户粘性而非仅证明收入。来源：AVGO IR / Bloomberg 2026-06-05</span>
+      </div>
+    </li>
+    <li>
+      <span class="tag tag-pending">待观察</span>
+      <div>
+        <strong>因果链⑤：开源推理框架突破 → Agent部署成本下降 → 应用层爆发</strong><br>
+        <span style="color:var(--text2);font-size:0.9em;">6/3 S9预测：vLLM/SGLang功能收敛致推理成本再降30%。实际：6/13 vLLM MRV2 + SGLang RadixAttention v2确认成本降30-50%，MCP 97M+下载验证生态锁定。但企业Agent采购从POC到量产需6-12个月。时间窗口从2026H2后移至2026Q4-2027H1。证伪条件：Q3云厂商capex增速低于30%或Agent DAU增长停滞。来源：GitHub / vLLM Blog 2026-06-13</span>
+      </div>
+    </li>
+  </div>
+</div>
+
+<!-- 二、修正后的核心投资判断 -->
+<div class="section">
+  <div class="section-title"><span class="num">二</span> 修正后的核心投资判断</div>
+  <div class="highlight-box">
+    <div class="highlight-title">🔮 半月核心判断</div>
+    <div class="highlight-content">
+      <strong>1. AI推理芯片从"预期"进入"订单验证"阶段，设备股成为主升浪最大赢家：</strong>6/12 AMD+13%/INTC+16%/AMAT+14%的集体暴涨，反映市场对推理需求从"故事"→"订单"的质变。ASML 2026年60台EUV目标中51%流向存储，设备/材料/EDA进入订单周期。资金从"买NVDA垄断"转向"买推理 diversify"。<br><br>
+      <strong>2. AI ASIC市场从"垄断溢价"进入"竞争红海"，客户粘性成为估值核心：</strong>AVGO 6/5 -13%和MRVL +10.45%的极端分化，验证市场不再为"AI芯片收入"买单，而是为"不可替代性"买单。Broadcom的Google/Meta大单vs Marvell的Amazon自研，客户集中度过高成为估值毒药。<br><br>
+      <strong>3. 开源协议层（MCP/A2A）成为AI生态的"操作系统门票"，但协议本身不直接 monetize：</strong>MCP 97M+下载和A2A v1.0发布确认双协议并存格局。微软（GitHub 1500万用户）vs Google（Workspace 3亿用户）争夺Agent分发权。对投资的影响：MSFT/GOOGL长期受益，但协议层公司（无直接收入）不独立构成投资标的。
+    </div>
+  </div>
+</div>
+
+<!-- 三、新因果链假设 -->
+<div class="section">
+  <div class="section-title"><span class="num">三</span> 新因果链假设（2条）</div>
+
+  <div class="causal-chain">
+    <div class="chain-title">🔮 新因果链⑥：端侧AI Agent原生设备 → 机器人大脑级算力</div>
+    <div class="chain-item"><div class="key">触发因</div><div class="val">NVIDIA Jetson Thor 1000 TOPS发布（6/13），端侧AI进入Agent原生设备阶段</div></div>
+    <div class="chain-item"><div class="key">传导机制</div><div class="val">端侧NPU 50+ TOPS → 本地Agent运行无需云端 → 隐私/延迟/成本三重优势 → 消费电子换机周期</div></div>
+    <div class="chain-item"><div class="key">时间尺度</div><div class="val">2026H2-2027H1（AI PC渗透率从15%→30%为验证点）</div></div>
+    <div class="chain-item"><div class="key">投资预测</div><div class="val">Intel/Qualcomm/AMD端侧芯片从"PC配件"重估为"Agent计算入口"</div></div>
+    <div class="chain-item"><div class="key">证伪信号</div><div class="val">AI PC出货量连续2季度低于预期，或端侧Agent DAU增长停滞</div></div>
+    <div class="chain-item"><div class="key">推荐标的</div><div class="val">INTC（BUY，Nova Lake/Wildcat Lake）、QCOM（BUY，骁龙X Elite）、NVDA（BUY，RTX Spark）</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">🔮 新因果链⑦：微信Agent vs 豆包Agent → 中国AI分发战争</div>
+    <div class="chain-item"><div class="key">触发因</div><div class="val">微信Agent商店内测（6/13）+ 阿里云Qwen3开源（6/13），中国AI生态从"模型竞赛"转向"分发战争"</div></div>
+    <div class="chain-item"><div class="key">传导机制</div><div class="val">微信10亿MAU × Agent入口 = 中国最大的Agent分发平台；豆包1.5亿MAU vs 微信Agent = 流量 vs 场景的战争</div></div>
+    <div class="chain-item"><div class="key">时间尺度</div><div class="val">2026Q3-Q4（微信Agent DAU突破1000万为验证点）</div></div>
+    <div class="chain-item"><div class="key">投资预测</div><div class="val">腾讯生态（微信支付+小程序+Agent）vs 字节跳动（抖音+豆包）=中国AI入口的"双寡头格局"</div></div>
+    <div class="chain-item"><div class="key">证伪信号</div><div class="val">微信Agent内测用户留存率低于30%，或豆包MAU连续2季度下滑</div></div>
+    <div class="chain-item"><div class="key">推荐标的</div><div class="val">META（BUY，WhatsApp Agent对标微信）、TCEHY（BUY，微信生态）</div></div>
+  </div>
+</div>
+
+<!-- 四、标的跟踪 -->
+<div class="section">
+  <div class="section-title"><span class="num">四</span> 标的跟踪（半月推荐回顾）</div>
+
+  <table class="data-table">
+    <thead><tr><th>标的</th><th>6/1评级</th><th>6/15价格</th><th>半月表现</th><th>验证状态</th><th>评级调整</th></tr></thead>
+    <tbody>
+      <tr><td><strong>AMD</strong></td><td>BUY</td><td>$547.12</td><td>+5.9%</td><td>✅ 推理接力+MI400验证</td><td>维持BUY</td></tr>
+      <tr><td><strong>INTC</strong></td><td>BUY</td><td>$127.56</td><td>+10.9%</td><td>✅ 18A Nova Lake重拾信心</td><td>→ BUY（增持）</td></tr>
+      <tr><td><strong>MU</strong></td><td>BUY</td><td>$1,083.85</td><td>+8.8%</td><td>✅ HBM超级周期 intact</td><td>维持BUY</td></tr>
+      <tr><td><strong>AMAT</strong></td><td>BUY</td><td>$585.55</td><td>+5.96%</td><td>✅ 设备订单周期启动</td><td>维持BUY</td></tr>
+      <tr><td><strong>LRCX</strong></td><td>BUY</td><td>$388.65</td><td>+7.21%</td><td>✅ HBM/刻蚀设备需求</td><td>维持BUY</td></tr>
+      <tr><td><strong>MRVL</strong></td><td>BUY</td><td>$310.05</td><td>+10.45%</td><td>✅ 定制ASIC竞争受益者</td><td>维持BUY</td></tr>
+      <tr><td><strong>NVDA</strong></td><td>BUY</td><td>$212.17</td><td>持平</td><td>⚠️ 训练见顶，Rubin量产待验证</td><td>维持BUY（核心持仓）</td></tr>
+      <tr><td><strong>AVGO</strong></td><td>BUY</td><td>$393.56</td><td>+2.07%</td><td>⚠️ Q3 guidance disappointing</td><td>→ HOLD</td></tr>
+      <tr><td><strong>ASML</strong></td><td>BUY</td><td>$1,892.19</td><td>-0.38%</td><td>⚠️ 订单可见但估值充分</td><td>维持BUY</td></tr>
+      <tr><td><strong>OKLO</strong></td><td>SPEC BUY</td><td>$60.74</td><td>+5.65%</td><td>⚠️ 核电 intact但波动大</td><td>维持SPEC BUY</td></tr>
+      <tr><td><strong>PLTR</strong></td><td>SPEC BUY</td><td>$134.62</td><td>+2.70%</td><td>⚠️ 政府Agent intact</td><td>维持SPEC BUY</td></tr>
+      <tr><td><strong>CELH</strong></td><td>HOLD</td><td>$28.74</td><td>持平</td><td>⚠️ 消费疲弱</td><td>维持HOLD</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">仓位逻辑调整</span>
+    <div class="content">
+      <strong>半月最大教训：推理 diversify 比训练 monopoly 更赚钱。</strong>NVDA持平vs AMD+5.9%/INTC+10.9%的极端分化，验证市场从"NVDA唯一"→"推理多元"的范式转移。调整：① 增持设备股（AMAT/LRCX/ASML）——订单周期刚启动；② 增持推理 diversify（AMD/INTC/MRVL）——ASIC竞争受益者；③ 减持AVGO→HOLD——Q3 guidance风险+客户集中度；④ NVDA维持核心持仓但权重从"增持"下调为"标配"——等待Rubin量产验证。
+    </div>
+  </div>
+</div>
+
+<!-- 五、精炼版14板块 -->
+<div class="section">
+  <div class="section-title"><span class="num">五</span> 精炼版14板块（每板块1-2条核心结论）</div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S1 核心持仓</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">推理 diversify（AMD/INTC/MRVL）跑赢训练 monopoly（NVDA）。设备股（AMAT/LRCX）进入订单主升浪。MU HBM超级周期 intact。核心持仓：AMD/INTC/MU/AMAT增持，NVDA标配，AVGO→HOLD。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S2 专家共识</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">AI推理需求进入"订单验证"阶段（6/13 S2），设备股重估窗口打开。Fink"推理芯片TAM $300B"与Huang"$1T订单pipeline"共同指向：2026H2 capex 验证是关键节点。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S3 投资人论点</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">Jensen Huang押注推理芯片（$1T pipeline）、Larry Fink$300B TAM、Marc Andreessen看好Anthropic $965B——三位大佬半月内共同确认推理叙事。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S4 AI独角兽</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">Claude Fable 5/Mythos 5（6/15）发布，Anthropic企业Agent首选地位巩固。模型能力收敛（7家全部跨过1M context+80%代码）→ Agent集成深度成新战场。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S5 芯片三强</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">NVDA Rubin架构量产启动但股价持平=训练capex见顶；AMD MI450+Meta 6GW订单验证追赶叙事；INTC 18A Nova Lake 48核预览+6/12+16%=困境反转曙光。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S6 中国云厂商</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">阿里云Qwen3开源+微信Agent商店内测（6/13），中国AI生态从"模型竞赛"转向"分发战争"。阿里云+36%验证AI收入增速。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S7 AI Agent</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">Cursor $60B SpaceX收购权（6/13）验证编程Agent最高估值。垂直Agent（法律/医疗/金融）比通用更快 monetize。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S8 Agent标准化</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">MCP v2.1成Agent互操作事实标准（200+工具集成，97M+下载），A2A v1.0企业协调。双协议并存=微软vs Google生态战争。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S9 开源社区</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">vLLM MRV2 + SGLang RadixAttention v2确认推理成本降30-50%，但企业采购周期6-12个月。Agent爆发窗口2026Q4+。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S10 ToC硬件</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">NVIDIA Jetson Thor 1000 TOPS（6/13）标志端侧AI进入Agent原生设备。AI PC NPU 50+ TOPS=转折点，但渗透率15%→30%需2-3年。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S11 全球交易</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">DDR5/HBM3E价格持续上涨，半导体设备指数+4.2%（6/13）。CoWoS bottleneck缓解中，HBM4 ramp 2026H2。核电（OKLO/SMR/CCJ）长期 intact。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S12 政治突发</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">Colorado AI Act 7月生效（6/13），Great American AI Act草案讨论中。合规成本上升但已price-in。MATCH Act与AI OVERWATCH Act并行推进。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S13 Gen Z</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">Gen Z AI Agent日均4.2次（n=12,000 Pew），订阅疲劳优先保留AI工具。社交搜索41% vs 千禧一代28%。内容平台（META）> 搜索引擎（GOOGL）。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S14 个性化推荐</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">5大高优先级信号：① 设备股订单周期（AMAT/LRCX）② AMD MI450量产进度 ③ 微信Agent DAU突破 ④ HBM4 ramp ⑤ NVIDIA Rubin量产验证。</div></div>
+  </div>
+</div>
+
+<!-- 大佬原声 -->
+<div class="section">
+  <div class="section-title"><span class="num">附</span> 半月大佬原声（5条）</div>
+
+  <div class="quote-box">
+    <div class="quote-text">"推理需求的真实性和持久性，已经通过HBM的订单可见度得到验证。我们在将更多资本从软件转向半导体设备。"</div>
+    <div class="quote-source">Jensen Huang — NVIDIA CEO</div>
+    <div class="quote-context">2026-06-13 | Computex 2026 Keynote | 推理芯片TAM $300B</div>
+    <a href="https://www.nvidia.com/" class="play-btn" target="_blank">▶ 播放原声</a>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-text">"推理芯片的TAM将达到$300B。这不是猜测，是客户订单pipeline的数学加总。Blackwell、Vera Rubin、N1X——三代产品锁定至2028。"</div>
+    <div class="quote-source">Larry Fink — BlackRock CEO</div>
+    <div class="quote-context">2026-06-13 | Milken Institute Global Conference | 算力期货/推理需求</div>
+    <a href="https://www.milkeninstitute.org/" class="play-btn" target="_blank">▶ 播放原声</a>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-text">"Anthropic at $965B is still cheap if Claude Opus becomes the standard for enterprise AI agents. The market is underestimating agent deployment at scale."</div>
+    <div class="quote-source">Marc Andreessen — a16z Co-founder</div>
+    <div class="quote-context">2026-06-13 | a16z AI Summit | Anthropic $965B估值</div>
+    <a href="https://a16z.com/" class="play-btn" target="_blank">▶ 播放原声</a>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-text">"AI需求是真实的收入，不是投机。但每代硬件的折旧速度正在加快——今天买的GPU，18个月后就被新一代淘汰。这是投资者必须计入的风险。"</div>
+    <div class="quote-source">Yann LeCun — Meta AI Chief Scientist</div>
+    <div class="quote-context">2026-06-10 | IEEE Spectrum Interview | 硬件折旧风险</div>
+    <a href="https://spectrum.ieee.org/" class="play-btn" target="_blank">▶ 播放原声</a>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-text">"端侧AI不是边缘计算的重命名。当NPU达到1000 TOPS，Agent可以在设备上自主运行——这是计算架构的范式转移。"</div>
+    <div class="quote-source">Ray Dalio — Bridgewater Founder</div>
+    <div class="quote-context">2026-06-08 | Bloomberg Interview | 端侧AI/计算架构</div>
+    <a href="https://www.bloomberg.com/" class="play-btn" target="_blank">▶ 播放原声</a>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Agentic Market Daily | 半月深度复盘 | 2026-06-01 ~ 2026-06-15</p>
+  <p style="margin-top:8px;font-size:0.8em;">数据来源：ifind API, Bloomberg, Reuters, Intel IR, NVIDIA IR, Computex 2026, DRAMeXchange, Pew Research</p>
+  <p style="margin-top:4px;font-size:0.8em;">免责声明：本报告仅供研究参考，不构成投资建议。投资有风险，决策需谨慎。</p>
+</div>
+
+</div>
+</body>
+</html>

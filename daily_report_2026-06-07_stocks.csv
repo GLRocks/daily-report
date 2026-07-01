@@ -1,0 +1,22 @@
+ticker,name,close,pct_change,category,rec_badge,metrics,reason
+NVDA.US,NVIDIA Corporation,205.73,0.02,芯片,BUY,市值$5.4T | P/S 35x | 毛利率75%,推理需求结构从训练向推理转移，NVDA软件生态锁定最深
+AMD.US,Advanced Micro Devices,466.0,0.06,芯片,BUY,YTD+65% | MI400出货Q3 | 服务器CPU TAM$120B,MI400系列在推理性价比上挑战NVDA，Lisa Su指引TAM年增35%
+QCOM.US,Qualcomm Inc.,216.79,0.1,芯片,HOLD,Q3指引$9.2-10B(低于$10.2B共识) | Android收入减速,短期业绩miss但AI PC/Auto长期布局 intact，等待回调后加仓窗口
+TSM.US,Taiwan Semiconductor,415.33,-0.06,芯片,BUY,2nm量产2025H2 | 美国凤凰厂高量投产 | 70%先进制程市占,先进制程绝对垄断地位，地缘风险已price in部分，产能持续扩张
+AVGO.US,Broadcom Inc.,387.45,-0.02,芯片,BUY,定制AI芯片收入$12B/年 | VMware整合完成 | 毛利率80%+,Google/Meta定制芯片核心供应商，AI ASIC趋势最大受益者
+MU.US,Micron Technology,864.01,-1.02,芯片,BUY,HBM3E量产 | DDR5供需紧 | 内存周期复苏确认,HBM3E供不应求，AI服务器内存密度提升驱动长期需求
+AMAT.US,Applied Materials,454.22,0.03,芯片,BUY,BIS罚款$300M已消化 | 中国设备收入占比18% | 刻蚀龙头,先进封装设备需求爆发，HBM/3D封装核心设备供应商
+LRCX.US,Lam Research,303.13,-0.08,芯片,HOLD,刻蚀/沉积双龙头 | 存储设备周期复苏 | 毛利率47%,存储资本开支回暖带动设备需求，先进工艺刻蚀复杂度提升
+ASML.US,ASML Holding,1643.74,0.01,芯片,BUY,EUV垄断 | High-NA EUV 2028量产 | 订单积压$40B+,光刻绝对垄断，High-NA技术护城河加深，长期订单可见性最强
+INTC.US,Intel Corporation,98.75,0.3,芯片,BUY,YTD+240% | 18A工艺上线 | Apple代工传闻,18A里程碑验证+Apple潜在代工订单，估值修复空间仍大
+GOOGL.US,Alphabet Inc.,368.99,-0.04,应用,BUY,Gemini 3.1 Ultra | 云收入增速26% | 搜索AI集成,Gemini生态+TPU自研+搜索AI化，三层护城河 intact
+MSFT.US,Microsoft Corp.,417.04,-0.03,应用,BUY,Azure增速31% | Copilot ARR>$10B | OpenAI深度绑定,企业AI消费最高确定性，Copilot生态粘性构建中
+META.US,Meta Platforms,593.04,0.0,应用,BUY,Llama 4开源 | Reels变现加速 | AI推荐引擎驱动DAU,开源模型战略+社交广告AI优化，AI应用层最大变现平台
+AAPL.US,Apple Inc.,307.58,-0.1,应用,SPEC BUY,iOS 27开放第三方AI | 服务端AI资本开支$10B+/年,端侧AI入口价值被低估，iOS开放AI模型选择生态变革
+PLTR.US,Palantir Technologies,135.56,-0.17,应用,SPEC BUY,AIP平台增速>50% | 政府合同扩张 | 估值溢价明显,企业AI平台化最激进，但估值需警惕，适合高风险偏好
+SNOW.US,Snowflake Inc.,238.26,0.04,应用,HOLD,Cortex AI集成 | 收入增长22% | 竞争加剧,数据平台AI化转型中，但Databrick等竞争压力上升
+BABA.US,Alibaba Group,120.91,-0.02,应用,HOLD,Qwen3 MoE | 阿里云增速14% | 通义千问DAU 2500万,中国AI云龙头但增长放缓，关注Qwen3商业化进展
+TSLA.US,Tesla Inc.,391.56,0.01,应用,HOLD,FSD V13延迟 | Optimus量产2026 | 能源业务增长,机器人+AI叙事 intact，但短期业绩波动大，需事件催化
+CEG.US,Constellation Energy,254.94,-0.01,能源,BUY,核电重启+AI数据中心供电 | 订单积压$30B+ | 监管绿灯,AI算力电力需求爆发最直接受益者，核电复兴核心标的
+CCJ.US,Cameco Corp.,103.44,-0.08,能源,BUY,铀价$85/lb | 供给缺口持续 | 核电复兴原料端,铀供需结构性缺口，核电复兴上游最直接杠杆
+OKLO.US,Oklo Inc.,58.09,-0.24,能源,SPEC BUY,小型模块化反应堆 | Sam Altman背书 | 早期阶段高风险,先进核反应堆技术路线，Altman个人押注，高风险高回报
