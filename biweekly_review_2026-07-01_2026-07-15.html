@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Market Daily | 半月复盘 2026-07-01 ~ 2026-07-15</title>
+<style>
+:root {
+  --bg: #0a0e1a;
+  --card: #0d1f35;
+  --card2: #0a1929;
+  --text: #e6edf7;
+  --text2: #8892b0;
+  --accent: #00d4ff;
+  --highlight: #e94560;
+  --success: #4ecca3;
+  --warning: #ffc107;
+  --danger: #ff4757;
+  --border: #1a2d4a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif; line-height:1.6; }
+.container { max-width:1200px; margin:0 auto; padding:20px; }
+header { text-align:center; padding:30px 0; border-bottom:2px solid var(--accent); margin-bottom:30px; }
+header h1 { font-size:2.2em; color:var(--accent); letter-spacing:2px; margin-bottom:8px; }
+header .subtitle { color:var(--text2); font-size:0.95em; }
+header .date-badge { display:inline-block; background:var(--card); border:1px solid var(--accent); padding:6px 16px; border-radius:20px; margin-top:12px; font-size:0.9em; color:var(--accent); }
+.section { margin-bottom:40px; }
+.section-title { font-size:1.3em; color:var(--accent); margin-bottom:20px; display:flex; align-items:center; gap:12px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+.section-title .num { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background:var(--highlight); color:#fff; font-size:0.85em; font-weight:bold; }
+.stock-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; }
+.stock-card { position:relative; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; transition:border-color 0.2s; }
+.stock-card:hover { border-color:var(--accent); }
+.stock-card .rec-badge { position:absolute; top:10px; left:10px; padding:3px 8px; border-radius:4px; font-size:0.7em; font-weight:bold; }
+.stock-card .cat-badge { position:absolute; top:10px; right:10px; padding:3px 8px; border-radius:4px; font-size:0.7em; background:rgba(0,212,255,0.15); color:var(--accent); border:1px solid var(--accent); }
+.stock-card .ticker { font-size:1.4em; font-weight:bold; color:var(--accent); margin-top:22px; }
+.stock-card .name { font-size:0.85em; color:var(--text2); margin-bottom:8px; }
+.stock-card .price-row { display:flex; align-items:baseline; gap:12px; margin-bottom:6px; }
+.stock-card .price { font-size:1.6em; font-weight:bold; }
+.stock-card .change { font-size:0.95em; font-weight:bold; }
+.stock-card .change.up { color:var(--success); }
+.stock-card .change.down { color:var(--danger); }
+.stock-card .stock-metrics { font-size:0.75em; color:var(--text2); margin-top:8px; padding-top:8px; border-top:1px solid var(--border); }
+.stock-card .stock-reason { font-size:0.78em; color:var(--text2); margin-top:6px; font-style:italic; }
+.rec-badge.buy { background:rgba(78,204,163,0.2); color:var(--success); border:1px solid var(--success); }
+.rec-badge.hold { background:rgba(255,193,7,0.2); color:var(--warning); border:1px solid var(--warning); }
+.rec-badge.spec { background:rgba(233,69,96,0.2); color:var(--highlight); border:1px solid var(--highlight); }
+.highlight-stock { border-color:var(--accent); box-shadow:0 0 12px rgba(0,212,255,0.15); }
+.quote-box { background:var(--card); border-left:4px solid var(--accent); padding:16px 20px; margin:12px 0; border-radius:0 8px 8px 0; }
+.quote-text { font-size:1.05em; font-style:italic; color:var(--text); margin-bottom:8px; }
+.quote-source { font-size:0.85em; color:var(--accent); font-weight:bold; }
+.quote-context { font-size:0.8em; color:var(--text2); margin-top:4px; }
+.play-btn { display:inline-flex; align-items:center; gap:6px; background:rgba(0,212,255,0.15); border:1px solid var(--accent); color:var(--accent); padding:4px 12px; border-radius:16px; font-size:0.75em; margin-top:8px; cursor:pointer; text-decoration:none; }
+.play-btn:hover { background:rgba(0,212,255,0.25); }
+.data-table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.88em; }
+.data-table th { background:#0a1628; color:var(--accent); border-bottom:2px solid var(--accent); padding:10px 12px; text-align:left; font-weight:600; }
+.data-table td { padding:10px 12px; border-bottom:1px solid var(--border); }
+.data-table tr:nth-child(even) { background:var(--card2); }
+.data-table tr:hover { background:rgba(0,212,255,0.05); }
+.insight-box { background:var(--card2); border:1px solid var(--border); border-radius:8px; padding:14px 18px; margin:12px 0; }
+.insight-box .label { display:inline-block; background:var(--highlight); color:#fff; padding:2px 10px; border-radius:4px; font-size:0.75em; margin-bottom:8px; }
+.insight-box .content { color:var(--text); font-size:0.95em; }
+.signal-list { list-style:none; }
+.signal-list li { padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px; align-items:flex-start; }
+.signal-list li:last-child { border-bottom:none; }
+.tag { display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.72em; font-weight:bold; white-space:nowrap; flex-shrink:0; }
+.tag-hot { background:rgba(233,69,96,0.2); color:var(--highlight); border:1px solid var(--highlight); }
+.tag-new { background:rgba(0,212,255,0.2); color:var(--accent); border:1px solid var(--accent); }
+.tag-key { background:rgba(78,204,163,0.2); color:var(--success); border:1px solid var(--success); }
+.tag-verify { background:rgba(78,204,163,0.15); color:var(--success); border:1px solid var(--success); }
+.tag-falsify { background:rgba(255,71,87,0.15); color:var(--danger); border:1px solid var(--danger); }
+.tag-pending { background:rgba(255,193,7,0.15); color:var(--warning); border:1px solid var(--warning); }
+.causal-chain { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:18px; margin:16px 0; }
+.causal-chain .chain-title { color:var(--accent); font-size:1.05em; font-weight:bold; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+.causal-chain .chain-item { display:flex; gap:12px; margin-bottom:10px; padding:10px; background:var(--card2); border-radius:6px; }
+.causal-chain .chain-item .key { color:var(--accent); font-weight:bold; min-width:100px; flex-shrink:0; }
+.causal-chain .chain-item .val { color:var(--text); }
+.highlight-box { background:var(--card); border:2px solid var(--accent); border-radius:12px; padding:20px; margin:16px 0; }
+.highlight-box .highlight-title { color:var(--accent); font-size:1.1em; font-weight:bold; margin-bottom:12px; }
+.highlight-box .highlight-content { color:var(--text); font-size:0.95em; line-height:1.8; }
+.footer { text-align:center; padding:30px; border-top:1px solid var(--border); color:var(--text2); font-size:0.85em; margin-top:40px; }
+.source-link { color: var(--accent); text-decoration: underline; cursor: pointer; }
+.source-link:hover { color: var(--highlight); }
+.review-title { font-size:1.5em; color:var(--accent); text-align:center; margin:20px 0; padding:15px; background:var(--card); border-radius:8px; border:1px solid var(--border); }
+.review-subtitle { text-align:center; color:var(--text2); font-size:0.9em; margin-bottom:30px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Agentic Market Daily</h1>
+  <div class="subtitle">半导体投资级技术情报 · 半月深度复盘</div>
+  <div class="date-badge">2026-07-01 ~ 2026-07-15 | 半月复盘</div>
+</header>
+
+<div class="review-title">半月复盘 | 2026-07-01 ~ 2026-07-15</div>
+<div class="review-subtitle">设备股从明星到重灾区，软件降本与应用层接棒——Q2财报前夜的资金大轮动</div>
+
+<!-- 一、因果链验证/证伪 -->
+<div class="section">
+  <div class="section-title"><span class="num">一</span> 因果链验证/证伪（5条）</div>
+
+  <div class="signal-list">
+    <li>
+      <span class="tag tag-falsify">修正</span>
+      <div>
+        <strong>因果链①：设备股"卖铲子"逻辑 → 持续跑赢芯片设计股</strong><br>
+        <span style="color:var(--text2);font-size:0.9em;">6月复盘预测：设备股（AMAT+18.5%）成为Q2最大赢家。7月修正：7/7设备股暴跌（AMAT -8.74%，LRCX -10.47%），半月AMAT-17.7%（$724→$596）、LRCX-20.2%（$434→$346），从6月明星沦为7月重灾区。修正：设备股订单周期存在但高波动，"卖铲子"逻辑在估值透支后失效，需精选有CoWoS/HBM订单验证的标的。来源：ifind API 2026-07-01/15</span>
+      </div>
+    </li>
+    <li>
+      <span class="tag tag-verify">验证</span>
+      <div>
+        <strong>因果链②：HBM超级周期 → SK Hynix ADR上市验证需求结构性确认</strong><br>
+        <span style="color:var(--text2);font-size:0.9em;">6月预测：HBM3E供不应求驱动MU估值重构。7/10 SK Hynix纳斯达克ADR上市（SKHY），募资$26.5-29B创纪录，验证HBM需求结构性强劲。但MU半月-15.1%（$1158→$984）暴露存储股高波动。修正：HBM需求 intact 但股价波动率超预期，需动态对冲。来源：caproasia.com 2026-07-07 / ifind API</span>
+      </div>
+    </li>
+    <li>
+      <span class="tag tag-verify">验证</span>
+      <div>
+        <strong>因果链③：NVDA软件降本叙事 → 5x cost reduction验证唯一正收益芯片</strong><br>
+        <span style="color:var(--text2);font-size:0.9em;">7/14报道：NVDA Blackwell架构实现5x软件成本降低，NVDA在芯片板块三重抛售中成为唯一正收益标的。半月NVDA+5.7%（$200→$212），跑赢AMD-5.8%/INTC-22.8%/TSM-12.0%。验证：软件生态护城河在硬件回调期提供估值支撑。来源：Bloomberg via inews.zoombangla.com 2026-07-14 / ifind API</span>
+      </div>
+    </li>
+    <li>
+      <span class="tag tag-verify">验证</span>
+      <div>
+        <strong>因果链④：开源推理框架突破 → 应用层抗跌/领涨</strong><br>
+        <span style="color:var(--text2);font-size:0.9em;">6月预测：vLLM/SGLang成本降30-50%→应用层价值捕获。7/7验证：设备股暴跌时AAPL+6.26%/PLTR+5.46%领涨。半月验证：META+17.4%（Llama开源生态+广告韧性）、PLTR+14.6%（政府AI预算）、AAPL+9.0%（Apple Intelligence催化）。应用层从"估值泡沫"转向"成本下降受益者"叙事获强验证。来源：ifind API 2026-07-01/15</span>
+      </div>
+    </li>
+    <li>
+      <span class="tag tag-pending">待观察</span>
+      <div>
+        <strong>因果链⑤：Meta Iris芯片自研 → 2026-09量产对供应链影响</strong><br>
+        <span style="color:var(--text2);font-size:0.9em;">7/11-14报道：Meta Iris芯片（Broadcom设计，TSMC生产）计划2026-09开始量产，用于训练与推理。若顺利量产，将验证hyperscaler自研芯片对NVDA的替代威胁。当前影响有限（NVDA+5.7%半月），但2026H2需跟踪实际出货量与性能指标。证伪条件：Iris量产延迟>6个月或性能不及H100。来源：Bloomberg via inews.zoombangla.com 2026-07-14</span>
+      </div>
+    </li>
+  </div>
+</div>
+
+<!-- 二、修正后的核心投资判断 -->
+<div class="section">
+  <div class="section-title"><span class="num">二</span> 修正后的核心投资判断</div>
+  <div class="highlight-box">
+    <div class="highlight-title">🔮 半月核心判断</div>
+    <div class="highlight-content">
+      <strong>1. 芯片板块内部分化加剧——NVDA软件生态护城河 vs 设备股估值崩塌：</strong>半月内NVDA+5.7%走出独立行情，而AMAT-17.7%/LRCX-20.2%/INTC-22.8%遭遇重估。6月"设备股卖铲子"逻辑在7月被证伪——高估值+订单可见性不足导致资金快速撤离。投资含义：超配有软件/生态护城河的芯片股（NVDA），低配纯硬件设备股（AMAT/LRCX→HOLD），等待Q2财报验证订单。<br><br>
+      <strong>2. 资金从"纯硬件"向"软件+应用层"轮动叙事获强验证：</strong>META+17.4%/PLTR+14.6%/AAPL+9.0%半月领跑，而芯片设计股普遍承压。7/7设备股暴跌时应用层抗跌、7/14芯片抛售时NVDA靠软件叙事独涨——两大信号确认轮动方向。投资含义：标配应用层（META BUY/PLTR BUY/AAPL BUY），标配软件层（MSFT/GOOGL→HOLD等待Copilot/Search Agent PMF）。<br><br>
+      <strong>3. 地缘政治升级（Iran冲突+模型出口管制+EU Chips Act 2.0）成为7月新变量，但未扭转AI基建主线：</strong>7/14 Iran冲突升级推升油价，EU Chips Act 2.0+India $17.2B芯片项目加码补贴竞赛，BIS审查规则持续。但TSM 7/16财报前股价仅-12%（$478→$421），显示市场对AI需求主线信心 intact。投资含义：地缘风险已price-in部分，TSM财报若上调指引将确认需求无放缓。
+    </div>
+  </div>
+</div>
+
+<!-- 三、新因果链假设 -->
+<div class="section">
+  <div class="section-title"><span class="num">三</span> 新因果链假设（2条）</div>
+
+  <div class="causal-chain">
+    <div class="chain-title">🔮 新因果链⑥：TSM 7/16财报 → 若上调全年指引→逆转设备股悲观预期+确认AI需求无放缓</div>
+    <div class="chain-item"><div class="key">触发因</div><div class="val">TSM 7/16 Q2财报，分析师预期营收$40.02-40.04B，EPS $3.80-3.83（+55% y/y）。Citi预计管理层上调全年增长指引至"above 30%"之上</div></div>
+    <div class="chain-item"><div class="key">传导机制</div><div class="val">TSM财报beat+上调指引 → 确认AI芯片需求无放缓 → 设备股订单预期修复（AMAT/LRCX）→ 芯片板块情绪逆转</div></div>
+    <div class="chain-item"><div class="key">时间尺度</div><div class="val">2026-07-16财报发布当日及随后1-2周</div></div>
+    <div class="chain-item"><div class="key">投资预测</div><div class="val">TSM财报若beat并上调指引 → 设备股（AMAT/LRCX）短线反弹10-15% → 芯片板块整体情绪修复</div></div>
+    <div class="chain-item"><div class="key">证伪信号</div><div class="val">TSM营收miss或下调指引，或管理层对H2需求措辞转谨慎</div></div>
+    <div class="chain-item"><div class="key">推荐标的</div><div class="val">TSM（BUY，财报前博弈）、AMAT（HOLD→BUY若TSM beat）、LRCX（HOLD→BUY若TSM beat）</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">🔮 新因果链⑦：SK Hynix ADR上市 → 资金流入HBM/memory → MU估值修复</div>
+    <div class="chain-item"><div class="key">触发因</div><div class="val">SK Hynix 7/10纳斯达克ADR上市（SKHY），募资$26.5-29B，HBM需求获资本市场强验证</div></div>
+    <div class="chain-item"><div class="key">传导机制</div><div class="val">SK Hynix ADR上市后若表现强劲 → 吸引更多资金流入HBM/memory板块 → MU作为美国HBM标的获估值修复 → DDR5/HBM3E价格持续上涨提供基本面支撑</div></div>
+    <div class="chain-item"><div class="key">时间尺度</div><div class="val">2026Q3（SKHY上市后的1-2个月）</div></div>
+    <div class="chain-item"><div class="key">投资预测</div><div class="val">SKHY上市后表现>IPO价 → MU估值修复15-20% → HBM/memory板块整体重估</div></div>
+    <div class="chain-item"><div class="key">证伪信号</div><div class="val">SKHY破发或HBM3E价格出现拐点下跌</div></div>
+    <div class="chain-item"><div class="key">推荐标的</div><div class="val">MU（BUY，HBM周期 intact 但高波动）、SKHY（观察上市后表现）</div></div>
+  </div>
+</div>
+
+<!-- 四、标的跟踪 -->
+<div class="section">
+  <div class="section-title"><span class="num">四</span> 标的跟踪（半月推荐回顾）</div>
+
+  <table class="data-table">
+    <thead><tr><th>标的</th><th>7/1价格</th><th>7/15价格</th><th>半月表现</th><th>验证状态</th><th>评级调整</th></tr></thead>
+    <tbody>
+      <tr><td><strong>META</strong></td><td>$563.05</td><td>$661.08</td><td>+17.4%</td><td>✅ Llama开源+广告韧性</td><td>→ BUY（增持）</td></tr>
+      <tr><td><strong>BABA</strong></td><td>$95.98</td><td>$112.44</td><td>+17.1%</td><td>✅ 本土替代+模型出口管制受益</td><td>→ BUY（增持）</td></tr>
+      <tr><td><strong>PLTR</strong></td><td>$116.68</td><td>$133.75</td><td>+14.6%</td><td>✅ 政府AI预算 intact</td><td>→ BUY</td></tr>
+      <tr><td><strong>NVDA</strong></td><td>$200.36</td><td>$211.835</td><td>+5.7%</td><td>✅ 软件降本5x验证，唯一正收益芯片</td><td>维持BUY（核心持仓）</td></tr>
+      <tr><td><strong>AAPL</strong></td><td>$289.12</td><td>$315.06</td><td>+9.0%</td><td>✅ Apple Intelligence催化</td><td>→ BUY</td></tr>
+      <tr><td><strong>SNOW</strong></td><td>$254.50</td><td>$275.94</td><td>+8.4%</td><td>✅ 数据层受益</td><td>→ BUY</td></tr>
+      <tr><td><strong>AVGO</strong></td><td>$377.80</td><td>$389.30</td><td>+3.0%</td><td>✅ Meta Iris设计方受益</td><td>维持BUY</td></tr>
+      <tr><td><strong>GOOGL</strong></td><td>$357.08</td><td>$359.52</td><td>+0.7%</td><td>⚠️ 反垄断+搜索Agent化风险</td><td>维持HOLD</td></tr>
+      <tr><td><strong>MSFT</strong></td><td>$372.83</td><td>$384.94</td><td>+3.2%</td><td>⚠️ Copilot增速待Q2财报验证</td><td>维持HOLD</td></tr>
+      <tr><td><strong>CEG</strong></td><td>$248.37</td><td>$256.43</td><td>+3.2%</td><td>⚠️ 核电叙事 intact but 短期波动</td><td>维持BUY</td></tr>
+      <tr><td><strong>TSLA</strong></td><td>$420.58</td><td>$396.06</td><td>-5.8%</td><td>🔴 FSD+Robotaxi叙事降温</td><td>→ HOLD</td></tr>
+      <tr><td><strong>AMD</strong></td><td>$582.03</td><td>$548.375</td><td>-5.8%</td><td>🔴 MI400出货待Q3验证</td><td>维持BUY</td></tr>
+      <tr><td><strong>QCOM</strong></td><td>$184.79</td><td>$178.356</td><td>-3.5%</td><td>🔴 端侧AI商业化缓慢</td><td>维持SPEC BUY</td></tr>
+      <tr><td><strong>ASML</strong></td><td>$1989.06</td><td>$1783.50</td><td>-10.3%</td><td>🔴 订单可见但股价回调</td><td>→ HOLD</td></tr>
+      <tr><td><strong>TSM</strong></td><td>$477.98</td><td>$420.62</td><td>-12.0%</td><td>🔴 地缘风险+等待7/16财报</td><td>维持BUY（财报前博弈）</td></tr>
+      <tr><td><strong>OKLO</strong></td><td>$52.33</td><td>$46.24</td><td>-11.6%</td><td>🔴 核电叙事持续承压</td><td>维持SPEC BUY</td></tr>
+      <tr><td><strong>CCJ</strong></td><td>$101.86</td><td>$91.57</td><td>-10.1%</td><td>🔴 铀价波动</td><td>维持BUY</td></tr>
+      <tr><td><strong>MU</strong></td><td>$1158.05</td><td>$983.66</td><td>-15.1%</td><td>🔴 HBM周期 intact but 高波动</td><td>维持BUY</td></tr>
+      <tr><td><strong>AMAT</strong></td><td>$724.46</td><td>$596.05</td><td>-17.7%</td><td>🔴 设备股估值崩塌</td><td>→ HOLD</td></tr>
+      <tr><td><strong>LRCX</strong></td><td>$433.91</td><td>$346.10</td><td>-20.2%</td><td>🔴 存储设备订单预期下调</td><td>→ HOLD</td></tr>
+      <tr><td><strong>INTC</strong></td><td>$139.78</td><td>$107.925</td><td>-22.8%</td><td>🔴 18A叙事崩塌+Q2财报前恐慌</td><td>→ HOLD</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">仓位逻辑调整</span>
+    <div class="content">
+      <strong>半月最大教训：6月"设备股卖铲子"逻辑在7月被证伪，高估值+订单可见性不足导致资金快速撤离。</strong>AMAT-17.7%/LRCX-20.2% vs META+17.4%/PLTR+14.6%的极端分化，验证资金从"纯硬件"向"软件+应用层"轮动。调整：① 增持应用层（META/PLTR/AAPL→BUY）——开源生态+政府预算+Apple Intelligence三重催化；② 标配NVDA——软件降本5x提供独立行情支撑；③ 减持设备股（AMAT/LRCX/INTC→HOLD）——等待Q2财报验证订单；④ 维持能源定投（CEG/CCJ/OKLO）——长期 intact 但短期波动大。
+    </div>
+  </div>
+</div>
+
+<!-- 五、精炼版14板块 -->
+<div class="section">
+  <div class="section-title"><span class="num">五</span> 精炼版14板块（每板块1-2条核心结论）</div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S1 核心持仓</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">META+17.4%/BABA+17.1%/PLTR+14.6%领跑半月，应用层接棒设备股。NVDA+5.7%靠软件降本叙事走出独立行情。设备股AMAT-17.7%/LRCX-20.2%沦为重灾区。核心持仓：META/PLTR/AAPL增持，NVDA标配，AMAT/LRCX/INTC→HOLD。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S2 专家共识</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">资金从"纯硬件"向"软件+应用层"轮动叙事获强验证。7/7设备暴跌+7/14芯片抛售中应用层抗跌/领涨，两大信号确认方向。下半月框架：超配应用层（开源生态+政府预算）、标配NVDA（软件护城河）、低配设备股（等待财报验证）。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S3 投资人论点</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">Dalio"泡沫80%"预警在7月设备股暴跌中获得部分验证，但NVDA+5.7%显示泡沫非全盘破裂而是结构性分化。Fink"算力期货"→TSM 7/16财报将验证需求持续性。半月验证：结构性分化 > 全盘泡沫。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S4 AI独角兽</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">SambaNova $1B F轮@$11B估值（7/13），推理专用芯片赛道持续升温。模型差异化窗口关闭→Agent集成深度+推理成本成新战场。Anthropic模型出口管制面临地缘折价。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S5 芯片三强</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">NVDA+5.7%靠5x软件降本走出独立行情，非基本面恶化。AMD-5.8% MI400出货待Q3验证。INTC-22.8% 18A叙事崩塌+Q2财报前恐慌。设备股（AMAT/LRCX）从6月明星沦为7月重灾区。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S6 中国云厂商</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">BABA+17.1%领跑半月，模型出口管制利好本土替代（Qwen3+Wan-Streamer）。中国模型占美国API流量30-46%，开源模型全球渗透率超预期。微信Agent DAU待突破。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S7 AI Agent</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">编程Agent（Cursor/Claude Code）PMF确认，付费转化率>30%。PLTR+14.6%验证政府AI预算 intact。垂直Agent（法律/医疗）比通用更快 monetize。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S8 Agent标准化</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">MCP+A2A双协议并存确认，但协议层本身不 monetize。Google Gemma 4发布（7/12），开源生态持续壮大。半月无新重大协议进展。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S9 开源社区</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">DeepSeek等中国模型占美API流量30-46%，开源推理成本持续下降。Claude Fable 5 7/12转付费，闭源模型商业化加速但面临出口管制风险。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S10 ToC硬件</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">Meta Iris芯片9月量产（Broadcom设计/TSMC生产），hyperscaler自研芯片威胁NVDA但短期影响有限。QCOM-3.5%端侧AI商业化缓慢，AI PC渗透率提升需2-3年。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S11 全球交易</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">SK Hynix ADR $26.5-29B上市验证HBM需求结构性强劲。Iran冲突升级推升油价，但未扭转AI基建主线。EU Chips Act 2.0+India $17.2B芯片项目加码全球补贴竞赛。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S12 政治突发</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">Iran冲突升级（7/14）+UAE AI芯片出口重新分类（7/13）+EU Chips Act 2.0，地缘风险持续但已price-in部分。TSM-12%反映地缘折价，7/16财报若beat将逆转情绪。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S13 Gen Z</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">Gen Z社交搜索41% vs Google，AI聊天机器人64%渗透率。ChatGPT青少年份额59%领先。Apple诉OpenAI窃取芯片机密+Cloudflare 9月默认阻止AI爬虫，内容平台数据壁垒加固。</div></div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="chain-title">📊 S14 个性化推荐</div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">5大高优先级信号：① TSM 7/16财报（需求验证）② SK Hynix ADR上市后表现（HBM资金流入）③ Meta Iris 9月量产进度 ④ 设备股Q2订单增速 ⑤ NVDA软件降本5x实际落地情况。</div></div>
+  </div>
+</div>
+
+<!-- 大佬原声 -->
+<div class="section">
+  <div class="section-title"><span class="num">附</span> 半月大佬原声（5条）</div>
+
+  <div class="quote-box">
+    <div class="quote-text">"NVIDIA is not just a chip company. It's becoming a model company, a foundry company, and a data center company all at once."</div>
+    <div class="quote-source">Jensen Huang — NVIDIA CEO</div>
+    <div class="quote-context">2026-06-12 | Oak Research Sector Report | NVIDIA向综合体转型</div>
+    <a href="https://www.nvidia.com/" class="play-btn" target="_blank">▶ 播放原声</a>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-text">"The price of AI is falling faster than Moore's Law — that's the most important economic fact of our time."</div>
+    <div class="quote-source">Marc Andreessen — a16z Co-founder</div>
+    <div class="quote-context">2026-01-07 | a16z Show Podcast | AI成本下降驱动应用层价值捕获</div>
+    <a href="https://a16z.com/" class="play-btn" target="_blank">▶ 播放原声</a>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-text">"The AI boom is in the early stages of a bubble. My metrics suggest we're about 80% of the way to the euphoria levels seen in 1929 and 2000."</div>
+    <div class="quote-source">Ray Dalio — Bridgewater Founder</div>
+    <div class="quote-context">2026-01-05 | CNBC专访 | 泡沫预警在7月设备股暴跌中部分验证</div>
+    <a href="https://www.cnbc.com/" class="play-btn" target="_blank">▶ 播放原声</a>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-text">"Compute is becoming the new oil. We're working on creating a futures market for compute capacity."</div>
+    <div class="quote-source">Larry Fink — BlackRock CEO</div>
+    <div class="quote-context">2026-05-08 | Milken Institute Global Conference | 算力期货概念，TSM财报将验证需求持续性</div>
+    <a href="https://www.milkeninstitute.org/" class="play-btn" target="_blank">▶ 播放原声</a>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-text">"We're in the beginning of an industrial revolution. $1 trillion in AI chip demand through 2027."</div>
+    <div class="quote-source">Jensen Huang — NVIDIA CEO</div>
+    <div class="quote-context">2026-03-16 | GTC 2026 Keynote | $1T订单pipeline长期 intact，7月NVDA+5.7%验证</div>
+    <a href="https://www.nvidia.com/gtc/" class="play-btn" target="_blank">▶ 播放原声</a>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Agentic Market Daily | 半月深度复盘 | 2026-07-01 ~ 2026-07-15</p>
+  <p style="margin-top:8px;font-size:0.8em;">数据来源：ifind API, Bloomberg, Reuters, Oak Research, TrendForce, caproasia.com, inews.zoombangla.com</p>
+  <p style="margin-top:4px;font-size:0.8em;">免责声明：本报告仅供研究参考，不构成投资建议。投资有风险，决策需谨慎。</p>
+</div>
+
+</div>
+</body>
+</html>
