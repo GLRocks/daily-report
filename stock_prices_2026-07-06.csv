@@ -1,0 +1,22 @@
+ticker,name,close,pct_change,category
+NVDA,NVIDIA,194.97,0.07,GPU/AI Chip
+AMD,AMD,515.875,-0.03,GPU/CPU
+QCOM,Qualcomm,176.37,0.0,Mobile/Edge AI
+TSM,TSMC,434.715,0.0,Foundry
+AVGO,Broadcom,360.22,0.0,Networking/Custom
+MU,Micron,975.755,0.22,Memory
+AMAT,Applied Materials,602.02,0.0,Equipment
+LRCX,Lam Research,350.135,0.02,Equipment
+ASML,ASML,1768.16,-0.01,Lithography
+INTC,Intel,120.41,0.41,CPU/GPU
+GOOGL,Alphabet,360.4,0.01,Cloud AI
+MSFT,Microsoft,390.82,0.01,Cloud AI
+META,Meta,583.54,0.01,AI Infrastructure
+AAPL,Apple,308.86,0.04,Consumer Tech
+PLTR,Palantir,129.535,0.03,AI Software
+SNOW,Snowflake,260.02,0.16,Data Cloud
+BABA,Alibaba,96.218,0.03,China Tech
+TSLA,Tesla,394.08,0.01,AI/Auto
+CEG,Constellation Energy,239.53,0.02,Nuclear
+CCJ,Cameco,96.54,0.2,Nuclear
+OKLO,Oklo,52.37,-0.11,Nuclear

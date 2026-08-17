@@ -1,0 +1,13 @@
+open,high,low,close,volume,thscode,time,thsname_cn,thsname_en,currency
+195.0,198.7,192.74,197.01,134111494,NVDA.O,2026-07-28,英伟达,Nvidia Corporation,USD
+195.845,197.074,190.01,190.01,147680809,NVDA.O,2026-07-29,英伟达,Nvidia Corporation,USD
+193.45,197.25,191.52,195.04,129010151,NVDA.O,2026-07-30,英伟达,Nvidia Corporation,USD
+198.4405,202.0,194.95,200.75,139961152,NVDA.O,2026-07-31,英伟达,Nvidia Corporation,USD
+467.0,472.75,442.27,454.62,36315461,AMD.O,2026-07-28,超威半导体,"Advanced Micro Devices, Inc.",USD
+452.675,457.22,424.0316,429.56,32304898,AMD.O,2026-07-29,超威半导体,"Advanced Micro Devices, Inc.",USD
+460.0,498.2,457.68,485.39,36936565,AMD.O,2026-07-30,超威半导体,"Advanced Micro Devices, Inc.",USD
+510.275,515.62,475.76,476.15,26615744,AMD.O,2026-07-31,超威半导体,"Advanced Micro Devices, Inc.",USD
+164.896,167.92,162.16,162.88,16147497,QCOM.O,2026-07-28,高通,Qualcomm Incorporated,USD
+162.575,164.56,155.0,155.68,19240744,QCOM.O,2026-07-29,高通,Qualcomm Incorporated,USD
+146.55,154.1595,146.0,151.6,24336846,QCOM.O,2026-07-30,高通,Qualcomm Incorporated,USD
+152.96,153.73,146.15,147.61,13811248,QCOM.O,2026-07-31,高通,Qualcomm Incorporated,USD

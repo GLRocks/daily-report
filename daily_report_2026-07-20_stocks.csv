@@ -1,0 +1,22 @@
+ticker,name,close,prev_close,pct_change,category,rating
+NVDA,NVIDIA Corporation,202.81,207.4,-2.21,芯片,buy
+AMD,Advanced Micro Devices,495.76,500.94,-1.03,芯片,buy
+QCOM,Qualcomm Inc.,171.78,170.61,0.69,芯片,hold
+TSM,Taiwan Semiconductor,398.37,409.74,-2.77,芯片,buy
+AVGO,Broadcom Inc.,370.83,374.45,-0.97,芯片,buy
+MU,Micron Technology,848.95,853.2,-0.5,芯片,buy
+AMAT,Applied Materials,529.66,560.93,-5.57,芯片,buy
+LRCX,Lam Research,313.3,320.96,-2.39,芯片,hold
+ASML,ASML Holding,1747.58,1784.87,-2.09,芯片,buy
+INTC,Intel Corporation,95.04,96.98,-2.0,芯片,buy
+GOOGL,Alphabet Inc.,346.77,354.46,-2.17,应用,buy
+MSFT,Microsoft Corp.,393.82,401.1,-1.82,应用,buy
+META,Meta Platforms,646.01,664.54,-2.79,应用,buy
+AAPL,Apple Inc.,333.74,333.26,0.14,应用,spec
+PLTR,Palantir Technologies,132.38,134.44,-1.53,应用,spec
+SNOW,Snowflake Inc.,268.9,270.02,-0.41,应用,hold
+BABA,Alibaba Group,114.97,117.49,-2.14,应用,hold
+TSLA,Tesla Inc.,380.84,391.06,-2.61,应用,hold
+CEG,Constellation Energy,252.39,251.77,0.25,能源,buy
+CCJ,Cameco Corp.,85.62,87.36,-1.99,能源,buy
+OKLO,Oklo Inc.,41.11,41.7,-1.41,能源,spec

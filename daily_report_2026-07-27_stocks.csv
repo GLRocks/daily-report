@@ -1,0 +1,22 @@
+ticker,close,pct_change,name
+NVDA,206.72,-0.92,NVIDIA
+AMD,520.67,-3.52,AMD
+QCOM,166.97,-2.42,Qualcomm
+TSM,403.23,-2.93,TSMC
+AVGO,381.24,-2.69,Broadcom
+MU,918.88,-6.99,Micron
+AMAT,535.73,-4.72,Applied Materials
+LRCX,304.99,-4.63,Lam Research
+ASML,1757.57,-2.52,ASML
+INTC,92.27,-7.94,Intel
+GOOGL,319.77,+0.65,Alphabet
+MSFT,381.66,+0.02,Microsoft
+META,595.20,-1.80,Meta
+AAPL,332.90,+3.49,Apple
+PLTR,122.99,-0.31,Palantir
+SNOW,268.06,+1.11,Snowflake
+BABA,112.28,-1.68,Alibaba
+TSLA,312.80,-2.16,Tesla
+CEG,274.35,-0.45,Constellation Energy
+CCJ,87.87,-1.65,Cameco
+OKLO,40.27,-8.52,Oklo
