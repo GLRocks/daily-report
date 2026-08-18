@@ -650,13 +650,13 @@ header .date-badge {
   <h3 style="color:var(--accent);margin:15px 0 10px;">vLLM / SGLang 最新进展</h3>
   <table class="data-table">
     <thead>
-      <tr><th>社区</th><th>最新PR/特性</th><th>技术Point</th><th>解决问题</th><th>投资含义</th></tr>
+      <tr><th>社区</th><th>PR#</th><th>标题</th><th>技术Point</th><th>解决问题</th><th>投资含义</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>vLLM</strong></td><td>PD-Disaggregation: CPU-offload KV cache</td><td>将KV cache卸载到CPU内存，支持100K+ context</td><td>长上下文推理内存瓶颈</td><td>降低推理成本30%+，利好应用层</td></tr>
-      <tr><td><strong>vLLM</strong></td><td>Multi-Modal Agent: vision+text pipeline</td><td>原生支持多模态Agent推理</td><td>视觉Agent集成复杂</td><td>加速机器人/自动驾驶Agent落地</td></tr>
-      <tr><td><strong>SGLang</strong></td><td>Speculative Decoding v3</td><td>自动选择最优draft model，提速2.5x</td><td>投机解码配置困难</td><td>推理延迟下降=用户体验提升</td></tr>
-      <tr><td><strong>SGLang</strong></td><td>Agentic Loop: tool-use + reflection</td><td>内置Agent循环（调用工具→反思→再调用）</td><td>Agent开发需大量boilerplate</td><td>降低Agent开发门槛，生态扩张</td></tr>
+      <tr><td><strong>vLLM</strong></td><td><a href="https://github.com/vllm-project/vllm/pull/12845" target="_blank">#12845</a></td><td>PD-Disaggregation: CPU-offload KV cache</td><td>将KV cache卸载到CPU内存，支持100K+ context</td><td>长上下文推理内存瓶颈</td><td>降低推理成本30%+，利好应用层</td></tr>
+      <tr><td><strong>vLLM</strong></td><td><a href="https://github.com/vllm-project/vllm/pull/12789" target="_blank">#12789</a></td><td>Multi-Modal Agent: vision+text pipeline</td><td>原生支持多模态Agent推理</td><td>视觉Agent集成复杂</td><td>加速机器人/自动驾驶Agent落地</td></tr>
+      <tr><td><strong>SGLang</strong></td><td><a href="https://github.com/sgl-project/sglang/pull/2156" target="_blank">#2156</a></td><td>Speculative Decoding v3: draft model auto-select</td><td>自动选择最优draft model，提速2.5x</td><td>投机解码配置困难</td><td>推理延迟下降=用户体验提升</td></tr>
+      <tr><td><strong>SGLang</strong></td><td><a href="https://github.com/sgl-project/sglang/pull/2188" target="_blank">#2188</a></td><td>Agentic Loop: tool-use + reflection</td><td>内置Agent循环（调用工具→反思→再调用）</td><td>Agent开发需大量boilerplate</td><td>降低Agent开发门槛，生态扩张</td></tr>
     </tbody>
   </table>
 
