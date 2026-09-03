@@ -1,25 +1,26 @@
 {
   "stm": {
-    "count": 28,
-    "last_ts": "2026-07-01T08:09:02.902161",
-    "last_sessions": 111,
-    "last_messages": 304,
-    "last_chars": 36854
+    "count": 41,
+    "last_ts": "2026-09-03T08:07:57.075825",
+    "last_sessions": 92,
+    "last_messages": 223,
+    "last_chars": 38294
   },
   "diary": {
-    "count": 94,
-    "last_ts": "2026-07-01T03:47:18.639001",
-    "last_day": 68,
+    "count": 124,
+    "last_ts": "2026-09-03T03:48:37.148282",
+    "last_day": 128,
     "last_sessions": 3,
-    "last_messages": 12,
+    "last_messages": 2,
     "last_filename": "day68-2026-07-01-six_times_same_task.md",
     "last_latency_s": 14.2,
-    "last_skip": "conversation_hash_unchanged"
+    "last_skip": "no_sessions_today",
+    "last_error": "'text'"
   },
   "compact": {
-    "count": 94,
-    "last_ts": "2026-07-01T03:47:40.767431",
-    "last_invoke": 39,
+    "count": 124,
+    "last_ts": "2026-09-03T03:51:11.673754",
+    "last_invoke": 40,
     "last_sessions": 111,
     "last_messages": 304,
     "last_latency_s": 19.9,

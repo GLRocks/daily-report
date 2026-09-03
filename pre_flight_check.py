@@ -69,22 +69,30 @@ def check(report_path):
     else:
         print("INFO: No stock change% elements")
     
-    # === S5 TABLE: 日涨跌 COLUMN CHECK (template V12 requires this) ===
-    s5_section = re.search(r'<span class="num">5</span>.*?</table>', html, re.DOTALL)
-    if s5_section:
-        if '日涨跌' in s5_section.group(0):
-            print("PASS: S5 table has 日涨跌 column (template V12 compliant)")
+    # === S5 TABLE: 日涨跌 COLUMN CHECK (template V12 requires this in S4 chip section, not S5) ===
+    s4_section = re.search(r'<span class="num">4</span>.*?</table>', html, re.DOTALL)
+    if s4_section:
+        if '日涨跌' in s4_section.group(0):
+            print("PASS: S4 table has 日涨跌 column (template V12 compliant)")
         else:
-            print("WARN: S5 table missing 日涨跌 column — per template V12 requirement")
+            print("WARN: S4 table missing 日涨跌 column — per template V12 requirement")
     
-    # === S9 PR LINK CHECK (open source section, per template V12) ===
-    s9_section = re.search(r'<span class="num">9</span>.*?</div>\s*</div>', html, re.DOTALL)
-    if s9_section:
-        s9_html = s9_section.group(0)
-        pr_links = re.findall(r'github\.com/(vllm-project|sgl-project)/[^"]+/pull/\d+', s9_html)
-        if len(pr_links) < 2:
-            fatal(f"S9 PR links missing: expected >=2 GitHub PR URLs, found {len(pr_links)}")
-        print(f"PASS: S9 PR links = {len(pr_links)}")
+    # === S8/S9 PR LINK CHECK (open source section, per template V12) ===
+    # V12 template: S8=开源社区, S9=ToC硬件. Check both to be safe.
+    s8_section = re.search(r'<span class="num">8</span>.*?</div>\s*</div>', html, re.DOTALL)
+    pr_links = []
+    if s8_section:
+        s8_html = s8_section.group(0)
+        pr_links = re.findall(r'github\.com/(vllm-project|sgl-project)/[^"]+/pull/\d+', s8_html)
+    if len(pr_links) < 2:
+        # Fallback to S9 if S8 doesn't have enough
+        s9_section = re.search(r'<span class="num">9</span>.*?</div>\s*</div>', html, re.DOTALL)
+        if s9_section:
+            s9_html = s9_section.group(0)
+            pr_links += re.findall(r'github\.com/(vllm-project|sgl-project)/[^"]+/pull/\d+', s9_html)
+    if len(pr_links) < 2:
+        fatal(f"S8/S9 PR links missing: expected >=2 GitHub PR URLs, found {len(pr_links)}")
+    print(f"PASS: S8/S9 PR links = {len(pr_links)}")
     
     # === SOURCE LINKS VALIDITY ===
     bad_links = html.count('href="#"')
@@ -209,20 +217,25 @@ def check(report_path):
             print(f"INFO: S5 contains {q1_count} Q1 2026 references — verify Q2 not yet available")
     print("CQ2: Earnings data freshness check completed")
     
-    # CQ3: PR verification (S9 — open source section with PR links)
-    s9_section = re.search(r'<span class="num">9</span>.*?</div>\s*</div>', html, re.DOTALL)
-    if s9_section:
-        s9_html = s9_section.group(0)
-        pr_no_links = re.findall(r'PR\s+#(\d+)(?![0-9])(?!\s*<)', s9_html)
+    # CQ3: PR verification (S8 — open source section with PR links)
+    s8_section = re.search(r'<span class="num">8</span>.*?</div>\s*</div>', html, re.DOTALL)
+    if s8_section:
+        s8_html = s8_section.group(0)
+        pr_no_links = re.findall(r'PR\s+#(\d+)(?![0-9])(?!\s*<)', s8_html)
         if pr_no_links:
-            fatal(f"S9 contains PR numbers without hyperlinks: {pr_no_links}")
-        non_github_links = re.findall(r'href="(?!https://github\.com)[^"]*pull[^"]*"', s9_html)
+            fatal(f"S8 contains PR numbers without hyperlinks: {pr_no_links}")
+        non_github_links = re.findall(r'href="(?!https://github\.com)[^"]*pull[^"]*"', s8_html)
         if non_github_links:
-            fatal(f"S9 contains non-GitHub PR links: {non_github_links}")
-        github_links = re.findall(r'github\.com/(vllm-project|sgl-project)/[^"]+/pull/\d+', s9_html)
+            fatal(f"S8 contains non-GitHub PR links: {non_github_links}")
+        github_links = re.findall(r'github\.com/(vllm-project|sgl-project)/[^"]+/pull/\d+', s8_html)
         if len(github_links) < 2:
-            fatal(f"S9 PR links insufficient: {len(github_links)} found, minimum 2 required")
-        print(f"CQ3: S9 GitHub PR links = {len(github_links)} — OK")
+            # Fallback to S9
+            s9_section = re.search(r'<span class="num">9</span>.*?</div>\s*</div>', html, re.DOTALL)
+            if s9_section:
+                github_links += re.findall(r'github\.com/(vllm-project|sgl-project)/[^"]+/pull/\d+', s9_section.group(0))
+        if len(github_links) < 2:
+            fatal(f"S8/S9 PR links insufficient: {len(github_links)} found, minimum 2 required")
+        print(f"CQ3: S8/S9 GitHub PR links = {len(github_links)} — OK")
     
     # CQ4: Policy source ban (S12)
     s12_section = re.search(r'<span class="num">12</span>.*?</div>\s*</div>', html, re.DOTALL)
