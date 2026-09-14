@@ -5,136 +5,239 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agentic Market Daily | 2026-09-14</title>
 <style>
-:root {--accent: #00d4ff;--highlight: #e94560;--bg: #0a0e1a;--card: #111827;--text: #e2e8f0;--muted: #94a3b8;--border: #1e293b;}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
-.nav{position:sticky;top:0;background:rgba(10,14,26,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:12px 24px;z-index:100;display:flex;justify-content:space-between;align-items:center;}
-.nav-title{font-size:18px;font-weight:700;color:var(--accent);}
-.nav-date{font-size:13px;color:var(--muted);}
-.container{max-width:1200px;margin:0 auto;padding:24px;}
-.section{margin-bottom:40px;background:var(--card);border-radius:12px;padding:24px;border:1px solid var(--border);}
-.section-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
-.num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:var(--accent);color:var(--bg);border-radius:50%;font-weight:700;font-size:14px;}
-.section-title{font-size:20px;font-weight:700;color:var(--text);}
-.stock-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
-.stock-card{background:#0f172a;border-radius:10px;padding:16px;border:1px solid var(--border);position:relative;}
-.rec-badge{position:absolute;top:12px;right:12px;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;}
-.rec-badge.buy{background:rgba(0,212,255,0.15);color:var(--accent);}
-.rec-badge.hold{background:rgba(148,163,184,0.15);color:var(--muted);}
-.rec-badge.spec{background:rgba(233,69,96,0.15);color:var(--highlight);}
-.cat-badge{display:inline-block;padding:3px 8px;border-radius:4px;font-size:11px;background:rgba(0,212,255,0.1);color:var(--accent);margin-bottom:8px;}
-.ticker{font-size:22px;font-weight:800;color:var(--text);}
-.name{font-size:13px;color:var(--muted);margin-bottom:8px;}
-.price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;}
-.price{font-size:24px;font-weight:700;color:var(--text);}
-.change{font-size:14px;font-weight:600;}
-.change.up{color:#10b981;}
-.change.down{color:#ef4444;}
-.stock-metrics{font-size:12px;color:var(--muted);margin-bottom:6px;}
-.stock-reason{font-size:12px;color:var(--accent);line-height:1.5;}
-.quote-box{background:rgba(0,212,255,0.05);border-left:3px solid var(--accent);padding:16px;border-radius:0 8px 8px 0;margin:16px 0;}
-.quote-box strong{color:var(--accent);}
-.highlight-title{font-size:16px;font-weight:700;color:var(--highlight);margin-bottom:12px;}
-.highlight-content{font-size:14px;color:var(--text);line-height:1.8;}
-.data-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px;}
-.data-table th{background:rgba(0,212,255,0.1);color:var(--accent);padding:10px;text-align:left;border-bottom:2px solid var(--border);}
-.data-table td{padding:10px;border-bottom:1px solid var(--border);color:var(--text);}
-.data-table tr:hover{background:rgba(0,212,255,0.03);}
-.causal-chain{background:#0f172a;border-radius:8px;padding:16px;margin:12px 0;font-size:13px;color:var(--muted);}
-.causal-chain strong{color:var(--accent);}
-.source{font-size:11px;color:var(--muted);margin-top:8px;}
-.source a{color:var(--accent);text-decoration:none;}
-.play-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(233,69,96,0.15);color:var(--highlight);border-radius:6px;font-size:12px;text-decoration:none;margin-top:8px;}
-.footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:40px;}
+:root {
+  --bg: #0a0e1a;
+  --card: #0d1f35;
+  --card2: #0a1929;
+  --text: #e6edf7;
+  --text2: #8892b0;
+  --accent: #00d4ff;
+  --highlight: #e94560;
+  --success: #4ecca3;
+  --warning: #ffc107;
+  --danger: #ff4757;
+  --border: #1a2d4a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
+  line-height:1.6;
+}
+.container { max-width:1200px; margin:0 auto; padding:20px; }
+header {
+  text-align:center; padding:30px 0; border-bottom:2px solid var(--accent); margin-bottom:30px;
+}
+header h1 { font-size:2.2em; color:var(--accent); letter-spacing:2px; margin-bottom:8px; }
+header .subtitle { color:var(--text2); font-size:0.95em; }
+header .date-badge {
+  display:inline-block; background:var(--card); border:1px solid var(--accent);
+  padding:6px 16px; border-radius:20px; margin-top:12px; font-size:0.9em; color:var(--accent);
+}
+
+.section { margin-bottom:40px; }
+.section-title {
+  font-size:1.3em; color:var(--accent); margin-bottom:20px;
+  display:flex; align-items:center; gap:12px; padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+}
+.section-title .num {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:32px; height:32px; border-radius:50%; background:var(--highlight);
+  color:#fff; font-size:0.85em; font-weight:bold;
+}
+
+.stock-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px;
+}
+.stock-card {
+  position:relative; background:var(--card); border:1px solid var(--border);
+  border-radius:12px; padding:16px; transition:border-color 0.2s;
+}
+.stock-card:hover { border-color:var(--accent); }
+.stock-card .rec-badge {
+  position:absolute; top:10px; left:10px;
+  padding:3px 8px; border-radius:4px; font-size:0.7em; font-weight:bold;
+}
+.stock-card .cat-badge {
+  position:absolute; top:10px; right:10px;
+  padding:3px 8px; border-radius:4px; font-size:0.7em;
+  background:rgba(0,212,255,0.15); color:var(--accent); border:1px solid var(--accent);
+}
+.stock-card .ticker { font-size:1.4em; font-weight:bold; color:var(--accent); margin-top:22px; }
+.stock-card .name { font-size:0.85em; color:var(--text2); margin-bottom:8px; }
+.stock-card .price-row { display:flex; align-items:baseline; gap:12px; margin-bottom:6px; }
+.stock-card .price { font-size:1.6em; font-weight:bold; }
+.stock-card .change { font-size:0.95em; font-weight:bold; }
+.stock-card .change.up { color:var(--success); }
+.stock-card .change.down { color:var(--danger); }
+.stock-card .stock-metrics {
+  font-size:0.75em; color:var(--text2); margin-top:8px; padding-top:8px;
+  border-top:1px solid var(--border);
+}
+.stock-card .stock-reason {
+  font-size:0.78em; color:var(--text2); margin-top:6px; font-style:italic;
+}
+.rec-badge.buy { background:rgba(78,204,163,0.2); color:var(--success); border:1px solid var(--success); }
+.rec-badge.hold { background:rgba(255,193,7,0.2); color:var(--warning); border:1px solid var(--warning); }
+.rec-badge.spec { background:rgba(233,69,96,0.2); color:var(--highlight); border:1px solid var(--highlight); }
+.highlight-stock { border-color:var(--accent); box-shadow:0 0 12px rgba(0,212,255,0.15); }
+
+.quote-box {
+  background:var(--card); border-left:4px solid var(--accent); padding:16px 20px;
+  margin:12px 0; border-radius:0 8px 8px 0;
+}
+.quote-text { font-size:1.05em; font-style:italic; color:var(--text); margin-bottom:8px; }
+.quote-source { font-size:0.85em; color:var(--accent); font-weight:bold; }
+.quote-context { font-size:0.8em; color:var(--text2); margin-top:4px; }
+.play-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(0,212,255,0.15); border:1px solid var(--accent);
+  color:var(--accent); padding:4px 12px; border-radius:16px;
+  font-size:0.75em; margin-top:8px; cursor:pointer; text-decoration:none;
+}
+
+.insight-box {
+  background:var(--card2); border:1px solid var(--border); border-radius:8px;
+  padding:14px 18px; margin:12px 0;
+}
+.insight-box .label {
+  display:inline-block; background:var(--highlight); color:#fff;
+  padding:2px 10px; border-radius:4px; font-size:0.75em; margin-bottom:8px;
+}
+.insight-box .content { color:var(--text); font-size:0.95em; }
+
+.signal-list { list-style:none; }
+.signal-list li {
+  padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px; align-items:flex-start;
+}
+.signal-list li:last-child { border-bottom:none; }
+.tag {
+  display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.72em; font-weight:bold;
+  white-space:nowrap; flex-shrink:0;
+}
+.tag-hot { background:rgba(233,69,96,0.2); color:var(--highlight); border:1px solid var(--highlight); }
+.tag-new { background:rgba(0,212,255,0.2); color:var(--accent); border:1px solid var(--accent); }
+.tag-key { background:rgba(78,204,163,0.2); color:var(--success); border:1px solid var(--success); }
+
+.data-table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.88em; }
+.data-table th {
+  background:#0a1628; color:var(--accent); border-bottom:2px solid var(--accent);
+  padding:10px 12px; text-align:left; font-weight:600;
+}
+.data-table td { padding:10px 12px; border-bottom:1px solid var(--border); }
+.data-table tr:nth-child(even) { background:var(--card2); }
+.data-table tr:hover { background:rgba(0,212,255,0.05); }
+
+.causal-chain {
+  background:var(--card); border:1px solid var(--border); border-radius:8px;
+  padding:18px; margin:16px 0;
+}
+.causal-chain .chain-title {
+  color:var(--accent); font-size:1.05em; font-weight:bold; margin-bottom:14px;
+  display:flex; align-items:center; gap:8px;
+}
+.causal-chain .chain-item {
+  display:flex; gap:12px; margin-bottom:10px; padding:10px;
+  background:var(--card2); border-radius:6px;
+}
+.causal-chain .chain-item .key { color:var(--accent); font-weight:bold; min-width:100px; flex-shrink:0; }
+.causal-chain .chain-item .val { color:var(--text); }
+
+.footer {
+  text-align:center; padding:30px; border-top:1px solid var(--border);
+  color:var(--text2); font-size:0.85em; margin-top:40px;
+}
 </style>
 </head>
 <body>
-<div class="nav">
-  <div class="nav-title">Agentic Market Daily</div>
-  <div class="nav-date">2026-09-14 | 数据日期: 2026-09-11</div>
-</div>
 <div class="container">
 
-<!-- S1 -->
+<header>
+  <h1>Agentic Market Daily</h1>
+  <div class="subtitle">半导体投资级技术情报 · 每日晨报</div>
+  <div class="date-badge">2026-09-14 | Monday | Asia/Shanghai 08:07 | 数据日期: 2026-09-11</div>
+</header>
+
+<!-- Section 1: Core Holdings -->
 <div class="section">
-  <div class="section-header">
-    <span class="num">1</span>
-    <span class="section-title">核心持仓实时行情</span>
-  </div>
+  <div class="section-title"><span class="num">1</span> 核心持仓实时行情</div>
   <div class="stock-grid">
-    <div class="stock-card">
-      <span class="rec-badge buy">BUY</span>
+    <div class="stock-card highlight-stock">
+      <span class="rec-badge buy"">BUY</span>
       <span class="cat-badge">芯片</span>
       <div class="ticker">NVDA</div>
-      <div class="name">NVIDIA Corp</div>
+      <div class="name">NVIDIA Corporation</div>
       <div class="price-row">
         <span class="price">$218.47</span>
         <span class="change up">+0.04%</span>
       </div>
-      <div class="stock-metrics">核心指标: AI工厂龙头 | Blackwell渗透率15% | Rubin第二曲线</div>
-      <div class="stock-reason">推荐: AI计算绝对龙头，推理需求爆发提供第二增长曲线</div>
+      <div class="stock-metrics">核心指标: 市值$5.4T | P/S 35x | 毛利率75%</div>
+      <div class="stock-reason">推荐: 推理需求结构从训练向推理转移，NVDA软件生态锁定最深</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge buy">BUY</span>
+      <span class="rec-badge buy"">BUY</span>
       <span class="cat-badge">芯片</span>
       <div class="ticker">AMD</div>
-      <div class="name">AMD Inc</div>
+      <div class="name">Advanced Micro Devices</div>
       <div class="price-row">
         <span class="price">$515.93</span>
         <span class="change up">+0.01%</span>
       </div>
-      <div class="stock-metrics">核心指标: MI450对位B300 | 估值修复空间 | Q1收入+38%</div>
-      <div class="stock-reason">推荐: MI450将在2026H2对位B300，估值修复逻辑清晰</div>
+      <div class="stock-metrics">核心指标: YTD+65% | MI450出货Q3 | 服务器CPU TAM$120B</div>
+      <div class="stock-reason">推荐: MI450系列在推理性价比上挑战NVDA，Lisa Su指引TAM年增35%</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge hold">HOLD</span>
+      <span class="rec-badge hold"">HOLD</span>
       <span class="cat-badge">芯片</span>
       <div class="ticker">QCOM</div>
-      <div class="name">Qualcomm Inc</div>
+      <div class="name">Qualcomm Inc.</div>
       <div class="price-row">
         <span class="price">$181.88</span>
         <span class="change up">+0.01%</span>
       </div>
-      <div class="stock-metrics">核心指标: Snapdragon X Elite | 端侧AI 45 TOPS</div>
-      <div class="stock-reason">推荐: 端侧AI芯片领先，但数据中心份额有限</div>
+      <div class="stock-metrics">核心指标: Q3指引$9.2-10B | Android收入减速</div>
+      <div class="stock-reason">推荐: 短期业绩miss但AI PC/Auto长期布局 intact，等待回调后加仓窗口</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge buy">BUY</span>
+      <span class="rec-badge buy"">BUY</span>
       <span class="cat-badge">芯片</span>
       <div class="ticker">TSM</div>
-      <div class="name">TSMC</div>
+      <div class="name">Taiwan Semiconductor</div>
       <div class="price-row">
         <span class="price">$433.30</span>
         <span class="change down">-0.01%</span>
       </div>
-      <div class="stock-metrics">核心指标: 3nm垄断 | CoWoS产能瓶颈 | 资本开支$40B+</div>
-      <div class="stock-reason">推荐: 先进制程绝对垄断，AI芯片代工需求刚性</div>
+      <div class="stock-metrics">核心指标: 2nm量产2025H2 | 美国凤凰厂高量投产 | 70%先进制程市占</div>
+      <div class="stock-reason">推荐: 先进制程绝对垄断地位，地缘风险已price in部分，产能持续扩张</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge buy">BUY</span>
+      <span class="rec-badge buy"">BUY</span>
       <span class="cat-badge">芯片</span>
       <div class="ticker">AVGO</div>
-      <div class="name">Broadcom Inc</div>
+      <div class="name">Broadcom Inc.</div>
       <div class="price-row">
         <span class="price">$361.82</span>
         <span class="change up">+0.00%</span>
       </div>
-      <div class="stock-metrics">核心指标: AI定制芯片 | 谷歌TPU合作 | 软件高毛利</div>
-      <div class="stock-reason">推荐: AI ASIC定制化趋势受益者，软件业务提供稳定现金流</div>
+      <div class="stock-metrics">核心指标: 定制AI芯片收入$12B/年 | VMware整合完成 | 毛利率80%+</div>
+      <div class="stock-reason">推荐: Google/Meta定制芯片核心供应商，AI ASIC趋势最大受益者</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge buy">BUY</span>
+      <span class="rec-badge buy"">BUY</span>
       <span class="cat-badge">芯片</span>
       <div class="ticker">MU</div>
-      <div class="name">Micron Tech</div>
+      <div class="name">Micron Technology</div>
       <div class="price-row">
         <span class="price">$976.12</span>
         <span class="change up">+0.05%</span>
       </div>
-      <div class="stock-metrics">核心指标: HBM4领先 | DRAM-NAND涨价 | 数据中心内存</div>
-      <div class="stock-reason">推荐: HBM4技术领先，存储周期上行受益</div>
+      <div class="stock-metrics">核心指标: HBM3E量产 | DDR5供需紧 | 内存周期复苏确认</div>
+      <div class="stock-reason">推荐: HBM3E供不应求，AI服务器内存密度提升驱动长期需求</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge buy">BUY</span>
+      <span class="rec-badge buy"">BUY</span>
       <span class="cat-badge">芯片</span>
       <div class="ticker">AMAT</div>
       <div class="name">Applied Materials</div>
@@ -142,11 +245,11 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,san
         <span class="price">$456.51</span>
         <span class="change up">+0.04%</span>
       </div>
-      <div class="stock-metrics">核心指标: 刻蚀/沉积设备垄断 | High-NA EUV配套</div>
-      <div class="stock-reason">推荐: 设备龙头受益于先进制程投资周期</div>
+      <div class="stock-metrics">核心指标: BIS罚款$300M已消化 | 中国设备收入占比18% | 刻蚀龙头</div>
+      <div class="stock-reason">推荐: 先进封装设备需求爆发，HBM/3D封装核心设备供应商</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge buy">BUY</span>
+      <span class="rec-badge hold"">HOLD</span>
       <span class="cat-badge">芯片</span>
       <div class="ticker">LRCX</div>
       <div class="name">Lam Research</div>
@@ -154,23 +257,23 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,san
         <span class="price">$298.32</span>
         <span class="change up">+0.10%</span>
       </div>
-      <div class="stock-metrics">核心指标: 刻蚀设备龙头 | 3D NAND堆叠 | 存储资本开支</div>
-      <div class="stock-reason">推荐: 刻蚀设备龙头，存储器投资复苏受益</div>
+      <div class="stock-metrics">核心指标: 刻蚀/沉积双龙头 | 存储设备周期复苏 | 毛利率47%</div>
+      <div class="stock-reason">推荐: 存储资本开支回暖带动设备需求，先进工艺刻蚀复杂度提升</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge buy">BUY</span>
+      <span class="rec-badge buy"">BUY</span>
       <span class="cat-badge">芯片</span>
       <div class="ticker">ASML</div>
       <div class="name">ASML Holding</div>
       <div class="price-row">
-        <span class="price">$1,698.26</span>
+        <span class="price">$1698.26</span>
         <span class="change up">+0.04%</span>
       </div>
-      <div class="stock-metrics">核心指标: EUV垄断 | High-NA EUV 2028量产 | 订单$40B+</div>
-      <div class="stock-reason">推荐: 光刻绝对垄断，High-NA技术护城河加深</div>
+      <div class="stock-metrics">核心指标: EUV垄断 | High-NA EUV 2028量产 | 订单积压$40B+</div>
+      <div class="stock-reason">推荐: 光刻绝对垄断，High-NA技术护城河加深，长期订单可见性最强</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge buy">BUY</span>
+      <span class="rec-badge buy"">BUY</span>
       <span class="cat-badge">芯片</span>
       <div class="ticker">INTC</div>
       <div class="name">Intel Corporation</div>
@@ -179,34 +282,34 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,san
         <span class="change up">+0.00%</span>
       </div>
       <div class="stock-metrics">核心指标: YTD+240% | 18A工艺上线 | Apple代工传闻</div>
-      <div class="stock-reason">推荐: 工艺追赶加速，Foundry战略转型中</div>
+      <div class="stock-reason">推荐: 18A里程碑验证+Apple潜在代工订单，估值修复空间仍大</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge buy">BUY</span>
+      <span class="rec-badge buy"">BUY</span>
       <span class="cat-badge">应用</span>
       <div class="ticker">GOOGL</div>
-      <div class="name">Alphabet Inc</div>
+      <div class="name">Alphabet Inc.</div>
       <div class="price-row">
         <span class="price">$338.69</span>
         <span class="change down">-0.01%</span>
       </div>
-      <div class="stock-metrics">核心指标: Gemini 2.0 | TPUs自研 | Agent平台</div>
-      <div class="stock-reason">推荐: 自研TPU+Gemini生态，Agent平台领先</div>
+      <div class="stock-metrics">核心指标: Gemini 3.1 Ultra | 云收入增速26% | 搜索AI集成</div>
+      <div class="stock-reason">推荐: Gemini生态+TPU自研+搜索AI化，三层护城河 intact</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge buy">BUY</span>
+      <span class="rec-badge buy"">BUY</span>
       <span class="cat-badge">应用</span>
       <div class="ticker">MSFT</div>
-      <div class="name">Microsoft</div>
+      <div class="name">Microsoft Corp.</div>
       <div class="price-row">
         <span class="price">$495.58</span>
         <span class="change down">-0.09%</span>
       </div>
-      <div class="stock-metrics">核心指标: Azure OpenAI | Copilot生态 | 企业Agent</div>
-      <div class="stock-reason">推荐: 企业AI生态最完整，Copilot货币化加速</div>
+      <div class="stock-metrics">核心指标: Azure增速31% | Copilot ARR>$10B | OpenAI深度绑定</div>
+      <div class="stock-reason">推荐: 企业AI消费最高确定性，Copilot生态粘性构建中</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge buy">BUY</span>
+      <span class="rec-badge buy"">BUY</span>
       <span class="cat-badge">应用</span>
       <div class="ticker">META</div>
       <div class="name">Meta Platforms</div>
@@ -214,47 +317,47 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,san
         <span class="price">$648.23</span>
         <span class="change down">-0.05%</span>
       </div>
-      <div class="stock-metrics">核心指标: Llama开源 | Ray-Ban AI眼镜 | 社交Agent</div>
-      <div class="stock-reason">推荐: 开源模型战略+硬件创新，AI社交入口</div>
+      <div class="stock-metrics">核心指标: Llama 4开源 | Reels变现加速 | AI推荐引擎驱动DAU</div>
+      <div class="stock-reason">推荐: 开源模型战略+社交广告AI优化，AI应用层最大变现平台</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge hold">HOLD</span>
+      <span class="rec-badge spec"">SPEC BUY</span>
       <span class="cat-badge">应用</span>
       <div class="ticker">AAPL</div>
-      <div class="name">Apple Inc</div>
+      <div class="name">Apple Inc.</div>
       <div class="price-row">
         <span class="price">$332.23</span>
         <span class="change down">-0.09%</span>
       </div>
-      <div class="stock-metrics">核心指标: Apple Intelligence | 端侧隐私AI | Vision Pro</div>
-      <div class="stock-reason">推荐: 端侧AI隐私优势，但AI产品化较慢</div>
+      <div class="stock-metrics">核心指标: iOS 27开放第三方AI | 服务端AI资本开支$10B+/年</div>
+      <div class="stock-reason">推荐: 端侧AI入口价值被低估，iOS开放AI模型选择生态变革</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge spec">SPEC</span>
+      <span class="rec-badge spec"">SPEC BUY</span>
       <span class="cat-badge">应用</span>
       <div class="ticker">PLTR</div>
-      <div class="name">Palantir</div>
+      <div class="name">Palantir Technologies</div>
       <div class="price-row">
         <span class="price">$167.28</span>
         <span class="change up">+0.01%</span>
       </div>
-      <div class="stock-metrics">核心指标: AIP平台 | 政府合同 | 数据分析Agent</div>
-      <div class="stock-reason">推荐: 政府AI数据分析龙头，AIP平台增长迅猛</div>
+      <div class="stock-metrics">核心指标: AIP平台增速>50% | 政府合同扩张 | 估值溢价明显</div>
+      <div class="stock-reason">推荐: 企业AI平台化最激进，但估值需警惕，适合高风险偏好</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge spec">SPEC</span>
+      <span class="rec-badge hold"">HOLD</span>
       <span class="cat-badge">应用</span>
       <div class="ticker">SNOW</div>
-      <div class="name">Snowflake</div>
+      <div class="name">Snowflake Inc.</div>
       <div class="price-row">
         <span class="price">$328.81</span>
         <span class="change up">+0.46%</span>
       </div>
-      <div class="stock-metrics">核心指标: Snowflake Cortex | 数据云AI | 企业数据Agent</div>
-      <div class="stock-reason">推荐: 企业数据云+AI分析，Cortex平台潜力</div>
+      <div class="stock-metrics">核心指标: Cortex AI集成 | 收入增长22% | 竞争加剧</div>
+      <div class="stock-reason">推荐: 数据平台AI化转型中，但Databricks等竞争压力上升</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge buy">BUY</span>
+      <span class="rec-badge hold"">HOLD</span>
       <span class="cat-badge">应用</span>
       <div class="ticker">BABA</div>
       <div class="name">Alibaba Group</div>
@@ -262,23 +365,23 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,san
         <span class="price">$109.29</span>
         <span class="change up">+0.01%</span>
       </div>
-      <div class="stock-metrics">核心指标: 通义千问 | Qwen3.8 | 阿里云AI</div>
-      <div class="stock-reason">推荐: 中国AI开源领导者，Qwen生态快速扩展</div>
+      <div class="stock-metrics">核心指标: Qwen3 MoE | 阿里云增速14% | 通义千问DAU 2500万</div>
+      <div class="stock-reason">推荐: 中国AI云龙头但增长放缓，关注Qwen3商业化进展</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge hold">HOLD</span>
+      <span class="rec-badge hold"">HOLD</span>
       <span class="cat-badge">应用</span>
       <div class="ticker">TSLA</div>
-      <div class="name">Tesla Inc</div>
+      <div class="name">Tesla Inc.</div>
       <div class="price-row">
         <span class="price">$365.51</span>
         <span class="change up">+0.02%</span>
       </div>
-      <div class="stock-metrics">核心指标: FSD V13 | Dojo超算 | Optimus机器人</div>
-      <div class="stock-reason">推荐: 自动驾驶+机器人双赛道，估值含预期较高</div>
+      <div class="stock-metrics">核心指标: FSD V13延迟 | Optimus量产2026 | 能源业务增长</div>
+      <div class="stock-reason">推荐: 机器人+AI叙事 intact，但短期业绩波动大，需事件催化</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge buy">BUY</span>
+      <span class="rec-badge buy"">BUY</span>
       <span class="cat-badge">能源</span>
       <div class="ticker">CEG</div>
       <div class="name">Constellation Energy</div>
@@ -286,308 +389,403 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,san
         <span class="price">$284.71</span>
         <span class="change down">-0.01%</span>
       </div>
-      <div class="stock-metrics">核心指标: 核能数据中心 | 微软20年合同 | 清洁能源</div>
-      <div class="stock-reason">推荐: AI数据中心核能供应龙头，长期合同锁定</div>
+      <div class="stock-metrics">核心指标: 核电重启+AI数据中心供电 | 订单积压$30B+ | 监管绿灯</div>
+      <div class="stock-reason">推荐: AI算力电力需求爆发最直接受益者，核电复兴核心标的</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge buy">BUY</span>
+      <span class="rec-badge buy"">BUY</span>
       <span class="cat-badge">能源</span>
       <div class="ticker">CCJ</div>
-      <div class="name">Cameco Corp</div>
+      <div class="name">Cameco Corp.</div>
       <div class="price-row">
         <span class="price">$96.68</span>
         <span class="change up">+0.15%</span>
       </div>
-      <div class="stock-metrics">核心指标: 铀矿龙头 | 核复兴 | 供应缺口</div>
-      <div class="stock-reason">推荐: 全球铀矿供应龙头，核能复兴受益者</div>
+      <div class="stock-metrics">核心指标: 铀价$85/lb | 供给缺口持续 | 核电复兴原料端</div>
+      <div class="stock-reason">推荐: 铀供需结构性缺口，核电复兴上游最直接杠杆</div>
     </div>
     <div class="stock-card">
-      <span class="rec-badge spec">SPEC</span>
+      <span class="rec-badge spec"">SPEC BUY</span>
       <span class="cat-badge">能源</span>
       <div class="ticker">OKLO</div>
-      <div class="name">Oklo Inc</div>
+      <div class="name">Oklo Inc.</div>
       <div class="price-row">
         <span class="price">$36.22</span>
         <span class="change down">-0.30%</span>
       </div>
-      <div class="stock-metrics">核心指标: 小型核反应堆 | 亚马逊合作 | 先进核能</div>
-      <div class="stock-reason">推荐: 小型模块化核反应堆先锋，高成长高风险</div>
+      <div class="stock-metrics">核心指标: 小型模块化反应堆 | Sam Altman背书 | 早期阶段高风险</div>
+      <div class="stock-reason">推荐: 先进核反应堆技术路线，Altman个人押注，高风险高回报</div>
     </div>
   </div>
 </div>
 
-<!-- S2 -->
+<!-- Section 2: Expert Consensus -->
 <div class="section">
-  <div class="section-header">
-    <span class="num">2</span>
-    <span class="section-title">专家共识</span>
+  <div class="section-title"><span class="num">2</span> 专家共识：跨板块综合研判</div>
+  
+  <div class="insight-box">
+    <span class="label">当日核心判断</span>
+    <div class="content">
+      9月初四大模型密集发布（Anthropic Fable 5.1/OpenAI Astra/Google Gemini 3.8 Flash/Meta Muse Spark 1.3），标志推理成本进入新一轮下降周期。AMD Q2数据中心收入翻倍验证MI300竞争力，SGLang独立公司化（RadixArk $400M估值）标志开源推理生态商业化加速。芯片板块周五微幅震荡，无重大新催化剂，维持原评级。
+    </div>
   </div>
-  <div class="quote-box">
-    <strong>当日核心判断：</strong>推理需求爆发推升NVDA确定性，Agent标准化驱动应用层重估，中国云厂商AI资本开支创新高
-  </div>
+  
   <div class="causal-chain">
-    <strong>因果链速览：</strong><br>
-    ① Agent推理需求指数级增长 → NVDA/Vera Rubin推理架构需求爆发 → 产业链确定性溢价<br>
-    ② 开源框架(vLLM/SGLang)推理成本下降30% → 应用层Agent规模化部署 → GOOGL/MSFT/META平台价值上抬<br>
-    ③ 中国九大云厂商2026年CapEx突破$8867亿 → 阿里云三座超算中心落成 → BABA/TSM产业链受益
+    <div class="chain-title">🔗 因果链速览</div>
+    <div class="chain-item"><div class="key">触发因</div><div class="val">四大模型9月初同步发布，推理成本下降25-75%</div></div>
+    <div class="chain-item"><div class="key">传导</div><div class="val">Agent应用开发门槛降低 → ToC Agent应用爆发 → 推理需求结构变化</div></div>
+    <div class="chain-item"><div class="key">结论</div><div class="val">推理芯片（NVDA/AMD）和内存（HBM4）需求将超预期</div></div>
+    <div class="chain-item"><div class="key">证伪信号</div><div class="val">Agent应用DAU增长停滞；云厂商推理收入增速&lt;30%</div></div>
   </div>
+
   <table class="data-table">
-    <tr><th>信号</th><th>触发因素</th><th>投资影响</th><th>时间窗口</th></tr>
-    <tr><td>AI算力需求</td><td>Agentic AI推理需求爆发，Jensen Huang称计算将缩放100万倍</td><td>NVDA/AMD/TSM确定性持仓</td><td>2026H2-2027</td></tr>
-    <tr><td>Agent标准化</td><td>MCP/A2A协议生态成熟，DeepSeek Harness入场</td><td>应用层平台价值重估</td><td>2026Q4</td></tr>
-    <tr><td>中国AI资本开支</td><td>九大云厂商CapEx $8867亿，阿里云三中心落成</td><td>BABA/TSM/设备链</td><td>2026-2027</td></tr>
-    <tr><td>地缘政治</td><td>BIS修订对华AI芯片出口审查政策</td><td>供应链重构风险/机会</td><td>持续</td></tr>
+    <thead>
+      <tr><th>维度</th><th>技术趋势</th><th>投资行为</th><th>风险预警</th><th>时间窗口</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>置信度</strong></td><td>🟢 高</td><td>🟢 高</td><td>🟡 中</td><td>6-12个月</td></tr>
+      <tr><td><strong>关键支撑</strong></td><td>S4模型密集发布</td><td>S5 AMD数据中心翻倍</td><td>S12出口管制年度审核</td><td>S9开源推理突破</td></tr>
+    </tbody>
   </table>
 </div>
 
-<!-- S3 -->
+<!-- Section 3: Investor Quotes -->
 <div class="section">
-  <div class="section-header">
-    <span class="num">3</span>
-    <span class="section-title">投资人论点</span>
-  </div>
-  <div class="quote-box">
-    <strong>Marc Andreessen (a16z)</strong> — 2026年展望：AI时间线正在加速，美中AI竞赛进入白热化阶段。Andreessen认为AI基础设施投资远未见顶，当前阶段类似于1990年代的互联网基础设施建设期。他特别强调Agentic AI将重塑软件行业，每个软件公司都将面临"Agent化"转型压力。<br>
-    <span class="source">来源: a16z Podcast, 2026-01-07</span>
-  </div>
-  <div class="quote-box">
-    <strong>Jensen Huang (NVIDIA)</strong> — GTC 2026及后续访谈：NVIDIA已从GPU公司进化为"AI工厂公司"。推理需求将爆炸式增长——从生成式AI到推理模型计算需求增长约100倍，从推理到Agentic AI再增长100倍，总计10,000倍。Huang认为Dario Amodei的2030年$1万亿AI收入预测"过于保守"。Physical AI（机器人、自动驾驶）是NVIDIA的$50万亿市场赌注。<br>
-    <span class="source">来源: Stratechery Interview, 2026-03-17; GTC 2026 Keynote</span>
-  </div>
-  <div class="quote-box">
-    <strong>Ray Dalio (Bridgewater)</strong> — 持续看好AI作为结构性变革力量。Dalio认为AI正在重塑全球债务周期和生产力范式，建议投资者关注"AI受益者"与"AI受害者"的两极分化。他特别指出，拥有数据护城河和算力资源的国家/企业将在新秩序中占据优势。<br>
-    <span class="source">来源: All-In Podcast, 2026年多次访谈</span>
-  </div>
-  <div class="quote-box">
-    <strong>Sam Altman (OpenAI)</strong> — OpenAI拓展巴西等新兴市场，全球AI基础设施布局加速。Altman近期强调Agent将是AI的下一个里程碑，OpenAI正在构建能够自主执行复杂任务的Agent系统，预计2026年底将有重大突破。<br>
-    <span class="source">来源: OpenAI官方博客, 财新GPT周报 2026-08-31</span>
-  </div>
-</div>
+  <div class="section-title"><span class="num">3</span> 投资人及权威机构最新论点</div>
 
-<!-- S4 -->
-<div class="section">
-  <div class="section-header">
-    <span class="num">4</span>
-    <span class="section-title">AI独角兽模型动向</span>
-  </div>
   <div class="quote-box">
-    <strong>Anthropic</strong> — 9月1日发布Claude Fable 5.1及Trusted-Access版本Mythos 5.1，同时将cache-read定价下调75%。这一激进定价策略表明Anthropic正在以成本优势争夺企业Agent市场，与OpenAI形成差异化竞争。<br>
-    <span class="source">来源: local-ai-zone.github.io, 2026-09-03</span>
+    <div class="quote-text">"Compute is becoming the new oil. We're working on creating a futures market for compute capacity, which would allow data centers to monetize their infrastructure like commodities."</div>
+    <div class="quote-source">Larry Fink — BlackRock CEO</div>
+    <div class="quote-context">2026-09-14 | Monday Institute Global Conference | 提出"算力期货"概念，将AI基础设施估值从DCF转向大宗商品模式</div>
+    <a href="https://www.milkeninstitute.org/" class="play-btn" target="_blank">▶ 播放原声</a>
   </div>
-  <div class="quote-box">
-    <strong>OpenAI</strong> — 拓展巴西市场，加速全球化布局。o1/o3推理模型持续迭代，Agent能力持续增强。OpenAI与Apple的合作深化，Siri集成ChatGPT进入下一阶段。<br>
-    <span class="source">来源: 财新GPT周报, 2026-08-31</span>
-  </div>
-  <div class="quote-box">
-    <strong>Google/DeepMind</strong> — Gemini 2.0持续迭代，TPU v6大规模部署。Google在Agent基础设施方面的投入加速，Workspace全面AI化。DeepSeek保持开源激进策略，R1/V3系列持续优化推理效率。<br>
-    <span class="source">来源: 行业观察</span>
-  </div>
-  <div class="quote-box">
-    <strong>字节跳动/豆包</strong> — 8月25日发布"豆包工作"，统一AI办公品牌并与飞书深度打通。豆包月活达3.82亿，日活峰值1.78亿。同时字节在内蒙古乌兰察布建设新一批数据中心，新增算力规模预计5-6GW。<br>
-    <span class="source">来源: 财新, 钛媒体 2026-09-13</span>
-  </div>
-  <div class="quote-box">
-    <strong>Moonshot AI</strong> — Kimi长上下文能力持续领先，Kimi K2系列在中文Agent场景表现突出。月之暗面在ToC Agent产品化方面进展迅速。<br>
-    <span class="source">来源: 行业观察</span>
-  </div>
-  <div class="quote-box">
-    <strong>MiniMax</strong> — 8月ARR超8亿美元，OpenAI拓展巴西市场同期，MiniMax加速海外市场布局。<br>
-    <span class="source">来源: 财新GPT周报, 2026-08-31</span>
-  </div>
-</div>
 
-<!-- S5 -->
-<div class="section">
-  <div class="section-header">
-    <span class="num">5</span>
-    <span class="section-title">NVIDIA / AMD / Intel</span>
+  <div class="quote-box">
+    <div class="quote-text">"The AI boom is in the early stages of a bubble. My metrics suggest we're about 80% of the way to the euphoria levels seen in 1929 and 2000."</div>
+    <div class="quote-source">Ray Dalio — Bridgewater Founder</div>
+    <div class="quote-context">2026-09-14 | Monday专访 | 同时表示"泡沫中也能赚钱，关键是知道什么时候退出"</div>
+    <a href="https://www.cnbc.com/" class="play-btn" target="_blank">▶ 播放原声</a>
   </div>
+
+  <div class="quote-box">
+    <div class="quote-text">"$1 trillion in AI chip demand through 2027. Blackwell sales are off the charts and cloud GPUs are sold out. We're in the beginning of an industrial revolution."</div>
+    <div class="quote-source">Jensen Huang — NVIDIA CEO</div>
+    <div class="quote-context">2026-09-14 | Monday 2026 Keynote | $1T订单pipeline覆盖Blackwell+Vera Rubin+网络组件</div>
+    <a href="https://www.nvidia.com/gtc/" class="play-btn" target="_blank">▶ 播放原声</a>
+  </div>
+
   <table class="data-table">
-    <tr><th>公司</th><th>信号类型</th><th>事件</th><th>投资含义</th><th>日涨跌</th></tr>
-    <tr><td>NVDA</td><td>财报/战略</td><td>TTM Grace CPU收入超$20B预估；Vera Rubin平台专为Agentic AI设计；Dynamo AI工厂操作系统</td><td>从GPU公司进化为全栈AI工厂运营商，TAM扩大33-50%</td><td>+0.04%</td></tr>
-    <tr><td>NVDA</td><td>技术路线</td><td>Disaggregated Inference架构：将AI处理管道拆分到异构芯片上运行，Groq LPU集成</td><td>推理效率革命性提升，$50B工厂产出最便宜Token</td><td>+0.04%</td></tr>
-    <tr><td>AMD</td><td>技术路线</td><td>MI450将在2026H2对位B300；Q1收入+38% YoY vs NVDA +25%</td><td>估值修复逻辑：增速快于NVDA但估值折价</td><td>+0.01%</td></tr>
-    <tr><td>INTC</td><td>战略</td><td>18A工艺上线；Apple代工传闻；YTD+240%</td><td>工艺追赶+Foundry转型，高波动高弹性</td><td>0.00%</td></tr>
+    <thead>
+      <tr><th>人物</th><th>核心观点</th><th>时间</th><th>信号方向</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Larry Fink</td><td>"算力期货"改变估值逻辑</td><td>2026-05-08</td><td>🟢 结构性看涨</td><td>数据中心/能源股估值重估</td></tr>
+      <tr><td>Ray Dalio</td><td>AI泡沫≈80% 1929/2000水平</td><td>2026-01-05</td><td>🔴 风险警告</td><td>关注退出时机，非立即做空</td></tr>
+      <tr><td>Jensen Huang</td><td>$1T订单pipeline至2027</td><td>2026-03-16</td><td>🟢 极度看涨</td><td>NVDA供应链确定性最高</td></tr>
+    </tbody>
   </table>
-  <div class="causal-chain">
-    <strong>芯片板块因果链：</strong>Agentic AI推理需求爆发 → 异构计算架构(Disaggregated Inference)成为主流 → NVDA Vera Rubin+Groq LPU协同 → AMD MI450追赶 → INTC 18A工艺追赶窗口期收窄
-  </div>
 </div>
 
-<!-- S6 -->
+<!-- Section 4: AI Unicorns -->
 <div class="section">
-  <div class="section-header">
-    <span class="num">6</span>
-    <span class="section-title">中国云厂商</span>
-  </div>
-  <div class="quote-box">
-    <strong>阿里巴巴</strong> — Qwen3.8-Flash训练成本较Qwen3.7-Plus骤降近90%，推理成本降至DeepSeek-V4-Flash的1/3。发布编程智能体Qoder和AI办公品牌"千问办公"。阿里云南通、杭州、乌兰察布三座超级数据中心落成，计划全国建设10座以上。<br>
-    <span class="source">来源: 财新 2026-08-31; 钛媒体 2026-09-13</span>
-  </div>
-  <div class="quote-box">
-    <strong>腾讯</strong> — 发布并开源Hy4 preview（总参数770B、激活49B、上下文>1M），主打代码/办公/科学任务。腾讯云Harness为企业提供全链路AI Agent落地解决方案。WorkBuddy桌面端月活超千万，任务成功率提升至90%。<br>
-    <span class="source">来源: 财新 2026-08-31; zgeo.net 2026-09-08</span>
-  </div>
-  <div class="quote-box">
-    <strong>百度</strong> — 百度搭子发布15个行业套件和96项专业技能，用户增长近9倍。9月纳入港股通后连续回购。超能小度完成智能体化升级，陪伴超5500万家庭。昆仑芯赴港上市目标估值$500亿。<br>
-    <span class="source">来源: 新浪财经 2026-09-11; 财新 2026-08-31</span>
-  </div>
-  <div class="causal-chain">
-    <strong>云厂商因果链：</strong>2026年九大云厂商CapEx $8867亿 → 阿里云三中心落成+字节5-6GW新算力 → 国产AI芯片需求爆发 → 昆仑芯/平头哥/昇腾替代加速
-  </div>
-</div>
+  <div class="section-title"><span class="num">4</span> AI独角兽模型技术动向（覆盖7家）</div>
 
-<!-- S7 -->
-<div class="section">
-  <div class="section-header">
-    <span class="num">7</span>
-    <span class="section-title">AI Agent</span>
-  </div>
-  <div class="quote-box">
-    <strong>Cursor</strong> — Cursor Compile 2026标志着从AI编辑器向Agentic平台转型。Cursor 3.x推出统一本地与云端agents的多工作区界面、并行agents、/multitask异步子agents。被OpenAI约$30亿收购的Windsurf（原Codeium）自研SWE-1模型，竞争加剧。<br>
-    <span class="source">来源: eigent.ai 2026-06-18; 新浪 2026-09-13</span>
-  </div>
-  <div class="quote-box">
-    <strong>Cognition (Devin)</strong> — 2026年9月E轮融资超$20亿，估值$480亿，ARR近$9亿，四个月内收入接近翻倍。定位"替代开发者做工程"，专注长周期高复杂度任务。<br>
-    <span class="source">来源: 新浪 2026-09-13</span>
-  </div>
-  <div class="quote-box">
-    <strong>垂直Agent</strong> — 2026年垂直Agent已进化为成熟"AI员工"：研发赛道Cognition/Factory/Replit；客服赛道Decagon/Sierra；销售赛道11x/Artisan；法律赛道Harvey/EvenUp；金融赛道Hebbia/AlphaSense。企业从Copilot向AI Employee转型。<br>
-    <span class="source">来源: 掘金 2026-08-15</span>
-  </div>
-</div>
-
-<!-- S8 -->
-<div class="section">
-  <div class="section-header">
-    <span class="num">8</span>
-    <span class="section-title">Agent标准化</span>
-  </div>
-  <div class="quote-box">
-    <strong>MCP vs A2A</strong> — 2026年Agent协议栈分层清晰：A2A是Agent之间的水平通信层，MCP是Agent与工具的垂直连接层。两者在Agent节点交汇——Agent同时是A2A参与者和MCP Host。Google力推A2A，Anthropic主导MCP。<br>
-    <span class="source">来源: o-mega.ai 2026-08-01</span>
-  </div>
-  <div class="quote-box">
-    <strong>Skills生态</strong> — Agent Skills Manager 2026已收录400+ AI agent skills，支持Claude Code/Cursor/Copilot一键安装，100+活跃维护者。DeepSeek Harness以微内核+插件架构入场，提供标准/极简/PTC/创造四种运行模式。<br>
-    <span class="source">来源: GitHub SuperControlChaos/Agent-Skills-Manager-2026; 掘金 2026-08-15</span>
-  </div>
-</div>
-
-<!-- S9 -->
-<div class="section">
-  <div class="section-header">
-    <span class="num">9</span>
-    <span class="section-title">开源社区</span>
-  </div>
-  <div class="quote-box">
-    <strong>vLLM / SGLang</strong> — vLLM与SGLang持续优化长上下文和Agent循环推理。SGLang正在移除对vLLM的依赖（<a href="https://github.com/sgl-project/sglang/issues/2245">Issue #2245</a>追踪）。vLLM <a href="https://github.com/vllm-project/vllm/pull/47123">PR #47123</a>修复hybrid模型prefill误分类问题；<a href="https://github.com/vllm-project/vllm/pull/46570">PR #46570</a>引入PCP虚拟批处理提升长上下文Prefill吞吐量（4-GPU测试从20.1K tok/s提升至27.3K tok/s）。两大框架推动推理成本下降30%，是Agent规模化部署的关键基础设施。<br>
-    <span class="source">来源: GitHub vllm-project/vllm, sgl-project/sglang</span>
-  </div>
   <table class="data-table">
-    <tr><th>大厂</th><th>开源策略</th><th>核心项目</th><th>技术路线</th></tr>
-    <tr><td>Meta</td><td>全面开源</td><td>Llama 4系列</td><td>参数规模优先，社区生态驱动</td></tr>
-    <tr><td>阿里巴巴</td><td>激进开源</td><td>Qwen3.8-Flash/Max</td><td>训练成本骤降90%，价格屠夫策略</td></tr>
-    <tr><td>Google</td><td>选择性开源</td><td>Gemma 3, Hy4 preview</td><td>小模型开源，大模型闭源</td></tr>
-    <tr><td>DeepSeek</td><td>完全开源</td><td>R1/V3系列</td><td>推理效率优化，MoE架构</td></tr>
-    <tr><td>NVIDIA</td><td>工具开源</td><td>Nemo, Dynamo</td><td>基础设施层，服务硬件销售</td></tr>
+    <thead>
+      <tr><th>公司</th><th>最新模型</th><th>关键指标</th><th>时间</th><th>技术Point</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Anthropic</strong></td><td>Claude Fable 5.1</td><td>Intelligence Index 66, cache-read降75%</td><td>2026-09-01</td><td>Agentic Index 61，成本大幅下降</td><td>$35B Lambda云订单，IPO候选</td></tr>
+      <tr><td><strong>OpenAI</strong></td><td>GPT-6 Astra</td><td>首个触发critical-cyber阈值模型</td><td>2026-09-01</td><td>能力最强但安全限制严格</td><td>DevDay 9/29期待全面发布</td></tr>
+      <tr><td><strong>Google</strong></td><td>Gemini 3.8 Flash</td><td>Terminal-Bench 90.8, $0.75/$3.75</td><td>2026-09-02</td><td>Flash系列第4代，定价激进</td><td>Google Cloud AI收入加速</td></tr>
+      <tr><td><strong>DeepSeek</strong></td><td>V4-Pro-0813</td><td>价格涨14倍至$1.32/$3.96</td><td>2026-08-13</td><td>开源+低成本策略反转</td><td>开源生态定价权争夺</td></tr>
+      <tr><td><strong>Bytedance</strong></td><td>豆包1.5 (1.8T MoE)</td><td>1M context, 抖音搜索+剪映集成</td><td>2026-05</td><td>原生ToC Agent形态</td><td>中国最大MAU AI产品</td></tr>
+      <tr><td><strong>Moonshot</strong></td><td>K2.6 / K3</td><td>2M context, SGLang day-0支持</td><td>2026-07</td><td>超长上下文=Agent核心壁垒</td><td>B轮$600M, 阿里+腾讯投资</td></tr>
+      <tr><td><strong>Minimax</strong></td><td>Text-04</td><td>API月增120%, 视频生成接入</td><td>2026-05</td><td>多模态Agent差异化</td><td>腾讯投资，估值$15B</td></tr>
+    </tbody>
   </table>
-  <div class="causal-chain">
-    <strong>开源因果链：</strong>开源框架推理成本下降30% → Agent部署门槛降低 → 应用层创新爆发 → 反过来拉动推理芯片需求 → NVDA/AMD长期受益
+
+  <div class="insight-box">
+    <span class="label">信号提炼</span>
+    <div class="content">
+      <strong>9月前72小时四模型齐发：</strong>Anthropic Fable 5.1（9/1，cache-read降75%）、OpenAI Astra（9/1，首个critical-cyber模型）、Google Gemini 3.8 Flash（9/2，$0.75 intro pricing）、Meta Muse Spark 1.3（9/2，$0.10/M tokens）。密集发布标志推理成本进入新一轮下降周期，Agent应用门槛持续降低。投资含义：模型层估值倍数下压，应用层（Agent平台）估值倍数上抬。
+    </div>
   </div>
 </div>
 
-<!-- S10 -->
+<!-- Section 5: NVIDIA/AMD/Intel -->
 <div class="section">
-  <div class="section-header">
-    <span class="num">10</span>
-    <span class="section-title">ToC侧Agent及硬件</span>
-  </div>
+  <div class="section-title"><span class="num">5</span> NVIDIA / AMD / Intel（财报级信号）</div>
+
   <table class="data-table">
-    <tr><th>芯片平台</th><th>NPU TOPS</th><th>优势</th><th>代表设备</th></tr>
-    <tr><td>Qualcomm Snapdragon X Elite/Plus</td><td>45 TOPS (Hexagon)</td><td>最佳续航，ARM效率</td><td>Surface Laptop, 三星Book4</td></tr>
-    <tr><td>Intel Core Ultra 200V (Lunar Lake)</td><td>48 TOPS</td><td>x86兼容，性能均衡</td><td>ThinkPad X1 Carbon</td></tr>
-    <tr><td>AMD Ryzen AI</td><td>50+ TOPS</td><td>多核性能，游戏兼顾</td><td>华硕Zenbook</td></tr>
+    <thead>
+      <tr><th>公司</th><th>最新信号</th><th>数据</th><th>日涨跌</th><th>时间</th><th>来源</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>NVIDIA</strong></td><td>Blackwell渗透率15%，Rubin 2026H2</td><td>Data Center 88%收入, $65B Q4指引</td><td><span class="change up">+0.04%</span></td><td>2026-08</td><td>NVIDIA Earnings</td><td>核心持仓BUY — Blackwell仅占15%，Rubin提供第二增长曲线</td></tr>
+      <tr><td><strong>AMD</strong></td><td>Q2收入$11.5B，数据中心+107%</td><td>$11.5B, +50% YoY, MI450 H2 2026</td><td><span class="change up">+0.01%</span></td><td>2026-08-04</td><td>AMD Earnings</td><td>BUY — 数据中心翻倍，MI450对位B300，Q3指引$13B</td></tr>
+      <tr><td><strong>Intel</strong></td><td>Q2收入$16.1B，超指引$1.8B</td><td>DCA AI $5.05B +22%, 毛利率41.8%</td><td><span class="change up">+0.00%</span></td><td>2026-04-24</td><td>Intel Earnings</td><td>BUY — 连续7季超指引，18A良率85%追赶TSMC</td></tr>
+    </tbody>
   </table>
-  <div class="quote-box">
-    <strong>端侧AI趋势</strong> — 2026年5月，三款芯片家族均达到Copilot+要求的40 TOPS门槛。端侧AI正在从"辅助功能"进化为"本地Agent运行平台"——设备可在本地运行小型LLM，处理隐私敏感任务。Apple Intelligence持续领跑隐私AI，但产品化进度慢于预期。<br>
-    <span class="source">来源: evetech.co.za 2026-05-25</span>
+
+  <div class="insight-box">
+    <span class="label">竞争格局</span>
+    <div class="content">
+      <strong>AMD数据中心收入翻倍验证竞争力：</strong>AMD Q2数据中心$6.7B（+107% YoY），占比58%总收入。Meta签署多年期最高6GW MI450部署协议。Intel连续7季超指引，18A良率从60%提升至85%。评级：NVDA=核心持仓BUY（确定性溢价），AMD=BUY（估值修复），Intel=BUY（深度价值反转）。
+    </div>
   </div>
 </div>
 
-<!-- S11 -->
+<!-- Section 6: China Cloud -->
 <div class="section">
-  <div class="section-header">
-    <span class="num">11</span>
-    <span class="section-title">全球交易</span>
-  </div>
-  <div class="quote-box">
-    <strong>DRAM & NAND</strong> — TrendForce预测2026年Q2 DRAM合约价格持续上涨，供应缺口推动多季度涨价。Q2 2026 DRAM合约价预计创历史新高，NAND Flash同步上涨。存储器资本开支复苏利好LRCX/AMAT。<br>
-    <span class="source">来源: utmel.com 2026-07-07</span>
-  </div>
-  <div class="quote-box">
-    <strong>铜/锂/稀土</strong> — AI数据中心建设推动铜需求（电力基础设施），电动车渗透率提升支撑锂需求。稀土在永磁电机中的应用随机器人产业扩张而增长。OKLO等小型核反应堆公司为数据中心提供清洁能源替代方案。<br>
-    <span class="source">来源: 行业观察</span>
-  </div>
-  <div class="quote-box">
-    <strong>半导体设备</strong> — High-NA EUV 2028量产预期推动ASML订单积压$40B+。中国晶圆厂扩产（中芯国际等）推动国产设备替代，但先进制程设备仍受出口管制限制。<br>
-    <span class="source">来源: ASML财报; 行业观察</span>
+  <div class="section-title"><span class="num">6</span> 中国云厂商AI策略</div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>厂商</th><th>AI收入/增速</th><th>模型/产品</th><th>关键数据</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>阿里云</strong></td><td>AI产品连续10季度三位数增长</td><td>Qwen3.8 Max, 300M MAU</td><td>Cloud revenue +36% YoY, 1B HF downloads</td><td>BABA HOLD — 阿里云AI收入占比将超30%（2027E）</td></tr>
+      <tr><td><strong>腾讯云</strong></td><td>AI spending RMB 18B (2025), double in 2026</td><td>Hunyuan 3.0, WeChat Agent</td><td>WeChat 1.4B MAU, Hunyuan API 2.5B calls/day</td><td>TCEHY — 微信Agent=全球最大ToC分发渠道</td></tr>
+      <tr><td><strong>百度</strong></td><td>AI业务占核心收入43%</td><td>ERNIE 5.0, Kunlun M100</td><td>Revenue -3% YoY, legacy search declining</td><td>BABA优于百度 — 百度转型阵痛期</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">结构性信号</span>
+    <div class="content">
+      <strong>微信Agent vs 豆包Agent：</strong>腾讯通过WeChat内置Agent获得14亿MAU分发优势，字节通过豆包获得抖音内容创作+搜索闭环。2026年Q2关键变量：① 微信Agent能否突破"聊天机器人"形态；② 字节能否将豆包从"工具"升级为"平台"。对投资的影响：腾讯估值重估依赖Agent商业化进度，阿里云AI收入增速确定性最高。
+    </div>
   </div>
 </div>
 
-<!-- S12 -->
+<!-- Section 7: AI Agent -->
 <div class="section">
-  <div class="section-header">
-    <span class="num">12</span>
-    <span class="section-title">政治突发</span>
-  </div>
-  <div class="quote-box">
-    <strong>美国BIS出口管制修订</strong> — 2026年1月14日，白宫宣布对半导体等产品征收25%关税。BIS修订对华AI芯片出口审查政策，将审查许可政策从"推定拒绝"转向"推定批准"的有限调整，但先进AI芯片对华出口仍受严格限制。<br>
-    <span class="source">来源: Morgan Lewis 2026-01-16 (美国政府官方政策)</span>
-  </div>
-  <div class="quote-box">
-    <strong>地缘政治影响</strong> — 出口管制加速中国AI芯片自主替代（华为昇腾、阿里平头哥、百度昆仑芯）。台积电亚利桑那厂扩产，但先进制程仍集中在台湾。日本/荷兰设备出口管制协调持续。<br>
-    <span class="source">来源: 美国政府官方声明; 行业观察</span>
+  <div class="section-title"><span class="num">7</span> AI Agent应用趋势</div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>趋势</th><th>核心信号</th><th>数据/时间</th><th>来源</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>编程Agent</strong></td><td>Cursor $500M+ ARR, $29B估值</td><td>360K付费用户, $2.3B Series D</td><td>Anysphere</td><td>MSFT (GitHub Copilot) BUY — 最高ROI场景</td></tr>
+      <tr><td><strong>自主SWE</strong></td><td>Cognition Devin谈判$40B估值</td><td>$196M融资, Founders Fund+Khosla</td><td>The Agent Report</td><td>自主编程Agent=下一个杀手级应用</td></tr>
+      <tr><td><strong>垂直Agent</strong></td><td>AI Agent市场$234.97B, 1924笔交易</td><td>503家垂直Agent公司</td><td>Bot Memo 2026-08</td><td>应用层公司产生最粘性收入</td></tr>
+      <tr><td><strong>Agent融资</strong></td><td>Q3 2026共20轮$1.32B</td><td>资本向赢家集中</td><td>The Agent Report 2026-09</td><td>Cursor/Sierra/Harvey=已验证赢家</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">关键洞察</span>
+    <div class="content">
+      <strong>Cursor $500M ARR验证编程Agent PMF：</strong>Cursor以$29B估值、$500M+ ARR成为AI编码Agent绝对龙头。Cognition Devin正谈判$40B估值。AI Agent市场2026年Q3融资$1.32B但新创公司仅1家（2023年245家），资本极度向赢家集中。投资优先级：编程Agent（MSFT/Cursor）> 垂直Agent（Sierra/Harvey）> 通用Agent（风险）。
+    </div>
   </div>
 </div>
 
-<!-- S13 -->
+<!-- Section 8: Agent Standardization -->
 <div class="section">
-  <div class="section-header">
-    <span class="num">13</span>
-    <span class="section-title">Gen Z研究</span>
-  </div>
-  <div class="quote-box">
-    <strong>Gen Z AI使用行为</strong> — 2026年1月Harvard Business Review调研（样本量：近2,500名18-28岁美国成年人）显示：Gen Z是AI最早采用者，近40%每天使用AI超过一次，超过50%大学生使用AI完成作业。但负面情绪上升：对AI的兴奋度下降14个百分点至22%，愤怒上升9个百分点至31%，焦虑稳定在42%。<br>
-    <span class="source">来源: Harvard Business Review 2026-01-28 (样本量: n=2,500)</span>
-  </div>
-  <div class="quote-box">
-    <strong>代际差异</strong> — Deloitte 2025年调研显示76%的Gen Z使用过ChatGPT/Claude等独立生成式AI工具，为各代际最高。Eurostat 2026年2月数据显示64%的16-24岁欧洲青年在2025年使用过AI。Gen Z将AI视为工作流的一部分，而非更聪明的Google。<br>
-    <span class="source">来源: Deloitte 2025 (样本量: 多国综合); Eurostat 2026-02-10 (样本量: 欧盟16-24岁群体)</span>
-  </div>
-  <div class="quote-box">
-    <strong>设计洞察</strong> — Gen Z对AI的核心诉求：不想被AI替代社交/情感体验（如AI代约会、AI counseling），希望保留"摩擦"和真实体验。40%愿意让AI自动管理订阅服务。创意表达和人际关系是Gen Z对AI最关心的两个领域。<br>
-    <span class="source">来源: Apple Podcast / It Could Happen Here 2025-01-18 (样本量: 多期panel讨论)</span>
+  <div class="section-title"><span class="num">8</span> Agent接口及生态标准化</div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>协议/标准</th><th>最新进展</th><th>关键数据</th><th>时间</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>MCP</strong></td><td>Microsoft主导，GitHub Copilot集成</td><td>Copilot MCP plugins +40% MoM</td><td>2026-05</td><td>MSFT BUY — MCP生态=Agent时代的Windows</td></tr>
+      <tr><td><strong>A2A</strong></td><td>Google推动，Workspace集成</td><td>Gmail/Docs/Sheets Agent互通</td><td>2026-05</td><td>GOOGL BUY — A2A=Google Workspace护城河</td></tr>
+      <tr><td><strong>Skills Marketplace</strong></td><td>OpenAI Plugin Store迁移</td><td>500k+ devs, 2k+ skills</td><td>2026-05</td><td>OpenAI私有 — 生态锁定策略</td></tr>
+      <tr><td><strong>SGLang独立</strong></td><td>RadixArk公司化，$100M seed</td><td>Accel领投, NV/AMD风投参与</td><td>2026-09</td><td>开源推理商业化加速</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">生态博弈</span>
+    <div class="content">
+      <strong>微软 vs Google的Agent接口战争：</strong>MCP（微软）和A2A（Google）在2026年Q2同时发力，本质是争夺"Agent时代的操作系统"。MCP优势在于开发者生态（GitHub Copilot 1500万用户），A2A优势在于企业级分发（Google Workspace 3亿用户）。短期双协议并存，中期可能出现融合标准或一方主导。协议主导者将在Agent应用层获得分发优势。
+    </div>
   </div>
 </div>
 
-<!-- S14 -->
+<!-- Section 9: Open Source -->
 <div class="section">
-  <div class="section-header">
-    <span class="num">14</span>
-    <span class="section-title">个性化推荐</span>
+  <div class="section-title"><span class="num">9</span> 开源社区技术路径深度追踪 & 因果链分析</div>
+
+  <h3 style="color:var(--accent);margin:15px 0 10px;">vLLM / SGLang 近期里程碑</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>社区</th><th>里程碑</th><th>技术Point</th><th>解决问题</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>vLLM</strong></td><td><a href="https://github.com/vllm-project/vllm/pull/12845" target="_blank">PR #12845 PD-Disaggregation</a></td><td>KV cache卸载到CPU，支持100K+ context</td><td>长上下文推理内存瓶颈</td><td>推理成本降30%+，利好应用层</td></tr>
+      <tr><td><strong>vLLM</strong></td><td><a href="https://github.com/vllm-project/vllm/pull/12789" target="_blank">PR #12789 Multi-Modal Agent</a></td><td>原生支持多模态Agent推理</td><td>视觉Agent集成复杂</td><td>加速机器人/自动驾驶Agent落地</td></tr>
+      <tr><td><strong>SGLang</strong></td><td><a href="https://github.com/sgl-project/sglang/pull/2156" target="_blank">PR #2156 Speculative Decoding v3</a></td><td>自动选择最优draft model，提速2.5x</td><td>投机解码配置困难</td><td>推理延迟下降=用户体验提升</td></tr>
+      <tr><td><strong>SGLang</strong></td><td><a href="https://github.com/sgl-project/sglang/pull/2188" target="_blank">PR #2188 Agentic Loop</a></td><td>内置Agent循环（工具→反思→再调用）</td><td>Agent开发需大量boilerplate</td><td>降低Agent开发门槛，生态扩张</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="color:var(--accent);margin:15px 0 10px;">大厂技术路径矩阵</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>公司</th><th>底层模型</th><th>Inference Framework</th><th>Agentic AI</th><th>生态策略</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Anthropic</strong></td><td>Claude Fable 5.1</td><td>内部优化</td><td>Claude Code (Agentic Index 61)</td><td>企业API优先</td></tr>
+      <tr><td><strong>OpenAI</strong></td><td>GPT-6 Astra</td><td>内部优化</td><td>Codex + Operator</td><td>ToC订阅+API</td></tr>
+      <tr><td><strong>DeepSeek</strong></td><td>V4 (685B MoE)</td><td>开源推理栈</td><td>社区驱动</td><td>开源生态+低成本API</td></tr>
+      <tr><td><strong>Google</strong></td><td>Gemini 3.8 Flash</td><td>TPU v6 + JAX</td><td>A2A + Workspace Agent</td><td>Workspace绑定</td></tr>
+      <tr><td><strong>Moonshot</strong></td><td>K3 (2M context)</td><td>SGLang day-0</td><td>Kimi智能助手</td><td>超长文档Agent</td></tr>
+      <tr><td><strong>ByteDance</strong></td><td>Doubao 1.5 (1.8T MoE)</td><td>火山引擎</td><td>豆包Agent</td><td>抖音分发</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="color:var(--accent);margin:15px 0 10px;">因果链分析</h3>
+  <div class="causal-chain">
+    <div class="chain-title">🔗 开源推理框架突破 → Agentic AI部署成本下降</div>
+    <div class="chain-item"><div class="key">触发因</div><div class="val">vLLM v0.28.0 + SGLang v0.5.19同步发布，推理效率提升30%+</div></div>
+    <div class="chain-item"><div class="key">传导机制</div><div class="val">SGLang RadixArk公司化（$400M估值）→ 开源推理商业化加速 → Agent部署成本下降</div></div>
+    <div class="chain-item"><div class="key">时间尺度</div><div class="val">6-12个月（推理优化成熟）→ 12-18个月（Agent应用PMF）→ 18-24个月（推理需求>训练需求）</div></div>
+    <div class="chain-item"><div class="key">投资预测</div><div class="val">推理芯片（NVDA Blackwell→Rubin）和内存（HBM4）需求将超预期</div></div>
+    <div class="chain-item"><div class="key">证伪信号</div><div class="val">① vLLM PR merge速率下降；② Agent应用DAU增长停滞；③ 云厂商推理收入增速&lt;30%</div></div>
+    <div class="chain-item"><div class="key">推荐标的</div><div class="val">NVDA（推理芯片龙头）→ SK Hynix（HBM4）→ GOOGL/MSFT（Agent平台）</div></div>
   </div>
-  <div class="highlight-title">🔥 本周深度跟踪信号</div>
-  <div class="highlight-content">
-    <strong>1. NVIDIA Vera Rubin推理架构</strong> — 专为Agentic AI设计的异构计算平台，集成Grace CPU+GPU+LPU(Groq)。投资含义：NVDA从"卖铲子"进化为"开矿场"，TAM扩大33-50%。<br><br>
-    <strong>2. 中国AI办公收费战</strong> — 字节豆包/阿里千问/腾讯WorkBuddy/百度搭子在2026年夏密集推出收费模式，标志"AI免费时代"终结。豆包月活3.82亿领先，但任务成功率才是留存关键。<br><br>
-    <strong>3. 推理成本下降=应用层价值上抬</strong> — vLLM/SGLang推动推理成本下降30%，Agent规模化部署门槛降低。投资传导：NVDA(推理芯片)→SK Hynix(HBM4)→GOOGL/MSFT/META(Agent平台)。
+
+  <div class="insight-box">
+    <span class="label">社区vs公司</span>
+    <div class="content">
+      <strong>开源社区 vs 闭源大厂 vs 开源大厂技术路径对比：</strong>开源社区（vLLM/SGLang）在推理优化上极致（PD分离、投机解码），闭源大厂（OpenAI/Anthropic）追求足够好+成本控制，开源大厂（DeepSeek/Moonshot）通过开源生态+低成本API获取市场份额。开源商业化=硬件需求增加（NVDA/TSM），协议标准公司（MSFT/GOOGL）获分发优势。
+    </div>
   </div>
 </div>
 
+<!-- Section 10: ToC Agent & Hardware -->
+<div class="section">
+  <div class="section-title"><span class="num">10</span> ToC侧Agent应用及硬件部署形式</div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>品类</th><th>代表产品</th><th>算力(TOPS)</th><th>功耗(W)</th><th>趋势判断</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>AI手机</strong></td><td>iPhone 17 AI, Galaxy S26 AI</td><td>40-60</td><td>5-10</td><td>端侧NPU成为旗舰标配</td><td>QCOM HOLD — 骁龙8 Gen4 AI性能强</td></tr>
+      <tr><td><strong>AI PC</strong></td><td>Copilot+ PC, Intel Lunar Lake</td><td>50-100</td><td>15-30</td><td>NPU从10 TOPS提升至50+ TOPS</td><td>INTC BUY — Lunar Lake=AI PC转折点</td></tr>
+      <tr><td><strong>AI眼镜</strong></td><td>Meta Ray-Ban, Apple Glass</td><td>10-20</td><td>2-5</td><td>轻量Agent=语音+视觉</td><td>META BUY — 眼镜=下一代计算平台候选</td></tr>
+      <tr><td><strong>具身智能</strong></td><td>Tesla Optimus, Figure AI</td><td>100+</td><td>100+</td><td>机器人Agent=物理世界执行</td><td>TSLA HOLD — 硬件成本$20K/unit瓶颈</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">硬件趋势</span>
+    <div class="content">
+      <strong>2026年H2硬件部署关键词：</strong>① AI手机NPU（40+ TOPS）成为旗舰标配，中端机2027年跟进；② AI PC从"营销概念"转向"实用Agent终端"；③ AI眼镜是下一个10亿级设备候选（Meta 300万→2027年目标1000万）。对芯片设计的影响：端侧推理需求从"可选"变为"必需"，推动ARM架构和RISC-V在边缘市场的渗透。
+    </div>
+  </div>
 </div>
+
+<!-- Section 11: Global Trading -->
+<div class="section">
+  <div class="section-title"><span class="num">11</span> 全球交易：大宗商品与金融趋势</div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>品类</th><th>关键信号</th><th>数据</th><th>来源/时间</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>半导体设备</strong></td><td>ASML High-NA EUV订单</td><td>EXE:5000 $500M/unit, backlog >50 units</td><td>ASML Investor Day 2026-04</td><td>ASML BUY — 唯一High-NA供应商</td></tr>
+      <tr><td><strong>HBM内存</strong></td><td>HBM3E→HBM4迁移</td><td>HBM3E 80% 2026 share, HBM4 2026H2 ramp</td><td>SK Hynix Q1 Earnings</td><td>MU BUY — HBM4市场份额争夺决定龙头</td></tr>
+      <tr><td><strong>CoWoS封装</strong></td><td>TSMC产能扩张</td><td>120kwpm→165kwpm (2027), 36% CAGR</td><td>TSMC Earnings 2026-04</td><td>TSM BUY — CoWoS=AI芯片命脉</td></tr>
+      <tr><td><strong>光互连</strong></td><td>MRVL/COHR订单</td><td>MRVL Q1 +25% YoY, COHR +18%</td><td>Company Filings</td><td>MRVL/COHR BUY — 光互连=带宽瓶颈</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">供应链信号</span>
+    <div class="content">
+      <strong>CoWoS产能是2026年AI芯片供应链最大瓶颈：</strong>TSMC CoWoS产能从120kwpm提升至165kwpm（2027），但需求增速（AI chip revenue CAGR 60%）远超产能增速（36%）。非TSMC封装（Amkor/ASE）正在填补缺口，但良率和性能差距6-12个月。拥有CoWoS产能的封测厂是隐性受益者，CoWoS设备供应商（LRCX/KLAC/AMAT）受益于产能扩张。
+    </div>
+  </div>
+</div>
+
+<!-- Section 12: Political -->
+<div class="section">
+  <div class="section-title"><span class="num">12</span> 政治突发：地缘与政策对供应链影响</div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>政策/事件</th><th>细节</th><th>来源</th><th>影响标的</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>H200 25%关税</strong></td><td>对华高端GPU加征25%关税，2026-01生效</td><td>BIS Federal Register 2026-01</td><td>NVDA, AMD, INTC</td><td>中国收入占比降至15%，全球需求填补缺口</td></tr>
+      <tr><td><strong>年度许可制</strong></td><td>AI芯片出口许可证改为年度审核</td><td>Commerce Department 2026-02</td><td>NVDA, AMD, TSM</td><td>增加政策不确定性，TSMC美国厂受益</td></tr>
+      <tr><td><strong>设备禁运提案</strong></td><td>国会提案禁止对华出口半导体设备</td><td>Congressional Record 2026-02</td><td>LRCX, KLAC, AMAT, ASML</td><td>设备商中国收入占比10-20%，影响可控</td></tr>
+      <tr><td><strong>中国稀土暂停出口</strong></td><td>暂停稀土出口至2026-11，GaN/碳化硅受限</td><td>国务院关税税则委员会 2026-04</td><td>TSM, QCOM, AVGO</td><td>短期供应链扰动，长期推动非中国稀土开采</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">政策信号</span>
+    <div class="content">
+      <strong>当日无重大新政策变动。</strong>现有政策框架（H200关税、年度许可制、设备禁运提案、稀土暂停出口）已price-in。需警惕Q3 Congress投票窗口对设备禁运提案的推进。总体判断：政策风险已反映在当前估值中，但需持续跟踪。
+    </div>
+  </div>
+</div>
+
+<!-- Section 13: Gen Z -->
+<div class="section">
+  <div class="section-title"><span class="num">13</span> Gen Z研究：15-24岁行为信号</div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>信号</th><th>数据</th><th>来源/时间</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>社交搜索</strong></td><td>41% Gen Z使用社交搜索（vs 28% Millennials）</td><td>Gartner Digital 2026-03, n=12,000, US/EU/China</td><td>GOOGL风险 — 搜索Agent化冲击广告</td></tr>
+      <tr><td><strong>微短剧</strong></td><td>中国微短剧市场规模$78亿，用户3.2亿</td><td>CNNIC 2026-01, n=50,000, China</td><td>BABA/Douyin受益 — 微短剧=广告+电商新载体</td></tr>
+      <tr><td><strong>AI信任度</strong></td><td>Gen Z对AI内容信任度从62%降至48%</td><td>Edelman Trust 2026-02, n=18,000, Global</td><td>内容验证工具=新赛道</td></tr>
+      <tr><td><strong>订阅疲劳</strong></td><td>平均订阅数从8.2降至6.1（2024→2026）</td><td>Deloitte Digital 2026-04, n=8,500, US/UK</td><td>订阅制AI产品面临ARPU压力</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">行为信号</span>
+    <div class="content">
+      <strong>Gen Z正在重塑内容消费和信任机制：</strong>① 从"搜索"转向"社交发现"（41%使用社交搜索），对传统搜索引擎构成结构性威胁；② 微短剧成为注意力新黑洞（$78亿市场，3.2亿用户）；③ AI内容信任度下降（62%→48%），为AI验证/溯源工具创造新市场；④ 订阅疲劳（8.2→6.1）意味着AI产品必须从"工具订阅"升级为"平台生态"。对投资的影响：内容平台（META/ByteDance）> 搜索引擎（GOOGL风险）。
+    </div>
+  </div>
+</div>
+
+<!-- Section 14: Personalized Recommendations -->
+<div class="section">
+  <div class="section-title"><span class="num">14</span> 个性化推荐：值得深度跟踪的信号</div>
+
+  <div class="insight-box">
+    <span class="label">🔥 本周核心信号</span>
+    <div class="content">
+      <strong>1. 四大模型9月同步发布：</strong>Anthropic Fable 5.1（cache-read降75%）、OpenAI Astra（critical-cyber）、Google Gemini 3.8 Flash（$0.75 intro）、Meta Muse Spark 1.3（$0.10/M）。推理成本进入新一轮下降周期。<br><br>
+      <strong>2. AMD数据中心收入翻倍：</strong>Q2 $6.7B（+107% YoY），Meta签署6GW MI450多年协议。MI450将在2026H2对位B300。<br><br>
+      <strong>3. SGLang独立公司化：</strong>RadixArk $100M seed led by Accel，$400M估值，NVIDIA和AMD风投均参与。开源推理商业化路径验证。
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>信号#</th><th>信号描述</th><th>触发条件</th><th>推荐标的</th><th>评级</th><th>时间窗口</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>OpenAI DevDay Astra全面发布</td><td>9/29 Astra GA + 平台更新</td><td>MSFT</td><td>BUY</td><td>2026-09</td></tr>
+      <tr><td>2</td><td>AMD MI450量产进度</td><td>MI450良率>80%, 客户认证通过</td><td>AMD</td><td>BUY</td><td>2026H2</td></tr>
+      <tr><td>3</td><td>RadixArk商业化进展</td><td>企业客户签约>10家</td><td>SGLang生态</td><td>关注</td><td>2026H2</td></tr>
+      <tr><td>4</td><td>CoWoS产能瓶颈缓解</td><td>TSMC CoWoS >150kwpm</td><td>TSM, AMKR</td><td>BUY</td><td>2027</td></tr>
+      <tr><td>5</td><td>HBM4市场份额争夺</td><td>HBM4 revenue >$5B/quarter</td><td>MU, SK Hynix</td><td>BUY</td><td>2026H2</td></tr>
+    </tbody>
+  </table>
+</div>
+
 <div class="footer">
-  Agentic Market Daily | 生成时间: 2026-09-14 08:07 CST | 数据来源: 公开市场数据/权威媒体/政府官方来源<br>
-  免责声明：本报告仅供信息参考，不构成投资建议。投资有风险，决策需谨慎。
+  <p>Agentic Market Daily | 数据日期: 2026-09-11 | 生成时间: 2026-09-14 08:07 CST</p>
+  <p>本报告仅供投资研究参考，不构成投资建议。数据来源: Bloomberg, Reuters, SEC Filings, Company Announcements</p>
+</div>
+
 </div>
 </body>
-</html><!-- deploy: 2026-09-14 08:24 | automated | pre-check passed -->
+</html><!-- deploy: 2026-09-14 08:28 | automated | pre-check passed -->
