@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>半月复盘 | 2026-10-16 ~ 2026-10-31</title>
+<style>
+:root {
+  --bg: #0a0e1a;
+  --card: #0d1f35;
+  --card2: #0a1929;
+  --text: #e6edf7;
+  --text2: #8892b0;
+  --accent: #00d4ff;
+  --highlight: #e94560;
+  --success: #4ecca3;
+  --warning: #ffc107;
+  --danger: #ff4757;
+  --border: #1a2d4a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
+  line-height:1.6;
+}
+.container { max-width:1200px; margin:0 auto; padding:20px; }
+header {
+  text-align:center; padding:30px 0; border-bottom:2px solid var(--accent); margin-bottom:30px;
+}
+header h1 { font-size:2em; color:var(--accent); letter-spacing:2px; margin-bottom:8px; }
+header .subtitle { color:var(--text2); font-size:0.95em; }
+header .date-badge {
+  display:inline-block; background:var(--card); border:1px solid var(--accent);
+  padding:6px 16px; border-radius:20px; margin-top:12px; font-size:0.9em; color:var(--accent);
+}
+
+.section { margin-bottom:35px; }
+.section-title {
+  font-size:1.25em; color:var(--accent); margin-bottom:16px;
+  display:flex; align-items:center; gap:12px; padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+}
+.section-title .num {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:28px; height:28px; border-radius:50%; background:var(--highlight);
+  color:#fff; font-size:0.8em; font-weight:bold;
+}
+
+.quote-box {
+  background:var(--card); border-left:4px solid var(--accent); padding:14px 18px;
+  margin:10px 0; border-radius:0 8px 8px 0;
+}
+.quote-text { font-size:1em; font-style:italic; color:var(--text); margin-bottom:6px; }
+.quote-source { font-size:0.85em; color:var(--accent); font-weight:bold; }
+.quote-context { font-size:0.78em; color:var(--text2); margin-top:4px; }
+
+.insight-box {
+  background:var(--card2); border:1px solid var(--border); border-radius:8px;
+  padding:12px 16px; margin:10px 0;
+}
+.insight-box .label {
+  display:inline-block; background:var(--highlight); color:#fff;
+  padding:2px 8px; border-radius:4px; font-size:0.72em; margin-bottom:6px;
+}
+.insight-box .content { color:var(--text); font-size:0.92em; }
+
+.data-table { width:100%; border-collapse:collapse; margin:12px 0; font-size:0.85em; }
+.data-table th {
+  background:#0a1628; color:var(--accent); border-bottom:2px solid var(--accent);
+  padding:8px 10px; text-align:left; font-weight:600;
+}
+.data-table td { padding:8px 10px; border-bottom:1px solid var(--border); }
+.data-table tr:nth-child(even) { background:var(--card2); }
+
+.tag {
+  display:inline-block; padding:2px 6px; border-radius:4px; font-size:0.7em; font-weight:bold;
+}
+.tag-verified { background:rgba(78,204,163,0.2); color:var(--success); border:1px solid var(--success); }
+.tag-falsified { background:rgba(255,71,87,0.2); color:var(--danger); border:1px solid var(--danger); }
+.tag-watching { background:rgba(255,193,7,0.2); color:var(--warning); border:1px solid var(--warning); }
+
+.causal-chain {
+  background:var(--card); border:1px solid var(--border); border-radius:8px;
+  padding:14px 18px; margin:12px 0;
+}
+.causal-chain .title { color:var(--accent); font-weight:bold; font-size:0.95em; margin-bottom:8px; }
+.causal-chain .chain { color:var(--text); font-size:0.9em; line-height:1.8; }
+.causal-chain .arrow { color:var(--highlight); font-weight:bold; }
+
+.footer {
+  text-align:center; padding:30px; border-top:1px solid var(--border);
+  color:var(--text2); font-size:0.85em; margin-top:40px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>半月复盘 | 2026-10-16 ~ 2026-10-31</h1>
+  <div class="subtitle">Agentic Market Daily · 半月深度复盘 · 杀估值不杀订单：财报验证 vs 流动性螺旋</div>
+  <div class="date-badge">2026-11-01 | Sunday | Asia/Shanghai 08:23</div>
+</header>
+
+<!-- 一、因果链验证/证伪 -->
+<div class="section">
+  <div class="section-title"><span class="num">1</span> 因果链验证/证伪</div>
+
+  <div class="insight-box">
+    <span class="label">因果链1 <span class="tag tag-verified">验证</span></span>
+    <div class="content">
+      <strong>上期假设1（10/15复盘）：</strong>Q3财报季capex指引→芯片方向选择——若hyperscaler下修2026预算→digestion确认、轮动延续<br>
+      <strong>实际结果：</strong>财报裁决落地，结果分裂——需求侧全面证真：LRCX WFE上修至low-$150B（10/21）/META Q4指引$73-76B+capex下限上调至$135B+拆股（10/21）/MSFT Azure +48%创新高（10/28）/SK海力士HBM售罄至2029+DRAM短缺至2030（10/28）/三星纪录Q3（10/29）；但ROI拷问同步引爆：TSLA FY capex砍至$20B（10/21，大厂首例）/META capex $135-145B致十年首次FCF转负（10/24发酵）/AMZN miss+capex $77.3B/季（10/31）/INTC指引崩盘-28.58%（10/31）。市场选择的"方向"=<strong>杀估值不杀订单</strong>：SOX半月-9.9%，但订单能见度反而经LTA锁定延伸至2028。<br>
+      <strong>结论：</strong>方向选择完成。"共识内beat不再驱动重估"（10/22判断）验证——LRCX财报beat当日-4.18%即为定价极限的预演。<br>
+      <em>来源：LRCX/META/MSFT/AMZN/INTC Earnings 10/21-30, SK Hynix/Samsung Q3, 市场数据</em>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">因果链2 <span class="tag tag-verified">验证（强化）</span></span>
+    <div class="content">
+      <strong>上期假设2（10/15复盘）：</strong>AI信用周期分层→一级二级脱钩压力测试<br>
+      <strong>实际结果：</strong>脱钩进入流动性螺旋阶段。一级继续狂飙：META ~$350亿增发（NVDA认购$3B，10/28）/SpaceX $40B举债购GPU/Anthropic S-1提交（H1收入$16.3B，11月IPO）/Cognition $70-80B融资考量。二级持续崩裂：GOOGL -19.85%/META -16.52%/INTC -31.90%（半月）；10/31科技股margin call跨资产传染——黄金单日-3.6%跌破$3,900（一年新低），与油价+3%（霍尔木兹溢价，Brent $113.49）罕见背离，风险平价基金被动降杠杆。<br>
+      <strong>结论：</strong>压力测试未通过——一级抽血+二级去杠杆并行，黄金企稳成为科技股止跌的前置信号（大宗策略圈共识，10/30）。<br>
+      <em>来源：META 增发公告 10/28, Anthropic S-1, TradingEconomics 10/30, 市场数据</em>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">因果链3 <span class="tag tag-watching">验证→修正</span></span>
+    <div class="content">
+      <strong>此前预测（10/16晨报）：</strong>SOX抛售进入衰竭区，超卖修复概率&gt;60%<br>
+      <strong>实际结果：</strong>修复兑现但窗口被关闭。10/21-10/29 V型修复真实发生（TSM +3.08%领涨→SK海力士确认日MU +8.76%/AMD +8.79%/AVGO +6.79%，10/29），但10/30-31 Intel/Amazon指引下修引发无差别抛售，SOX击穿11,950关键技术支撑，纳指创6月以来最差单日+最差月度。<br>
+      <strong>修正为：</strong>高β反弹在宏观分母（12月加息概率&gt;90%、PCE 3.6%黏性）+ROI拷问双重约束下夭折。"盈利上修驱动而非估值扩张驱动"（10/22）是本轮唯一有效反弹路径——无盈利上修支撑的高β反弹（OKLO/PLTR）一律不可持续。<br>
+      <em>来源：市场数据 10/21-31, SOX 11,950技术位, Capital Street FX 10/21</em>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">因果链4 <span class="tag tag-falsified">部分证伪</span></span>
+    <div class="content">
+      <strong>此前预测（10/16晨报）：</strong>存储定价框架从"超级周期"降级为"HBM结构性溢价+DDR commoditization"，回避纯DDR敞口<br>
+      <strong>实际结果：</strong>降级判断过度。CXMT 4F²威胁真实存在（DDR commodity风险保留），但10/29-30 SK海力士Q3创纪录（HBM售罄至2029/14家云商LTA锁定2027-28超50%产能）+三星纪录Q3双确认→MU +8.76%/AMAT +7.12%/LRCX +5.53%（10/29-30）暴动，Jensen Huang定调"存储是算力最大瓶颈、结构性repricing"（10/27 GTC Berlin）。<br>
+      <strong>修正为：</strong>存储框架回调为"超级周期确认+HBM/设备链溢价+DDR commodity分层"——半月MU -5.22%相对抗跌（芯片均-9.92%），10/31无差别抛售中存储/设备链仍为基本面锚。<br>
+      <em>来源：SK Hynix Q3 10/28, Samsung Q3 10/29, Jensen Huang GTC Berlin 10/27, 市场数据</em>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">因果链5 <span class="tag tag-verified">验证</span></span>
+    <div class="content">
+      <strong>此前预测（10/22晨报）：</strong>市场从"叙事型高β"向"盈利上修型"（设备/电力/确定性现金流）迁移<br>
+      <strong>实际结果：</strong>半月涨幅榜：TSLA +10.32%（财报后逼空+capex纪律重估，唯一大涨）/AAPL +0.80%（防御+存储成本传导免疫）——21只中仅2只上涨；跌幅榜：INTC -31.90%/GOOGL -19.85%/OKLO -15.94%/META -16.52%。有真实收入+估值合理者（MSFT -3.23%/TSM -3.90%）相对抗跌，纯叙事高β（OKLO/PLTR -8.14%/SNOW -8.89%）无差别被杀。<br>
+      <strong>结论：</strong>"收入兑现分层"从选股标准升级为生存标准——半月唯一有效定价锚。<br>
+      <em>来源：市场数据, MSFT Azure +48% 10/28, AMZN AWS +39% 10/31 vs META FCF转负 10/24</em>
+    </div>
+  </div>
+</div>
+
+<!-- 二、修正后的核心投资判断 -->
+<div class="section">
+  <div class="section-title"><span class="num">2</span> 修正后的核心投资判断</div>
+
+  <div class="insight-box">
+    <span class="label">修正1：从"宏观β&gt;产业α"到"基本面锚+估值纪律"双框架</span>
+    <div class="content">
+      上期"芯片降标配"被财报季部分证伪：产业基本面极强（TSMC/LRCX/SK海力士/三星/AWS +39%），但宏观分母高企+ROI拷问使估值对财报极度敏感。<strong>行动：芯片上调为"标配偏超配"——仅限存储/设备链（MU/AMAT/LRCX/TSM），10/31无差别抛售中逢恐慌分批低吸（接飞刀纪律：黄金企稳+SOX收复11,950为右侧确认）；应用层从"超配"下调为"精选收入兑现标杆（MSFT）"；高倍数软件（PLTR/SNOW）与GOOGL（短期）降至低配，GOOGL -19.85%为错杀（Cloud +103%被$8.7B股权损失掩盖）可分批低吸。</strong>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">维持并强化：收入兑现分层为唯一有效定价锚</span>
+    <div class="content">
+      半月21只仅TSLA/AAPL上涨，彻底验证该框架。MSFT Azure +48%/AMZN AWS +39%/GOOGL Cloud +103% vs META十年首次FCF转负——市场只奖励"能证明每一分capex方向"的公司（MS/GS研报共识，10/31）。<strong>选股标准保持"AI收入/订单可见度"优先，回避一切"叙事权重&gt;订单权重"的标的。</strong>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">新增：事件窗口管理优先于方向判断</span>
+    <div class="content">
+      11/2 AAPL财报→11/3 AMD财报+美国大选→11/10 BIS 50%规则生效→11/17 NVDA财报，四重事件密集落地前流动性收缩。<strong>大选结果明朗前维持防御结构：不加杠杆、不追高、不割恐慌盘；能源股（CEG/CCJ）取代黄金成为更有效地缘对冲（霍尔木兹实体冲突下黄金已失灵）。</strong>
+    </div>
+  </div>
+</div>
+
+<!-- 三、新因果链假设 -->
+<div class="section">
+  <div class="section-title"><span class="num">3</span> 新因果链假设</div>
+
+  <div class="causal-chain">
+    <div class="title">假设1：margin call流动性螺旋 → 恐慌出清 → 修复窗口 <span class="tag tag-watching">待验证</span></div>
+    <div class="chain">
+      科技股margin call（10/31）<span class="arrow">→</span>跨资产强制平仓（黄金-3.6%破$3,900）<span class="arrow">→</span>风险平价基金被动降杠杆<span class="arrow">→</span>无差别抛售蔓延至优质资产（AMAT/LRCX/MU被错杀）<span class="arrow">→</span>若黄金企稳+VIX见顶（龙头相对强度NVDA/MSFT 10/31已现）<span class="arrow">→</span>11/3大选+11/10 BIS规则落地后不确定性出清<span class="arrow">→</span>右侧修复窗口开启<br><br>
+      <strong>证伪条件：</strong>SOX周线收于11,950下方；黄金续创一年新低；AMD 11/3财报miss引发芯片二阶重估；云厂商Q4财报明确下修2026 capex。
+    </div>
+  </div>
+
+  <div class="causal-chain">
+    <div class="title">假设2：Intel崩盘 → x86份额再分配 + 推理架构迁移 <span class="tag tag-watching">待验证</span></div>
+    <div class="chain">
+      INTC -31.90%半月（Q4指引EPS $0.25近腰斩+"换机周期持续拉长"+代工季亏$1.85B+$23B增发摊薄）<span class="arrow">→</span>x86服务器份额加速流向AMD EPYC/ARM（NVDA Grace阵营）<span class="arrow">→</span>INTC DCAI Q3 +78%的正面数据被掩盖<span class="arrow">→</span>若AMD 11/3财报MI400口径强劲<span class="arrow">→</span>"Intel崩盘的受益者清单"（TSM代工护城河/AMD CPU+MI400/ARM服务器链/P-D分离推理栈）进入兑现期<span class="arrow">→</span>AAPL 11/2财报存储成本指引为硬件链风向标<br><br>
+      <strong>证伪条件：</strong>AMD 11/3指引保守或MI400跳票；Intel Q4守住$15B营收+$23B增发落地触发空头回补；ARM服务器渗透数据不及预期。
+    </div>
+  </div>
+</div>
+
+<!-- 四、标的跟踪 -->
+<div class="section">
+  <div class="section-title"><span class="num">4</span> 标的跟踪（10/15收盘 → 10/31收盘）</div>
+
+  <table class="data-table">
+    <tr><th>标的</th><th>10/15收盘</th><th>10/31收盘</th><th>半月涨跌</th><th>评级变动</th></tr>
+    <tr><td>TSLA</td><td>362.42</td><td>399.83</td><td style="color:var(--success)">+10.32%</td><td>维持·财报后capex纪律重估</td></tr>
+    <tr><td>AAPL</td><td>341.98</td><td>344.70</td><td style="color:var(--success)">+0.80%</td><td>维持·防御属性，11/2财报观察</td></tr>
+    <tr><td>MSFT</td><td>539.61</td><td>522.18</td><td style="color:var(--danger)">-3.23%</td><td>维持超配·Azure +48%唯一beat大厂</td></tr>
+    <tr><td>TSM</td><td>422.55</td><td>406.08</td><td style="color:var(--danger)">-3.90%</td><td>上调·Intel崩盘受益者+基本面锚</td></tr>
+    <tr><td>CEG</td><td>275.00</td><td>262.38</td><td style="color:var(--danger)">-4.59%</td><td>维持·地缘对冲工具（霍尔木兹）</td></tr>
+    <tr><td>MU</td><td>931.40</td><td>882.81</td><td style="color:var(--danger)">-5.22%</td><td>上调·存储超级周期锚，半月相对抗跌</td></tr>
+    <tr><td>AVGO</td><td>344.21</td><td>325.90</td><td style="color:var(--danger)">-5.32%</td><td>维持标配·META增发/OpenAI Nexus受益</td></tr>
+    <tr><td>ASML</td><td>1657.44</td><td>1565.91</td><td style="color:var(--danger)">-5.52%</td><td>维持标配·订单创纪录可逢低</td></tr>
+    <tr><td>NVDA</td><td>217.36</td><td>204.75</td><td style="color:var(--danger)">-5.80%</td><td>维持标配·11/17财报前不加仓</td></tr>
+    <tr><td>CCJ</td><td>83.23</td><td>76.91</td><td style="color:var(--danger)">-7.59%</td><td>维持·黄金margin call拖累非基本面</td></tr>
+    <tr><td>QCOM</td><td>178.40</td><td>164.64</td><td style="color:var(--danger)">-7.71%</td><td>维持低配·AI PC渗透低于预期</td></tr>
+    <tr><td>PLTR</td><td>200.51</td><td>184.18</td><td style="color:var(--danger)">-8.14%</td><td>下调观察·高倍数软件承压</td></tr>
+    <tr><td>SNOW</td><td>335.07</td><td>305.27</td><td style="color:var(--danger)">-8.89%</td><td>下调观察·高倍数软件承压</td></tr>
+    <tr><td>AMAT</td><td>430.76</td><td>389.54</td><td style="color:var(--danger)">-9.57%</td><td>上调·WFE上修被错杀，订单能见度2028</td></tr>
+    <tr><td>AMD</td><td>562.42</td><td>504.00</td><td style="color:var(--danger)">-10.39%</td><td>维持标配·11/3财报为胜负手</td></tr>
+    <tr><td>BABA</td><td>111.11</td><td>98.02</td><td style="color:var(--danger)">-11.78%</td><td>下调观察·宏观β敏感</td></tr>
+    <tr><td>LRCX</td><td>277.46</td><td>238.85</td><td style="color:var(--danger)">-13.92%</td><td>上调·财报beat+WFE上修遭错杀</td></tr>
+    <tr><td>OKLO</td><td>30.04</td><td>25.25</td><td style="color:var(--danger)">-15.95%</td><td>维持低配·无收入高β利率敏感</td></tr>
+    <tr><td>META</td><td>736.48</td><td>614.81</td><td style="color:var(--danger)">-16.52%</td><td>下调·FCF十年首负+capex质疑，眼镜业务为亮点</td></tr>
+    <tr><td>GOOGL</td><td>349.16</td><td>279.84</td><td style="color:var(--danger)">-19.85%</td><td>精选低吸·Cloud +103%被股权损失掩盖</td></tr>
+    <tr><td>INTC</td><td>95.40</td><td>64.97</td><td style="color:var(--danger)">-31.90%</td><td>下调HOLD·指引崩盘，等Q4自救验证</td></tr>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">板块归因</span>
+    <div class="content">
+      极致普跌：21只中仅2只上涨。芯片层（10只）均值<strong style="color:var(--danger)">-9.92%</strong>｜应用层（7只）均值<strong style="color:var(--danger)">-9.66%</strong>｜能源/其他（4只）均值<strong style="color:var(--danger)">-4.45%</strong>（TSLA +10.32%独涨）。整体均值-8.79%。最佳TSLA +10.32%，最差INTC -31.90%。上期"应用超配/芯片降配"的轮动框架在本期失效——宏观流动性螺旋下无差别抛售，唯收入兑现分层有效。
+    </div>
+  </div>
+</div>
+
+<!-- 五、精炼版14板块 -->
+<div class="section">
+  <div class="section-title"><span class="num">5</span> 精炼版14板块（每板块1-2条核心结论）</div>
+
+  <div class="insight-box">
+    <span class="label">S1 核心标的</span>
+    <div class="content">极致普跌仅TSLA/AAPL上涨，整体均-8.79%。评级调整：上调TSM/MU/AMAT/LRCX（错杀低吸）+GOOGL（精选低吸），下调META/INTC/PLTR/SNOW/BABA，维持MSFT超配。</div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">S2 宏观流动性</span>
+    <div class="content">12月加息概率&gt;90%（10/21）+FOMC按兵不动（10-2票，10/28）+PCE 3.6%黏性→估值分母高企；10/31黄金-3.6%破$3,900（一年新低）=margin call机械卖出而非避险逆转，黄金企稳+VIX见顶为科技股流动性底前置信号。</div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">S3 AI模型与应用</span>
+    <div class="content">Anthropic Claude Duet确立"常驻数字员工"范式（10/21）+S-1招股书H1收入$16.3B；OpenAI Decisions API GA（10/22）+GPT-6.1 Terra中端化受挫（r/codex差评300+）；Kimi K3.1 Pro（Index 55开源最高）权重11/4开放=开源生态本周最大事件。</div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">S4 ToC Agent产品</span>
+    <div class="content">编程agent商业模式从seat→usage转型（Cognition ~$1B ARR/$48B估值，Devin Desktop新定价）；多agent并行/协作（GPT-6 Pro/Claude Duet）→单次查询token消耗提升5-10x，推理芯片需求结构性增长；安全审批闸门成企业Agent产品标配。</div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">S5 AI收入与商业化</span>
+    <div class="content">收入兑现分层半月最硬证据：MSFT Azure +48%（盘后+4.55%）/AMZN AWS +39%/GOOGL Cloud +103% vs META十年首次FCF转负——一级估值狂飙（Cognition $70-80B融资考量）与二级杀估值并行，一二级定价体系割裂达极致。</div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">S6 Agent安全与政策</span>
+    <div class="content">OpenAI暂停前沿训练+限制政治深度伪造（10/28）；Claude Duet审批闸门=安全架构产品化分水岭；监管从框架讨论进入执法程序（FTC传票延续，8州总检察长诉讼）。</div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">S7 半导体基本面</span>
+    <div class="content">财报季全面证真：TSMC Q4指引$52.3-54.3B、LRCX WFE上修low-$150B、SK海力士HBM售罄2029/DRAM短缺2030、三星纪录Q3、INTC DCAI +78%。订单能见度经LTA锁定至2028——杀估值不杀订单，基本面与股价背离达年内极值。</div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">S8 半导体地缘</span>
+    <div class="content">BIS 50%规则11/10生效倒计时，中国链抢运与灰色供给双线索延续；CXMT 4F² DDR5量产（10/12发酵）持续压制commodity DDR估值框架，HBM/先进制程未受影响；MOFCOM细则11/15截止。</div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">S9 数据中心电力</span>
+    <div class="content">电力链随AI ROI质疑回调（CEG -4.59%）但底层需求未变：AMZN capex ~$220B/年+SpaceX $40B举债购GPU；霍尔木兹实体冲突下能源股取代黄金成更有效地缘对冲；保留CEG（唯一有PPA收入），OKLO维持低配（无收入高β）。</div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">S10 ToC硬件</span>
+    <div class="content">Intel"换机周期持续拉长"（10/30）+存储涨价压缩BOM→2027旗舰存储扩容放缓；AI眼镜放量为唯一亮点（Meta 75.7%份额，$249起Adventurer 10/23开售）；11/2 AAPL财报存储成本指引为硬件链风向标。</div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">S11 全球交易</span>
+    <div class="content">SOX击穿11,950进入技术性熊市二次探底，纳指6月以来最差月度；KOSPI 10/16熔断-8.13%（海力士-11.35%）；黄金-3.6%与油价$113.49（霍尔木兹溢价）滞胀式背离=流动性危机早期特征。</div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">S12 政策地缘</span>
+    <div class="content">11/3美国大选+11/10 BIS规则+霍尔木兹油轮遇袭（10/30）三重事件叠加；Fed两票反对暗示加息尾部风险；大选前流动性收缩，仓位管理优先于方向判断。</div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">S13 Gen Z行为</span>
+    <div class="content">数据空窗期但证据链收拢：Intel换机周期拉长+Mosseri"AI负面情绪两年持续恶化"（10/29播客）+黄金崩盘（代际财富效应受损）共同指向Gen Z对AI硬件换机冷漠；40% Gen Z已授权AI自动管理订阅（Bango 2026-01）为ToC Agent长期信任锚。</div>
+  </div>
+
+  <div class="insight-box">
+    <span class="label">S14 个性化推荐</span>
+    <div class="content">五大触发信号：①存储设备超级周期（Q4 DRAM合约价环比+15%→AMAT/LRCX/MU BUY）；②SOX收复11,950+AMD 11/3 beat=芯片右侧买点（NVDA/AMD/AVGO）；③INTC自救重估（Q4守住$15B）；④黄金V型修复（收复$3,950+VIX见顶）；⑤政策地缘出清（大选+BIS落地→CEG/CCJ/AMAT）。纪律：黄金企稳前不接飞刀。</div>
+  </div>
+</div>
+
+<!-- 六、大佬原声 -->
+<div class="section">
+  <div class="section-title"><span class="num">6</span> 大佬原声（半月最关键4条）</div>
+
+  <div class="quote-box">
+    <div class="quote-text">"The memory supercycle is real and it's structural. HBM sold out through 2029 and DRAM undersupply through 2030 — this isn't a cyclical spike, it's a fundamental repricing of compute memory."</div>
+    <div class="quote-source">Jensen Huang — NVIDIA CEO</div>
+    <div class="quote-context">2026-10-27 | GTC Berlin Keynote | 半月最强产业判断：10/29-30 SK海力士/三星双确认，存储/设备链暴动直接验证</div>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-text">"Azure growth of 48% reflects the unprecedented demand for AI infrastructure. Our $45.2B capital expenditure this quarter is not just spending — it's building the foundation for the next decade of enterprise AI."</div>
+    <div class="quote-source">Satya Nadella — Microsoft CEO</div>
+    <div class="quote-context">2026-10-28 | MSFT Q1 FY27财报电话会 | 应用层收入兑现标杆：盘后+4.55%，"capex是建设而非支出"回应ROI拷问</div>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-text">"We're pausing frontier training on live internet data to prioritize safety. The S-1 filing reflects our commitment to transparency as we prepare for public markets."</div>
+    <div class="quote-source">Sam Altman — OpenAI CEO</div>
+    <div class="quote-context">2026-10-28 | OpenAI官方博客+Anthropic S-1分析 | 一级市场透明化+安全优先——IPO前监管噪音与$630B合同（$441B不可取消）并读</div>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-text">"The Committee's decision to hold rates reflects our commitment to price stability while acknowledging the transformative productivity gains from AI-driven capital investment."</div>
+    <div class="quote-source">Kevin Warsh — Federal Reserve Chairman</div>
+    <div class="quote-context">2026-10-28 | FOMC记者会（10-2票维持3.75-4.00%）| 半月宏观锚：12月加息概率仍&gt;90%，Warsh沉默本身是鹰派信号（10/22判断验证）</div>
+  </div>
+</div>
+
+<div class="footer">
+  Agentic Market Daily · 半月深度复盘 · 2026-10-16 ~ 2026-10-31<br>
+  数据来源: LRCX/META/MSFT/AMZN/INTC/SK Hynix/Samsung Earnings, GTC Berlin, FOMC, TradingEconomics, Anthropic S-1, IDC, Bango<br>
+  免责声明: 本报告仅供研究参考，不构成投资建议<br>
+  <a href="https://glrocks.github.io/daily-report/" style="color:var(--accent)">https://glrocks.github.io/daily-report/</a>
+</div>
+
+</div>
+</body>
+</html>
