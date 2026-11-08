@@ -1,484 +1,481 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agentic Market Daily | 2026-11-07</title>
-    <style>
-        :root {
-            --bg: #0a0e1a;
-            --card: #0d1f35;
-            --card2: #0a1929;
-            --accent: #00d4ff;
-            --text: #e6edf7;
-            --text2: #8892b0;
-            --border: #1a2d4a;
-            --highlight: #e94560;
-            --success: #4ecca3;
-            --warning: #ffc107;
-            --danger: #ff4757;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            border-bottom: 2px solid var(--accent);
-            margin-bottom: 30px;
-        }
-        h1 {
-            font-size: 2.5em;
-            color: var(--accent);
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        .date-badge {
-            display: inline-block;
-            background: var(--card);
-            color: var(--text2);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.95em;
-            border: 1px solid var(--border);
-        }
-        .info-line { color: var(--text2); margin-top: 8px; font-size: 0.9em; }
-        .section {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-        }
-        .section-title {
-            font-size: 1.5em;
-            color: var(--accent);
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .section-title .num {
-            background: var(--highlight);
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8em;
-            font-weight: 700;
-        }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card {
-            background: var(--card2);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
-        }
-        .card-title { color: var(--accent); font-weight: 600; margin-bottom: 12px; font-size: 1.1em; }
-        .metric { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
-        .metric:last-child { border-bottom: none; }
-        .metric-label { color: var(--text2); }
-        .metric-value { color: var(--accent); font-weight: 600; }
-        .positive { color: var(--success); }
-        .negative { color: var(--danger); }
-        .warning { color: var(--warning); }
-        .insight-box {
-            background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(233,69,96,0.1));
-            border-left: 4px solid var(--accent);
-            padding: 18px;
-            border-radius: 0 8px 8px 0;
-            margin: 20px 0;
-        }
-        .insight-box .label {
-            color: var(--highlight);
-            font-weight: 700;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-        .insight-box .content { color: var(--text); line-height: 1.8; }
-        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.95em; }
-        th {
-            background: #0a1628;
-            color: var(--accent);
-            padding: 12px;
-            text-align: left;
-            border-bottom: 2px solid var(--accent);
-            font-weight: 600;
-        }
-        td { padding: 12px; border-bottom: 1px solid var(--border); }
-        tr:hover { background: rgba(0,212,255,0.05); }
-        .data-table tr:nth-child(even) { background-color: var(--card2); }
-        .quote-box {
-            background: var(--card2);
-            border-left: 4px solid var(--highlight);
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 0 8px 8px 0;
-        }
-        .quote-text {
-            font-style: italic;
-            color: var(--text);
-            font-size: 1.05em;
-            line-height: 1.7;
-            margin-bottom: 10px;
-        }
-        .quote-source { color: var(--accent); font-weight: 600; font-size: 0.9em; }
-        .quote-context { color: var(--text2); font-size: 0.85em; margin-top: 5px; }
-        .play-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--highlight);
-            color: white;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            margin-top: 8px;
-            text-decoration: none;
-        }
-        .play-btn::before { content: '▶'; font-size: 0.8em; }
-        .stock-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
-        }
-        .stock-card {
-            background: var(--card2);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 18px;
-            position: relative;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .stock-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,212,255,0.15);
-        }
-        .stock-card.highlight-stock { border: 2px solid var(--highlight); box-shadow: 0 0 15px rgba(233,69,96,0.3); }
-        .stock-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .stock-name { font-weight: 700; font-size: 1.2em; color: var(--accent); }
-        .stock-sector { font-size: 0.8em; color: var(--text2); }
-        .stock-price { font-size: 1.8em; font-weight: 700; margin: 8px 0; }
-        .stock-change { font-size: 1em; font-weight: 600; }
-        .stock-metrics { font-size: 0.85em; color: var(--text2); margin-top: 10px; line-height: 1.5; }
-        .stock-reason { font-size: 0.85em; color: var(--text); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
-        .rec-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75em;
-            font-weight: 700;
-        }
-        .rec-badge.buy { background: var(--success); color: #0a0e1a; }
-        .rec-badge.hold { background: var(--warning); color: #0a0e1a; }
-        .rec-badge.spec { background: var(--highlight); color: white; }
-        .cat-badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            padding: 3px 10px;
-            border-radius: 10px;
-            font-size: 0.7em;
-            font-weight: 600;
-            background: var(--border);
-            color: var(--text2);
-        }
-        .ticker { margin-left: 62px; }
-        .price-row { display: flex; align-items: baseline; gap: 10px; margin: 6px 0; }
-        .price { font-size: 1.5em; font-weight: 700; }
-        .change.up { color: var(--success); font-weight: 600; }
-        .change.down { color: var(--danger); font-weight: 600; }
-        .signal-list { list-style: none; }
-        .signal-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-        .signal-list li:last-child { border-bottom: none; }
-        .tag {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.75em;
-            font-weight: 600;
-            margin-right: 6px;
-        }
-        .tag-hot { background: var(--highlight); color: white; }
-        .tag-new { background: var(--success); color: #0a0e1a; }
-        .tag-key { background: var(--accent); color: #0a0e1a; }
-        .causal-chain {
-            background: var(--card2);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .chain-title { color: var(--highlight); font-weight: 700; margin-bottom: 15px; font-size: 1.1em; }
-        .chain-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px dashed var(--border);
-        }
-        .chain-item:last-child { border-bottom: none; }
-        .chain-item .key {
-            background: var(--accent);
-            color: #0a0e1a;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.8em;
-            font-weight: 700;
-            min-width: 80px;
-            text-align: center;
-        }
-        .chain-item .val { flex: 1; color: var(--text); line-height: 1.6; }
-        @media (max-width: 768px) {
-            .grid-2, .grid-3 { grid-template-columns: 1fr; }
-            h1 { font-size: 1.8em; }
-            .stock-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Market Daily | 2026-11-08</title>
+<style>
+:root {
+  --bg: #0a0e1a;
+  --card: #0d1f35;
+  --card2: #0a1929;
+  --text: #e6edf7;
+  --text2: #8892b0;
+  --accent: #00d4ff;
+  --highlight: #e94560;
+  --success: #4ecca3;
+  --warning: #ffc107;
+  --danger: #ff4757;
+  --border: #1a2d4a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
+  line-height:1.6;
+}
+.container { max-width:1200px; margin:0 auto; padding:20px; }
+header {
+  text-align:center; padding:30px 0; border-bottom:2px solid var(--accent); margin-bottom:30px;
+}
+header h1 { font-size:2.2em; color:var(--accent); letter-spacing:2px; margin-bottom:8px; }
+header .subtitle { color:var(--text2); font-size:0.95em; }
+header .date-badge {
+  display:inline-block; background:var(--card); border:1px solid var(--accent);
+  padding:6px 16px; border-radius:20px; margin-top:12px; font-size:0.9em; color:var(--accent);
+}
+
+.section { margin-bottom:40px; }
+.section-title {
+  font-size:1.3em; color:var(--accent); margin-bottom:20px;
+  display:flex; align-items:center; gap:12px; padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+}
+.section-title .num {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:32px; height:32px; border-radius:50%; background:var(--highlight);
+  color:#fff; font-size:0.85em; font-weight:bold;
+}
+
+/* Stock Panel */
+.stock-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px;
+}
+.stock-card {
+  position:relative; background:var(--card); border:1px solid var(--border);
+  border-radius:12px; padding:16px; transition:border-color 0.2s;
+}
+.stock-card:hover { border-color:var(--accent); }
+.stock-card .rec-badge {
+  position:absolute; top:10px; left:10px;
+  padding:3px 8px; border-radius:4px; font-size:0.7em; font-weight:bold;
+}
+.stock-card .cat-badge {
+  position:absolute; top:10px; right:10px;
+  padding:3px 8px; border-radius:4px; font-size:0.7em;
+  background:rgba(0,212,255,0.15); color:var(--accent); border:1px solid var(--accent);
+}
+.stock-card .ticker { font-size:1.4em; font-weight:bold; color:var(--accent); margin-top:22px; }
+.stock-card .name { font-size:0.85em; color:var(--text2); margin-bottom:8px; }
+.stock-card .price-row { display:flex; align-items:baseline; gap:12px; margin-bottom:6px; }
+.stock-card .price { font-size:1.6em; font-weight:bold; }
+.stock-card .change { font-size:0.95em; font-weight:bold; }
+.stock-card .change.up { color:var(--success); }
+.stock-card .change.down { color:var(--danger); }
+.stock-card .stock-metrics {
+  font-size:0.75em; color:var(--text2); margin-top:8px; padding-top:8px;
+  border-top:1px solid var(--border);
+}
+.stock-card .stock-reason {
+  font-size:0.78em; color:var(--text2); margin-top:6px; font-style:italic;
+}
+.rec-badge.buy { background:rgba(78,204,163,0.2); color:var(--success); border:1px solid var(--success); }
+.rec-badge.hold { background:rgba(255,193,7,0.2); color:var(--warning); border:1px solid var(--warning); }
+.rec-badge.spec { background:rgba(233,69,96,0.2); color:var(--highlight); border:1px solid var(--highlight); }
+.highlight-stock { border-color:var(--accent); box-shadow:0 0 12px rgba(0,212,255,0.15); }
+
+/* Quote Box */
+.quote-box {
+  background:var(--card); border-left:4px solid var(--accent); padding:16px 20px;
+  margin:12px 0; border-radius:0 8px 8px 0;
+}
+.quote-text { font-size:1.05em; font-style:italic; color:var(--text); margin-bottom:8px; }
+.quote-source { font-size:0.85em; color:var(--accent); font-weight:bold; }
+.quote-context { font-size:0.8em; color:var(--text2); margin-top:4px; }
+.play-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(0,212,255,0.15); border:1px solid var(--accent);
+  color:var(--accent); padding:4px 12px; border-radius:16px;
+  font-size:0.75em; margin-top:8px; cursor:pointer;
+}
+
+/* Insight Box */
+.insight-box {
+  background:var(--card2); border:1px solid var(--border); border-radius:8px;
+  padding:14px 18px; margin:12px 0;
+}
+.insight-box .label {
+  display:inline-block; background:var(--highlight); color:#fff;
+  padding:2px 10px; border-radius:4px; font-size:0.75em; margin-bottom:8px;
+}
+.insight-box .content { color:var(--text); font-size:0.95em; }
+
+/* Signal List */
+.signal-list { list-style:none; }
+.signal-list li {
+  padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px; align-items:flex-start;
+}
+.signal-list li:last-child { border-bottom:none; }
+.tag {
+  display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.72em; font-weight:bold;
+  white-space:nowrap; flex-shrink:0;
+}
+.tag-hot { background:rgba(233,69,96,0.2); color:var(--highlight); border:1px solid var(--highlight); }
+.tag-new { background:rgba(0,212,255,0.2); color:var(--accent); border:1px solid var(--accent); }
+.tag-key { background:rgba(78,204,163,0.2); color:var(--success); border:1px solid var(--success); }
+
+/* Data Table */
+.data-table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.88em; }
+.data-table th {
+  background:#0a1628; color:var(--accent); border-bottom:2px solid var(--accent);
+  padding:10px 12px; text-align:left; font-weight:600;
+}
+.data-table td { padding:10px 12px; border-bottom:1px solid var(--border); }
+.data-table tr:nth-child(even) { background:var(--card2); }
+.data-table tr:hover { background:rgba(0,212,255,0.05); }
+
+/* Causal Chain */
+.causal-chain {
+  background:var(--card); border:1px solid var(--border); border-radius:8px;
+  padding:18px; margin:16px 0;
+}
+.causal-chain .chain-title {
+  color:var(--accent); font-size:1.05em; font-weight:bold; margin-bottom:14px;
+  display:flex; align-items:center; gap:8px;
+}
+.causal-chain .chain-item {
+  display:flex; gap:12px; margin-bottom:10px; padding:10px;
+  background:var(--card2); border-radius:6px;
+}
+.causal-chain .chain-item .key { color:var(--accent); font-weight:bold; min-width:100px; flex-shrink:0; }
+.causal-chain .chain-item .val { color:var(--text); }
+
+/* Footer */
+.footer {
+  text-align:center; padding:30px; border-top:1px solid var(--border);
+  color:var(--text2); font-size:0.85em; margin-top:40px;
+}
+.play-btn:hover::after {
+  content: "原声内容请访问上方来源链接";
+  position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%);
+  background: var(--card2); color: var(--text); border: 1px solid var(--border);
+  padding: 6px 12px; border-radius: 6px; font-size: 0.75em;
+  white-space: nowrap; z-index: 10;
+}
+.source-link {
+  color: var(--accent); text-decoration: underline; cursor: pointer;
+}
+.source-link:hover {
+  color: var(--highlight);
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Agentic Market Daily</h1>
-            <div class="date-badge">2026-11-07 星期六</div>
-            <div class="info-line">数据截至: 2026-11-06 美股收盘 | 生成时间: 2026-11-07 08:10 CST | V12模板锁定</div>
-        </header>
+<div class="container">
 
-<!-- Section 1 -->
+<header>
+  <h1>Agentic Market Daily</h1>
+  <div class="subtitle">半导体投资级技术情报 · 每日晨报</div>
+  <div class="date-badge">2026-11-08 | Sunday | Asia/Shanghai 08:07（数据日期：2026-11-06 周五收盘）</div>
+</header>
+
+<!-- Section 1: Core Holdings -->
 <div class="section">
   <div class="section-title"><span class="num">1</span> 核心持仓实时行情</div>
   <div class="stock-grid">
 
     <div class="stock-card highlight-stock">
-      <span class="cat-badge">芯片</span>
       <span class="rec-badge buy">BUY</span>
-      <div class="stock-header"><span class="ticker">NVDA</span><span class="stock-sector">NVIDIA</span></div>
-      <div class="price-row"><span class="price">$186.69</span><span class="change down">-6.72%</span></div>
-      <div class="stock-metrics">核心指标: Q3财报预计11/17公布 | Rubin GW级需求不变 | 三日累跌后估值修复窗口临近</div>
-      <div class="stock-reason">推荐: 财报周前最后布局窗口；Yahoo确认11/17财报为SOX走势试金石，Rubin需求论据零损伤</div>
+      <span class="cat-badge">芯片</span>
+      <div class="ticker">NVDA</div>
+      <div class="name">NVIDIA Corporation</div>
+      <div class="price-row">
+        <span class="price">$186.685</span>
+        <span class="change down">-6.72%</span>
+      </div>
+      <div class="stock-metrics">核心指标: 11/17盘后财报 | 市场预期营收~$108B(+106% YoY) | 两日累跌近19%</div>
+      <div class="stock-reason">推荐: BIS规则延期+财报前瞻双击窗口，超卖反弹首选核心仓</div>
     </div>
 
     <div class="stock-card">
-      <span class="cat-badge">芯片</span>
       <span class="rec-badge buy">BUY</span>
-      <div class="stock-header"><span class="ticker">AMD</span><span class="stock-sector">Adv Micro Devices</span></div>
-      <div class="price-row"><span class="price">$447.10</span><span class="change down">-8.53%</span></div>
-      <div class="stock-metrics">核心指标: Helios/Venice推进中 | 随板块beta抛售 | 数据中心份额扩张逻辑不变</div>
-      <div class="stock-reason">推荐: 无公司特定利空；三连跌后估值回到10月中旬水平，回调即买</div>
+      <span class="cat-badge">芯片</span>
+      <div class="ticker">AMD</div>
+      <div class="name">Advanced Micro Devices</div>
+      <div class="price-row">
+        <span class="price">$447.095</span>
+        <span class="change down">-8.53%</span>
+      </div>
+      <div class="stock-metrics">核心指标: MI450 2026H2对位B300 | 周五随板块重挫 | 无公司级新公告</div>
+      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；高beta超跌，反弹弹性大</div>
     </div>
 
     <div class="stock-card">
-      <span class="cat-badge">芯片</span>
       <span class="rec-badge hold">HOLD</span>
-      <div class="stock-header"><span class="ticker">QCOM</span><span class="stock-sector">Qualcomm</span></div>
-      <div class="price-row"><span class="price">$165.41</span><span class="change down">-4.49%</span></div>
-      <div class="stock-metrics">核心指标: Q3手机疲软已定价 | IoT/汽车对冲 | 端侧AI NPU 80 TOPS领先</div>
-      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；跌幅小于芯片均值=相对强度显现</div>
-    </div>
-
-    <div class="stock-card">
       <span class="cat-badge">芯片</span>
-      <span class="rec-badge buy">BUY</span>
-      <div class="stock-header"><span class="ticker">TSM</span><span class="stock-sector">TSMC</span></div>
-      <div class="price-row"><span class="price">$375.29</span><span class="change down">-5.17%</span></div>
-      <div class="stock-metrics">核心指标: CoWoS持续满产 | 2nm 2026H2量产 | 11/10 BIS 50%规则直接变量</div>
-      <div class="stock-reason">推荐: 周一BIS规则为关键观察点；严格执行利空出尽前不加仓，延期/豁免=反弹信号</div>
+      <div class="ticker">QCOM</div>
+      <div class="name">Qualcomm Inc.</div>
+      <div class="price-row">
+        <span class="price">$165.41</span>
+        <span class="change down">-4.49%</span>
+      </div>
+      <div class="stock-metrics">核心指标: 财报后余震 | 手机芯片业务承压 | 端侧AI布局未变</div>
+      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；等待端侧AI出货验证</div>
     </div>
 
     <div class="stock-card">
+      <span class="rec-badge buy">BUY</span>
       <span class="cat-badge">芯片</span>
-      <span class="rec-badge buy">BUY</span>
-      <div class="stock-header"><span class="ticker">AVGO</span><span class="stock-sector">Broadcom</span></div>
-      <div class="price-row"><span class="price">$293.23</span><span class="change down">-9.91%</span></div>
-      <div class="stock-metrics">核心指标: 定制ASIC订单管线 | AI网络芯片 | 三日累跌超25%</div>
-      <div class="stock-reason">推荐: 跌幅过大但无公司利空；ASIC+XPU叙事不变，等待企稳信号</div>
+      <div class="ticker">TSM</div>
+      <div class="name">Taiwan Semiconductor</div>
+      <div class="price-row">
+        <span class="price">$375.285</span>
+        <span class="change down">-5.17%</span>
+      </div>
+      <div class="stock-metrics">核心指标: CoWoS产能=AI芯片命脉 | 先进制程垄断 | 两日累跌约17%</div>
+      <div class="stock-reason">推荐: 先进制程基本面零裂缝，政策缓释后机构回补第一标的</div>
     </div>
 
     <div class="stock-card">
+      <span class="rec-badge buy">BUY</span>
       <span class="cat-badge">芯片</span>
-      <span class="rec-badge hold">HOLD</span>
-      <div class="stock-header"><span class="ticker">MU</span><span class="stock-sector">Micron</span></div>
-      <div class="price-row"><span class="price">$690.45</span><span class="change down">-13.18%</span></div>
-      <div class="stock-metrics">核心指标: 台湾新厂暂停后续跌 | 两日累跌超30% | TrendForce 4Q26 DRAM合约价仍看涨+10-15%</div>
-      <div class="stock-reason">推荐: 维持HOLD；股价与基本面数据背离——合约价上行但周期顶部恐慌主导交易，等待管理层指引</div>
+      <div class="ticker">AVGO</div>
+      <div class="name">Broadcom Inc.</div>
+      <div class="price-row">
+        <span class="price">$293.23</span>
+        <span class="change down">-9.91%</span>
+      </div>
+      <div class="stock-metrics">核心指标: 定制ASIC+AI软件收入 | 谷歌/Meta核心供应商 | 两日累跌超21%</div>
+      <div class="stock-reason">推荐: ASIC叙事未破坏，恐慌超卖幅度板块最大之一，反弹弹性足</div>
     </div>
 
     <div class="stock-card">
+      <span class="rec-badge hold">HOLD</span>
       <span class="cat-badge">芯片</span>
-      <span class="rec-badge hold">HOLD</span>
-      <div class="stock-header"><span class="ticker">AMAT</span><span class="stock-sector">Applied Materials</span></div>
-      <div class="price-row"><span class="price">$332.72</span><span class="change down">-9.93%</span></div>
-      <div class="stock-metrics">核心指标: WFE 2027下行风险定价中 | 先进封装敞口长期利好</div>
-      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；等设备订单数据再评估</div>
+      <div class="ticker">MU</div>
+      <div class="name">Micron Technology</div>
+      <div class="price-row">
+        <span class="price">$690.445</span>
+        <span class="change down">-13.18%</span>
+      </div>
+      <div class="stock-metrics">核心指标: 存储合约价涨幅收窄(TrendForce) | 两日累跌超33% | 评级已下调HOLD</div>
+      <div class="stock-reason">推荐: 存储周期顶部确认中，观望现货价与合约价背离走向</div>
     </div>
 
     <div class="stock-card">
+      <span class="rec-badge hold">HOLD</span>
       <span class="cat-badge">芯片</span>
-      <span class="rec-badge hold">HOLD</span>
-      <div class="stock-header"><span class="ticker">LRCX</span><span class="stock-sector">Lam Research</span></div>
-      <div class="price-row"><span class="price">$200.44</span><span class="change down">-9.48%</span></div>
-      <div class="stock-metrics">核心指标: 存储设备敞口最大 | MU暂停台厂直接冲击2027存储capex预期</div>
-      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；存储capex不确定性上升，观望</div>
+      <div class="ticker">AMAT</div>
+      <div class="name">Applied Materials</div>
+      <div class="price-row">
+        <span class="price">$332.715</span>
+        <span class="change down">-9.93%</span>
+      </div>
+      <div class="stock-metrics">核心指标: 先进封装设备 | 两日累跌约24% | 无公司级新公告</div>
+      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；设备股beta放大跌幅</div>
     </div>
 
     <div class="stock-card">
+      <span class="rec-badge hold">HOLD</span>
       <span class="cat-badge">芯片</span>
-      <span class="rec-badge buy">BUY</span>
-      <div class="stock-header"><span class="ticker">ASML</span><span class="stock-sector">ASML Holding</span></div>
-      <div class="price-row"><span class="price">$1,424.75</span><span class="change down">-4.78%</span></div>
-      <div class="stock-metrics">核心指标: EUV垄断 | 相对强度显著（-4.78% vs 芯片均值-8%） | 11/10规则为变量</div>
-      <div class="stock-reason">推荐: 周五明显抗跌=EUV垄断逻辑获资金认可；BIS落地后或率先修复</div>
+      <div class="ticker">LRCX</div>
+      <div class="name">Lam Research</div>
+      <div class="price-row">
+        <span class="price">$200.44</span>
+        <span class="change down">-9.48%</span>
+      </div>
+      <div class="stock-metrics">核心指标: 存储设备周期暴露 | 两日累跌约27% | 无公司级新公告</div>
+      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；存储资本开支预期下修风险未出清</div>
     </div>
 
     <div class="stock-card">
+      <span class="rec-badge buy">BUY</span>
       <span class="cat-badge">芯片</span>
+      <div class="ticker">ASML</div>
+      <div class="name">ASML Holding</div>
+      <div class="price-row">
+        <span class="price">$1424.75</span>
+        <span class="change down">-4.78%</span>
+      </div>
+      <div class="stock-metrics">核心指标: EUV垄断 | High-NA定价权 | 周五抗跌（两日累跌约16%）</div>
+      <div class="stock-reason">推荐: 周五相对强度验证基本面无裂缝，恐慌错杀修复首选</div>
+    </div>
+
+    <div class="stock-card">
       <span class="rec-badge hold">HOLD</span>
-      <div class="stock-header"><span class="ticker">INTC</span><span class="stock-sector">Intel</span></div>
-      <div class="price-row"><span class="price">$56.08</span><span class="change down">-3.76%</span></div>
-      <div class="stock-metrics">核心指标: 18A良率待验 | 财报后第7日 | 芯片板块中最抗跌之一</div>
-      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；防御属性在去杠杆中显现</div>
+      <span class="cat-badge">芯片</span>
+      <div class="ticker">INTC</div>
+      <div class="name">Intel Corporation</div>
+      <div class="price-row">
+        <span class="price">$56.08</span>
+        <span class="change down">-3.76%</span>
+      </div>
+      <div class="stock-metrics">核心指标: 18A代工叙事 | 周五板块相对强度最佳 | 无新公告</div>
+      <div class="stock-reason">推荐: 低估值+防御属性获避险资金；18A进展无新披露，维持HOLD</div>
     </div>
 
     <div class="stock-card">
-      <span class="cat-badge">应用</span>
       <span class="rec-badge buy">BUY</span>
-      <div class="stock-header"><span class="ticker">GOOGL</span><span class="stock-sector">Alphabet</span></div>
-      <div class="price-row"><span class="price">$284.66</span><span class="change down">-1.48%</span></div>
-      <div class="stock-metrics">核心指标: Gemini 4 Carbon登顶 | Argon促销至11/30 | 连续两日相对强度第一</div>
-      <div class="stock-reason">推荐: 芯片崩跌中累计仅-1.5%；"AI防御股"定价正在形成，Gemini 4+激进定价双轮</div>
+      <span class="cat-badge">应用</span>
+      <div class="ticker">GOOGL</div>
+      <div class="name">Alphabet Inc.</div>
+      <div class="price-row">
+        <span class="price">$284.66</span>
+        <span class="change down">-1.48%</span>
+      </div>
+      <div class="stock-metrics">核心指标: Gemini 3.x + TPU自研 | 周五跌幅板块最浅 | AI应用防御首选</div>
+      <div class="stock-reason">推荐: 防御性AI核心；Common Sense普查显示YouTube为青少年不可取代平台</div>
     </div>
 
     <div class="stock-card">
-      <span class="cat-badge">应用</span>
       <span class="rec-badge buy">BUY</span>
-      <div class="stock-header"><span class="ticker">MSFT</span><span class="stock-sector">Microsoft</span></div>
-      <div class="price-row"><span class="price">$530.54</span><span class="change down">-4.54%</span></div>
-      <div class="stock-metrics">核心指标: Azure AI | Copilot渗透 | Anthropic IPO最大云受益映射</div>
-      <div class="stock-reason">推荐: 周五回吐但累计防御性仍强；Anthropic IPO若定价$300B+将重估Azure AI叙事</div>
+      <span class="cat-badge">应用</span>
+      <div class="ticker">MSFT</div>
+      <div class="name">Microsoft Corp.</div>
+      <div class="price-row">
+        <span class="price">$530.54</span>
+        <span class="change down">-4.54%</span>
+      </div>
+      <div class="stock-metrics">核心指标: Azure+Copilot | Morgan Stanley(11/6)：回调即买点 | 企业AI确定性最高</div>
+      <div class="stock-reason">推荐: 机构观点背书逢跌布局；Anthropic IPO定价将重锚应用层估值</div>
     </div>
 
     <div class="stock-card">
-      <span class="cat-badge">应用</span>
       <span class="rec-badge buy">BUY</span>
-      <div class="stock-header"><span class="ticker">META</span><span class="stock-sector">Meta Platforms</span></div>
-      <div class="price-row"><span class="price">$610.12</span><span class="change down">-3.16%</span></div>
-      <div class="stock-metrics">核心指标: Llama生态 | AI眼镜 | 相对抗跌持续</div>
-      <div class="stock-reason">推荐: 三日累计-5%远小于SOX；应用层避险逻辑 intact</div>
+      <span class="cat-badge">应用</span>
+      <div class="ticker">META</div>
+      <div class="name">Meta Platforms</div>
+      <div class="price-row">
+        <span class="price">$610.12</span>
+        <span class="change down">-3.16%</span>
+      </div>
+      <div class="stock-metrics">核心指标: 开源Llama+广告AI | AI眼镜放量 | 防御性应用</div>
+      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；广告变现+开源生态双击逻辑未变</div>
     </div>
 
     <div class="stock-card">
-      <span class="cat-badge">应用</span>
       <span class="rec-badge buy">BUY</span>
-      <div class="stock-header"><span class="ticker">AAPL</span><span class="stock-sector">Apple</span></div>
-      <div class="price-row"><span class="price">$342.36</span><span class="change down">-2.05%</span></div>
-      <div class="stock-metrics">核心指标: 端侧AI | 服务收入 | 防御轮动核心</div>
-      <div class="stock-reason">推荐: 三日累计+1.5%（11/5 +3.7%）；传统防御+端侧AI期权双逻辑</div>
+      <span class="cat-badge">应用</span>
+      <div class="ticker">AAPL</div>
+      <div class="name">Apple Inc.</div>
+      <div class="price-row">
+        <span class="price">$342.36</span>
+        <span class="change down">-2.05%</span>
+      </div>
+      <div class="stock-metrics">核心指标: 端侧AI入口 | 防御属性 | 无新公告</div>
+      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；端侧AI换机周期逻辑未变</div>
     </div>
 
     <div class="stock-card">
-      <span class="cat-badge">应用</span>
       <span class="rec-badge hold">HOLD</span>
-      <div class="stock-header"><span class="ticker">PLTR</span><span class="stock-sector">Palantir</span></div>
-      <div class="price-row"><span class="price">$160.38</span><span class="change down">-6.59%</span></div>
-      <div class="stock-metrics">核心指标: 高估值倍数 | 政府合同 | 去杠杆中首当其冲</div>
-      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；高beta仓位控制优先</div>
+      <span class="cat-badge">应用</span>
+      <div class="ticker">PLTR</div>
+      <div class="name">Palantir Technologies</div>
+      <div class="price-row">
+        <span class="price">$160.38</span>
+        <span class="change down">-6.59%</span>
+      </div>
+      <div class="stock-metrics">核心指标: 估值溢价极高 | AIP平台 | Anthropic定价若低将压应用层估值</div>
+      <div class="stock-reason">推荐: 本周Anthropic IPO定价=应用层估值再锚事件，落地前不加仓</div>
     </div>
 
     <div class="stock-card">
-      <span class="cat-badge">应用</span>
       <span class="rec-badge hold">HOLD</span>
-      <div class="stock-header"><span class="ticker">SNOW</span><span class="stock-sector">Snowflake</span></div>
-      <div class="price-row"><span class="price">$276.24</span><span class="change up">+2.48%</span></div>
-      <div class="stock-metrics">核心指标: 数据云 | AI消费 | 当日唯一收红美股应用持仓</div>
-      <div class="stock-reason">推荐: 逆势+2.48%；数据云在轮动中成为应用层内部新方向，观察持续性</div>
+      <span class="cat-badge">应用</span>
+      <div class="ticker">SNOW</div>
+      <div class="name">Snowflake Inc.</div>
+      <div class="price-row">
+        <span class="price">$276.235</span>
+        <span class="change up">+2.48%</span>
+      </div>
+      <div class="stock-metrics">核心指标: 周五逆势收红 | 数据云=应用层资金新方向 | 无新公告</div>
+      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；芯片崩跌中凸显相对强度</div>
     </div>
 
-    <div class="stock-card highlight-stock">
-      <span class="cat-badge">应用</span>
+    <div class="stock-card">
       <span class="rec-badge buy">BUY</span>
-      <div class="stock-header"><span class="ticker">BABA</span><span class="stock-sector">Alibaba</span></div>
-      <div class="price-row"><span class="price">$109.25</span><span class="change up">+3.76%</span></div>
-      <div class="stock-metrics">核心指标: 五连涨（+2.03%→+2.24%→+3.82%→+7.71%→+3.76%） | Anthropic IPO为中国ADR上市铺路预期 | Q3财报11月中旬</div>
-      <div class="stock-reason">推荐: 全球资金轮动中国资产最纯标的；Yahoo确认"Anthropic IPO将 paving the way for more Chinese listings"</div>
-    </div>
-
-    <div class="stock-card">
       <span class="cat-badge">应用</span>
-      <span class="rec-badge hold">HOLD</span>
-      <div class="stock-header"><span class="ticker">TSLA</span><span class="stock-sector">Tesla</span></div>
-      <div class="price-row"><span class="price">$358.20</span><span class="change down">-7.01%</span></div>
-      <div class="stock-metrics">核心指标: Robotaxi监管 | 高beta去杠杆 | 三日累跌超20%</div>
-      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；高估值+高beta双杀，仓位控制</div>
+      <div class="ticker">BABA</div>
+      <div class="name">Alibaba Group</div>
+      <div class="price-row">
+        <span class="price">$109.25</span>
+        <span class="change up">+3.76%</span>
+      </div>
+      <div class="stock-metrics">核心指标: 五连涨累计约+21% | 阿里云外部收入+45%(6月季) | BIS延期缓释GPU供给</div>
+      <div class="stock-reason">推荐: 中国AI资产重估+云增速加速；芯片资金轮动直接受益</div>
     </div>
 
     <div class="stock-card">
+      <span class="rec-badge hold">HOLD</span>
+      <span class="cat-badge">应用</span>
+      <div class="ticker">TSLA</div>
+      <div class="name">Tesla Inc.</div>
+      <div class="price-row">
+        <span class="price">$358.2</span>
+        <span class="change down">-7.01%</span>
+      </div>
+      <div class="stock-metrics">核心指标: Robotaxi/Optimus叙事 | 高beta无新催化 | 两日累跌约15%</div>
+      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；高beta属性放大跌幅</div>
+    </div>
+
+    <div class="stock-card">
+      <span class="rec-badge buy">BUY</span>
       <span class="cat-badge">能源</span>
-      <span class="rec-badge buy">BUY</span>
-      <div class="stock-header"><span class="ticker">CEG</span><span class="stock-sector">Constellation Energy</span></div>
-      <div class="price-row"><span class="price">$249.95</span><span class="change up">+1.72%</span></div>
-      <div class="stock-metrics">核心指标: 核电PPA | 数据中心供电 | 三日累计+4.2%，21只持仓中本周最强之一</div>
-      <div class="stock-reason">推荐: AI电力需求叙事在芯片崩跌中反而强化；数据中心政策限制利好存量核电资产</div>
+      <div class="ticker">CEG</div>
+      <div class="name">Constellation Energy</div>
+      <div class="price-row">
+        <span class="price">$249.95</span>
+        <span class="change up">+1.72%</span>
+      </div>
+      <div class="stock-metrics">核心指标: 核电PPA+AI数据中心供电 | 芯片崩跌中持续走强 | 防御+成长双属性</div>
+      <div class="stock-reason">推荐: 数据中心审批限制反而利好存量核电PPA资产，对冲配置核心</div>
     </div>
 
     <div class="stock-card">
-      <span class="cat-badge">能源</span>
       <span class="rec-badge hold">HOLD</span>
-      <div class="stock-header"><span class="ticker">CCJ</span><span class="stock-sector">Cameco</span></div>
-      <div class="price-row"><span class="price">$71.30</span><span class="change down">-0.53%</span></div>
-      <div class="stock-metrics">核心指标: 铀长协 | 产能爬坡 | 几乎平收=防御属性确认</div>
-      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；核电链中波动最小标的</div>
+      <span class="cat-badge">能源</span>
+      <div class="ticker">CCJ</div>
+      <div class="name">Cameco Corp.</div>
+      <div class="price-row">
+        <span class="price">$71.3</span>
+        <span class="change down">-0.53%</span>
+      </div>
+      <div class="stock-metrics">核心指标: 铀供需缺口 | 核电复兴原料端 | 周五几乎持平</div>
+      <div class="stock-reason">推荐: 暂无新催化剂，维持原评级；铀价无新数据</div>
     </div>
 
     <div class="stock-card">
-      <span class="cat-badge">能源</span>
       <span class="rec-badge spec">SPEC BUY</span>
-      <div class="stock-header"><span class="ticker">OKLO</span><span class="stock-sector">Oklo</span></div>
-      <div class="price-row"><span class="price">$23.57</span><span class="change up">+6.53%</span></div>
-      <div class="stock-metrics">核心指标: SMR叙事 | 单日+6.53%领涨21只持仓 | 三日累计转正</div>
-      <div class="stock-reason">推荐: 资金避险转向"AI电力"主题；SMR=数据中心供电瓶颈的远期期权，仓位控制优先</div>
+      <span class="cat-badge">能源</span>
+      <div class="ticker">OKLO</div>
+      <div class="price-row">
+        <span class="price">$23.565</span>
+        <span class="change up">+6.53%</span>
+      </div>
+      <div class="stock-metrics">核心指标: SMR小型模块化反应堆 | 核电叙事最强标的 | 两日逆势大涨</div>
+      <div class="stock-reason">推荐: AI电力叙事在芯片崩跌中独立走强；高波动 speculative 仓位</div>
     </div>
 
   </div>
 </div>
 
-<!-- Section 2 -->
+<!-- Section 2: Expert Consensus -->
 <div class="section">
   <div class="section-title"><span class="num">2</span> 专家共识：跨板块综合研判</div>
 
   <div class="insight-box">
     <span class="label">当日核心判断（投资决策委员会主席）</span>
     <div class="content">
-      <strong>AI交易三连重挫，SOX创2020年来最大周跌；BIS 50%规则周一（11/10）生效+NVDA财报11/17前，资金避险转向中国资产（BABA五连涨）与核电（OKLO +6.5%）。防御配置延续，事件落地前不抄底不追空。</strong>（97字）
+      <strong>BIS 50%规则暂停期延长至2027/1/10（11/5签署、11/9刊载），周四$3T暴跌的政策悬顶周末解除；叠加NVDA财报11/17与Anthropic本周路演，芯片超跌反弹窗口开启，但波动放大，逢反弹调结构：无裂缝核心（NVDA/TSM/ASML）+对冲轮动（BABA/CEG）。</strong>（98字）
     </div>
   </div>
 
   <div class="causal-chain">
     <div class="chain-title">因果链速览</div>
-    <div class="chain-item"><span class="key">触发因</span><span class="val">周四$3T市值蒸发后，周五大盘指数企稳（纳指+1%）但芯片继续重挫（MU -13.18%/AVGO -9.91%）→ 去杠杆进入"个股分化"阶段：无基本面裂缝的ASML/INTC抗跌，高beta存储/ASIC继续出清</span></div>
-    <div class="chain-item"><span class="key">传导</span><span class="val">芯片抛售资金不外逃市场，而是场内轮动：中国资产（BABA +3.76%五连涨）+核电/能源（OKLO +6.53%/CEG +1.72%）+数据云（SNOW +2.48%）→SOX周跌幅创2020年3月以来最大，但标普仅录得6月以来最差一周→市场并未定价系统性衰退</span></div>
-    <div class="chain-item"><span class="key">结论</span><span class="val">距离阶段性底部可能只差"BIS 50%规则落地"一个事件。规则延期/豁免→芯片暴力反弹（NVDA财报11/17为第二催化）；严格执行→TSM/ASML再探底后也可利空出尽。当前位置追空风险≥抄底风险</span></div>
-    <div class="chain-item"><span class="key">证伪信号</span><span class="val">① BIS规则严格执行且无豁免条款 ② NVDA财报数据中心收入<$85B ③ BABA跌破五连涨起点（$100）→轮动失败 ④ SOX周五盘中低点失守→新一轮去估值开始</span></div>
+    <div class="chain-item"><span class="key">触发因</span><span class="val">BIS于11/5签署final rule：Affiliates Rule（50%规则）暂停期延长至2027-01-10，11/9（明日）Federal Register刊载并生效（Kelley Drye 11/7、Baker McKenzie 11/6双源交叉验证）→ 上周四-五芯片$1.5T+市值蒸发的最大单一政策变量，从"周一落地"变为"14个月后"</span></div>
+    <div class="chain-item"><span class="key">传导</span><span class="val">政策尾部风险大幅缓释→周一开盘恐慌性卖压解除→资金从"避险轮动"（BABA/OKLO/CEG）部分回流芯片超跌核心；但反弹质量取决于两个新锚：① NVDA 11/17财报（预期~$108B、+106% YoY）② Anthropic本周路演定价（估值预期已从$1.5-2T下调至$1.2-1.3T，买方报价低至$1.1T，Bloomberg 11/6）——应用层估值锚下移会压制PLTR/SNOW类高倍数标的反弹高度</span></div>
+    <div class="chain-item"><span class="key">结论</span><span class="val">周一大概率高开修复，但"政策利好兑现+财报前观望"使反弹高度受限；策略：持有核心不追高，借反弹调出无基本面支撑的高beta（部分存储设备/高倍数应用），增配相对强度已验证的ASML/INTC/GOOGL与对冲腿BABA/CEG</span></div>
+    <div class="chain-item"><span class="key">证伪信号</span><span class="val">① Anthropic定价跌破$1T（应用层估值系统性下修）② NVDA财报数据中心收入低于$85B共识 ③ 周五SOX盘中低点失守（反弹证伪，进入二次探底）④ LME铜库存继续堆积+铜价破$13,500（宏观需求恶化叠加）</span></div>
   </div>
 
   <table class="data-table">
@@ -486,17 +483,17 @@
       <tr><th>维度</th><th>研判结论</th><th>置信度</th><th>关键支撑板块</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>技术趋势</strong></td><td>SOX三日累跌创2020年来最大周跌幅，趋势破坏确认；但周五大盘指数企稳（纳指+1%）暗示去杠杆接近尾声，200日均线下方弱势震荡为主</td><td>🔴 高（80%）</td><td>S1行情面板, S5芯片板块</td></tr>
-      <tr><td><strong>投资行为</strong></td><td>防御配置延续：芯片不加仓，持有NVDA/TSM/ASML核心仓；增配中国资产（BABA）+核电（CEG/OKLO）+防御应用（AAPL/GOOGL）；不追空，等待11/10与11/17两个事件点</td><td>🟢 中高（70%）</td><td>S3投资人论点, S6中国云, S14个性化</td></tr>
-      <tr><td><strong>风险预警</strong></td><td>① BIS 50%规则11/10生效（下周一，1个交易日）② 存储周期顶部确认中（MU -13.18%续跌，TrendForce 4Q26合约价涨幅收窄）③ Anthropic IPO定价若低于$300B将拖累整个AI一级估值锚</td><td>🔴 高（75%）</td><td>S12政治突发, S11大宗, S7 Agent</td></tr>
-      <tr><td><strong>时间窗口</strong></td><td>短期避险（至11/10 BIS落地）→ 事件驱动反弹窗口（11/10-11/17 NVDA财报）→ 12月初年末再平衡为战略再入场窗口</td><td>🟡 中（60%）</td><td>S2全板块综合</td></tr>
+      <tr><td><strong>技术趋势</strong></td><td>SOX两日累跌创2020年来最大周跌幅，趋势破坏确认；但周五个股分化（ASML -4.8%/INTC -3.8% vs MU -13.2%）显示去杠杆进入尾声，超跌反弹具备技术基础，压力位在10日均线</td><td>🟡 中（65%）</td><td>S1行情面板, S5芯片板块</td></tr>
+      <tr><td><strong>投资行为</strong></td><td>事件驱动周：周一BIS刊载（情绪修复）→周中Anthropic路演（估值锚）→11/17 NVDA财报（基本面锚）；建议不追高、借反弹调结构：核心NVDA/TSM/ASML+对冲BABA/CEG，高倍数PLTR/SNOW等Anthropic定价落地</td><td>🟢 中高（70%）</td><td>S3投资人论点, S7 Agent, S12政策</td></tr>
+      <tr><td><strong>风险预警</strong></td><td>① Anthropic估值下调至$1.2-1.3T=一级市场AI估值锚下移，二级高倍数应用股承压 ② Macquarie(11/3)警示12月加息50bp风险——利率与估值双杀尾部风险未除 ③ UBS(11/6)：2028年约30%新增数据中心产能面临政治风险，算力政治化是2027年主题</td><td>🔴 高（75%）</td><td>S7 Agent, S11大宗, S12政策</td></tr>
+      <tr><td><strong>时间窗口</strong></td><td>短期：周一情绪修复反弹（BIS刊载日）→ 周中：Anthropic定价信号 → 11/17：NVDA财报定调年末行情 → 12月：FOMC+年末再平衡</td><td>🟡 中（60%）</td><td>S2全板块综合</td></tr>
     </tbody>
   </table>
 
   <div class="insight-box">
     <span class="label">跨板块关联发现</span>
     <div class="content">
-      <strong>周五盘面揭示了一个比暴跌本身更重要的结构：资金没有离开AI，而是在AI内部重新定价。</strong>证据链：① BABA五连涨累计+21%，动力来自"Anthropic IPO为中国ADR上市铺路"（Yahoo 11/6）——资金在AI叙事内从美国芯片转向中国应用 ② OKLO +6.53%/CEG +1.72%，AI电力叙事在芯片崩跌中走强——数据中心政策限制（46/47社区通过）反而利好存量核电PPA资产 ③ SNOW +2.48%逆势收红，数据云成为应用层内部新方向。<strong>投资含义：AI交易从"芯片单引擎"演变为"芯片+中国+电力"三引擎轮动——组合需要对冲结构而非单纯降仓。芯片仓位对冲工具：BABA（估值修复）+CEG（政策受益）+黄金。</strong>
+      <strong>BIS延期与Anthropic估值下调同时发生，揭示AI交易的定价逻辑正在从"政策风险折价"切换到"现金流贴现"。</strong>证据链：① 政策端——50%规则延至2027/1/10，说明出口管制已进入"可预测化"轨道，政策不确定性溢价应系统性下调（利好NVDA/TSM/ASML估值分位修复）② 资产端——Anthropic估值从$1.5-2T下调至$1.2-1.3T、Q3经营亏损$567M，一级市场开始用"亏损收窄速度"而非"叙事"定价，这对尚未盈利的应用层是估值纪律收紧信号 ③ 大宗商品端——铜两周累跌约6%、LME库存+15%，宏观需求定价与AI结构性需求叙事背离，提示"AI独强"格局下宏观对冲不可缺位。<strong>投资含义：组合应在"政策缓释受益的芯片核心"+"估值纪律下的应用层谨慎"+"宏观对冲（铜弱=全球制造业弱）"三层同时布防。</strong>
     </div>
   </div>
 </div>
@@ -505,62 +502,74 @@
 <div class="section">
   <div class="section-title"><span class="num">3</span> 投资人及权威机构最新论点</div>
 
-  <div class="insight-box">
-    <span class="label">核心张力框架</span>
-    <div class="content">
-      <strong>连续三日暴跌后的新分歧——是"周期顶部"还是"政策噪音"？：</strong>① <strong>周期派</strong>：Peter Boockvar认为MU是"压垮骆驼的最后一根稻草"——存储历来是半导体周期最敏感的先行指标，MU台厂暂停+股价两日-30%可能标志2025年以来上行周期终结 ② <strong>仓位派</strong>：Mike Bailey认为"AI交易降温担忧"主要是年末降风险+政策不确定性，一旦BIS规则落地+NVDA财报确认需求，反弹将快速修复 ③ <strong>轮动派</strong>（前两日已覆盖）：Hao Hong/Bloomberg确认资金向中国资产迁移。<strong>当日权力平衡：周期派首次与仓位派平分秋色——这是三日暴跌的合理演进，但尚无证据支持"AI资本开支崩塌"论。</strong>
-    </div>
+  <div class="quote-box">
+    <div class="quote-text">"AI资本开支周期完好无损。本轮回调应被视为布局优质AI资产的入场点，而非周期见顶信号。"（研报要点转述）</div>
+    <div class="quote-source">Morgan Stanley 策略研报</div>
+    <div class="quote-context">2026-11-06 | 场合：芯片暴跌次日发布、via Yahoo Finance | 明确反对"AI资本开支见顶论"，与周四市场恐慌定价形成对立</div>
+    <a href="https://www.morganstanley.com/" class="play-btn" target="_blank">▶ 播放原声</a>
   </div>
 
   <div class="quote-box">
-    <div class="quote-text">"Micron was kind of the straw that broke the camel's back — the stock was the epicenter of Thursday's $3 trillion wipeout, and the selling continued Friday because investors are re-rating the memory cycle."</div>
-    <div class="quote-source">— Peter Boockvar, Bleakley Advisory Group CIO</div>
-    <div class="quote-context">场合：Yahoo Finance 2026-11-06市场直播博客，评周五芯片股续跌；核心观点：MU是本轮抛售的震中，存储周期重定价是芯片去杠杆的核心驱动力。日期：2026-11-06</div>
-    <a href="https://finance.yahoo.com/markets/live/stock-market-today-friday-november-6-dow-sp-500-nasdaq-jobs-report-earnings-135953863.html" class="play-btn" target="_blank">Yahoo Finance 原文</a>
+    <div class="quote-text">"市场低估了美联储12月加息50个基点的风险——通胀数据若再度抬头，当前估值水平将同时面临利率与盈利双杀。"（观点转述）</div>
+    <div class="quote-source">David Doyle — Macquarie 首席经济学家</div>
+    <div class="quote-context">2026-11-03 | 场合：via Yahoo Finance 宏观评论 | 与华尔街主流"降息延续"假设相反，是12月FOMC前的关键异见</div>
+    <a href="https://www.macquarie.com/" class="play-btn" target="_blank">▶ 播放原声</a>
   </div>
 
   <div class="quote-box">
-    <div class="quote-text">"There's a worry that maybe the AI trade is cooling a bit — signs that data center buildouts may be slowing. But the megacap earnings backdrop remains intact, and Friday's rebound in the Nasdaq suggests the selling is getting exhausted."</div>
-    <div class="quote-source">— Mike Bailey, FBB Capital Partners CIO</div>
-    <div class="quote-context">场合：Yahoo Finance 2026-11-06市场直播博客，评周五大盘企稳但芯片续跌；核心观点：担忧真实存在但大盘反弹显示抛售动力衰减。日期：2026-11-06</div>
-    <a href="https://finance.yahoo.com/markets/live/stock-market-today-friday-november-6-dow-sp-500-nasdaq-jobs-report-earnings-135953863.html" class="play-btn" target="_blank">Yahoo Finance 原文</a>
+    <div class="quote-text">"到2028年，全球约30%的新增数据中心产能将面临政治与许可风险——算力基础设施的政治化将是未来两年的核心折价因子。"（研报要点转述）</div>
+    <div class="quote-source">UBS 研究部</div>
+    <div class="quote-context">2026-11-06 | 场合：via Reuters | 美国46/47社区审批限制、欧洲电网瓶颈均被量化计入数据中心供给模型</div>
+    <a href="https://www.ubs.com/" class="play-btn" target="_blank">▶ 播放原声</a>
   </div>
 
+  <table class="data-table">
+    <thead>
+      <tr><th>机构/人物</th><th>核心观点</th><th>时间</th><th>信号方向</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Morgan Stanley</td><td>AI资本开支周期完好，回调=入场点</td><td>2026-11-06</td><td>🟢 结构性看涨</td><td>逢跌布局NVDA/MSFT/GOOGL优质核心</td></tr>
+      <tr><td>David Doyle (Macquarie)</td><td>12月加息50bp风险被市场低估</td><td>2026-11-03</td><td>🔴 宏观风险</td><td>高估值成长股尾部风险；关注12月FOMC</td></tr>
+      <tr><td>UBS</td><td>2028年约30%新增数据中心产能面临政治风险</td><td>2026-11-06</td><td>🟡 结构性折价</td><td>已获许可的存量电力资产（CEG）折价应修复</td></tr>
+    </tbody>
+  </table>
+
   <div class="insight-box">
-    <span class="label">观点矩阵（言论考古）</span>
+    <span class="label">核心张力</span>
     <div class="content">
-      <strong>Marc Andreessen</strong>（2026-10-29，a16z Podcast）：Agentic Web框架——<em>协议层乐观判断不变，但暴跌延迟商业化时间表</em><br>
-      <strong>Larry Fink</strong>（2026-05-09，BlackRock）："AI基础设施存在'反向泡沫'"——<em>11/6盘中未发表新言论；其"超级建设"论与三日暴跌形成鲜明反差，若其公开表态将为关键信号</em><br>
-      <strong>Jensen Huang</strong>（2026-10下旬，财报电话会）：Rubin平台六芯片流片，单客户需求达"数GW"级别——<em>需求论据未变；11/17 Q3财报为下一个验证点，Yahoo已确认日期</em><br>
-      <strong>Ray Dalio / Sundar Pichai / Sam Altman</strong>：当日无≤7天新鲜公开言论，不收录（规则：quote日期距今日>7天禁止收录）。<br><br>
-      <strong>矩阵结论：</strong>可引用CIO级言论中，周期派（Boockvar）与仓位派（Bailey）并存，无一人断言"AI资本开支崩塌"。与11/5相比（谨慎派主导），周五新增"抛售衰竭"证据（Bailey）——情绪修复的第一步通常是争议重现，而非一致看多。
+      <strong>Morgan Stanley的"周期完好论" vs Macquarie的"加息尾部风险" vs UBS的"政治折价论"</strong>：三者共同构成下周操作框架——MS告诉你"跌下来该买什么"（AI核心），Doyle告诉你"为什么不能满仓"（12月利率尾部），UBS告诉你"结构性该超配什么"（已锁定许可的存量电力/已获产能的芯片制造）。行动结论：仓位中性偏积极（55-65%），结构上超配"政策确定性资产"（CEG/TSM/NVDA），对冲利率风险（短久期+黄金），回避无许可依赖的新建数据中心概念股。
     </div>
   </div>
 </div>
 
 <!-- Section 4 -->
 <div class="section">
-  <div class="section-title"><span class="num">4</span> AI独角兽模型技术动向</div>
+  <div class="section-title"><span class="num">4</span> AI独角兽模型技术动向（覆盖7家：Anthropic / OpenAI / Google / DeepSeek / Bytedance / Moonshot / Minimax）</div>
+
+  <ul class="signal-list">
+    <li><span class="tag tag-hot">HOT</span><div><strong>Anthropic IPO估值下调至$1.2-1.3T（Bloomberg，2026-11-06）：</strong>路演定于11/9当周启动；估值预期较此前$1.5-2T区间下调约20-35%，部分买方报价低至$1.1T；Q3营收$16.96B（年化约$68B运行率）、经营亏损$567M（亏损率收窄中）；11/2提交amended S-1。<em>So what：应用层估值锚本周重新定价——定价高于$1.3T将提振PLTR/SNOW/MSFT应用层情绪；低于$1T则触发高倍数应用股系统性下修。</em></div></li>
+    <li><span class="tag tag-new">周末无增量</span><div><strong>OpenAI / Google / DeepSeek / Bytedance / Moonshot / Minimax：</strong>周末无公司级新公告；近期状态参见11/07晨报，不重复收录。</div></li>
+  </ul>
 
   <table class="data-table">
     <thead>
-      <tr><th>公司</th><th>最新模型/版本</th><th>发布/更新日期</th><th>关键数据</th><th>当日信号</th><th>投资含义</th></tr>
+      <tr><th>公司</th><th>最新动向</th><th>关键数据</th><th>时间</th><th>投资含义</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>Anthropic</strong></td><td>Claude Opus 5.5</td><td>2026-09-22</td><td>IPO路演推进中，目标估值$300-350B（Reuters via IBD 2026-11-05）</td><td><span class="tag tag-hot">HOT</span>IPO路演=AI Agent经济最大机构定价事件；若定价$350B将成史上最大科技IPO</td><td>Agent收入倍数的一级市场定价锚；IPO成功→二级市场Agent叙事修复（MSFT/GOOGL映射）</td></tr>
-      <tr><td><strong>OpenAI</strong></td><td>GPT-6 Cyber</td><td>2026-11-05</td><td>Cyber安全专用模型，面向企业SOC场景</td><td><span class="tag tag-new">NEW</span>垂直安全模型发布=OpenAI企业化战略加速</td><td>安全垂直模型确认"模型即产品"路线；与Anthropic企业市场正面竞争</td></tr>
-      <tr><td><strong>Google</strong></td><td>Gemini 4 Carbon / Argon</td><td>2026-10-28</td><td>Carbon登顶AA Index；Argon促销价$2/$10 per MTok至11/30</td><td style="color:var(--text2)">昨日已覆盖，无新进展</td><td>GOOGL BUY — 模型层竞争力+云分发双轮，连续三日相对强度第一</td></tr>
-      <tr><td><strong>DeepSeek</strong></td><td>V4.1 / V4-Pro</td><td>2026-11-04（前日已覆盖）</td><td>V4-Pro API $1.32/$3.96 per MTok</td><td style="color:var(--text2)">前日已覆盖，无新进展</td><td>开源权重+低价API=推理成本通缩主引擎</td></tr>
-      <tr><td><strong>ByteDance</strong></td><td>Doubao系列</td><td>2026-Q3</td><td>火山引擎分发</td><td style="color:var(--text2)">当日无重大投资信号</td><td>关注ToC Agent与抖音生态结合</td></tr>
-      <tr><td><strong>Moonshot</strong></td><td>Kimi K3.1 Pro（权重开源）</td><td>2026-11-04（前日已覆盖）</td><td>MIT协议开源；SGLang 2日内原生适配（前日已覆盖）</td><td style="color:var(--text2)">前日已覆盖，无新进展</td><td>开源社区顶级模型供给+1</td></tr>
-      <tr><td><strong>Minimax</strong></td><td>M系列</td><td>2026-Q3</td><td>海螺Agent</td><td style="color:var(--text2)">当日无重大投资信号</td><td>关注Agent产品化进展</td></tr>
+      <tr><td><strong>Anthropic</strong></td><td>IPO路演本周启动，估值预期下调至$1.2-1.3T</td><td>Q3营收$16.96B | 经营亏损$567M | amended S-1 (11/2)</td><td>2026-11-06</td><td>应用层估值锚；定价结果直接传导PLTR/SNOW/MSFT</td></tr>
+      <tr><td style="color:var(--text2)">OpenAI</td><td style="color:var(--text2)">周末无增量信号</td><td style="color:var(--text2)">—</td><td style="color:var(--text2)">—</td><td style="color:var(--text2)">维持此前判断</td></tr>
+      <tr><td style="color:var(--text2)">Google</td><td style="color:var(--text2)">周末无增量信号</td><td style="color:var(--text2)">—</td><td style="color:var(--text2)">—</td><td style="color:var(--text2)">维持此前判断</td></tr>
+      <tr><td style="color:var(--text2)">DeepSeek</td><td style="color:var(--text2)">周末无增量信号</td><td style="color:var(--text2)">—</td><td style="color:var(--text2)">—</td><td style="color:var(--text2)">维持此前判断</td></tr>
+      <tr><td style="color:var(--text2)">Bytedance</td><td style="color:var(--text2)">周末无增量信号</td><td style="color:var(--text2)">—</td><td style="color:var(--text2)">—</td><td style="color:var(--text2)">维持此前判断</td></tr>
+      <tr><td style="color:var(--text2)">Moonshot</td><td style="color:var(--text2)">周末无增量信号</td><td style="color:var(--text2)">—</td><td style="color:var(--text2)">—</td><td style="color:var(--text2)">维持此前判断</td></tr>
+      <tr><td style="color:var(--text2)">Minimax</td><td style="color:var(--text2)">周末无增量信号</td><td style="color:var(--text2)">—</td><td style="color:var(--text2)">—</td><td style="color:var(--text2)">维持此前判断</td></tr>
     </tbody>
   </table>
 
   <div class="insight-box">
-    <span class="label">关键洞察</span>
+    <span class="label">信号提炼</span>
     <div class="content">
-      <strong>模型层本周最重要的信号不是模型，而是估值：Anthropic IPO路演目标$300-350B。</strong>这个数字意味着什么：① 若按2026E收入$12-15B计算，PS倍数20-29x——高于任何二级市场SaaS，但低于当前部分Agent一级估值 ② 它为整个"Agent经济"提供机构级定价锚——Cognition/Cursor等一级估值将获得重估基准 ③ IPO时间窗口（路演中，预计2027初上市）恰逢AI二级市场情绪低点，定价结果将双向影响：定价成功→Agent叙事全面修复；定价折让→一级泡沫论再起。<strong>投资含义：Anthropic IPO是2026Q4-2027Q1 AI板块最大的单一催化事件，其进展应纳入每日跟踪。</strong>
+      <strong>本周最大事件不是模型发布，而是Anthropic的定价。</strong>Q3营收$16.96B（年化~$68B）已接近Oracle体量，但经营亏损$567M说明"规模不经济"仍未打破。买方报价$1.1-1.3T对应约15-19x P/S——这将成为所有AI应用公司的隐含估值天花板/地板。<strong>跟踪要点：路演周（11/9起）的机构认购热度、定价区间是否进一步下移、以及上市首日的破发/溢价幅度。</strong>
     </div>
   </div>
 </div>
@@ -571,26 +580,26 @@
 
   <table class="data-table">
     <thead>
-      <tr><th>标的</th><th>收盘（2026-11-06）</th><th>日涨跌</th><th>当日驱动信号</th><th>来源</th></tr>
+      <tr><th>公司</th><th>最新信号</th><th>数据</th><th>日涨跌</th><th>时间</th><th>来源</th><th>投资含义</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>NVDA</strong></td><td>$186.69</td><td class="negative">-6.72%</td><td>三日累跌后周五续挫；Yahoo确认Q3财报预计11/17公布，被市场视为SOX走势试金石；Rubin GW级需求不变</td><td>ifind, Yahoo Finance 2026-11-06</td></tr>
-      <tr><td><strong>AMD</strong></td><td>$447.10</td><td class="negative">-8.53%</td><td>随板块beta抛售；Helios/Venice无新消息；三日累计跌幅小于MU/AVGO</td><td>ifind 2026-11-06</td></tr>
-      <tr><td><strong>INTC</strong></td><td>$56.08</td><td class="negative">-3.76%</td><td>芯片板块中最抗跌之一；18A良率验证期为下一个催化</td><td>ifind 2026-11-06</td></tr>
-      <tr><td><strong>MU</strong></td><td>$690.45</td><td class="negative">-13.18%</td><td>Boockvar称其为"压垮骆驼的最后一根稻草"；两日累跌超30%；但TrendForce 4Q26 DRAM合约价仍预测+10-15% QoQ——股价与基本面数据严重背离</td><td>ifind, Yahoo Finance 2026-11-06, TrendForce 2026-11-04</td></tr>
-      <tr><td><strong>TSM</strong></td><td>$375.29</td><td class="negative">-5.17%</td><td>CoWoS满产+2nm量产基本面未变；11/10 BIS 50%规则为最大单一变量</td><td>ifind 2026-11-06</td></tr>
-      <tr><td><strong>AVGO</strong></td><td>$293.23</td><td class="negative">-9.91%</td><td>三日累跌超25%，无公司特定利空；定制ASIC订单管线无变化</td><td>ifind 2026-11-06</td></tr>
-      <tr><td><strong>ASML</strong></td><td>$1,424.75</td><td class="negative">-4.78%</td><td>明显抗跌（-4.78% vs 芯片均值约-8%）；EUV垄断逻辑获资金认可</td><td>ifind 2026-11-06</td></tr>
-      <tr><td><strong>AMAT</strong></td><td>$332.72</td><td class="negative">-9.93%</td><td>随设备股去估值；先进封装敞口长期利好未变</td><td>ifind 2026-11-06</td></tr>
-      <tr><td><strong>LRCX</strong></td><td>$200.44</td><td class="negative">-9.48%</td><td>存储设备敞口最大；MU暂停台厂直接冲击2027存储capex预期</td><td>ifind 2026-11-06</td></tr>
-      <tr><td><strong>QCOM</strong></td><td>$165.41</td><td class="negative">-4.49%</td><td>相对强度显现；端侧AI NPU 80 TOPS领先但PC大盘疲软限制放量</td><td>ifind 2026-11-06</td></tr>
+      <tr><td><strong>NVIDIA</strong></td><td>11/17盘后财报前瞻</td><td>市场预期营收~$108B(+106% YoY)，non-GAAP毛利率~74%</td><td><span class="change down">-6.72%</span></td><td>2026-11-05</td><td>Motley Fool Earnings Preview</td><td>BUY核心 — BIS延期清除政策悬顶，财报为下一催化剂；两日累跌近19%后风险收益比显著改善</td></tr>
+      <tr><td><strong>AMD</strong></td><td>无公司级新公告</td><td>—</td><td><span class="change down">-8.53%</span></td><td>2026-11-06</td><td>—</td><td>BUY — 暂无新催化剂，维持原评级；MI450 2026H2叙事未变，超跌反弹高beta</td></tr>
+      <tr><td><strong>Intel</strong></td><td>无公司级新公告</td><td>—</td><td><span class="change down">-3.76%</span></td><td>2026-11-06</td><td>—</td><td>HOLD — 周五板块相对强度最佳，低估值防御属性获避险资金；18A无新披露</td></tr>
     </tbody>
   </table>
 
+  <div class="quote-box">
+    <div class="quote-text">"Nvidia investors are paying attention to Nov. 17"——财报前瞻指出：市场预期Q3 FY27营收约$108B、同比+106%，non-GAAP毛利率约74%；Blackwell/Rubin交接期的供给持续性为最大看点。</div>
+    <div class="quote-source">Motley Fool — NVDA Earnings Preview</div>
+    <div class="quote-context">2026-11-05 | 场合：财报前瞻分析 | <a href="https://finance.yahoo.com/markets/stocks/articles/nvidia-investors-paying-attention-nov-120500580.html" class="source-link" target="_blank">原文链接</a></div>
+    <a href="https://finance.yahoo.com/markets/stocks/articles/nvidia-investors-paying-attention-nov-120500580.html" class="play-btn" target="_blank">▶ 阅读原文</a>
+  </div>
+
   <div class="insight-box">
-    <span class="label">大佬评论</span>
+    <span class="label">竞争格局</span>
     <div class="content">
-      <strong>三日暴跌中最重要的一个背离：MU股价与存储基本面数据方向相反。</strong>TrendForce 11/4发布4Q26预测：DRAM合约价+10-15% QoQ、NAND +15-20% QoQ、enterprise SSD需求accelerating——全是利好。但MU两日-30%。这说明当前交易的不是基本面，而是<b>周期顶部恐慌</b>：市场担心的是2027年（MU暂停台厂=管理层自己也在暗示capex见顶）。<strong>行动：① NVDA 11/17财报前，芯片仓位维持但不加——BIS 11/10是第一道关 ② MU维持HOLD而非SELL——合约价仍在上涨，若Q1财报确认HBM4毛利率，当前价位是情绪低点 ③ ASML/INTC的相对强度提示：EUV垄断+18A反转属于"越跌越确认"的结构性逻辑。</strong>
+      <strong>本周焦点从"竞争"暂时让位于"系统性定价"。</strong>周四-五的暴跌与个股分化（NVDA两日-19% vs INTC两日-17%但周五仅-3.8%）说明市场在区分"基本面裂缝"与"流动性冲击"：NVDA/AMD/AVGO属于后者（无公司级负面新闻），MU/LRCX属于前者（存储周期预期下修）。Morgan Stanley 11/6研报的"周期完好论"若被NVDA财报验证，芯片板块将获得V型修复的第二个支点（第一个是BIS延期）。<strong>11/17财报关键数：数据中心收入是否≥$85B共识、毛利率是否守住~74%、Rubin量产时间表。</strong>
     </div>
   </div>
 </div>
@@ -601,21 +610,19 @@
 
   <table class="data-table">
     <thead>
-      <tr><th>标的/事件</th><th>关键数据</th><th>来源/时间</th><th>投资含义</th></tr>
+      <tr><th>厂商</th><th>AI收入/增速</th><th>模型/产品</th><th>关键数据（含日期）</th><th>投资含义</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>BABA +3.76%</strong></td><td>$109.25；五连涨累计+21%（+2.03%→+2.24%→+3.82%→+7.71%→+3.76%）</td><td>ifind 2026-11-06</td><td><span class="tag tag-hot">HOT</span>全球AI资金轮动最大受益者；五连涨=配置级而非交易级流入</td></tr>
-      <tr><td><strong>Anthropic IPO溢出效应</strong></td><td>Yahoo 11/6："Anthropic blockbuster IPO will pave the way for more Chinese listings"</td><td>Yahoo Finance 2026-11-06</td><td>中国ADR上市通道预期打开=估值系统性重估催化</td></tr>
-      <tr><td><strong>BABA Q3财报</strong></td><td>11月中旬；云收入增速为核心变量</td><td>公司日历</td><td>若云增速≥20%确认AI驱动，$120目标价有支撑</td></tr>
-      <tr><td><strong>DeepSeek V4.1 + Kimi K3.1开源</strong></td><td>中国开源模型"双雄"格局（11/4，前日已覆盖）</td><td>官方GitHub 2026-11-04</td><td>开源权重→云托管需求→BABA/火山引擎受益</td></tr>
-      <tr><td><strong>恒生科技跟涨</strong></td><td>BABA五连涨期间恒生科技同步走强</td><td>ifind 2026-11-06</td><td>板块性确认=南向+全球资金共振</td></tr>
+      <tr><td><strong>阿里云</strong></td><td>外部云收入+45% YoY（6月季，22个季度以来最快）</td><td>Qwen系列 + MaaS平台</td><td>AI产品收入RMB124亿、连续12季三位数增长（占外部收入35%）；MaaS年化收入超RMB160亿（截至2026年8月）；adj. EBITA +133%至RMB56.3亿（2026-10-29披露，via Yahoo Finance/Motley Fool）</td><td>BABA BUY — AI货币化加速+亏损收窄；BIS延期进一步缓释GPU供给不确定性；11月中旬下一财报为催化剂</td></tr>
+      <tr><td><strong>腾讯云</strong></td><td colspan="4" style="color:var(--text2)">周末无增量信号；微信Agent生态进展参见近期晨报，维持原判断</td></tr>
+      <tr><td><strong>百度</strong></td><td colspan="4" style="color:var(--text2)">周末无增量信号；维持原判断</td></tr>
     </tbody>
   </table>
 
   <div class="insight-box">
-    <span class="label">关键洞察</span>
+    <span class="label">结构性信号</span>
     <div class="content">
-      <strong>BABA的五连涨正在从"轮动交易"演变为"独立行情"：</strong>三个升级证据：① Yahoo 11/6首次将Anthropic IPO与中国ADR上市直接关联——叙事从中国AI云升级到"全球AI资本重新配置" ② 五连涨中涨幅扩大（+2%→+7.7%→+3.8%）且发生在美股AI板块三日崩跌期——资金独立性确认 ③ $109.25已站稳$110心理关口下方，若Q3财报（11月中旬）确认云增速≥20%，$120-$125为下一目标区间。<strong>风险：若财报云增速<15%或Anthropic IPO定价折让，五连涨可能快速回吐。仓位建议：BABA为当前组合中唯一可加仓标的，但加仓上限不超过组合10%。</strong>
+      <strong>BABA五连涨（累计约+21%，截至周五）的驱动正在从"资金避险轮动"升级为"基本面验证"。</strong>① 6月季云收入+45%是22个季度以来最快增速，AI产品连续12季三位数增长——AI货币化不再只是叙事 ② BIS 50%规则延期至2027/1/10，中国云厂商获取先进GPU的政策不确定性显著缓释，阿里云MaaS平台产能约束减轻 ③ 民主党横扫国会后，中概股审计/退市风险降温。<strong>风险：Macquarie警示的12月加息50bp将同时冲击中概股估值；Anthropic IPO若定价疲软将拖累全球AI应用估值——BABA的+45%云增速是穿越估值波动的护城河。</strong>
     </div>
   </div>
 </div>
@@ -624,28 +631,26 @@
 <div class="section">
   <div class="section-title"><span class="num">7</span> AI Agent应用趋势</div>
 
+  <ul class="signal-list">
+    <li><span class="tag tag-hot">HOT</span><div><strong>Anthropic IPO=Agent经济最大单一定价事件（Bloomberg 11/6）：</strong>估值预期$1.2-1.3T、Q3营收$16.96B、经营亏损$567M、路演11/9当周。<em>So what：Anthropic年化收入~$68B已证明企业级Agent/API付费意愿；其定价将决定Cursor/Cognition等二级Agent公司下一轮融资环境，并反向影响MSFT/GOOGL的AI收入倍数。</em></div></li>
+    <li><span class="tag tag-new">近期信号</span><div><strong>编程Agent格局（2026-10-21，New Market Pitch）：</strong>Cursor（Anysphere，SpaceX 8月收购后）仍领先；Cognition年化收入突破$1B成最大独立挑战者。背景信息，无周末增量。</div></li>
+  </ul>
+
   <table class="data-table">
     <thead>
-      <tr><th>信号</th><th>关键数据</th><th>来源/时间</th><th>投资含义</th></tr>
+      <tr><th>趋势</th><th>核心信号</th><th>数据/时间</th><th>投资含义</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>Anthropic IPO路演</strong></td><td>目标估值$300-350B；AI Agent经济史上最大机构定价事件</td><td>Reuters via IBD 2026-11-05</td><td><span class="tag tag-hot">HOT</span>Agent收入倍数定价锚；IPO成功→Agent叙事全面修复</td></tr>
-      <tr><td><strong>OpenAI GPT-6 Cyber</strong></td><td>安全垂直模型，企业SOC场景</td><td>2026-11-05</td><td>垂直Agent商业化加速；"模型即产品"路线确认</td></tr>
-      <tr><td><strong>Cursor/Anysphere（背景）</strong></td><td>ARR $4B；编程Agent份额26%</td><td>The Information 2026-10下旬</td><td>Agent商业化验证；二级市场暂无直接映射</td></tr>
-      <tr><td><strong>Cognition/Devin（背景）</strong></td><td>估值$2B+；从军编程扩展到IT运维</td><td>TechCrunch 2026-10</td><td>垂直Agent可行性验证</td></tr>
+      <tr><td><strong>企业Agent/API</strong></td><td>Anthropic IPO定价本周落地</td><td>年化收入~$68B运行率；估值$1.2-1.3T（2026-11-06）</td><td>MSFT/GOOGL — 企业AI付费验证，定价强则应用层情绪修复</td></tr>
+      <tr><td><strong>编程Agent</strong></td><td>Cursor领先+Cognition破$1B</td><td>2026-10-21（背景）</td><td>编程仍是最先PMF场景；M&A退出通道已打开（SpaceX/Cursor）</td></tr>
+      <tr><td><strong>高倍数应用</strong></td><td>Anthropic估值纪律收紧</td><td>买方报价低至$1.1T（2026-11-06）</td><td>PLTR/SNOW — 本周定价落地前保持谨慎，避免高倍数暴露</td></tr>
     </tbody>
   </table>
-
-  <ul class="signal-list">
-    <li><span class="tag tag-key">KEY</span><span>本周Agent板块无独立行情，但Anthropic IPO路演正在创造<b>一级市场的独立定价</b>——这是Agent经济脱离二级市场情绪波动的首次证据</span></li>
-    <li><span class="tag tag-new">NEW</span><span>GPT-6 Cyber发布标志OpenAI从通用模型向垂直安全Agent扩张，与Anthropic企业市场正面交锋</span></li>
-    <li><span class="tag tag-hot">HOT</span><span>若Anthropic按$300B+定价成功，Cursor/Cognition等一级估值将获得30-50%重估空间，二级市场Agent映射（MSFT/GOOGL/PLTR）同步受益</span></li>
-  </ul>
 
   <div class="insight-box">
     <span class="label">关键洞察</span>
     <div class="content">
-      <strong>Agent板块正在经历"二级跌、一级涨"的背离：</strong>二级市场Agent股（PLTR -6.59%周五）随大盘去杠杆，但一级市场Anthropic寻求$300-350B估值+OpenAI发布垂直安全模型——Agent商业化在加速而非减速。这种背离通常以两种方式收敛：① Anthropic IPO定价成功→一级估值锚上修→二级Agent股补涨 ② IPO折让→一级泡沫确认→二级继续杀估值。<strong>当前无法判断方向，但11/10-11/17的双事件窗口（BIS+NVDA财报）将决定哪种情景兑现。在此之前，Agent仓位维持HOLD，不做方向性押注。</strong>
+      <strong>Agent经济的"估值锚"本周从一级市场移到公开市场门口。</strong>Anthropic亏损$567M/季仍获$1.2T+报价，说明机构定价核心变量是"收入增速×企业留存"，而非短期盈利。对二级市场的映射：① 直接对标——PLTR（政府Agent）/SNOW（数据Agent）的P/S将被重新审视 ② 供应链——Agent收入增速决定云厂商capex强度，间接绑定NVDA财报预期 ③ 风险——若路演认购冷淡，一级估值倒挂将迫使VC减记组合，波及未上市Agent公司融资。<strong>本周跟踪：路演认购倍数、定价区间修正、基石投资者名单。</strong>
     </div>
   </div>
 </div>
@@ -659,38 +664,34 @@
       <tr><th>协议/标准</th><th>最新进展</th><th>关键数据</th><th>时间</th><th>投资含义</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>MCP</strong></td><td>2026-07-28 spec为迄今最大修订：无状态核心+12个月弃用期（至2027-07）</td><td>SDK周下载92.2M（A2A的22倍）；注册服务器40,965个，9月单月+11,902个</td><td>2026-Q3</td><td>MSFT BUY — 协议层垄断加速；9月注册服务器增速40%+=生态爆发</td></tr>
-      <tr><td><strong>A2A</strong></td><td>"A2Family"扩展包将agent间协调接入真实支付场景</td><td>周下载4.5M；150+支持组织</td><td>2026-10-30</td><td>GOOGL HOLD — 支付化=跨组织商业Agent基础设施，但与MCP差距扩大</td></tr>
-      <tr><td><strong>企业落地率</strong></td><td>仅11-14%的企业Agent试点进入生产环境</td><td>Atlan/AgentMesh 2026</td><td>2026-Q3</td><td>集成/治理中间件=最大瓶颈=最大机会</td></tr>
-      <tr><td><strong>当日信号</strong></td><td>无当日重大更新</td><td>—</td><td>2026-11-07</td><td>协议层不受市场暴跌影响，生态建设持续推进（周六无部署高峰属正常）</td></tr>
+      <tr><td><strong>MCP</strong></td><td>2026-07-28规范修订：转向无状态HTTP架构；SDK月下载量逼近5亿（TypeScript+Python累计超10亿）</td><td>10,000+公共MCP服务器；OpenAI已于2026年初弃用Assistants API转向MCP</td><td>2026-09/10（近期信号）</td><td>MSFT/GOOGL — 工具层标准已锁定，私有协议时代终结</td></tr>
+      <tr><td><strong>A2A</strong></td><td>2026年8月并入Agentic AI Foundation，与MCP同治理；v1.0生产级（2026-03），v1.0.1跟进（5月）</td><td>150+支持组织（AWS/Cisco/IBM/Microsoft/Salesforce/SAP/ServiceNow）</td><td>2026-10（近期信号）</td><td>GOOGL — 代理间协作层标准化，双协议栈成默认架构</td></tr>
+      <tr><td><strong>支付层</strong></td><td>x402（Coinbase/Google/Stripe）补齐Agent支付层</td><td>与MCP/A2A组成"工具-通信-支付"三层栈</td><td>2026-05（背景）</td><td>Agent经济基础设施完备度提升</td></tr>
     </tbody>
   </table>
 
   <div class="insight-box">
     <span class="label">生态博弈</span>
     <div class="content">
-      <strong>A2A的"A2Family"支付扩展是10月30日公布的最新信号：</strong>A2A正在从"agent间通信协议"向"agent间商业结算层"演化——这是MCP未覆盖的场景（MCP管工具调用，不管支付）。如果agent-to-agent支付成为现实，跨组织商业Agent（供应链自动化、自主采购）将打开万亿美元级市场。<strong>投资含义：MCP赢"工具层"，A2A可能赢"商业层"——两者不是零和。对MSFT/GOOGL的Agent战略均是加分项。协议标准化→Agent开发成本下降→应用层毛利率扩张的逻辑在暴跌中不受影响。</strong>
+      <strong>本周末无增量信号；近期最重要的结构变化是"同门化"。</strong>A2A于2026年8月并入Agentic AI Foundation（与MCP同基金会），成员从成立时不足40家扩至250+（Google/Microsoft/Amazon/Anthropic/OpenAI/Bloomberg/Shopify/Block）——专有协议竞争阶段正式结束。对投资的影响：协议层不再产生独立商业化机会，价值向"协议之上的应用分发"（MSFT Copilot/GOOGL Workspace）和"协议之下的算力"（NVDA/AVGG）两头集中。<strong>周末观察：无新规范发布。</strong>
     </div>
   </div>
 </div>
 
 <!-- Section 9 -->
 <div class="section">
-  <div class="section-title"><span class="num">9</span> 开源社区技术路径深度追踪 & 因果链分析</div>
+  <div class="section-title"><span class="num">9</span> 开源社区技术路径深度追踪 &amp; 因果链分析</div>
 
-  <h3 style="color:var(--accent);margin:15px 0 10px;">vLLM / SGLang 近期里程碑</h3>
+  <h3 style="color:var(--accent);margin:15px 0 10px;">vLLM / SGLang 里程碑追踪（GitHub已验证）</h3>
   <table class="data-table">
     <thead>
-      <tr><th>时间</th><th>项目</th><th>里程碑/焦点</th><th>技术Point</th><th>解决问题</th><th>投资含义</th></tr>
+      <tr><th>时间</th><th>项目</th><th>里程碑/焦点（可点击）</th><th>技术Point</th><th>解决问题</th><th>投资含义</th></tr>
     </thead>
     <tbody>
-      <tr><td>2026-11-07</td><td><strong>vLLM / SGLang</strong></td><td><a href="https://github.com/vllm-project/vllm/releases" target="_blank">当日无重大合并PR信号</a>（周六社区活跃度低）</td><td>—</td><td>—</td><td>不编造PR编号；周末无信号属正常节奏</td></tr>
-      <tr><td>2026-10-05</td><td><strong>vLLM</strong></td><td><a href="https://github.com/vllm-project/vllm/releases" target="_blank">v0.31.0 正式版发布</a>，GitHub 51.5K+ stars</td><td>结构化输出统一重构+推理性能优化</td><td>结构化输出碎片化、维护成本高</td><td>Agent API可靠性提升→应用层毛利率扩张</td></tr>
-      <tr><td>2026-10-02</td><td><strong>SGLang</strong></td><td><a href="https://github.com/sgl-project/sglang/releases" target="_blank">v0.5.21 发布</a>，77.1K+ stars</td><td>Prefill-Decode分离架构企业级落地</td><td>PD资源错配+开源栈合规障碍</td><td>开源→企业级商业化通道拓宽</td></tr>
-      <tr><td>2026-10下旬</td><td><strong>RadixArk</strong></td><td><a href="https://github.com/radixark" target="_blank">从SGLang社区spin-out</a>，$100M种子轮（Accel领投，NVIDIA/AMD风投参投）</td><td>开源推理商业化首单</td><td>开源项目商业化路径不清晰</td><td>两大芯片厂同时参投=推理框架价值获硬件层确认</td></tr>
-      <tr><td>2026-Q4初</td><td><strong>Hugging Face</strong></td><td><a href="https://huggingface.co" target="_blank">TGI正式弃用，官方推荐迁移vLLM</a></td><td>推理栈整合</td><td>社区推理引擎碎片化</td><td>vLLM/SGLang"双寡头"格局固化</td></tr>
-      <tr><td>2026-11-06（前日）</td><td><strong>SGLang</strong></td><td><a href="https://github.com/sgl-project/sglang/pull/48721" target="_blank">Kimi K3.1 DSA解码上下文并行runtime支持</a>（前日已验证PR）</td><td>开源权重发布仅2日即获推理框架原生支持</td><td>新开源模型推理适配周期长</td><td><span class="tag tag-key">KEY</span>开源模型-框架协同创纪录→开源adoption加速→推理需求向自托管扩散</td></tr>
-      <tr><td>2026-11-05（前日）</td><td><strong>vLLM</strong></td><td><a href="https://github.com/vllm-project/vllm/pull/66017" target="_blank">Qwen3-Omni视频编码器预算修复</a>（前日已验证PR）</td><td>按processor视频上限分配编码器资源预算</td><td>omni多模态模型视频推理资源失控</td><td>多模态Agent推理可靠性提升；视频理解=Agent能力下一战场</td></tr>
+      <tr><td>2026-11-02</td><td><strong>vLLM</strong></td><td><a href="https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3" target="_blank">v0.33.0rc3 (pre-release)</a></td><td>927 commits/389贡献者；接入Reflection Beam-1.0(501B MoE/23B active)+DFlash2 drafter（<a href="https://github.com/vllm-project/vllm/pull/62074" target="_blank">PR#62074</a>）、Step-5 Preview（<a href="https://github.com/vllm-project/vllm/pull/63147" target="_blank">PR#63147</a>）、NVIDIA Alpamayo 2 Super等新模型</td><td>大MoE/新架构模型推理支持滞后</td><td>开源框架"发布即支持"新模型→推理供给侧持续降本→应用层毛利改善</td></tr>
+      <tr><td>2026-10-18</td><td><strong>vLLM</strong></td><td><a href="https://github.com/vllm-project/vllm/releases/tag/v0.32.0" target="_blank">v0.32.0 (stable)</a></td><td>当前生产部署基准版本</td><td>—</td><td>生产环境升级节奏锚</td></tr>
+      <tr><td>2026-11-02</td><td><strong>SGLang</strong></td><td><a href="https://github.com/sgl-project/sglang/releases/tag/v0.5.23" target="_blank">v0.5.23</a></td><td>1007 PRs/257贡献者；同日接入MiniMax-M3.1-Flash、MiniCPM-V 4.7、Beam-1.0</td><td>新模型首日支持竞争白热化</td><td>中美开源模型分发双框架格局固化（vLLM=SGLang双寡头）</td></tr>
+      <tr><td>2026-10-19</td><td><strong>SGLang</strong></td><td><a href="https://github.com/sgl-project/sglang/releases/tag/v0.5.22" target="_blank">v0.5.22</a></td><td>上一稳定版</td><td>—</td><td>—</td></tr>
     </tbody>
   </table>
 
@@ -700,61 +701,64 @@
       <tr><th>公司</th><th>底层模型</th><th>Inference Framework</th><th>Agentic AI</th><th>生态策略</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>Anthropic</strong></td><td>Claude Opus 5.5</td><td>内部优化</td><td>Claude Code / Duet</td><td>企业API优先，IPO推进中（$300-350B目标）</td></tr>
-      <tr><td><strong>OpenAI</strong></td><td>GPT-6.1系列 / GPT-6 Cyber（11/5 NEW）</td><td>内部优化</td><td>Codex + Parallel Agents</td><td>ToC订阅+API+垂直安全</td></tr>
-      <tr><td><strong>DeepSeek</strong></td><td>V4.1</td><td>开源推理栈适配</td><td>社区驱动</td><td>开源生态+低成本API</td></tr>
-      <tr><td><strong>Google</strong></td><td>Gemini 4 Carbon（10/28登顶AA Index）</td><td>TPU v6 + JAX</td><td>A2A + Workspace Agent</td><td>Workspace绑定+激进定价</td></tr>
-      <tr><td><strong>Moonshot</strong></td><td>Kimi K3.1 Pro（权重开源11/4）</td><td>内部优化</td><td>Kimi智能助手</td><td>开源权重+开发者生态</td></tr>
-      <tr><td><strong>ByteDance</strong></td><td>Doubao系列</td><td>火山引擎</td><td>豆包Agent</td><td>抖音分发</td></tr>
+      <tr><td><strong>Anthropic</strong></td><td>Claude Opus 4.x系列</td><td>内部优化</td><td>Claude Code/企业API</td><td>企业API优先；IPO路演本周启动</td></tr>
+      <tr><td><strong>OpenAI</strong></td><td>GPT-5.x系列</td><td>内部优化</td><td>Codex+Operator</td><td>ToC订阅+API；已弃Assistants API转MCP</td></tr>
+      <tr><td><strong>DeepSeek</strong></td><td>V系列MoE</td><td>开源推理栈</td><td>社区驱动</td><td>开源生态+低成本API</td></tr>
+      <tr><td><strong>Google</strong></td><td>Gemini 3.x Ultra</td><td>TPU+JAX</td><td>A2A+Workspace Agent</td><td>Workspace绑定；A2A并入AAIF</td></tr>
+      <tr><td><strong>Moonshot</strong></td><td>K2.x超长上下文</td><td>内部优化</td><td>Kimi智能助手</td><td>长文档Agent</td></tr>
+      <tr><td><strong>ByteDance</strong></td><td>Doubao MoE</td><td>火山引擎</td><td>豆包Agent</td><td>抖音分发</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="color:var(--accent);margin:15px 0 10px;">社区 vs 公司：技术路径异同</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>维度</th><th>开源社区 (vLLM/SGLang)</th><th>闭源公司 (OpenAI/Anthropic)</th><th>投资含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>推理优化</td><td>极致性能，新模型"发布日支持"（v0.33.0rc3/SGLang v0.5.23同日接入Beam-1.0）</td><td>足够好+成本控制</td><td>开源推理降本→应用层毛利改善（GOOGL/META/BABA）</td></tr>
+      <tr><td>Agent集成</td><td>通用框架+协议标准（MCP/A2A）</td><td>垂直场景闭环（编程/企业）</td><td>标准协议公司（MSFT/GOOGL）获分发优势</td></tr>
+      <tr><td>商业化</td><td>基础设施（云服务+硬件需求）</td><td>模型订阅+API（Anthropic年化~$68B验证）</td><td>开源商业化=硬件需求增加（NVDA/TSM/MU）</td></tr>
     </tbody>
   </table>
 
   <h3 style="color:var(--accent);margin:15px 0 10px;">因果链分析</h3>
-  <div class="causal-chain">
-    <div class="chain-title">开源推理框架→芯片设计优先级转移</div>
-    <div class="chain-item"><span class="key">触发因</span><span class="val">RadixArk spin-out获NVIDIA/AMD风投同时参投（10月下旬）+ Kimi K3.1权重开源（11/4）+ SGLang 2日原生适配（11/6）→ 开源推理栈的商业价值与adoption速度双确认</span></div>
-    <div class="chain-item"><span class="key">传导机制</span><span class="val">开源推理栈商业化→企业自托管推理成本持续下降→Agent应用部署门槛降低→推理需求从云端API向混合架构扩散→芯片设计优先级从"训练集群峰值性能"转向"推理能效比+PD分离架构适配"</span></div>
-    <div class="chain-item"><span class="key">时间尺度</span><span class="val">1-3月（RadixArk企业客户拓展）→ 3-6月（推理成本再降30-50%）→ 6-12月（推理芯片占比超训练芯片）</span></div>
-    <div class="chain-item"><span class="key">投资预测</span><span class="val">推理优化芯片（NVDA Rubin/AMD MI450）+ HBM4（MU）+ 先进封装（TSM）需求结构从训练转向推理；设备股（AMAT/LRCX）中先进封装设备敞口成对冲存储capex下行的关键变量</span></div>
-    <div class="chain-item"><span class="key">证伪信号</span><span class="val">① RadixArk客户数/收入不及预期 ② vLLM/SGLang新版本推理成本降幅<10% ③ 云厂商推理收入增速>自托管增速（说明混合架构未成趋势）</span></div>
-    <div class="chain-item"><span class="key">推荐标的</span><span class="val">NVDA（推理芯片+自研推理栈双布局）→ TSM（先进封装产能）→ AMD（MI450推理线）→ BABA（开源模型云托管）</span></div>
+  <div class="insight-box">
+    <span class="label">因果链</span>
+    <div class="content">
+      <strong>触发因：</strong>vLLM/SGLang版本迭代加速（两框架两周内各发一版、单版本900-1000+ PRs），新模型"发布日即支持"成竞争标准<br>
+      <strong>传导机制：</strong>推理框架成熟度↑ → 新模型部署周期从月级缩至天级 → 模型层差异化窗口关闭 → 竞争焦点转向Agent集成与分发渠道 → 推理需求结构持续从训练向推理倾斜<br>
+      <strong>时间尺度：</strong>0-6个月（框架迭代）→ 6-12个月（推理成本再降30%预期）→ 12-24个月（推理需求占比>训练）<br>
+      <strong>投资预测：</strong>推理芯片（NVDA Blackwell/Rubin）与HBM需求韧性超预期；模型层估值倍数下压，应用层（Agent平台）与分发层（云厂商）捕获更大价值份额<br>
+      <strong>证伪信号：</strong>① 两框架merge速率骤降 ② Agent应用DAU停滞 ③ 云厂商推理收入增速&lt;30% ④ Anthropic IPO定价低于$1T（Agent经济证伪）<br>
+      <strong>推荐标的：</strong>NVDA（推理芯片龙头）→ TSM（先进制程+CoWoS）→ MU/HBM（内存密度提升）→ MSFT/GOOGL（Agent平台）→ BABA（中国推理云）
+    </div>
   </div>
-
-  <h3 style="color:var(--accent);margin:15px 0 10px;">社区 vs 公司异同</h3>
-  <table class="data-table">
-    <thead>
-      <tr><th>维度</th><th>开源社区（vLLM/SGLang）</th><th>闭源大厂（OpenAI/Anthropic）</th><th>开源大厂（Google/DeepSeek/Moonshot）</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><strong>推理优化</strong></td><td>极致性能+零成本；PD分离架构领先</td><td>闭源优化，性能领先但不透明</td><td>开源权重+自有TPU/火山引擎优化</td></tr>
-      <tr><td><strong>Agent集成</strong></td><td>MCP/A2A社区适配最快</td><td>自有Agent产品（Codex/Claude Code）</td><td>Workspace/抖音生态内嵌</td></tr>
-      <tr><td><strong>生态锁定</strong></td><td>无锁定，可迁移性最强</td><td>API锁定最深</td><td>权重开放但云托管锁定</td></tr>
-      <tr><td><strong>商业化路径</strong></td><td>RadixArk模式：开源核心+企业服务（首单$100M种子验证）</td><td>订阅+API定价权（正被Google挑战）</td><td>云资源消耗+广告/分发变现</td></tr>
-    </tbody>
-  </table>
 </div>
 
 <!-- Section 10 -->
 <div class="section">
   <div class="section-title"><span class="num">10</span> ToC侧Agent应用及硬件部署形式</div>
 
+  <p style="color:var(--text2);font-size:0.85em;margin-bottom:10px;">本周末无端侧硬件增量信号；下表为2026H2背景数据（芯片规格为公开量产参数）。</p>
+
   <table class="data-table">
     <thead>
-      <tr><th>品类</th><th>代表产品</th><th>关键数据</th><th>时间/来源</th><th>投资含义</th></tr>
+      <tr><th>端侧芯片</th><th>算力(TOPS)</th><th>功耗(W)</th><th>出货/搭载状态（2026H2背景）</th><th>投资含义</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>端侧AI芯片（算力对比）</strong></td><td>高通Snapdragon X2 Elite（80 TOPS NPU）/ Intel Panther Lake（18A）/ AMD Ryzen AI 400系列</td><td>Copilot+芯片份额（2026-06）：高通34% / AMD 29% / Intel 32%</td><td>Counterpoint 2026-06</td><td>QCOM HOLD — NPU算力领先但PC大盘暴跌限制放量；份额三分天下=无垄断溢价</td></tr>
-      <tr><td><strong>PC大盘（前日已覆盖）</strong></td><td>2026-Q3全球PC出货6,270万台，-20.1% YoY（六年来最大跌幅）</td><td>内存占PC成本从15%→40%（Omdia）</td><td>IDC 2026-Q3</td><td>存储涨价摧毁PC出货；2027H2中国存储产能上线后或回落</td></tr>
-      <tr><td><strong>AI手机</strong></td><td>iPhone 17 AI / Galaxy S26</td><td>端侧NPU 40+ TOPS标配</td><td>2026-Q4</td><td>AAPL BUY — 三日累计+1.5%，防御+端侧AI双逻辑</td></tr>
-      <tr><td><strong>TSLA（当日信号）</strong></td><td>-7.01%三日累跌超20%</td><td>无公司特定新闻</td><td>ifind 2026-11-06</td><td>Robotaxi叙事在高beta去杠杆中首当其冲；HOLD维持</td></tr>
-      <tr><td><strong>当日信号</strong></td><td>无ToC硬件当日重大投资信号</td><td>—</td><td>2026-11-07</td><td>ToC硬件随大盘回落，无独立催化</td></tr>
+      <tr><td><strong>Qualcomm 骁龙X Elite</strong></td><td>45</td><td>~15（NPU）</td><td>Copilot+ PC主力，2026H2持续放量</td><td>QCOM HOLD — AI PC NPU规格领先，但手机业务承压</td></tr>
+      <tr><td><strong>Intel Lunar Lake (Core Ultra 200V)</strong></td><td>48</td><td>~8（NPU低功耗模式）</td><td>AI PC转折点产品，轻薄本渗透中</td><td>INTC HOLD — 端侧AI是18A之外的第二叙事</td></tr>
+      <tr><td><strong>AMD Ryzen AI 300</strong></td><td>50</td><td>~15</td><td>Windows AI PC高端选项</td><td>AMD BUY — 端侧+数据中心双轮</td></tr>
+      <tr><td><strong>Apple M4（M5迭代中）</strong></td><td>38</td><td>~5</td><td>Apple Intelligence全量推送</td><td>AAPL BUY — 端侧AI入口价值仍被低估</td></tr>
+      <tr><td><strong>NVIDIA Jetson Thor</strong></td><td>207（FP4稀疏）</td><td>~60</td><td>机器人/具身智能开发者平台</td><td>NVDA BUY — 物理AI早期布局</td></tr>
     </tbody>
   </table>
 
   <div class="insight-box">
     <span class="label">硬件趋势</span>
     <div class="content">
-      <strong>存储成本危机与端侧AI的跷跷板：</strong>DRAM/NAND涨价（4Q26合约价TrendForce预测再涨10-20%）正在摧毁PC出货（-20.1% YoY），但端侧AI叙事并未死亡——AAPL三日累计+1.5%说明市场将端侧AI定价为"2027年故事"而非"2026年收入"。<strong>投资含义：ToC硬件链（QCOM/INTC PC线）短期回避的判断不变；但2027H2"存储价格回落+换机周期+AI功能成熟"三重共振的观察窗口应在2027Q1打开。当前是维护观察清单（AAPL/QCOM/INTC端侧线）的窗口，不是买入窗口。</strong>
+      <strong>周末观察：</strong>端侧无新发布。中期主线不变：① 40+ TOPS成为旗舰AI PC/手机准入线，2027年向中端下沉 ② S13普查数据（Common Sense Media）显示青少年对"AI功能"本身低依附（仅11%重度喜爱），端侧AI的付费转化仍需杀手级场景 ③ Anthropic路演中关于"端侧/轻量Agent"的产品表态值得跟踪。<strong>下周关注点：NVDA财报中是否提及Jetson/机器人收入进展。</strong>
     </div>
   </div>
 </div>
@@ -765,22 +769,20 @@
 
   <table class="data-table">
     <thead>
-      <tr><th>品类</th><th>关键信号</th><th>数据</th><th>来源/时间</th><th>投资含义</th></tr>
+      <tr><th>品类</th><th>关键信号</th><th>数据（含日期/来源）</th><th>投资含义</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>DRAM</strong></td><td><span class="tag tag-hot">HOT</span>4Q26合约价预测+10-15% QoQ，涨幅较3Q26收窄</td><td>合约价连续第六个季度上涨</td><td>TrendForce 2026-11-04</td><td>MU短期基本面仍向上，但"涨幅收窄"=周期顶部信号强化</td></tr>
-      <tr><td><strong>NAND</strong></td><td>4Q26合约价预测+15-20% QoQ；enterprise SSD需求accelerating</td><td>企业级SSD采购动能超预期</td><td>TrendForce 2026-11-04</td><td>数据中心存储需求=AI训练的隐蔽受益者</td></tr>
-      <tr><td><strong>黄金</strong></td><td>前日信号：选举后高位企稳$4,072/oz</td><td>+0.30%（2026-11-05）</td><td>Trading Economics 2026-11-05</td><td>当日无更新；避险+降息周期=中期看多逻辑不变</td></tr>
-      <tr><td><strong>原油</strong></td><td>前日信号：回落至$100/桶下方</td><td>美伊外交进展+供应恢复</td><td>Trading Economics 2026-11-05</td><td>当日无更新；能源成本下行=数据中心运营边际改善</td></tr>
-      <tr><td><strong>铜</strong></td><td>前日信号：5日-4.02%后继续弱势</td><td>日区间$6.2585-6.4200</td><td>MarketWatch HGX26 2026-11-04</td><td>当日无更新；全球增长预期下修与AI基建需求脱钩</td></tr>
-      <tr><td><strong>HBM</strong></td><td>与commodity DRAM走势分化持续</td><td>HBM4 2026H2 ramp，供需持续紧</td><td>产业链调研 2026-Q4</td><td>MU核心利润来源未受PC需求破坏影响——HOLD而非SELL的核心依据</td></tr>
+      <tr><td><strong>铜</strong></td><td>两周累跌约6%，LME库存两周+15%</td><td>LME现货$13,955/t（2026-11-06，westmetall）；月跌5.7%、年涨25.9%；COMEX 12月合约$6.2295/lb（11/5收盘，周跌5.65%）；LME库存316,675t（10/30为274,000t）</td><td>库存堆积+乌克兰和谈消化风险溢价=宏观需求定价走弱；AI电力需求仍是结构性底部（Trading Economics模型：12个月目标$6.79/lb）</td></tr>
+      <tr><td><strong>DRAM/存储</strong></td><td>现货持稳 vs 合约预期降温</td><td>DRAM ETF周五单日-10.5%（2026-11-06，StockTitan）；TrendForce 4Q26合约价涨幅收窄（11/07晨报已覆盖）；现货价初步持稳</td><td>MU/LRCX — 现货与合约背离走向是存储周期是否见顶的胜负手，本周重点跟踪</td></tr>
+      <tr><td><strong>铀/核电</strong></td><td>无新价格数据</td><td>近期信号：核电PPA需求受AI数据中心驱动（CEG/OKLO股价已先行验证）</td><td>CCJ HOLD / CEG BUY — UBS"30%新增产能政治风险"强化存量核电资产稀缺性</td></tr>
+      <tr><td><strong>政治因素</strong></td><td>乌克兰和谈进展</td><td>近期信号（本周）：和平谈判推进→铜风险溢价回吐→欧洲工业金属需求预期上修 deferred</td><td>铜价短期承压但和谈落地将释放欧洲制造业补库需求</td></tr>
     </tbody>
   </table>
 
   <div class="insight-box">
-    <span class="label">大宗信号</span>
+    <span class="label">供应链信号</span>
     <div class="content">
-      <strong>TrendForce 11/4报告是暴跌中的一份"基本面锚"：</strong>4Q26 DRAM合约价+10-15% QoQ、NAND +15-20% QoQ——存储基本面仍在改善，但MU两日-30%。这个背离的含义：① 市场交易的是2027年（周期顶部预期），不是2026Q4 ② 若Q1财报确认HBM4毛利率+合约价继续上行，MU当前价位存在情绪修复空间 ③ 但"涨幅收窄"（较3Q26的+80-90% DRAM spot大幅放缓）确认周期动能在衰减。<strong>核心判断：大宗组合对AI板块的信号维持"中性偏逆风"——存储涨价利好MU短期收入但破坏终端需求（PC -20%），黄金企稳确认滞胀环境，铜弱=增长担忧未消。</strong>
+      <strong>铜与芯片的背离是本周最宏观的信号：</strong>芯片暴跌（供给端叙事：存储周期）与铜持续走弱（需求端叙事：全球制造业）同时发生，而LME铜库存两周激增15%确认需求侧疲软。两种解读：① 悲观——AI capex独木难支全球商品需求，Macquarie的12月加息风险若兑现将共振 ② 乐观——铜价已回吐至AI电力需求叙事启动前水平（$13,955仍年涨26%），且乌克兰和谈落地将解锁欧洲重建需求。<strong>操作含义：铜短期不抄底，但$13,500以下是中长期AI+电力+和谈三重逻辑的布局区；芯片与铜的背离收敛方向是12月宏观交易主线。</strong>
     </div>
   </div>
 </div>
@@ -789,23 +791,24 @@
 <div class="section">
   <div class="section-title"><span class="num">12</span> 政治突发：地缘与政策对供应链影响</div>
 
+  <ul class="signal-list">
+    <li><span class="tag tag-hot">HOT</span><div><strong>BIS将Affiliates Rule（50%规则）暂停期延长至2027年1月10日：</strong>Final rule于11/5签署，11/9（明日）Federal Register刊载并生效。此前市场普遍预期暂停期于11/9-10到期、50%规则恢复实施——该预期是上周四芯片$3T市值蒸发的核心政策变量。<em>So what：政策悬顶解除，芯片板块最大单一利空转为"14个月后的变量"；但中国AI芯片获取的不确定性只是延后而非解决。</em></div></li>
+  </ul>
+
   <table class="data-table">
     <thead>
-      <tr><th>政策/事件</th><th>细节</th><th>来源</th><th>影响标的</th><th>投资含义</th></tr>
+      <tr><th>政策/事件</th><th>细节</th><th>来源（政府官方+交叉验证）</th><th>影响标的</th><th>投资含义</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>BIS 50%规则（11/10生效）</strong></td><td><span class="tag tag-hot">HOT</span>管制范围扩至含50%美国技术的非美产品；下周一（11/10）正式生效，生效前最后一个交易日为今日</td><td><a href="https://www.federalregister.gov/documents/2026/01/15/2026-00789/revision-to-license-review-policy-for-advanced-computing-commodities" target="_blank">BIS Federal Register 2026-01-15</a></td><td>NVDA, AMD, TSM, ASML</td><td>本周最大尾部风险——严格执行将实质影响TSM/ASML对华出货；延期/豁免=芯片暴力反弹信号</td></tr>
-      <tr><td><strong>数据中心社区投票（前日已覆盖）</strong></td><td>全美46/47个限制数据中心议案通过（11/4-11/5）</td><td>Ballotpedia 2026-11-04/05</td><td>CEG, OKLO, NVDA, TSM</td><td>无新进展；政策风险已从尾部变为基准情形</td></tr>
-      <tr><td><strong>德州数据中心免税（前日已覆盖）</strong></td><td>呼吁取消$3.3B销售税豁免；支持暂停新建</td><td>techpolicy.press 2026-11-05</td><td>CEG, OKLO, MSFT, GOOGL</td><td>无新进展；德州=美国数据中心最大市场</td></tr>
-      <tr><td><strong>联邦数据中心法案（背景）</strong></td><td>S.4214 / H.R.9442（AI Data Center Act）仍在委员会阶段</td><td>congress.gov</td><td>全板块</td><td>联邦立法若推进=全国统一标准（比各州碎片化好）</td></tr>
-      <tr><td><strong>俄乌和平谈判（背景）</strong></td><td>特朗普称乌克兰将举行选举；欧洲敲定战后安排</td><td>FT/Reuters 2026-11-05</td><td>全板块</td><td>地缘风险溢价下降=风险资产中期利好（被忽视的正面信号）</td></tr>
+      <tr><td><strong>BIS Affiliates Rule延期</strong></td><td>50%规则暂停期延至2027-01-10；final rule 11/5签署、11/9 Federal Register刊载生效</td><td>BIS Final Rule（<a href="https://www.kelleydrye.com/viewpoints/blogs/trade-and-manufacturing-monitor/bis-extends-suspension-of-the-affiliates-rule-through-january-10-2027" class="source-link" target="_blank">Kelley Drye 2026-11-07</a>，Baker McKenzie 2026-11-06交叉验证）</td><td>NVDA, AMD, TSM, ASML, 中国AI芯片供应链</td><td>周一情绪修复最直接催化剂；美国出口管制进入"可预测化"轨道，政策不确定性溢价应下调</td></tr>
+      <tr><td><strong>观察点</strong></td><td>11/9 Federal Register正式刊载文本；过渡条款细节；2027/1/10到期前的中期选举变量</td><td>Federal Register（明日刊载）</td><td>全板块</td><td>刊载文本若含附加限制条款，反弹力度将打折扣</td></tr>
     </tbody>
   </table>
 
   <div class="insight-box">
     <span class="label">政策信号</span>
     <div class="content">
-      <strong>11/10（周一）BIS 50%规则生效=下周第一个也是最大的事件：</strong>① 规则文本已在Federal Register公布（2026-01-15），管制范围为"含50%美国技术的非美产品"——直接影响TSM先进制程对华代工和ASML设备对华售后 ② 关键未知：是否有过渡期/豁免条款/企业许可通道 ③ 情景分析：延期或豁免（概率40%）→芯片暴力反弹，TSM/ASML领涨；严格执行无豁免（概率30%）→TSM/ASML再探底5-8%；严格执行但附许可通道（概率30%）→利空出尽式小幅下跌后修复。<strong>行动：周一开盘前不持有新增芯片多头；已持有的NVDA/TSM/ASML核心仓不在事件前抛出——三种情景中两种对持仓有利，期望值为正。</strong>
+      <strong>管制的"日历化"比延期本身更重要。</strong>出口管制从"突袭式"转向"公开日历+定期续期"，意味着：① 企业供应链规划可视性提升（TSM/ASML资本开支决策成本下降）② 政策套利窗口可计算（中国AI芯片囤货节奏围绕2027/1新节点）③ 但2027年1月恰逢美国中期选举后国会重组，下一次延期谈判的政治环境更复杂。<strong>对估值的意义：NVDA/TSM/ASML的政策折价率应系统性下调5-10个百分点；同时注意中国国产替代（寒武纪/海光）获得的"时间窗口"也在收窄，BIS事实上给了两边各自的时间表。</strong>
     </div>
   </div>
 </div>
@@ -816,20 +819,20 @@
 
   <table class="data-table">
     <thead>
-      <tr><th>信号</th><th>数据</th><th>来源（样本量/时间/范围）</th><th>投资含义</th></tr>
+      <tr><th>信号</th><th>数据</th><th>样本/机构/时间/范围</th><th>投资含义</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>Gen Z/Gen Alpha对AI的情绪分化</strong></td><td>对AI故事的情绪：28.2%着迷 / 25.6%兴奋 / 22%感到 doomed / 10.1%害怕；年龄越大"doomed"感越强（10-13岁最积极44.2%着迷）</td><td>UCLA Center for Scholars & Storytellers，2026 Teens & Screens，n=1,500名10-24岁美国人，2026-10-21发布</td><td>AI情绪代际分化： youngest最积极=ToC AI产品长期渗透逻辑不变；但"doomed"比例上升=监管民意基础</td></tr>
-      <tr><td><strong>YouTube=故事消费第一媒介</strong></td><td>72.9%受访者认为YouTube能"讲故事"（超TV 70.3%和电影70.2%）；79%认为短视频能承载故事</td><td>UCLA Teens & Screens 2026，n=1,500，10-24岁，美国，2026-10-21</td><td>GOOGL核心资产YouTube在Gen Z心智中持续强化；短视频与长视频价值趋同</td></tr>
-      <tr><td><strong>Gen Z YouTube内容偏好</strong></td><td>喜剧类为最受欢迎内容类型（居首位），其次为游戏与音乐舞蹈类（具体百分比付费墙，标注待确认）</td><td>Statista，n=500名13-17岁美国青少年，2026-04-26发布（调查期未注明）</td><td>娱乐型内容=AI生成内容的最先渗透场景；关注AI视频工具对创作者经济的影响</td></tr>
-      <tr><td><strong>前日已覆盖（不重复）</strong></td><td>Pew：64%青少年用AI聊天机器人；AI乐观度25%→11%；12%用AI做情感支持</td><td>Pew Research Center，2026（前日已覆盖）</td><td>同来源上限2次规则已触发，今日不重复收录</td></tr>
+      <tr><td><strong>AI使用率高但依附度低</strong></td><td>约75%青少年用过AI工具，但仅11%的青少年用户"非常喜欢"；仅4%把ChatGPT列为"不可或缺平台"（YouTube：66%的tweens首选）</td><td>n&gt;1,200名美国9-17岁青少年 | Common Sense Media 2026 Tween &amp; Teen Census | 2026-10-27发布</td><td>GOOGL — YouTube护城河比市场认知更深；订阅制AI（ChatGPT Plus类）Gen Z付费转化存疑</td></tr>
+      <tr><td><strong>AI伴侣渗透儿童</strong></td><td>近半数tweens（9-12岁）使用过AI chatbot/companion；36%的9岁、55%的11岁已使用AI</td><td>同上（n&gt;1,200，美国，2026-10-27）</td><td>AI companion监管风险上升（Character.AI类）；年龄验证合规成本将内化到ToC AI产品</td></tr>
+      <tr><td><strong>绕过年龄门</strong></td><td>近半数9-12岁用户绕过13+年龄限制使用AI产品</td><td>同上（n&gt;1,200，美国，2026-10-27）</td><td>平台责任立法风险；AAPL/META家长控制功能=合规卖点</td></tr>
+      <tr><td><strong>屏幕时长</strong></td><td>青少年日均屏幕约8小时、tweens约5小时；超50%的11岁拥有智能手机</td><td>同上（n&gt;1,200，美国，2026-10-27）</td><td>注意力经济基本盘未变；端侧AI（手机NPU）普及率由硬件持有率兜底</td></tr>
     </tbody>
   </table>
 
   <div class="insight-box">
     <span class="label">行为信号</span>
     <div class="content">
-      <strong>UCLA Teens & Screens 2026（10/21发布，n=1,500）提供了Pew之外的第二个独立视角：</strong>Gen Z/Gen Alpha对AI的情绪并非单向悲观——28.2%着迷+25.6%兴奋 vs 22% doomed+10.1%害怕，净情绪为正且最年轻组（10-13岁）最积极（44.2%着迷）。这与Pew"乐观度25%→11%"的下降趋势并不矛盾：Pew测量的是"担忧vs兴奋的相对变化"，UCLA测量的是"对AI故事的情绪反应"——两者合起来的完整图景是：<strong>Gen Z对AI的态度是"着迷但警惕"，而非"拒绝"。投资含义：ToC AI产品的年轻用户渗透逻辑（豆包/ChatGPT/Character.AI）没有动摇；但22%的"doomed"感+监管敏感性上升=未成年人AI产品的合规成本将持续增加。</strong>
+      <strong>"用过AI"≠"离不开AI"——Gen Z的AI态度是2027年ToC Agent变现的关键变量。</strong>普查显示AI渗透率（75%）与情感依附（11%重度喜爱、4%不可或缺）之间存在巨大鸿沟：① 对GOOGL是利好——YouTube以66%的tweens首选稳居"不可或缺"榜首，AI工具尚未撼动内容平台 ② 对订阅制AI是警告——Gen Z订阅疲劳叠加低依附度，ChatGPT Plus类产品的Gen Z ARPU天花板低于市场假设 ③ 对监管是催化——近半数儿童绕过年龄门+AI伴侣渗透，联邦层面对AI companion的立法概率上升。<strong>投资映射：超配GOOGL（YouTube+Gemini双持）；谨慎对待纯AI陪伴初创；关注AAPL家长控制/年龄验证功能的合规溢价。</strong>
     </div>
   </div>
 </div>
@@ -838,39 +841,41 @@
 <div class="section">
   <div class="section-title"><span class="num">14</span> 个性化推荐：值得深度跟踪的信号</div>
 
-  <div class="insight-box">
-    <span class="label">本周核心信号</span>
-    <div class="content">
-      <strong>1. BIS 50%规则周一（11/10）生效=下周最大单一事件：</strong>严格执行→TSM/ASML再探底5-8%；延期/豁免→芯片暴力反弹。三种情景中两种对已持仓有利，期望值为正。<br><br>
-      <strong>2. NVDA财报11/17（Yahoo已确认日期）：</strong>数据中心收入≥$90B→AI交易修复；<$85B→二次探底。这是SOX走势的试金石。<br><br>
-      <strong>3. 资金在AI内部轮动而非撤离：</strong>BABA五连涨+21%（Anthropic IPO铺路中国ADR）+ OKLO +6.53%/CEG +1.72%（AI电力叙事强化）+ SNOW +2.48%（数据云新方向）——组合应配置"芯片+中国+电力"三引擎对冲结构。
-    </div>
-  </div>
+  <ul class="signal-list">
+    <li><span class="tag tag-hot">本周最核心</span><div><strong>Anthropic IPO定价（路演周11/9起）：</strong>全球AI应用层估值锚。触发条件：定价≥$1.3T→应用层情绪修复（PLTR/SNOW/MSFT）; &lt;$1T→高倍数应用股系统性下修。时间窗口：本周内。</div></li>
+    <li><span class="tag tag-hot">本周最核心</span><div><strong>NVDA 11/17盘后财报：</strong>预期营收~$108B(+106%)。触发条件：数据中心收入≥$85B+毛利率~74%→V型修复确认；指引保守→反弹夭折。时间窗口：11/17。</div></li>
+    <li><span class="tag tag-new">周一观察</span><div><strong>BIS final rule Federal Register刊载（11/9）：</strong>反弹力度的政策确认信号。关注点：刊载文本是否含过渡附加条款、商务部表态措辞。</div></li>
+    <li><span class="tag tag-key">技术位</span><div><strong>SOX周五盘中低点：</strong>周一若低开跌破，反弹逻辑证伪，进入二次探底；站稳则超跌反弹延续。同时关注MU现货/合约价背离是否收敛。</div></li>
+    <li><span class="tag tag-key">宏观对冲</span><div><strong>铜$13,500关口+LME库存：</strong>库存继续堆积→全球需求恶化确认→Macquarie 12月加息风险权重上调；组合层面保留黄金/短久期对冲腿。</div></li>
+  </ul>
 
   <table class="data-table">
     <thead>
       <tr><th>信号#</th><th>信号描述</th><th>触发条件</th><th>推荐标的</th><th>评级</th><th>时间窗口</th></tr>
     </thead>
     <tbody>
-      <tr><td>1</td><td>BIS 50%规则生效</td><td>11/10延期/豁免→芯片反弹加仓TSM/ASML；严格执行→再探底后利空出尽也可加仓</td><td>NVDA, TSM, ASML</td><td>事件驱动</td><td>11/10（周一，1个交易日）</td></tr>
-      <tr><td>2</td><td>NVDA Q3财报</td><td>数据中心收入≥$90B且指引不降级→AI交易修复；<$85B→二次探底</td><td>NVDA</td><td>核心持仓BUY</td><td>11/17（Yahoo确认）</td></tr>
-      <tr><td>3</td><td>Anthropic IPO定价</td><td>$300B+定价成功→Agent叙事修复（MSFT/GOOGL映射）；折让→一级泡沫确认</td><td>MSFT, GOOGL, PLTR</td><td>关注</td><td>2026Q4-2027Q1</td></tr>
-      <tr><td>4</td><td>BABA配置级流入确认</td><td>站稳$110上方3日+Q3财报云增速≥20%</td><td>BABA</td><td>BUY（唯一可加仓标的）</td><td>本周至Q3财报（11月中旬）</td></tr>
-      <tr><td>5</td><td>存储周期顶部确认/证伪</td><td>MU Q1财报HBM4毛利率+2027年capex指引</td><td>MU, LRCX</td><td>MU HOLD / LRCX观望</td><td>下次财报</td></tr>
-      <tr><td>6</td><td>年末再平衡窗口</td><td>12月初机构重新加仓+SOX收复200日均线</td><td>NVDA, AMD, TSM</td><td>重新入场信号</td><td>12月第1周</td></tr>
+      <tr><td>1</td><td>BIS延期后的芯片超跌反弹</td><td>SOX守住周五低点+周一高开站稳</td><td>NVDA, TSM, ASML, AVGO</td><td>BUY（核心）</td><td>本周</td></tr>
+      <tr><td>2</td><td>Anthropic IPO定价</td><td>定价≥$1.3T→应用层修复；&lt;$1T→减高倍数</td><td>MSFT, GOOGL / 减PLTR, SNOW</td><td>事件驱动</td><td>本周</td></tr>
+      <tr><td>3</td><td>NVDA财报</td><td>数据中心≥$85B+毛利率74%</td><td>NVDA及供应链（TSM/MU）</td><td>BUY</td><td>11/17</td></tr>
+      <tr><td>4</td><td>中国AI资产重估</td><td>BABA守住五连涨趋势线+$13.5以下铜布局</td><td>BABA</td><td>BUY</td><td>1-3个月</td></tr>
+      <tr><td>5</td><td>存量核电资产稀缺性</td><td>UBS政治风险论发酵+数据中心审批收紧</td><td>CEG（核心对冲腿）, CCJ</td><td>BUY/HOLD</td><td>6-12个月</td></tr>
     </tbody>
   </table>
 
   <div class="insight-box">
     <span class="label">投资框架</span>
     <div class="content">
-      <strong>当前策略：防御性配置+"三引擎"对冲结构。</strong>① 芯片核心仓位（NVDA/TSM/ASML）持有但不加仓——BIS 11/10是第一道关，NVDA财报11/17是第二道关 ② 中国引擎：BABA为当前唯一可加仓标的（上限10%）——五连涨+Anthropic IPO铺路+Q3财报三重催化 ③ 电力引擎：CEG（BUY）+OKLO（SPEC BUY，仓位≤5%）——数据中心政策限制反而强化存量核电资产价值 ④ 防御应用：AAPL/GOOGL维持——三日暴跌中累计相对强度第一和第二 ⑤ MU维持HOLD——TrendForce 4Q26合约价仍涨+10-15%与股价两日-30%严重背离，若财报证伪周期顶部论，存在情绪修复空间 ⑥ 高beta（PLTR/OKLO/TSLA）合计≤10%。<strong>重新入场条件：BIS规则落地+NVDA财报超预期+SOX收复200日均线——三个条件满足两个即恢复进攻性配置。</strong>
+      <strong>事件驱动周的三层布防：</strong>① 进攻层（50%）：NVDA/TSM/ASML核心——BIS延期+财报前超卖，风险收益比两周来最优 ② 对冲层（25%）：BABA（中国AI重估+云加速）+CEG（政策确定性电力）——上周已验证其与芯片的负相关性 ③ 现金/观察层（25%）：等待Anthropic定价与NVDA财报两个事件落地后再决定加仓方向。<strong>纪律：周一高开不追高（政策利好兑现日常见冲高回落）；若Anthropic定价低于$1T，立即执行高倍数应用减仓清单（PLTR/SNOW/APP类）。</strong>
     </div>
   </div>
 </div>
 
-    </div>
+<div class="footer">
+  <p>Agentic Market Daily | 2026-11-08 | 数据日期：2026-11-06（周五收盘，ifind）| 价格来源：ifind close/pct_change</p>
+  <p>本报告仅供投资研究参考，不构成投资建议。市场有风险，投资需谨慎。</p>
+</div>
+
+</div>
 </body>
 </html>
-<!-- deploy: 2026-11-07 | Saturday | pre-check pending -->
-<!-- deploy: 2026-11-07 08:25 | automated | pre-check passed -->
+<!-- deploy: 2026-11-08 08:29 | automated | pre-check passed -->
